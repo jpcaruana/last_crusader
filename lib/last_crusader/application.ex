@@ -1,14 +1,21 @@
 defmodule LastCrusader.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
+  @moduledoc """
+  Documentation for `LastCrusader`.
+  """
 
   use Application
 
   def start(_type, _args) do
+    # List all child processes to be supervised
     children = [
-      # Starts a worker by calling: LastCrusader.Worker.start_link(arg)
-      # {LastCrusader.Worker, arg}
+      # Use Plug.Cowboy.child_spec/3 to register our endpoint as a plug
+      Plug.Cowboy.child_spec(
+        scheme: :http,
+        plug: LastCrusader.Router,
+        options: [
+          port: 4001
+        ]
+      )
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
