@@ -2,6 +2,8 @@ defmodule LastCrusader.Handler do
   @moduledoc """
   Handles HTTP requests
   """
+  import Plug.Conn
+  import Poison
 
   def handle_events(conn) do
     {status, body} =
@@ -10,19 +12,19 @@ defmodule LastCrusader.Handler do
         _ -> {422, missing_events()}
       end
 
-    Plug.Conn.send_resp(conn, status, body)
+    send_resp(conn, status, body)
   end
 
   defp process_events(events) when is_list(events) do
     # Do some processing on a list of events
-    Poison.encode!(%{response: "Received Events!"})
+    encode!(%{response: "Received Events!"})
   end
   defp process_events(_) do
     # If we can't process anything, let them know :)
-    Poison.encode!(%{response: "Please Send Some Events!"})
+    encode!(%{response: "Please Send Some Events!"})
   end
 
   defp missing_events do
-    Poison.encode!(%{error: "Expected Payload: { 'events': [...] }"})
+    encode!(%{error: "Expected Payload: { 'events': [...] }"})
   end
 end
