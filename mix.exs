@@ -14,7 +14,7 @@ defmodule LastCrusader.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :cowboy, :plug, :poison],
+      extra_applications: [:logger, :plug_cowboy, :poison],
       mod: {LastCrusader.Application, []}
     ]
   end
@@ -22,10 +22,8 @@ defmodule LastCrusader.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug_cowboy, "~> 1.0"},
-      {:cowboy, "~> 1.0.0"},
-      {:plug, "~> 1.5"},
-      {:poison, "~> 3.1"}
+      {:plug_cowboy, "~> 2.0"}, # This will pull in Plug AND Cowboy
+      {:poison, "~> 3.1"} # Latest version as of this writing
     ]
   end
 end
