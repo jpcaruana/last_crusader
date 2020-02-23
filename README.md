@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/jpcaruana/last_crusader.svg?branch=master)](https://travis-ci.com/jpcaruana/last_crusader)
+
 # LastCrusader
 
 **TODO: Add description**

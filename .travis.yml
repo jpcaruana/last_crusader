@@ -1,15 +1,11 @@
 language: elixir
-cache:
-  directories:
-    - deps
-    - _build
 
 elixir:
-  - '1.10.0'
+  - 1.10
+otp_release:
+  - 22.0
 
-install:
-  - mix local.rebar --force
-  - mix local.hex --force
+before_script:
   - mix deps.get
 script:
   - mix test
