@@ -4,6 +4,7 @@ defmodule LastCrusader.Router do
   matching routes, and dispatching responses.
   """
   alias LastCrusader.Handler, as: Handler
+  alias LastCrusader.Auth, as: Auth
   use Plug.Router
 
   # This module is a Plug, that also implements it's own plug pipeline, below:
@@ -29,6 +30,10 @@ defmodule LastCrusader.Router do
 
   post "/events" do
     Handler.handle_events(conn)
+  end
+
+  get "/auth" do
+    Auth.auth(conn)
   end
 
   # "Default" route that will get called when no other route is matched
