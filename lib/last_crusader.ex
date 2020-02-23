@@ -1,18 +1,27 @@
-defmodule LastCrusader do
+defmodule LastCrusader.Application do
   @moduledoc """
   Documentation for `LastCrusader`.
   """
 
-  @doc """
-  Hello world.
+  use Application
 
-  ## Examples
+  def start(_type, _args) do
+    # List all child processes to be supervised
+    children = [
+      # Starts a worker by calling: LastCrusader.Worker.start_link(arg)
+      # {LastCrusader.Worker, arg},
+      Plug.Adapters.Cowboy.child_spec(
+        scheme: :http,
+        plug: LastCrusader.Router,
+        options: [
+          port: 8085
+        ]
+      )
+    ]
 
-      iex> LastCrusader.hello()
-      :world
-
-  """
-  def hello do
-    :world
+    # See https://hexdocs.pm/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: LastCrusader.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
