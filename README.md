@@ -21,3 +21,10 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/last_crusader](https://hexdocs.pm/last_crusader).
 
+## Notes to self
+
+- run tests: `mix test`
+- run locally: `iex -S mix`
+- make a release: `MIX_ENV=prod mix release`
+
+
