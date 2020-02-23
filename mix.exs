@@ -8,13 +8,12 @@ defmodule LastCrusader.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-
       preferred_cli_env: [
-        "coveralls": :test,
+        coveralls: :test,
         "coveralls.html": :test,
-        "coveralls.json": :test,
+        "coveralls.json": :test
       ],
-      test_coverage: [tool: ExCoveralls],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -29,9 +28,12 @@ defmodule LastCrusader.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug_cowboy, "~> 2.0"}, # This will pull in Plug AND Cowboy
-      {:poison, "~> 3.1"}, # Latest version as of this writing
-      {:excoveralls, "~> 0.12.2", only: :test}, # code coverage
+      # This will pull in Plug AND Cowboy
+      {:plug_cowboy, "~> 2.0"},
+      # Latest version as of this writing
+      {:poison, "~> 3.1"},
+      # code coverage
+      {:excoveralls, "~> 0.12.2", only: :test}
     ]
   end
 end

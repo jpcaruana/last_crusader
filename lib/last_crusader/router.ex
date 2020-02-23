@@ -29,11 +29,10 @@ defmodule LastCrusader.Router do
     {:ok, body, conn} = read_body(conn)
 
     # body = Poison.decode!(body)
-    #IO.inspect(body)
+    # IO.inspect(body)
 
     send_resp(conn, 201, Poison.encode!(%{created: "#{get_in(body, ["message"])}"}))
   end
-
 
   # from https://dev.to/jonlunsford/elixir-building-a-small-json-endpoint-with-plug-cowboy-and-poison-1826
   # A simple route to test that the server is up
@@ -70,5 +69,4 @@ defmodule LastCrusader.Router do
   match _ do
     send_resp(conn, 404, "not found")
   end
-
 end
