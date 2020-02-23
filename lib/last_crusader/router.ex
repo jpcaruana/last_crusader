@@ -41,7 +41,7 @@ defmodule LastCrusader.Router do
   get "/ping" do
     send_resp(conn, 200, "pong!")
   end
-  
+
   post "/events" do
     {status, body} =
       case conn.body_params do

@@ -12,8 +12,9 @@ defmodule LastCrusader.Application do
       Plug.Cowboy.child_spec(
         scheme: :http,
         plug: LastCrusader.Router,
+        # Set the port per environment, see ./config/MIX_ENV.exs
         options: [
-          port: 4001
+          port: Application.get_env(:last_crusader, :port)
         ]
       )
     ]
