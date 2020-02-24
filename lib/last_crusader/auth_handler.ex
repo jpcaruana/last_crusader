@@ -32,6 +32,8 @@ defmodule LastCrusader.Auth do
     redirect_uri = q.query_params["redirect_uri"]
     state = q.query_params["state"]
 
+    RequestCache.cache("key", "xxxxxxxx")
+
     conn = put_headers(conn, %{location: "#{redirect_uri}?code=xxxxxxxx&state=#{state}"})
 
     send_resp(conn, 301, "")
@@ -58,7 +60,10 @@ defmodule LastCrusader.Auth do
     This may be different from the me parameter that the user originally entered, but MUST be on the same domain.
   """
   def code_verification(conn) do
-    send_resp(conn, 403, "")
+
+    a = RequestCache.read("key")
+    IO.puts a
+     send_resp(conn, 200, a)
   end
 
   defp put_headers(conn, key_values) do

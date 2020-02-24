@@ -7,7 +7,7 @@ defmodule Cache.Supervisor do
 
   def init(:ok) do
     children = [
-      worker(RequestCache, [10])
+      worker(RequestCache, [1])
     ]
 
     supervise(children, strategy: :one_for_one)

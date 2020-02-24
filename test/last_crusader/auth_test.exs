@@ -41,6 +41,28 @@ defmodule LastCrusader.AuthTest do
     assert_redirect(conn, 301, "https://webapp.example.org/auth/callback?code=xxxxxxxx&state=1234567890")
   end
 
+  test "read from cache" do
+    conn = conn(
+      :get,
+      "/auth?me=https://aaronparecki.com/&client_id=https://webapp.example.org/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
+    )
+
+    # Invoke the plug
+    conn = LastCrusader.Router.call(conn, @opts)
+
+    conn = conn(
+      :post,
+      "/auth"
+    )
+    # Invoke the plug
+    conn = LastCrusader.Router.call(conn, @opts)
+
+    # Assert the response and status
+    assert conn.state == :sent
+    assert conn.status == 200
+    assert conn.resp_body == "xxxxxxxx"
+  end
+
   defp assert_redirect(conn, code, to) do
     assert conn.state == :sent
     assert conn.status == code
