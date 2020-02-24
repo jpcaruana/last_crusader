@@ -31,10 +31,13 @@ defmodule LastCrusader.Auth do
     q = fetch_query_params(conn)
     redirect_uri = q.query_params["redirect_uri"]
     state = q.query_params["state"]
+    me = q.query_params["me"]
+    client_id = q.query_params["client_id"]
 
-    RequestCache.cache("key", "xxxxxxxx")
+    token = Randomizer.randomizer(50)
+    RequestCache.cache({redirect_uri, client_id}, {token, me})
 
-    conn = put_headers(conn, %{location: "#{redirect_uri}?code=xxxxxxxx&state=#{state}"})
+    conn = put_headers(conn, %{location: "#{redirect_uri}?code=#{token}&state=#{state}"})
 
     send_resp(conn, 301, "")
   end
@@ -60,10 +63,15 @@ defmodule LastCrusader.Auth do
     This may be different from the me parameter that the user originally entered, but MUST be on the same domain.
   """
   def code_verification(conn) do
+    q = fetch_query_params(conn)
+    redirect_uri = q.query_params["redirect_uri"]
+    client_id = q.query_params["client_id"]
+    token = q.query_params["code"]
 
-    a = RequestCache.read("key")
-    IO.puts a
-     send_resp(conn, 200, a)
+    case RequestCache.read({redirect_uri, client_id}) do
+      {^token, me} -> send_resp(conn, 200, me)
+      _ -> send_resp(conn, 401, "Unauthorized")
+    end
   end
 
   defp put_headers(conn, key_values) do
