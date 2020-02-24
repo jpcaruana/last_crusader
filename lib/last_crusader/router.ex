@@ -33,7 +33,11 @@ defmodule LastCrusader.Router do
   end
 
   get "/auth" do
-    Auth.auth(conn)
+    Auth.auth_endpoint(conn)
+  end
+
+  post "/auth" do
+    Auth.code_verification(conn)
   end
 
   # "Default" route that will get called when no other route is matched

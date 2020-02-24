@@ -20,7 +20,7 @@ defmodule LastCrusader.AuthTest do
     Optional. Defaults to id.
   scope
     Not used and omitted in identification mode (response_type=id)
-    For authorization, the scope contains a space-separated list of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
+    For authorization, the scope contains a space-separated lis of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
   """
 
   use ExUnit.Case, async: true
