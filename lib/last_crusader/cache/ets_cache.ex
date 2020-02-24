@@ -72,7 +72,7 @@ defmodule RequestCache do
 
   @spec init(integer) :: {:ok, t}
   def init(ttl_seconds) do
-    initial_state = %{invalidators: %{}, ttl: 12 * 1000}
+    initial_state = %{invalidators: %{}, ttl: ttl_seconds * 1000}
     generate_table()
     {:ok, initial_state}
   end
