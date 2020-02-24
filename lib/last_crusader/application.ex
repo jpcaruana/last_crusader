@@ -2,6 +2,7 @@ defmodule LastCrusader.Application do
   @moduledoc """
   Documentation for `LastCrusader`.
   """
+  import RequestCache
 
   use Application
 
@@ -16,12 +17,13 @@ defmodule LastCrusader.Application do
         options: [
           port: Application.get_env(:last_crusader, :port)
         ]
-      )
+      ),
+      {RequestCache, name: RequestCache}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: LastCrusader.Supervisor]
+    opts = [strategy: :one_for_one]
     Supervisor.start_link(children, opts)
   end
 end

@@ -4,7 +4,7 @@ defmodule RequestCache do
 
     https://gist.github.com/raorao/a4bb34726af2e3fa071adfa504505e1d
   """
-  use GenServer
+  use GenServer, restart: :transient, shutdown: 10_000
 
   @type t :: %{ttl: integer, invalidators: %{}}
   @type cache_key :: any
@@ -70,9 +70,9 @@ defmodule RequestCache do
 
   # GenServer Callbacks
 
-  @spec init(integer) :: {:ok, t}
-  def init(ttl_seconds) do
-    initial_state = %{invalidators: %{}, ttl: ttl_seconds * 1000}
+  @spec init() :: {:ok, t}
+  def init() do
+    initial_state = %{invalidators: %{}, ttl: 12 * 1000}
     generate_table()
     {:ok, initial_state}
   end
@@ -113,6 +113,6 @@ defmodule RequestCache do
   end
 
   defp generate_table do
-    :ets.new(:request_cache, [:set, :protected, :named_table])
+    :ets.new(:request_cache, [:set,  :named_table])
   end
 end
