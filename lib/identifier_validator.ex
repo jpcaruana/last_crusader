@@ -36,9 +36,8 @@ defmodule IdentifierValidator do
   defp validate_profile(_), do: :invalid
 
   defp valid2(path, host) do
-    [head | tail] = String.split(path, ["/../"])
-    case length(tail) do
-      0 -> valid3(host)
+    case String.split(path, ["/../"]) do
+      [head | []] -> valid3(host)
       _ -> :invalid
     end
   end
