@@ -37,9 +37,9 @@ defmodule LastCrusader.Auth do
     token = Randomizer.randomizer(50)
     RequestCache.cache({redirect_uri, client_id}, {token, me})
 
-    conn = put_headers(conn, %{location: "#{redirect_uri}?code=#{token}&state=#{state}"})
-
-    send_resp(conn, 301, "")
+    conn
+    |> put_headers(%{location: "#{redirect_uri}?code=#{token}&state=#{state}"})
+    |> send_resp(301, "")
   end
 
   @doc """

@@ -3,24 +3,6 @@ defmodule LastCrusader.AuthTest do
   Unit tests for IndieAuth: authorization-endpoint
 
   see https://indieweb.org/authorization-endpoint
-
-  Parameters:
-
-  me
-    Full URI of the user's homepage
-  client_id
-    Full URI of the application's/website's home page. Used to identify the application. An authorization endpoint may show the application's icon and title to the user during the auth process.
-  redirect_uri
-    Full URI to redirect back to when the login process is finished
-  state
-    A random value the app makes up, unique per request. The authorization server just passes it back to the app.
-    Optional. Auth endpoints MUST support them, though.
-  response_type
-    id (identification only) or code (identification + authorization)
-    Optional. Defaults to id.
-  scope
-    Not used and omitted in identification mode (response_type=id)
-    For authorization, the scope contains a space-separated lis of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
   """
 
   use ExUnit.Case, async: false
