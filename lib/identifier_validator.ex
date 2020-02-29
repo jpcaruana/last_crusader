@@ -23,6 +23,11 @@ defmodule IdentifierValidator do
       https://172.28.92.51/ - host is an IP address
   """
 
+  # to use in a pipe
+  def validate_user_profile_url(:invalid, _), do: :invalid
+  def validate_user_profile_url(:valid, url), do: validate_user_profile_url(url)
+
+  # real validation
   def validate_user_profile_url(nil), do: :invalid
   def validate_user_profile_url(url) do
     URI.parse(url)
