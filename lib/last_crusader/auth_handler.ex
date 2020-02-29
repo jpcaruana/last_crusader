@@ -35,14 +35,24 @@ defmodule LastCrusader.Auth do
     me = q.query_params["me"]
     client_id = q.query_params["client_id"]
 
-    {status, body, headers} = case validate_user_profile_url(client_id) do
-      :invalid -> {400, "invalid client_id", nil}
+    {status, body, headers} = case validate_input(redirect_uri, client_id, me) do
+      :invalid -> {400, "", nil}
       _ -> generate_token(redirect_uri, client_id, me, state)
     end
 
     conn
     |> put_headers(headers)
     |> send_resp(status, body)
+  end
+
+  defp validate_input(redirect_uri, client_id, me) do
+    a = validate_user_profile_url(client_id)
+    b = validate_user_profile_url(redirect_uri)
+    c = validate_user_profile_url(me)
+    case {a, b, c} do
+      {:valid, :valid, :valid} -> :valid
+      _ -> :invalid
+    end
   end
 
   defp generate_token(redirect_uri, client_id, me, state) do
