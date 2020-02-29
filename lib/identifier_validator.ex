@@ -36,22 +36,22 @@ defmodule IdentifierValidator do
 
   defp validate_profile(%URI{host: nil}), do: :invalid
   defp validate_profile(%URI{scheme: "https", path: path, host: host, userinfo: nil, fragment: nil}),
-       do: validate_path(path, host)
-           |> validate_host
+       do: validate_path(path)
+           |> validate_host(host)
   defp validate_profile(%URI{scheme: "http", path: path, host: host, userinfo: nil, fragment: nil}),
-       do: validate_path(path, host)
-           |> validate_host
+       do: validate_path(path)
+           |> validate_host(host)
   defp validate_profile(_), do: :invalid
 
-  defp validate_path(path, host) do
+  defp validate_path(path) do
     case String.split(path, ["/../"]) do
-      [_ | []] -> host
+      [_ | []] -> :valid
       _ -> :invalid
     end
   end
 
-  defp validate_host(:invalid), do: :invalid
-  defp validate_host(host) do
+  defp validate_host(:invalid, _), do: :invalid
+  defp validate_host(:valid, host) do
     case :inet.parse_address(to_charlist(host)) do
       {:ok, _} -> :invalid
       _ -> :valid
