@@ -12,7 +12,9 @@ defmodule LastCrusader.Handler do
         _ -> {422, missing_events()}
       end
 
-    send_resp(conn, status, body)
+    conn
+    |> put_resp_header("content-type", "application/json")
+    |> send_resp(status, body)
   end
 
   defp process_events(events) when is_list(events) do
