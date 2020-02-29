@@ -88,7 +88,8 @@ defmodule LastCrusader.AuthTest do
 
     # Assert the response and status
     assert conn.state == :sent
-    assert conn.resp_body == "url_me"
+    assert conn.resp_body == "{\"me\":\"url_me\"}"
+    assert Plug.Conn.get_resp_header(conn, "content-type") == ["application/json"]
     assert conn.status == 200
   end
 

@@ -6,6 +6,7 @@ defmodule LastCrusader.Auth do
   """
   import Plug.Conn
   import IdentifierValidator
+  import Poison
 
   @doc """
   IndieAuth: authorization-endpoint
@@ -81,7 +82,9 @@ defmodule LastCrusader.Auth do
     token = q.query_params["code"]
 
     case RequestCache.read({redirect_uri, client_id}) do
-      {^token, me} -> send_resp(conn, 200, me)
+      {^token, me} -> conn
+                      |> put_resp_header("content-type", "application/json")
+                      |> send_resp(200, encode!(%{me: me}))
       _ -> send_resp(conn, 401, "Unauthorized")
     end
   end
