@@ -5,6 +5,7 @@ defmodule LastCrusader.Auth do
   see https://indieweb.org/authorization-endpoint
   """
   import Plug.Conn
+  import IdentifierValidator
 
   @doc """
   IndieAuth: authorization-endpoint
@@ -34,12 +35,21 @@ defmodule LastCrusader.Auth do
     me = q.query_params["me"]
     client_id = q.query_params["client_id"]
 
+    {status, body, headers} = case validate_user_profile_url(client_id) do
+      :invalid -> {400, "invalid client_id", nil}
+      _ -> generate_token(redirect_uri, client_id, me, state)
+    end
+
+    conn
+    |> put_headers(headers)
+    |> send_resp(status, body)
+  end
+
+  defp generate_token(redirect_uri, client_id, me, state) do
     token = Randomizer.randomizer(50)
     RequestCache.cache({redirect_uri, client_id}, {token, me})
 
-    conn
-    |> put_headers(%{location: "#{redirect_uri}?code=#{token}&state=#{state}"})
-    |> send_resp(301, "")
+    {301, me, %{location: "#{redirect_uri}?code=#{token}&state=#{state}"}}
   end
 
   @doc """
@@ -74,6 +84,7 @@ defmodule LastCrusader.Auth do
     end
   end
 
+  defp put_headers(conn, nil), do: conn
   defp put_headers(conn, key_values) do
     Enum.reduce key_values, conn, fn {k, v}, conn ->
       put_resp_header(conn, to_string(k), v)
