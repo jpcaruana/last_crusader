@@ -24,7 +24,7 @@ defmodule LastCrusader.AuthTest do
 
     conn = LastCrusader.Router.call(conn, @opts)
 
-    assert_redirect(conn, 301, "https://webapp.example.org/auth/callback?code=xxxxxxxx&state=1234567890")
+    assert_redirect(conn, 302, "https://webapp.example.org/auth/callback?code=xxxxxxxx&state=1234567890")
   end
 
   test "auth should receive the client_id parameter" do
@@ -76,7 +76,7 @@ defmodule LastCrusader.AuthTest do
   end
 
 
-  test "read from cache" do
+  test "token read from cache" do
     RequestCache.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
 
     conn = conn(
