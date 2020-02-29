@@ -27,6 +27,17 @@ defmodule LastCrusader.AuthTest do
     assert_redirect(conn, 301, "https://webapp.example.org/auth/callback?code=xxxxxxxx&state=1234567890")
   end
 
+  test "auth should receive the client_id parameter" do
+    conn = conn(
+      :get,
+      "/auth?me=https://aaronparecki.com/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
+    )
+
+    conn = LastCrusader.Router.call(conn, @opts)
+
+    assert conn.state == :sent
+    assert conn.status == 400
+  end
 
   test "auth should reject invalid client_id" do
     conn = conn(

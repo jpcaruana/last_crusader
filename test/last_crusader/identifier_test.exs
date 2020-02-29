@@ -26,5 +26,8 @@ defmodule IdentifierTest do
   test "profile URL should not be an IP address" do
     assert :invalid == IdentifierValidator.validate_user_profile_url("https://172.28.92.51/")
   end
+  test "profile URL should not be nil" do
+    assert :invalid == IdentifierValidator.validate_user_profile_url(nil)
+  end
 
 end
