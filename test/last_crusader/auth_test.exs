@@ -10,12 +10,6 @@ defmodule LastCrusader.AuthTest do
 
   @opts LastCrusader.Router.init([])
 
-  setup do
-    on_exit fn ->
-      RequestCache.clear()
-    end
-  end
-
   test "auth should redirect to web application" do
     conn = conn(
       :get,
