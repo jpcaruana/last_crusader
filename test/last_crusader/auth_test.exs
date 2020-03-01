@@ -1,9 +1,5 @@
 defmodule LastCrusader.AuthTest do
-  @moduledoc """
-  Unit tests for IndieAuth: authorization-endpoint
-
-  see https://indieweb.org/authorization-endpoint
-  """
+  @moduledoc false
 
   use ExUnit.Case, async: false
   use Plug.Test

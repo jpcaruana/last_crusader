@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Se logguer avec IndieAuth</title>
+</head>
+<style>
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  body, html {
+    height: 100%;
+  }
+
+  form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+</style>
+<body>
+<div class="container">
+  <form action="http://localhost:4001/auth" method="get">
+    <label for="indie_auth_url">Web Address:</label>
+    <input id="indie_auth_url" type="text" name="me" placeholder="yourdomain.com"/>
+    <p>
+      <button type="submit">Login</button>
+    </p>
+    <input type="hidden" name="client_id" value="http://localhost:4001/"/>
+    <input type="hidden" name="redirect_uri" value="http://localhost:4001/public/login.html"/>
+    <input type="hidden" name="state" value="jwiusuerujs"/>
+  </form>
+</div>
+</body>
+</html>

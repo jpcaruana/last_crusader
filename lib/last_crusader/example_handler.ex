@@ -1,4 +1,4 @@
-defmodule LastCrusader.Handler do
+defmodule LastCrusader.ExampleHandler do
   @moduledoc """
   Handles HTTP requests
   """
