@@ -1,4 +1,4 @@
-defmodule RequestCache do
+defmodule LastCrusader.Cache.MemoryTokenStore do
   @moduledoc """
     Simple ETS-based cache.
 

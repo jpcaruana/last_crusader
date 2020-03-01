@@ -18,7 +18,7 @@ defmodule LastCrusader.Application do
           port: Application.get_env(:last_crusader, :port)
         ]
       ),
-      supervisor(Cache.Supervisor, []),
+      supervisor(LastCrusader.Cache.Supervisor, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

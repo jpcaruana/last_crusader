@@ -1,5 +1,6 @@
-defmodule IdentifierTest do
+defmodule LastCrusader.Utils.IdentifierTest do
   use ExUnit.Case, async: true
+  alias LastCrusader.Utils.IdentifierValidator, as: IdentifierValidator
 
   test "user profile URL should be valid" do
     assert :valid == IdentifierValidator.validate_user_profile_url("https://example.com/")

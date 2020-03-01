@@ -1,4 +1,4 @@
-defmodule LastCrusader.Login do
+defmodule LastCrusader.Login.LoginHandler do
   @moduledoc false
   import Plug.Conn
 

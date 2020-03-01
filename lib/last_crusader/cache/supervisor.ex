@@ -1,4 +1,4 @@
-defmodule Cache.Supervisor do
+defmodule LastCrusader.Cache.Supervisor do
   use Supervisor
 
   def start_link do
@@ -7,7 +7,7 @@ defmodule Cache.Supervisor do
 
   def init(:ok) do
     children = [
-      worker(RequestCache, [100])
+      worker(LastCrusader.Cache.MemoryTokenStore, [100])
     ]
 
     supervise(children, strategy: :one_for_one)

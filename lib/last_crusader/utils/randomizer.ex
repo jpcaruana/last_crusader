@@ -1,4 +1,4 @@
-defmodule Randomizer do
+defmodule LastCrusader.Utils.Randomizer do
   @moduledoc """
   Random string generator module.
 

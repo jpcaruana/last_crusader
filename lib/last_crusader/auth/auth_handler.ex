@@ -1,12 +1,15 @@
-defmodule LastCrusader.Auth do
+defmodule LastCrusader.Auth.AuthHandler do
   @moduledoc """
   Handles HTTP requests for IndieAuth
 
   see https://indieweb.org/authorization-endpoint
   """
   import Plug.Conn
-  import IdentifierValidator
+  import LastCrusader.Utils.IdentifierValidator
   import Poison
+
+  alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
+  alias LastCrusader.Utils.Randomizer, as: Randomizer
 
   @doc """
   IndieAuth: authorization-endpoint
@@ -50,7 +53,7 @@ defmodule LastCrusader.Auth do
 
   defp generate_token(redirect_uri, client_id, me, state) do
     token = Randomizer.randomizer(50)
-    RequestCache.cache({redirect_uri, client_id}, {token, me})
+    MemoryTokenStore.cache({redirect_uri, client_id}, {token, me})
 
     {302, "", %{location: "#{redirect_uri}?code=#{token}&state=#{state}"}}
   end
@@ -81,7 +84,7 @@ defmodule LastCrusader.Auth do
     client_id = q.query_params["client_id"]
     token = q.query_params["code"]
 
-    case RequestCache.read({redirect_uri, client_id}) do
+    case MemoryTokenStore.read({redirect_uri, client_id}) do
       {^token, me} -> conn
                       |> put_resp_content_type("application/json")
                       |> send_resp(200, encode!(%{me: me}))

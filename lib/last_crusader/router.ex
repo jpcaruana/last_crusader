@@ -3,8 +3,8 @@ defmodule LastCrusader.Router do
   A Plug responsible for logging request info, parsing request body's as JSON,
   matching routes, and dispatching responses.
   """
-  alias LastCrusader.Auth, as: Auth
-  alias LastCrusader.Login, as: Login
+  alias LastCrusader.Auth.AuthHandler, as: Auth
+  alias LastCrusader.Login.LoginHandler, as: Login
   use Plug.Router
   use Plug.ErrorHandler
 

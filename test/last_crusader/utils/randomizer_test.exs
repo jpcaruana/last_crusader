@@ -1,5 +1,6 @@
-defmodule RandomizerTest do
+defmodule LastCrusader.Utils.RandomizerTest do
   use ExUnit.Case, async: true
+  alias LastCrusader.Utils.Randomizer, as: Randomizer
 
   #alias Randomizer
 

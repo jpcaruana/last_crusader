@@ -1,4 +1,4 @@
-defmodule IdentifierValidator do
+defmodule LastCrusader.Utils.IdentifierValidator do
   @moduledoc """
   see spec https://indieauth.spec.indieweb.org/#user-profile-url
 

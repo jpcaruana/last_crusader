@@ -3,6 +3,7 @@ defmodule LastCrusader.AuthTest do
 
   use ExUnit.Case, async: false
   use Plug.Test
+  alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
 
   @opts LastCrusader.Router.init([])
 
@@ -67,7 +68,7 @@ defmodule LastCrusader.AuthTest do
 
 
   test "token read from cache" do
-    RequestCache.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
+    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
 
     conn = conn(
       :post,
@@ -84,7 +85,7 @@ defmodule LastCrusader.AuthTest do
   end
 
   test "read from cache fails on bad token" do
-    RequestCache.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
+    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
 
     conn = conn(
       :post,
