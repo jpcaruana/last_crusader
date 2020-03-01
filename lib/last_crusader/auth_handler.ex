@@ -83,7 +83,7 @@ defmodule LastCrusader.Auth do
 
     case RequestCache.read({redirect_uri, client_id}) do
       {^token, me} -> conn
-                      |> put_resp_header("content-type", "application/json")
+                      |> put_resp_content_type("application/json")
                       |> send_resp(200, encode!(%{me: me}))
       _ -> send_resp(conn, 401, "Unauthorized")
     end
