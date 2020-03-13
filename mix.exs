@@ -32,8 +32,11 @@ defmodule LastCrusader.MixProject do
       {:plug_cowboy, "~> 2.0"},
       # Latest version as of this writing
       {:poison, "~> 3.1"},
+      # microformats parser
+      {:microformats2, "~> 0.6.0"},
+      {:tesla, "~> 1.3.0"},
       # code coverage
-      {:excoveralls, "~> 0.12.2", only: :test}
+      {:excoveralls, "~> 0.12.2", only: :test},
     ]
   end
 end
