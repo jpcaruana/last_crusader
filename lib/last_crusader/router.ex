@@ -5,6 +5,7 @@ defmodule LastCrusader.Router do
   """
   alias LastCrusader.Auth.AuthHandler, as: Auth
   alias LastCrusader.Login.LoginHandler, as: Login
+  alias LastCrusader.Micropub.MicropubHandler, as: Micropub
   use Plug.Router
   use Plug.ErrorHandler
 
@@ -58,6 +59,10 @@ defmodule LastCrusader.Router do
 
   post "/login" do
     Login.log_user(conn)
+  end
+
+  post "/micropub" do
+    Micropub.publish(conn)
   end
 
   get "/favicon.ico" do
