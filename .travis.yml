@@ -9,7 +9,6 @@ before_script:
   - mix deps.get
 script:
   - mix test
-script:
   - mix docs
 
 #script:
