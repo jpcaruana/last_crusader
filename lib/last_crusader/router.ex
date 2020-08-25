@@ -1,8 +1,5 @@
 defmodule LastCrusader.Router do
-  @moduledoc """
-  A Plug responsible for logging request info, parsing request body's as JSON,
-  matching routes, and dispatching responses.
-  """
+  @moduledoc false
   alias LastCrusader.Auth.AuthHandler, as: Auth
   alias LastCrusader.Login.LoginHandler, as: Login
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub

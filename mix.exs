@@ -13,7 +13,18 @@ defmodule LastCrusader.MixProject do
         "coveralls.html": :test,
         "coveralls.json": :test
       ],
-      test_coverage: [tool: ExCoveralls]
+      test_coverage: [tool: ExCoveralls],
+
+      # Docs
+      name: "Last Crusader",
+      source_url: "https://github.com/jpcaruana/last_crusader",
+      homepage_url: "https://github.com/jpcaruana/last_crusader",
+      docs: [
+        # The main page in the docs
+        main: "readme",
+        # logo: "path/to/logo.png",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -36,7 +47,9 @@ defmodule LastCrusader.MixProject do
       {:microformats2, "~> 0.6.0"},
       {:tesla, "~> 1.3.0"},
       # code coverage
-      {:excoveralls, "~> 0.12.2", only: :test}
+      {:excoveralls, "~> 0.12.2", only: :test},
+      # doc generation: mix docs
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
     ]
   end
 end

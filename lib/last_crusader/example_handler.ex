@@ -1,7 +1,5 @@
 defmodule LastCrusader.ExampleHandler do
-  @moduledoc """
-  Handles HTTP requests
-  """
+  @moduledoc false
   import Plug.Conn
   import Poison
 

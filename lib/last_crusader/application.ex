@@ -4,6 +4,7 @@ defmodule LastCrusader.Application do
 
   use Application
 
+  @doc false
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [

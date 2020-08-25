@@ -1,8 +1,10 @@
 defmodule LastCrusader.Utils.IdentifierValidator do
   @moduledoc """
+  Indie Auth Identifier Validator
+
   see spec https://indieauth.spec.indieweb.org/#user-profile-url
 
-  3.1 User Profile URL
+  ## User Profile URL
 
   Users are identified by a [URL]. Profile URLs MUST have either an https or http scheme, MUST contain a path component (/ is a valid path), MUST NOT contain single-dot or double-dot path segments, MAY contain a query string component, MUST NOT contain a fragment component, MUST NOT contain a username or password component, and MUST NOT contain a port. Additionally, hostnames MUST be domain names and MUST NOT be ipv4 or ipv6 addresses.
 
