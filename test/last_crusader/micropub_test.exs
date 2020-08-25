@@ -10,8 +10,8 @@ defmodule LastCrusader.MicropubTest do
     conn = LastCrusader.Router.call(conn, @opts)
 
     assert conn.state == :sent
-    assert conn.status == 201
-    assert conn.resp_body == "Location: http://example.com/venue/10"
+    assert conn.status == 202
+    assert Plug.Conn.get_resp_header(conn, "location") == ["http://example.com/venue/10"]
   end
 
   test "micropub should reject bad h-entries" do
