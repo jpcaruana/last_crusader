@@ -4,7 +4,7 @@ defmodule LastCrusader.MicropubTest do
 
   @opts LastCrusader.Router.init([])
 
-  test "micropub should accept x-www-form-urlencoded requests" do
+  test "micropub should accept h-entry x-www-form-urlencoded requests" do
     conn = conn(:post, "/micropub", %{h: "entry", content: "some text content"})
 
     conn = LastCrusader.Router.call(conn, @opts)
@@ -12,5 +12,14 @@ defmodule LastCrusader.MicropubTest do
     assert conn.state == :sent
     assert conn.status == 201
     assert conn.resp_body == "Location: http://example.com/venue/10"
+  end
+
+  test "micropub should reject bad h-entries" do
+    conn = conn(:post, "/micropub", %{h: "NOPE", content: "some text content"})
+
+    conn = LastCrusader.Router.call(conn, @opts)
+
+    assert conn.state == :sent
+    assert conn.status == 400
   end
 end
