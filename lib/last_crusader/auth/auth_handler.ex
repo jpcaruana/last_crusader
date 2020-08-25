@@ -39,12 +39,13 @@ defmodule LastCrusader.Auth.AuthHandler do
     me = q.query_params["me"]
     client_id = q.query_params["client_id"]
 
-    {status, body, headers} = case validate_user_profile_url(client_id)
-                                   |> validate_user_profile_url(redirect_uri)
-                                   |> validate_user_profile_url(me) do
-      :invalid -> {400, "", nil}
-      _ -> generate_token(redirect_uri, client_id, me, state)
-    end
+    {status, body, headers} =
+      case validate_user_profile_url(client_id)
+           |> validate_user_profile_url(redirect_uri)
+           |> validate_user_profile_url(me) do
+        :invalid -> {400, "", nil}
+        _ -> generate_token(redirect_uri, client_id, me, state)
+      end
 
     conn
     |> put_headers(headers)
@@ -85,17 +86,21 @@ defmodule LastCrusader.Auth.AuthHandler do
     token = q.query_params["code"]
 
     case MemoryTokenStore.read({redirect_uri, client_id}) do
-      {^token, me} -> conn
-                      |> put_resp_content_type("application/json")
-                      |> send_resp(200, encode!(%{me: me}))
-      _ -> send_resp(conn, 401, "Unauthorized")
+      {^token, me} ->
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(200, encode!(%{me: me}))
+
+      _ ->
+        send_resp(conn, 401, "Unauthorized")
     end
   end
 
   defp put_headers(conn, nil), do: conn
+
   defp put_headers(conn, key_values) do
-    Enum.reduce key_values, conn, fn {k, v}, conn ->
+    Enum.reduce(key_values, conn, fn {k, v}, conn ->
       put_resp_header(conn, to_string(k), v)
-    end
+    end)
   end
 end

@@ -29,18 +29,30 @@ defmodule LastCrusader.Utils.IdentifierValidator do
 
   # real validation
   def validate_user_profile_url(nil), do: :invalid
+
   def validate_user_profile_url(url) do
     URI.parse(url)
     |> validate_profile
   end
 
   defp validate_profile(%URI{host: nil}), do: :invalid
-  defp validate_profile(%URI{scheme: "https", path: path, host: host, userinfo: nil, fragment: nil}),
-       do: validate_path(path)
-           |> validate_host(host)
+
+  defp validate_profile(%URI{
+         scheme: "https",
+         path: path,
+         host: host,
+         userinfo: nil,
+         fragment: nil
+       }),
+       do:
+         validate_path(path)
+         |> validate_host(host)
+
   defp validate_profile(%URI{scheme: "http", path: path, host: host, userinfo: nil, fragment: nil}),
-       do: validate_path(path)
-           |> validate_host(host)
+       do:
+         validate_path(path)
+         |> validate_host(host)
+
   defp validate_profile(_), do: :invalid
 
   defp validate_path(path) do
@@ -51,6 +63,7 @@ defmodule LastCrusader.Utils.IdentifierValidator do
   end
 
   defp validate_host(:invalid, _), do: :invalid
+
   defp validate_host(:valid, host) do
     case :inet.parse_address(to_charlist(host)) do
       {:ok, _} -> :invalid

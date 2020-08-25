@@ -2,7 +2,7 @@ defmodule LastCrusader.Utils.RandomizerTest do
   use ExUnit.Case, async: true
   alias LastCrusader.Utils.Randomizer, as: Randomizer
 
-  #alias Randomizer
+  # alias Randomizer
 
   test "generate random string" do
     random = Randomizer.randomizer(100)

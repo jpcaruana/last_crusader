@@ -36,7 +36,7 @@ defmodule LastCrusader.MixProject do
       {:microformats2, "~> 0.6.0"},
       {:tesla, "~> 1.3.0"},
       # code coverage
-      {:excoveralls, "~> 0.12.2", only: :test},
+      {:excoveralls, "~> 0.12.2", only: :test}
     ]
   end
 end

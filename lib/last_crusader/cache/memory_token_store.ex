@@ -16,7 +16,7 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
 
     By default, every item in the cache lives for 6 hours.
   """
-  @spec start_link(integer) :: GenServer.on_start
+  @spec start_link(integer) :: GenServer.on_start()
   def start_link(ttl_seconds \\ 21_600) do
     GenServer.start_link(__MODULE__, ttl_seconds, name: __MODULE__)
   end
@@ -61,8 +61,9 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
     case read(key) do
       :not_found ->
         value = default_fn.()
-        cache key, value
+        cache(key, value)
         value
+
       value ->
         value
     end
@@ -98,7 +99,7 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
   @spec handle_cast(:clear, t) :: {:noreply, t}
   def handle_cast(:clear, state = %{invalidators: invalidators}) do
     invalidators
-    |> Map.keys
+    |> Map.keys()
     |> Enum.each(&Process.cancel_timer/1)
 
     :ets.delete(:request_cache)

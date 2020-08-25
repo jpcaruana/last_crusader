@@ -23,5 +23,4 @@ defmodule LastCrusader.LoginTest do
     assert conn.state == :sent
     assert conn.status == 200
   end
-
 end

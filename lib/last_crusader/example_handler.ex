@@ -21,6 +21,7 @@ defmodule LastCrusader.ExampleHandler do
     # Do some processing on a list of events
     encode!(%{response: "Received Events!"})
   end
+
   defp process_events(_) do
     # If we can't process anything, let them know :)
     encode!(%{response: "Please Send Some Events!"})
