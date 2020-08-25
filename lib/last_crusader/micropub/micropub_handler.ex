@@ -1,5 +1,7 @@
 defmodule LastCrusader.Micropub.MicropubHandler do
-  @moduledoc false
+  @moduledoc """
+    cf spec: https://micropub.spec.indieweb.org/
+  """
   import Plug.Conn
 
   def publish(conn) do
