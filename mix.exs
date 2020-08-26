@@ -46,6 +46,8 @@ defmodule LastCrusader.MixProject do
       # microformats parser
       {:microformats2, "~> 0.6.0"},
       {:tesla, "~> 1.3.0"},
+      # hugo
+      {:toml, "~> 0.6.1"},
       # code coverage
       {:excoveralls, "~> 0.12.2", only: :test},
       # doc generation: mix docs
