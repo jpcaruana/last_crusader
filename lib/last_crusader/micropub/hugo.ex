@@ -1,54 +1,65 @@
 defmodule LastCrusader.Micropub.Hugo do
   @moduledoc """
-  Generates Hugo compatile data, file content, file name
-"""
+    Generates Hugo compatile data, file content, file name
+  """
 
   @doc """
-  Create a new Hugo Note type
-"""
-  def note(date, data) do
-    new(:note, date, data)
+    Create a new Hugo Note type
+  """
+  def note(date, name, content, data \\ %{}) do
+    new(:note, date, name, content, data)
   end
 
   @doc """
     Create a new Hugo Post type
   """
-
-  def post(date, data) do
-    new(:post, date, data)
+  def post(date, name, content, data \\ %{}) do
+    new(:post, date, name, content, data)
   end
 
   @doc """
     Create a new Hugo Bookmark type
   """
-  def bookmark(date, data) do
-    new(:bookmark, date, data)
+  def bookmark(date, name, content, data \\ %{}) do
+    new(:bookmark, date, name, content, data)
   end
 
   @doc false
-  def new(type, date, data) do
-    %{name: name, content: content} = data
+  def new(type, date, name, content, data) do
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date)
 
-    front_matter = generate_front_matter(date)
+    front_matter = generate_front_matter(date, data)
 
     {file_name, front_matter <> content}
   end
 
-  def generate_front_matter(date) do
+  def generate_front_matter(date, data) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
-    "+++\ndate = " <> iso_date <> "\n+++\n"
+
+    data_as_toml = Map.put(data, :date, iso_date)
+                   |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
+                   |> Enum.join("\n")
+    "+++\n" <> data_as_toml <> "\n+++\n"
+  end
+
+  def toml_value(s) when is_list(s) do
+    toml = Enum.map(s, fn x -> toml_value(x) end)
+           |> Enum.join(", ")
+    "[" <> toml <> "]"
+  end
+  def toml_value(s) do
+    "\"" <> s <> "\""
   end
 
   @doc """
-  Generates the complete filename (with path) for a Hugo website
+    Generates the complete filename (with path) for a Hugo website
 
-  Parameters:
-  - type: can be `:note` `:post` `:bookmark`
-  - name: for the file name
-  - date
-"""
+    Parameters:
+    - type: can be `:note` `:post` `:bookmark`
+    - name: for the file name
+    - date
+  """
   def generate_filename(:note, name, date) do
     "content/notes/" <> date <> "/" <> name <> ".md"
   end
