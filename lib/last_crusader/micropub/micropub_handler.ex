@@ -13,7 +13,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   def publish(conn) do
     type = conn.params["h"]
-    content = conn.params["content"]
+    _content = conn.params["content"]
 
     # - discover post type
     # - transform to hugo
