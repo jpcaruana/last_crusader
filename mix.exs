@@ -31,7 +31,7 @@ defmodule LastCrusader.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy, :poison],
+      extra_applications: [:logger, :plug_cowboy, :poison, :timex],
       mod: {LastCrusader.Application, []}
     ]
   end
@@ -48,6 +48,7 @@ defmodule LastCrusader.MixProject do
       {:tesla, "~> 1.3.0"},
       # hugo
       {:toml, "~> 0.6.1"},
+      {:timex, "~> 3.0"},
       # code coverage
       {:excoveralls, "~> 0.12.2", only: :test},
       # doc generation: mix docs

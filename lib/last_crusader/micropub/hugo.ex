@@ -28,15 +28,17 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc false
   def new(type, date, data) do
     %{name: name, content: content} = data
-    file_name = generate_filename(type, name, date)
+    {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
+    file_name = generate_filename(type, name, path_date)
 
-    front_matter = """
-+++
-date = 2020-08-12T00:00:00+02:00
-+++
-"""
+    front_matter = generate_front_matter(date)
 
     {file_name, front_matter <> content}
+  end
+
+  def generate_front_matter(date) do
+    {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
+    "+++\ndate = " <> iso_date <> "\n+++\n"
   end
 
   @doc """
