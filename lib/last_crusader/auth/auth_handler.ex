@@ -8,6 +8,7 @@ defmodule LastCrusader.Auth.AuthHandler do
   """
   import Plug.Conn
   import LastCrusader.Utils.IdentifierValidator
+  import LastCrusader.Utils.Http
 
   alias Poison, as: Json
   alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
@@ -98,13 +99,5 @@ defmodule LastCrusader.Auth.AuthHandler do
       _ ->
         send_resp(conn, 401, "Unauthorized")
     end
-  end
-
-  defp put_headers(conn, nil), do: conn
-
-  defp put_headers(conn, key_values) do
-    Enum.reduce(key_values, conn, fn {k, v}, conn ->
-      put_resp_header(conn, to_string(k), v)
-    end)
   end
 end

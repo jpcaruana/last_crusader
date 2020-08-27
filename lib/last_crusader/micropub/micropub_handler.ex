@@ -7,11 +7,18 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     cf https://indieweb.org/post-type-discovery for Post Type discovery
   """
   import Plug.Conn
+  import LastCrusader.Utils.Http
+
   alias Poison, as: Json
 
   def publish(conn) do
-    type = conn.body_params["h"]
-    content = conn.body_params["content"]
+    type = conn.params["h"]
+    content = conn.params["content"]
+
+    # - discover post type
+    # - transform to hugo
+    # - post to github
+    # - http reply to client
 
     {status, body, headers} =
       case type do
@@ -24,11 +31,4 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     |> send_resp(status, body)
   end
 
-  defp put_headers(conn, nil), do: conn
-
-  defp put_headers(conn, key_values) do
-    Enum.reduce(key_values, conn, fn {k, v}, conn ->
-      put_resp_header(conn, to_string(k), v)
-    end)
-  end
 end

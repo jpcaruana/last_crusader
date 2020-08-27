@@ -13,7 +13,9 @@ defmodule LastCrusader.MixProject do
         "coveralls.html": :test,
         "coveralls.json": :test
       ],
-      test_coverage: [tool: ExCoveralls],
+      test_coverage: [
+        tool: ExCoveralls
+      ],
 
       # Docs
       name: "Last Crusader",
@@ -39,14 +41,10 @@ defmodule LastCrusader.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # This will pull in Plug AND Cowboy
       {:plug_cowboy, "~> 2.3.0"},
-      # Latest version as of this writing
       {:poison, "~> 4.0.1"},
-      # microformats parser
       {:microformats2, "~> 0.6.0"},
       {:tesla, "~> 1.3.0"},
-      # hugo
       {:toml, "~> 0.6.1"},
       {:timex, "~> 3.0"},
       # code coverage
