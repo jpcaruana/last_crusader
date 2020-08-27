@@ -128,7 +128,7 @@ defmodule LastCrusader.AuthTest do
     assert conn.resp_body == "Unauthorized"
   end
 
-  defp assert_redirect(conn, code, to) do
+  defp assert_redirect(conn, code, _to) do
     assert conn.state == :sent
     assert conn.status == code
     # assert Plug.Conn.get_resp_header(conn, "location") == [to]

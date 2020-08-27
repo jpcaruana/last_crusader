@@ -8,8 +8,8 @@ defmodule LastCrusader.Auth.AuthHandler do
   """
   import Plug.Conn
   import LastCrusader.Utils.IdentifierValidator
-  import Poison
 
+  alias Poison, as: Json
   alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
   alias LastCrusader.Utils.Randomizer, as: Randomizer
 
@@ -93,7 +93,7 @@ defmodule LastCrusader.Auth.AuthHandler do
       {^token, me} ->
         conn
         |> put_resp_content_type("application/json")
-        |> send_resp(200, encode!(%{me: me}))
+        |> send_resp(200, Json.encode!(%{me: me}))
 
       _ ->
         send_resp(conn, 401, "Unauthorized")

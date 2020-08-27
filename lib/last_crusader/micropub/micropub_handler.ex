@@ -7,7 +7,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     cf https://indieweb.org/post-type-discovery for Post Type discovery
   """
   import Plug.Conn
-  import Poison
+  alias Poison, as: Json
 
   def publish(conn) do
     type = conn.body_params["h"]
@@ -16,7 +16,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     {status, body, headers} =
       case type do
         "entry" -> {202, "", %{location: "http://example.com/venue/10"}}
-        _ -> {400, encode!(%{error: "invalid_request"}), nil}
+        _ -> {400, Json.encode!(%{error: "invalid_request"}), nil}
       end
 
     conn
