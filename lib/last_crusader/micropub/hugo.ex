@@ -25,7 +25,7 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc false
-  def new(type, date, name, content, data) do
+  def new(type, date, name, content, data \\ %{}) do
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date)
 
@@ -34,10 +34,11 @@ defmodule LastCrusader.Micropub.Hugo do
     {file_name, front_matter <> content}
   end
 
-  def generate_front_matter(date, data) do
+  def generate_front_matter(date, data \\ %{}) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
 
-    data_as_toml = Map.put(data, :date, iso_date)
+    data_as_toml = data
+                   |> Map.put(:date, iso_date)
                    |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
                    |> Enum.join("\n")
     "+++\n" <> data_as_toml <> "\n+++\n"
