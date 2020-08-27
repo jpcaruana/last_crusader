@@ -11,7 +11,7 @@ defmodule LastCrusader.Auth.AuthHandler do
   import LastCrusader.Utils.Http
 
   alias Poison, as: Json
-  alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
+  alias LastCrusader.Cache.MemoryTokenStore, as: TokenStore
   alias LastCrusader.Utils.Randomizer, as: Randomizer
 
   @doc """
@@ -57,7 +57,7 @@ defmodule LastCrusader.Auth.AuthHandler do
 
   defp generate_token(redirect_uri, client_id, me, state) do
     token = Randomizer.randomizer(50)
-    MemoryTokenStore.cache({redirect_uri, client_id}, {token, me})
+    TokenStore.cache({redirect_uri, client_id}, {token, me})
 
     {302, "", %{location: "#{redirect_uri}?code=#{token}&state=#{state}"}}
   end
@@ -90,7 +90,7 @@ defmodule LastCrusader.Auth.AuthHandler do
     client_id = q.query_params["client_id"]
     token = q.query_params["code"]
 
-    case MemoryTokenStore.read({redirect_uri, client_id}) do
+    case TokenStore.read({redirect_uri, client_id}) do
       {^token, me} ->
         conn
         |> put_resp_content_type("application/json")
