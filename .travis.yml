@@ -8,11 +8,8 @@ otp_release:
 before_script:
   - mix deps.get
 script:
-  - mix test
-  - mix docs
-
-#script:
-#  - MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json
+  - MIX_ENV=test mix do compile, test, coveralls.json, coveralls.html
+  #- MIX_ENV=test mix do compile --warnings-as-errors, coveralls.json, coveralls.html
 
 #after_success:
 #  - bash <(curl -s https://codecov.io/bash)
