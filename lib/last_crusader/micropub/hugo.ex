@@ -1,6 +1,6 @@
 defmodule LastCrusader.Micropub.Hugo do
   @moduledoc """
-    Generates Hugo compatile data, file content, file name
+    Generates Hugo compatible data, file content, file name
   """
 
   @doc """
