@@ -50,7 +50,9 @@ defmodule LastCrusader.MixProject do
       # code coverage
       {:excoveralls, "~> 0.12.2", only: :test},
       # doc generation: mix docs
-      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      # watch for tests
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 end
