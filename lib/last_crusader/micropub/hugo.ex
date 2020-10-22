@@ -37,18 +37,23 @@ defmodule LastCrusader.Micropub.Hugo do
   def generate_front_matter(date, data \\ %{}) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
 
-    data_as_toml = data
-                   |> Map.put(:date, iso_date)
-                   |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
-                   |> Enum.join("\n")
+    data_as_toml =
+      data
+      |> Map.put(:date, iso_date)
+      |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
+      |> Enum.join("\n")
+
     "+++\n" <> data_as_toml <> "\n+++\n"
   end
 
   def toml_value(s) when is_list(s) do
-    toml = Enum.map(s, fn x -> toml_value(x) end)
-           |> Enum.join(", ")
+    toml =
+      Enum.map(s, fn x -> toml_value(x) end)
+      |> Enum.join(", ")
+
     "[" <> toml <> "]"
   end
+
   def toml_value(s) do
     "\"" <> s <> "\""
   end
@@ -68,7 +73,6 @@ defmodule LastCrusader.Micropub.Hugo do
   def generate_filename(:post, name, date) do
     "content/posts/" <> date <> "/" <> name <> ".md"
   end
-
 
   def generate_filename(:bookmark, name, date) do
     "content/bookmarks/" <> date <> "/" <> name <> ".md"

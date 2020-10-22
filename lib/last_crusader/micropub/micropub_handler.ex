@@ -1,10 +1,13 @@
 defmodule LastCrusader.Micropub.MicropubHandler do
   @moduledoc """
-  The Micropub protocol is used to create, update and delete posts on one's own domain using third-party clients. Web apps and native apps (e.g., iPhone, Android) can use Micropub to post and edit articles, short notes, comments, likes, photos, events or other kinds of posts on your own website.
+  The Micropub protocol is used to create, update and delete posts on one's own domain using third-party clients.
 
-    cf spec: https://micropub.spec.indieweb.org/
+  Web apps and native apps (e.g., iPhone, Android) can use Micropub to post and edit articles, short notes, comments,
+  likes, photos, events or other kinds of posts on your own website.
 
-    cf https://indieweb.org/post-type-discovery for Post Type discovery
+  cf full specification: https://micropub.spec.indieweb.org/
+
+  see also `LastCrusader.Micropub.PostTypeDiscovery`.
   """
   import Plug.Conn
   import LastCrusader.Utils.Http
@@ -16,7 +19,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     _content = conn.params["content"]
 
     # - [X] discover post type
-    # - [ ] transform to hugo
+    # - [X] transform to hugo
     # - [ ] post to github
     # - [ ] http reply to client
 

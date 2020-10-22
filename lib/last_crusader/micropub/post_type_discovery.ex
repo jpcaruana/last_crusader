@@ -38,7 +38,6 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
 
     Quoted property names in the algorithm are defined in h-entry.
   """
-  import LastCrusader.Utils.IdentifierValidator
 
   @doc """
     Discover the post type according to the official algorithm. Can be:
@@ -51,10 +50,11 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
     - `:video`
     - `:photo`
   """
-  def discover(post = %{rvsp: value}) do
+  def discover(post)
+  def discover(m = %{rvsp: value}) do
     case valid_rvsp_value(value) do
       true -> :rvsp
-      _ -> pop_and_continue(:rvsp, post)
+      _ -> pop_and_continue(:rvsp, m)
     end
   end
 
@@ -131,11 +131,12 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
   content is a subset of name. We also strip out non-alphanumeric
   characters just to make the check a little more forgiving.
   """
-  def is_name_a_title?(name, content = nil) do
+  def is_name_a_title?(name, content)
+  def is_name_a_title?(name, nil) when name != nil do
     true
   end
 
-  def is_name_a_title?(nil, content) do
+  def is_name_a_title?(nil, _) do
     false
   end
 
@@ -144,10 +145,6 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
       strip_spaces_and_punctuation(name),
       strip_spaces_and_punctuation(content)
     )
-  end
-
-  def is_name_a_title?(_, _) do
-    false
   end
 
   defp valid_rvsp_value(value) do
