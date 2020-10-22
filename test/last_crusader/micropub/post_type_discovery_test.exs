@@ -14,7 +14,7 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryTest do
     assert :rvsp == discover(%{rvsp: "interested"})
     assert :rvsp == discover(%{rvsp: "iNtEreSTed"})
 
-    assert :note == discover(%{rvsp: "invalid RVSP value"})
+    assert :rvsp != discover(%{rvsp: "invalid RVSP value"})
   end
 
   test "1. rvsp priority over in-reply-to" do
@@ -59,6 +59,12 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryTest do
     assert :note == discover(%{name: "Same as content", content: "Same as content"})
     assert :note == discover(%{name: "Same as summary", summary: "Same as summary"})
   end
+end
+
+defmodule LastCrusader.Micropub.PostTypeDiscoveryIsNameTitleTest do
+  @moduledoc false
+  use ExUnit.Case, async: true
+  import LastCrusader.Micropub.PostTypeDiscovery
 
   test "find title in name: simple case" do
     assert false == is_name_a_title?("this is the content", "this is the content")
