@@ -14,43 +14,38 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryTest do
     assert :rvsp == discover(%{rvsp: "interested"})
     assert :rvsp == discover(%{rvsp: "iNtEreSTed"})
 
-    assert :rvsp != discover(%{rvsp: "invalid RVSP value"})
+    assert :note == discover(%{rvsp: "invalid RVSP value"})
   end
 
   test "1. rvsp priority over in-reply-to" do
-    assert :rvsp == discover(%{rvsp: "yes", "in-reply-to": "http://some.url/"})
+    assert :rvsp == discover(%{rvsp: "yes", "in-reply-to": "http://some-url.com/"})
   end
 
   test "2. in-reply-to" do
-    assert :in_reply_to == discover(%{"in-reply-to": "http://some.url/"})
-    # assert :in_reply_to != discover(%{"in-reply-to": "invalid URL value"})
+    assert :in_reply_to == discover(%{"in-reply-to": "http://some-url.com/"})
+    assert :in_reply_to != discover(%{"in-reply-to": "invalid URL value"})
   end
 
   test "3. repost-of" do
-    assert :repost_of == discover(%{"repost-of": "http://some.url/"})
+    assert :repost_of == discover(%{"repost-of": "http://some-url.com/"})
+    assert :repost_of != discover(%{"repost-of": "invalid URL value"})
   end
 
   test "4. like-of" do
-    assert :like_of == discover(%{"like-of": "http://some.url/"})
+    assert :like_of == discover(%{"like-of": "http://some-url.com/"})
+    assert :like_of != discover(%{"like-of": "invalid URL value"})
   end
 
   test "5. video" do
-    assert :video == discover(%{video: "http://some.url/"})
+    assert :video == discover(%{video: "http://some-url.com/"})
+    assert :video != discover(%{video: "invalid URL value"})
   end
 
   test "6. photo" do
-    assert :photo == discover(%{photo: "http://some.url/"})
+    assert :photo == discover(%{photo: "http://some-url.com/"})
+    assert :photo != discover(%{photo: "invalid URL value"})
   end
 
-  @doc """
-      name = get_plain_text(props.get('name'))
-      content = get_plain_text(props.get('content'))
-      if not content:
-          content = get_plain_text(props.get('summary'))
-      if content and name and is_name_a_title?(name, content):
-          return 'article'
-      return 'note'
-  """
   test "7-15. article" do
     assert :article == discover(%{name: "A Title", content: "Here is the content"})
     assert :article == discover(%{name: "A Title", summary: "Here is the content"})
@@ -61,8 +56,8 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryTest do
     assert :note == discover(%{description: "no content nor summary property"})
     assert :note == discover(%{content: "no title, just plain and dull content"})
     assert :note == discover(%{summary: "no title, just a summary"})
-    assert :note == discover(%{name: "Name is same as content", content: "Name is same as content"})
-    assert :note == discover(%{name: "Name is same as summary", summary: "Name is same as summary"})
+    assert :note == discover(%{name: "Same as content", content: "Same as content"})
+    assert :note == discover(%{name: "Same as summary", summary: "Same as summary"})
   end
 
   test "find title in name: simple case" do

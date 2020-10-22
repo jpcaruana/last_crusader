@@ -54,36 +54,43 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
   def discover(post = %{rvsp: value}) do
     case valid_rvsp_value(value) do
       true -> :rvsp
-      _ -> pop_and_continue(post, :rvsp)
+      _ -> pop_and_continue(:rvsp, post)
     end
   end
 
   def discover(m = %{"in-reply-to": url}) do
-    # case validate_user_profile_url(url) do   # KO car fait une requete DNS pour de vrai :(
-    #  :invalid -> pop_and_continue(m, "in-reply-to")
-    #  _ -> :in_reply_to
-    # end
-    :in_reply_to
+    case uri_valid?(url) do
+      true -> :in_reply_to
+      _ -> pop_and_continue("in-reply-to", m)
+    end
   end
 
-  def discover(%{"repost-of": url}) do
-    URI.parse(url)
-    :repost_of
+  def discover(m = %{"repost-of": url}) do
+    case uri_valid?(url) do
+      true -> :repost_of
+      _ -> pop_and_continue("repost-of", m)
+    end
   end
 
-  def discover(%{"like-of": url}) do
-    URI.parse(url)
-    :like_of
+  def discover(m = %{"like-of": url}) do
+    case uri_valid?(url) do
+      true -> :like_of
+      _ -> pop_and_continue("like-of", m)
+    end
   end
 
-  def discover(%{video: url}) do
-    URI.parse(url)
-    :video
+  def discover(m = %{video: url}) do
+    case uri_valid?(url) do
+      true -> :video
+      _ -> pop_and_continue(:video, m)
+    end
   end
 
-  def discover(%{photo: url}) do
-    URI.parse(url)
-    :photo
+  def discover(m = %{photo: url}) do
+    case uri_valid?(url) do
+      true -> :photo
+      _ -> pop_and_continue(:photo, m)
+    end
   end
 
   def discover(%{name: name, content: content}) when content != "" do
@@ -147,7 +154,12 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
     String.downcase(value) in ["yes", "no", "maybe", "interested"]
   end
 
-  defp pop_and_continue(map, key) do
+  defp pop_and_continue(key, map) when is_bitstring(key) do
+    String.to_existing_atom(key)
+    |> pop_and_continue(map)
+  end
+
+  defp pop_and_continue(key, map) do
     {_, new_map} = Map.pop(map, key)
     discover(new_map)
   end
@@ -156,5 +168,10 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
     String.downcase(value)
     |> String.replace(~r"[[:punct:]]", "")
     |> String.replace(~r"[[:space:]]", "")
+  end
+
+  defp uri_valid?(url) do
+    %URI{scheme: scheme, host: host} = URI.parse(url)
+    scheme != nil && host != nil && host =~ "."
   end
 end
