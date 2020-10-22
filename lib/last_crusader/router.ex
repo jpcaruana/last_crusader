@@ -11,7 +11,9 @@ defmodule LastCrusader.Router do
   end
 
   # Using Plug.Logger for logging request information
-  plug(Plug.Logger)
+  if Application.get_env(:last_crusader, :plug_logger, true) do
+    plug(Plug.Logger)
+  end
   # Serve at "/" the static files from "priv/static" directory.
   plug(Plug.Static,
     at: "/public",

@@ -5,8 +5,9 @@ defmodule LastCrusader.Utils.Http do
   import Plug.Conn
 
   @doc """
-    Add header to HTTP response
+  Add key-value header(s) to HTTP response
   """
+  def put_headers(conn, key_values)
   def put_headers(conn, nil), do: conn
 
   def put_headers(conn, key_values) do
