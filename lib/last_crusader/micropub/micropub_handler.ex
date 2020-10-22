@@ -15,10 +15,10 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     type = conn.params["h"]
     _content = conn.params["content"]
 
-    # - discover post type
-    # - transform to hugo
-    # - post to github
-    # - http reply to client
+    # - [X] discover post type
+    # - [ ] transform to hugo
+    # - [ ] post to github
+    # - [ ] http reply to client
 
     {status, body, headers} =
       case type do
@@ -30,5 +30,4 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     |> put_headers(headers)
     |> send_resp(status, body)
   end
-
 end
