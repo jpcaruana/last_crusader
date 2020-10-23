@@ -18,9 +18,10 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     type = conn.params["h"]
     _content = conn.params["content"]
 
+    # - [ ] verify access token
     # - [X] discover post type
     # - [X] transform to hugo
-    # - [ ] post to github
+    # - [X] post to github
     # - [ ] http reply to client
 
     {status, body, headers} =
