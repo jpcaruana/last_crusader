@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.22.2">
+    <meta name="project" content="Last Crusader v0.1.0">
+
+    <title>LastCrusader.Auth.CheckAuthorizationCode — Last Crusader v0.1.0</title>
+    <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
+
+    <script src="dist/sidebar_items-60c6e67e56.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-0103364119015b97e56c.js"></script>
+
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="https://github.com/jpcaruana/last_crusader" class="sidebar-projectName">
+Last Crusader
+      </a>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        <small class="app-vsn">Last Crusader v0.1.0</small>
+LastCrusader.Auth.CheckAuthorizationCode
+
+          <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/auth/check_authorization_code.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Verifying the indieweb authorization code. This is dedicated <a href="https://elixirschool.com/en/lessons/specifics/plug/#adding-another-plug">Plug</a>.</p><p>see <a href="https://indieweb.org/obtaining-an-access-token">https://indieweb.org/obtaining-an-access-token</a> and <a href="https://indieweb.org/token-endpoint#Verifying_an_Access_Token">https://indieweb.org/token-endpoint#Verifying_an_Access_Token</a></p><p>A micropub endpoint will make a request to the token endpoint to verify that an incoming access token is valid.</p><p>The URL of the token server must be known to the micropub endpoint in advance.
+The bearer token does not contain any information about the server address.</p><p>This means that the micropub endpoint dictates the token endpoint that the user links to on his homepage.</p><p>The micropub endpoint will make a request like the following:</p><pre><code class="nohighlight makeup elixir"><span class="nc">GET</span><span class="w"> </span><span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">tokens</span><span class="o">.</span><span class="n">indieauth</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">token</span><span class="w">
+</span><span class="ss">Authorization</span><span class="p">:</span><span class="w"> </span><span class="nc">Bearer</span><span class="w"> </span><span class="n">xxxxxxxx</span></code></pre><p>The token endpoint looks at the token in the authorization header and verifies it.
+How exactly it does this is up to the implementation, such as in the example below of using either a self-encoded token or a database of tokens.
+After verifying the token is still valid, the token endpoint returns the information about the token such as
+the user and scope, in form-encoded or JSON format depending on the HTTP Accept header:</p><pre><code class="nohighlight makeup elixir"><span class="nc">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="nc">OK</span><span class="w">
+</span><span class="nc">Content</span><span class="o">-</span><span class="ss">Type</span><span class="p">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span><span class="w">
+
+</span><span class="n">me</span><span class="o">=</span><span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">aaronparecki</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="o">&amp;</span><span class="w">
+</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">ownyourgram</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="o">&amp;</span><span class="w">
+</span><span class="n">scope</span><span class="o">=</span><span class="n">create</span><span class="w"> </span><span class="n">update</span></code></pre><p>as json:</p><pre><code class="nohighlight makeup elixir"><span class="nc">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="nc">OK</span><span class="w">
+</span><span class="nc">Content</span><span class="o">-</span><span class="ss">Type</span><span class="p">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="w">
+
+</span><span class="p" data-group-id="1721129570-1">{</span><span class="w">
+  </span><span class="ss">&quot;me&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://aaronparecki.com/&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">&quot;client_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://ownyourgram.com/&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="ss">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;create update&quot;</span><span class="w">
+</span><span class="p" data-group-id="1721129570-1">}</span></code></pre><p>The micropub endpoint will then inspect these values and determine whether to proceed with the request.</p>
+        </section>
+
+
+
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.22.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+  </body>
+</html>
