@@ -14,7 +14,7 @@ defmodule LastCrusader.Micropub.Hugo do
     Create a new Hugo Post type
   """
   def post(date, name, content) do
-    new(:post, date, name, content)
+    new(:article, date, name, content)
   end
 
   @doc """
@@ -25,7 +25,12 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc false
-  def new(type, date, name, content) do
+  def new(type, date, name, data) do
+    content =
+      data
+      |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
+      |> Map.new()
+
     {text, content} = Map.pop(content, :content)
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date) <> ".md"
@@ -41,7 +46,9 @@ defmodule LastCrusader.Micropub.Hugo do
 
     data_as_toml =
       data
+      |> Map.delete(:h)
       |> rename_key(:category, :tags)
+      |> rename_key(:name, :title)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
       |> Enum.join("\n")
@@ -73,7 +80,7 @@ defmodule LastCrusader.Micropub.Hugo do
     "content/notes/" <> date <> "/" <> name
   end
 
-  def generate_filename(:post, name, date) do
+  def generate_filename(:article, name, date) do
     "content/posts/" <> date <> "/" <> name
   end
 

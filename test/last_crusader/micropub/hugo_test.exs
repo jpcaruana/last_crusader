@@ -4,7 +4,7 @@ defmodule LastCrusader.HugoTest do
 
   test "it should create a Hugo file-like for Notes" do
     {file_name, file_content, web_path} =
-      Hugo.note(now(), "some-name", %{content: "Some markdown content\n"})
+      Hugo.note(now(), "some-name", [{"content", "Some markdown content\n"}])
 
     assert file_content == """
            +++
@@ -17,13 +17,51 @@ defmodule LastCrusader.HugoTest do
     assert web_path == "content/notes/2015/01/23/some-name/"
   end
 
+  test "it should rename name to title" do
+    {file_name, file_content, _} =
+      Hugo.note(now(), "some-name", [
+        {"content", "Some markdown content\n"},
+        {"name", "My title"}
+      ])
+
+    assert file_content == """
+           +++
+           date = "2015-01-23T23:50:07+00:00"
+           title = "My title"
+           +++
+           Some markdown content
+           """
+
+    assert file_name == "content/notes/2015/01/23/some-name.md"
+  end
+
   test "it should create a Hugo file-like for Notes with additional data" do
     {file_name, file_content, _} =
-      Hugo.note(now(), "some-name", %{
-        content: "Some markdown content\n",
-        category: ["tag1", "tag2"],
-        copy: "https://some/url"
-      })
+      Hugo.note(now(), "some-name", [
+        {"content", "Some markdown content\n"},
+        {"tags", ["tag1", "tag2"]},
+        {"copy", "https://some/url"}
+      ])
+
+    assert file_content == """
+           +++
+           copy = "https://some/url"
+           date = "2015-01-23T23:50:07+00:00"
+           tags = ["tag1", "tag2"]
+           +++
+           Some markdown content
+           """
+
+    assert file_name == "content/notes/2015/01/23/some-name.md"
+  end
+
+  test "it should rename category to tags" do
+    {file_name, file_content, _} =
+      Hugo.note(now(), "some-name", [
+        {"content", "Some markdown content\n"},
+        {"category", ["tag1", "tag2"]},
+        {"copy", "https://some/url"}
+      ])
 
     assert file_content == """
            +++
@@ -39,7 +77,7 @@ defmodule LastCrusader.HugoTest do
 
   test "it should create a Hugo file-like for Posts" do
     {file_name, file_content, _} =
-      Hugo.post(now(), "some-name", %{content: "Some markdown content\n"})
+      Hugo.post(now(), "some-name", [{"content", "Some markdown content\n"}])
 
     assert file_content == """
            +++
@@ -53,7 +91,7 @@ defmodule LastCrusader.HugoTest do
 
   test "it should create a Hugo file-like for Bookmarks" do
     {file_name, file_content, _} =
-      Hugo.bookmark(now(), "some-name", %{content: "Some markdown content\n"})
+      Hugo.bookmark(now(), "some-name", [{"content", "Some markdown content\n"}])
 
     assert file_content == """
            +++
