@@ -7,12 +7,12 @@ defmodule LastCrusader.Micropub.Hugo do
     Create a new Hugo document
   """
   def new(type, date, name, data) do
-    content =
+    {text, content} =
       data
       |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
       |> Map.new()
+      |> Map.pop(:content)
 
-    {text, content} = Map.pop(content, :content)
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date) <> ".md"
     web_path = generate_filename(type, name, path_date) <> "/"
@@ -22,6 +22,9 @@ defmodule LastCrusader.Micropub.Hugo do
     {file_name, front_matter <> text, web_path}
   end
 
+  @doc """
+    Generates TOML formatted fron-matter
+  """
   def generate_front_matter(date, data \\ %{}) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
 
@@ -37,7 +40,7 @@ defmodule LastCrusader.Micropub.Hugo do
     "+++\n" <> data_as_toml <> "\n+++\n"
   end
 
-  def toml_value(s) when is_list(s) do
+  defp toml_value(s) when is_list(s) do
     toml =
       Enum.map(s, fn x -> toml_value(x) end)
       |> Enum.join(", ")
@@ -45,7 +48,7 @@ defmodule LastCrusader.Micropub.Hugo do
     "[" <> toml <> "]"
   end
 
-  def toml_value(s) do
+  defp toml_value(s) do
     "\"" <> s <> "\""
   end
 
