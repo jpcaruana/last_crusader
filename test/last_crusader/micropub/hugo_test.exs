@@ -3,7 +3,8 @@ defmodule LastCrusader.HugoTest do
   alias LastCrusader.Micropub.Hugo, as: Hugo
 
   test "it should create a Hugo file-like for Notes" do
-    {file_name, file_content} = Hugo.note(now(), "some-name", "Some markdown content\n")
+    {file_name, file_content} =
+      Hugo.note(now(), "some-name", %{content: "Some markdown content\n"})
 
     assert file_content == """
            +++
@@ -17,7 +18,8 @@ defmodule LastCrusader.HugoTest do
 
   test "it should create a Hugo file-like for Notes with additional data" do
     {file_name, file_content} =
-      Hugo.note(now(), "some-name", "Some markdown content\n", %{
+      Hugo.note(now(), "some-name", %{
+        content: "Some markdown content\n",
         tags: ["tag1", "tag2"],
         copy: "https://some/url"
       })
@@ -35,7 +37,8 @@ defmodule LastCrusader.HugoTest do
   end
 
   test "it should create a Hugo file-like for Posts" do
-    {file_name, file_content} = Hugo.post(now(), "some-name", "Some markdown content\n")
+    {file_name, file_content} =
+      Hugo.post(now(), "some-name", %{content: "Some markdown content\n"})
 
     assert file_content == """
            +++
@@ -48,7 +51,8 @@ defmodule LastCrusader.HugoTest do
   end
 
   test "it should create a Hugo file-like for Bookmarks" do
-    {file_name, file_content} = Hugo.bookmark(now(), "some-name", "Some markdown content\n")
+    {file_name, file_content} =
+      Hugo.bookmark(now(), "some-name", %{content: "Some markdown content\n"})
 
     assert file_content == """
            +++

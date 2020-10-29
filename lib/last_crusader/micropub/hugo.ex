@@ -6,32 +6,33 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc """
     Create a new Hugo Note type
   """
-  def note(date, name, content, data \\ %{}) do
-    new(:note, date, name, content, data)
+  def note(date, name, content) do
+    new(:note, date, name, content)
   end
 
   @doc """
     Create a new Hugo Post type
   """
-  def post(date, name, content, data \\ %{}) do
-    new(:post, date, name, content, data)
+  def post(date, name, content) do
+    new(:post, date, name, content)
   end
 
   @doc """
     Create a new Hugo Bookmark type
   """
-  def bookmark(date, name, content, data \\ %{}) do
-    new(:bookmark, date, name, content, data)
+  def bookmark(date, name, content) do
+    new(:bookmark, date, name, content)
   end
 
   @doc false
-  def new(type, date, name, content, data \\ %{}) do
+  def new(type, date, name, content) do
+    {text, content} = Map.pop(content, :content)
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date)
 
-    front_matter = generate_front_matter(date, data)
+    front_matter = generate_front_matter(date, content)
 
-    {file_name, front_matter <> content}
+    {file_name, front_matter <> text}
   end
 
   def generate_front_matter(date, data \\ %{}) do
