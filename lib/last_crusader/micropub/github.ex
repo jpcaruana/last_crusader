@@ -7,11 +7,11 @@ defmodule LastCrusader.Micropub.GitHub do
     # ex: auth=%{access_token: "928392873982932"}
     body = %{
       "branch" => branch,
-      "message" => commit_message,
-      "content" => Base.encode64(filecontent ++ "\n\nposted with LastCrusader :)")
+      "message" => commit_message <> "\n\nposted with LastCrusader :)",
+      "content" => Base.encode64(filecontent)
     }
 
-    {:ok, _, _} =
+    {201, _, _} =
       Tentacat.Client.new(auth)
       |> Tentacat.Contents.create(user, repo, filename, body)
   end
