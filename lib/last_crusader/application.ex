@@ -1,7 +1,5 @@
 defmodule LastCrusader.Application do
   @moduledoc false
-  import Supervisor.Spec
-
   use Application
 
   @doc false
@@ -17,7 +15,7 @@ defmodule LastCrusader.Application do
           port: Application.get_env(:last_crusader, :port)
         ]
       ),
-      supervisor(LastCrusader.Cache.Supervisor, [])
+      LastCrusader.Cache.Supervisor
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
