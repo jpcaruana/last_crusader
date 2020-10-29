@@ -11,27 +11,55 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   """
   import Plug.Conn
   import LastCrusader.Utils.Http
+  require Logger
 
+  alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
+  alias LastCrusader.Micropub.Hugo, as: Hugo
+  alias LastCrusader.Micropub.GitHub, as: GitHub
   alias Poison, as: Json
 
   def publish(conn) do
-    type = conn.params["h"]
-    _content = conn.params["content"]
-
     # - [ ] verify access token
     # - [X] discover post type
     # - [X] transform to hugo
+    #   - [X] name the file
     # - [X] post to github
-    # - [ ] http reply to client
+    # - [X] http reply to client
+    Logger.info("------------------------")
+    Logger.info(conn.req_headers)
+    Logger.info(conn.params)
+    Logger.info("------------------------")
+
+    post_type = PostTypeDiscovery.discover(
+      conn.params
+      |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
+      |> Map.new
+    )
+
+    {filename, filecontent, path} =
+      Hugo.new(
+        post_type,
+        Timex.local(),
+        "name_" <> Integer.to_string(Enum.random(10..100_000)),
+        conn.params
+      )
+
+    GitHub.new_file(
+      %{access_token: "secret bien gardé"},
+      "jpcaruana",
+      "jp.caruana.fr",
+      "new " <> filename,
+      filename,
+      filecontent,
+      "test_micropub"
+    )
 
     {status, body, headers} =
-      case type do
-        "entry" -> {202, "", %{location: "http://example.com/venue/10"}}
-        _ -> {400, Json.encode!(%{error: "invalid_request"}), nil}
-      end
+      {202, "", %{location: "https://test-micropub--jp-caruana-fr.netlify.app/" <> path}}
 
     conn
     |> put_headers(headers)
     |> send_resp(status, body)
   end
+
 end
