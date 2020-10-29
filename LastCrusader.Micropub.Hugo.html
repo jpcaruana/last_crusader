@@ -10,7 +10,7 @@
     <title>LastCrusader.Micropub.Hugo — Last Crusader v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
 
-    <script src="dist/sidebar_items-60c6e67e56.js"></script>
+    <script src="dist/sidebar_items-cef5568ee9.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -103,15 +103,6 @@ LastCrusader.Micropub.Hugo
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#bookmark/4">bookmark(date, name, content, data \\ %{})</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Create a new Hugo Bookmark type</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#generate_filename/3">generate_filename(arg1, name, date)</a>
 
   </div>
@@ -125,30 +116,16 @@ LastCrusader.Micropub.Hugo
 
   </div>
 
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#note/4">note(date, name, content, data \\ %{})</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Create a new Hugo Note type</p></div>
+    <div class="summary-synopsis"><p>  Generates TOML formatted fron-matter</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#post/4">post(date, name, content, data \\ %{})</a>
+    <a href="#new/4">new(type, date, name, data)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>  Create a new Hugo Post type</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#toml_value/1">toml_value(s)</a>
-
-  </div>
+    <div class="summary-synopsis"><p>  Create a new Hugo document</p></div>
 
 </div>
 
@@ -166,30 +143,6 @@ LastCrusader.Micropub.Hugo
 Functions
           </h1>
           <div class="functions-list">
-<section class="detail" id="bookmark/4">
-
-    <span id="bookmark/3"></span>
-
-  <div class="detail-header">
-    <a href="#bookmark/4" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">bookmark(date, name, content, data \\ %{})</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L23" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>  Create a new Hugo Bookmark type</p>
-  </section>
-</section>
 <section class="detail" id="generate_filename/3">
 
   <div class="detail-header">
@@ -199,7 +152,7 @@ Functions
     </a>
     <h1 class="signature">generate_filename(arg1, name, date)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L69" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L63" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -223,7 +176,7 @@ Functions
     </a>
     <h1 class="signature">generate_front_matter(date, data \\ %{})</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L28" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -233,19 +186,17 @@ Functions
 
   <section class="docstring">
 
-
+<p>  Generates TOML formatted fron-matter</p>
   </section>
 </section>
-<section class="detail" id="note/4">
-
-    <span id="note/3"></span>
+<section class="detail" id="new/4">
 
   <div class="detail-header">
-    <a href="#note/4" class="detail-link" title="Link to this function">
+    <a href="#new/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">note(date, name, content, data \\ %{})</h1>
+    <h1 class="signature">new(type, date, name, data)</h1>
 
       <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L9" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
@@ -257,53 +208,7 @@ Functions
 
   <section class="docstring">
 
-<p>  Create a new Hugo Note type</p>
-  </section>
-</section>
-<section class="detail" id="post/4">
-
-    <span id="post/3"></span>
-
-  <div class="detail-header">
-    <a href="#post/4" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">post(date, name, content, data \\ %{})</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L16" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>  Create a new Hugo Post type</p>
-  </section>
-</section>
-<section class="detail" id="toml_value/1">
-
-  <div class="detail-header">
-    <a href="#toml_value/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature">toml_value(s)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L49" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>  Create a new Hugo document</p>
   </section>
 </section>
 

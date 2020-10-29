@@ -10,7 +10,7 @@
     <title>LastCrusader.Auth.CheckAuthorizationCode — Last Crusader v0.1.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
 
-    <script src="dist/sidebar_items-60c6e67e56.js"></script>
+    <script src="dist/sidebar_items-cef5568ee9.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -84,7 +84,8 @@ LastCrusader.Auth.CheckAuthorizationCode
 
 
         <section id="moduledoc">
-<p>Verifying the indieweb authorization code. This is dedicated <a href="https://elixirschool.com/en/lessons/specifics/plug/#adding-another-plug">Plug</a>.</p><p>see <a href="https://indieweb.org/obtaining-an-access-token">https://indieweb.org/obtaining-an-access-token</a> and <a href="https://indieweb.org/token-endpoint#Verifying_an_Access_Token">https://indieweb.org/token-endpoint#Verifying_an_Access_Token</a></p><p>A micropub endpoint will make a request to the token endpoint to verify that an incoming access token is valid.</p><p>The URL of the token server must be known to the micropub endpoint in advance.
+<p>Verifying the Indieweb <a href="https://indieweb.org/authorization-endpoint#Auth_code_verification">Authorization Code</a>.
+This is dedicated <a href="https://elixirschool.com/en/lessons/specifics/plug/#adding-another-plug">Plug</a>.</p><p>see <a href="https://indieweb.org/obtaining-an-access-token">https://indieweb.org/obtaining-an-access-token</a> and <a href="https://indieweb.org/token-endpoint#Verifying_an_Access_Token">https://indieweb.org/token-endpoint#Verifying_an_Access_Token</a></p><p>A micropub endpoint will make a request to the token endpoint to verify that an incoming access token is valid.</p><p>The URL of the token server must be known to the micropub endpoint in advance.
 The bearer token does not contain any information about the server address.</p><p>This means that the micropub endpoint dictates the token endpoint that the user links to on his homepage.</p><p>The micropub endpoint will make a request like the following:</p><pre><code class="nohighlight makeup elixir"><span class="nc">GET</span><span class="w"> </span><span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">tokens</span><span class="o">.</span><span class="n">indieauth</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">token</span><span class="w">
 </span><span class="ss">Authorization</span><span class="p">:</span><span class="w"> </span><span class="nc">Bearer</span><span class="w"> </span><span class="n">xxxxxxxx</span></code></pre><p>The token endpoint looks at the token in the authorization header and verifies it.
 How exactly it does this is up to the implementation, such as in the example below of using either a self-encoded token or a database of tokens.
@@ -97,11 +98,11 @@ the user and scope, in form-encoded or JSON format depending on the HTTP Accept 
 </span><span class="n">scope</span><span class="o">=</span><span class="n">create</span><span class="w"> </span><span class="n">update</span></code></pre><p>as json:</p><pre><code class="nohighlight makeup elixir"><span class="nc">HTTP</span><span class="o">/</span><span class="mf">1.1</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="nc">OK</span><span class="w">
 </span><span class="nc">Content</span><span class="o">-</span><span class="ss">Type</span><span class="p">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">json</span><span class="w">
 
-</span><span class="p" data-group-id="1721129570-1">{</span><span class="w">
+</span><span class="p" data-group-id="0780859210-1">{</span><span class="w">
   </span><span class="ss">&quot;me&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://aaronparecki.com/&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">&quot;client_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://ownyourgram.com/&quot;</span><span class="p">,</span><span class="w">
   </span><span class="ss">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;create update&quot;</span><span class="w">
-</span><span class="p" data-group-id="1721129570-1">}</span></code></pre><p>The micropub endpoint will then inspect these values and determine whether to proceed with the request.</p>
+</span><span class="p" data-group-id="0780859210-1">}</span></code></pre><p>The micropub endpoint will then inspect these values and determine whether to proceed with the request.</p>
         </section>
 
 
