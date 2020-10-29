@@ -4,27 +4,8 @@ defmodule LastCrusader.Micropub.Hugo do
   """
 
   @doc """
-    Create a new Hugo Note type
+    Create a new Hugo document
   """
-  def note(date, name, content) do
-    new(:note, date, name, content)
-  end
-
-  @doc """
-    Create a new Hugo Post type
-  """
-  def post(date, name, content) do
-    new(:article, date, name, content)
-  end
-
-  @doc """
-    Create a new Hugo Bookmark type
-  """
-  def bookmark(date, name, content) do
-    new(:bookmark, date, name, content)
-  end
-
-  @doc false
   def new(type, date, name, data) do
     content =
       data
