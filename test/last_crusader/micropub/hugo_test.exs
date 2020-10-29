@@ -20,7 +20,7 @@ defmodule LastCrusader.HugoTest do
     {file_name, file_content} =
       Hugo.note(now(), "some-name", %{
         content: "Some markdown content\n",
-        tags: ["tag1", "tag2"],
+        category: ["tag1", "tag2"],
         copy: "https://some/url"
       })
 

@@ -40,6 +40,7 @@ defmodule LastCrusader.Micropub.Hugo do
 
     data_as_toml =
       data
+      |> rename_key(:category, :tags)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
       |> Enum.join("\n")
@@ -81,5 +82,14 @@ defmodule LastCrusader.Micropub.Hugo do
 
   def generate_filename(_, _, _) do
     :error
+  end
+
+  defp rename_key(map, old_key, new_key) do
+    if Map.has_key?(map, old_key) do
+      Map.put(map, new_key, map[old_key])
+      |> Map.delete(old_key)
+    else
+      map
+    end
   end
 end
