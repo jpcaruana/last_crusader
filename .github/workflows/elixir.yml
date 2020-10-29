@@ -29,3 +29,31 @@ jobs:
       run: mix deps.get
     - name: Run tests
       run: mix test
+
+  generateDocs:
+    name: Generate project documentation
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Elixir
+      uses: actions/setup-elixir@v1
+      with:
+        elixir-version: '1.10.3' # Define the elixir version [required]
+        otp-version: '22.3' # Define the OTP version [required]
+    - name: Restore dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: deps
+        key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-mix-
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Build docs
+      run: mix doc
+    - name: Publish to Pages
+      uses: peaceiris/actions-gh-pages@v1.0.1
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        PUBLISH_DIR: ./doc
+        PUBLISH_BRANCH: gh-pages
+
