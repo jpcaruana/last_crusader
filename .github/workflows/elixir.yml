@@ -49,7 +49,7 @@ jobs:
     - name: Install dependencies
       run: mix deps.get
     - name: Build docs
-      run: mix doc
+      run: mix docs
     - name: Publish to Pages
       uses: peaceiris/actions-gh-pages@v1.0.1
       env:
