@@ -28,11 +28,12 @@ defmodule LastCrusader.Micropub.Hugo do
   def new(type, date, name, content) do
     {text, content} = Map.pop(content, :content)
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
-    file_name = generate_filename(type, name, path_date)
+    file_name = generate_filename(type, name, path_date) <> ".md"
+    web_path = generate_filename(type, name, path_date) <> "/"
 
     front_matter = generate_front_matter(date, content)
 
-    {file_name, front_matter <> text}
+    {file_name, front_matter <> text, web_path}
   end
 
   def generate_front_matter(date, data \\ %{}) do
@@ -69,15 +70,15 @@ defmodule LastCrusader.Micropub.Hugo do
     - date
   """
   def generate_filename(:note, name, date) do
-    "content/notes/" <> date <> "/" <> name <> ".md"
+    "content/notes/" <> date <> "/" <> name
   end
 
   def generate_filename(:post, name, date) do
-    "content/posts/" <> date <> "/" <> name <> ".md"
+    "content/posts/" <> date <> "/" <> name
   end
 
   def generate_filename(:bookmark, name, date) do
-    "content/bookmarks/" <> date <> "/" <> name <> ".md"
+    "content/bookmarks/" <> date <> "/" <> name
   end
 
   def generate_filename(_, _, _) do
