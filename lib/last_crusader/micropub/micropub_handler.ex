@@ -30,17 +30,17 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     Logger.info(conn.params)
     Logger.info("------------------------")
 
-    post_type = PostTypeDiscovery.discover(
-      conn.params
-      |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
-      |> Map.new
-    )
+    post_type =
+      PostTypeDiscovery.discover(
+        conn.params
+        |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
+        |> Map.new()
+      )
 
     {filename, filecontent, path} =
       Hugo.new(
         post_type,
         Timex.local(),
-        "name_" <> Integer.to_string(Enum.random(10..100_000)),
         conn.params
       )
 
@@ -61,5 +61,4 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     |> put_headers(headers)
     |> send_resp(status, body)
   end
-
 end

@@ -6,12 +6,14 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc """
     Create a new Hugo document
   """
-  def new(type, date, name, data) do
+  def new(type, date, data) do
     {text, content} =
       data
       |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
       |> Map.new()
       |> Map.pop(:content)
+
+    name = generate_name(content[:name], text)
 
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
     file_name = generate_filename(type, name, path_date) <> ".md"
@@ -83,5 +85,19 @@ defmodule LastCrusader.Micropub.Hugo do
     else
       map
     end
+  end
+
+  defp generate_name(nil, nil) do
+    Integer.to_string(Enum.random(10..100_000))
+  end
+
+  defp generate_name(nil, text) do
+    Slugger.slugify_downcase(text)
+    |> Slugger.truncate_slug(31)
+  end
+
+  defp generate_name(name, _) do
+    Slugger.slugify_downcase(name)
+    |> Slugger.truncate_slug(31)
   end
 end

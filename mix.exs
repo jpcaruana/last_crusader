@@ -48,6 +48,7 @@ defmodule LastCrusader.MixProject do
       {:toml, "~> 0.6.1"},
       {:timex, "~> 3.0"},
       {:tentacat, "~> 2.0"},
+      {:slugger, "~> 0.3"},
       # code coverage
       {:excoveralls, "~> 0.12.2", only: :test},
       # doc generation: mix docs

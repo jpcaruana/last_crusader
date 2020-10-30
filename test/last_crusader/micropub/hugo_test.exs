@@ -4,7 +4,7 @@ defmodule LastCrusader.HugoTest do
 
   test "it should create a Hugo file-like for Notes" do
     {file_name, file_content, web_path} =
-      Hugo.new(:note, now(), "some-name", [{"content", "Some markdown content\n"}])
+      Hugo.new(:note, now(), [{"content", "Some markdown content\n"}])
 
     assert file_content == """
            +++
@@ -13,14 +13,14 @@ defmodule LastCrusader.HugoTest do
            Some markdown content
            """
 
-    assert file_name == "content/notes/2015/01/23/some-name.md"
-    assert web_path == "content/notes/2015/01/23/some-name/"
+    assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+    assert web_path == "content/notes/2015/01/23/some-markdown-content/"
   end
 
   test "it should rename name to title" do
     {file_name, file_content, _} =
-      Hugo.new(:note, now(), "some-name", [
-        {"content", "Some markdown content\n"},
+      Hugo.new(:note, now(), [
+        {"content", "Some other markdown content\n"},
         {"name", "My title"}
       ])
 
@@ -29,15 +29,15 @@ defmodule LastCrusader.HugoTest do
            date = "2015-01-23T23:50:07+00:00"
            title = "My title"
            +++
-           Some markdown content
+           Some other markdown content
            """
 
-    assert file_name == "content/notes/2015/01/23/some-name.md"
+    assert file_name == "content/notes/2015/01/23/my-title.md"
   end
 
   test "it should create a Hugo file-like for Notes with additional data" do
     {file_name, file_content, _} =
-      Hugo.new(:note, now(), "some-name", [
+      Hugo.new(:note, now(), [
         {"content", "Some markdown content\n"},
         {"tags", ["tag1", "tag2"]},
         {"copy", "https://some/url"}
@@ -52,12 +52,12 @@ defmodule LastCrusader.HugoTest do
            Some markdown content
            """
 
-    assert file_name == "content/notes/2015/01/23/some-name.md"
+    assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
   end
 
   test "it should rename category to tags" do
     {file_name, file_content, _} =
-      Hugo.new(:note, now(), "some-name", [
+      Hugo.new(:note, now(), [
         {"content", "Some markdown content\n"},
         {"category", ["tag1", "tag2"]},
         {"copy", "https://some/url"}
@@ -72,7 +72,26 @@ defmodule LastCrusader.HugoTest do
            Some markdown content
            """
 
-    assert file_name == "content/notes/2015/01/23/some-name.md"
+    assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+  end
+
+  test "it should shorten the generated slug for long content" do
+    {file_name, _, _} =
+      Hugo.new(:note, now(), [
+        {"content", "it should shorten the generated slug for long content"}
+      ])
+
+    assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated.md"
+  end
+
+  test "it should shorten the generated slug for long name" do
+    {file_name, _, _} =
+      Hugo.new(:note, now(), [
+        {"content", "some content"},
+        {"content", "it should shorten the generated slug for long name"}
+      ])
+
+    assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated.md"
   end
 
   test "generate_filename should fail on inexiting type" do
