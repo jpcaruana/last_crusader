@@ -11,7 +11,6 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   """
   import Plug.Conn
   import LastCrusader.Utils.Http
-  require Logger
 
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
@@ -24,10 +23,6 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     #   - [X] name the file
     # - [X] post to github
     # - [X] http reply to client
-    Logger.info("------------------------")
-    Logger.info(conn.req_headers)
-    Logger.info(conn.params)
-    Logger.info("------------------------")
 
     post_type =
       PostTypeDiscovery.discover(
