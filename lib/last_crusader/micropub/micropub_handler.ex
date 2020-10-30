@@ -16,7 +16,6 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
   alias LastCrusader.Micropub.GitHub, as: GitHub
-  alias Poison, as: Json
 
   def publish(conn) do
     # - [ ] verify access token
