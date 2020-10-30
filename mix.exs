@@ -16,6 +16,12 @@ defmodule LastCrusader.MixProject do
       test_coverage: [
         tool: ExCoveralls
       ],
+      releases: [
+        last_crusader: [
+          include_executables_for: [:unix],
+          include_erts: false
+        ]
+      ],
 
       # Docs
       name: "Last Crusader",
