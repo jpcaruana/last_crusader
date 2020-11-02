@@ -36,11 +36,10 @@ defmodule LastCrusader.Auth.AuthHandler do
     For authorization, the scope contains a space-separated list of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
   """
   def auth_endpoint(conn) do
-    q = fetch_query_params(conn)
-    redirect_uri = q.query_params["redirect_uri"]
-    state = q.query_params["state"]
-    me = q.query_params["me"]
-    client_id = q.query_params["client_id"]
+    redirect_uri = conn.params["redirect_uri"]
+    state = conn.params["state"]
+    me = conn.params["me"]
+    client_id = conn.params["client_id"]
 
     {status, body, headers} =
       case validate_user_profile_url(client_id)
@@ -85,10 +84,9 @@ defmodule LastCrusader.Auth.AuthHandler do
     This may be different from the me parameter that the user originally entered, but MUST be on the same domain.
   """
   def code_verification(conn) do
-    q = fetch_query_params(conn)
-    redirect_uri = q.query_params["redirect_uri"]
-    client_id = q.query_params["client_id"]
-    token = q.query_params["code"]
+    redirect_uri = conn.params["redirect_uri"]
+    client_id = conn.params["client_id"]
+    token = conn.params["code"]
 
     case TokenStore.read({redirect_uri, client_id}) do
       {^token, me} ->

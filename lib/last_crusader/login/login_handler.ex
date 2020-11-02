@@ -3,8 +3,8 @@ defmodule LastCrusader.Login.LoginHandler do
   import Plug.Conn
 
   def log_user(conn) do
-    user = conn.body_params["user"]
-    password = conn.body_params["password"]
+    user = conn.params["user"]
+    password = conn.params["password"]
 
     {code, content} =
       case {user, password} do
