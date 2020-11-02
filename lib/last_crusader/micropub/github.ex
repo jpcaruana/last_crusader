@@ -11,8 +11,10 @@ defmodule LastCrusader.Micropub.GitHub do
       "content" => Base.encode64(filecontent)
     }
 
-    {201, _, _} =
-      Tentacat.Client.new(auth)
-      |> Tentacat.Contents.create(user, repo, filename, body)
+    case Tentacat.Client.new(auth)
+         |> Tentacat.Contents.create(user, repo, filename, body) do
+      {201, _, _} -> {:ok, :content_created}
+      _ -> {:ko, :github_error}
+    end
   end
 end
