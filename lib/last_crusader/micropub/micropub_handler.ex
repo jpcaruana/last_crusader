@@ -15,6 +15,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
   alias LastCrusader.Micropub.GitHub, as: GitHub
+  alias Poison, as: Json
 
   def publish(conn) do
     # - [X] verify access token
@@ -47,11 +48,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
              filecontent,
              "master"
            ) do
-      {status, body, headers} = {202, "", %{location: me <> path}}
-
       conn
-      |> put_headers(headers)
-      |> send_resp(status, body)
+      |> put_headers(%{location: me <> path})
+      |> send_resp(202, "")
     else
       {:error, :bad_token} ->
         conn
@@ -73,8 +72,8 @@ defmodule LastCrusader.Micropub.MicropubHandler do
         ]
       )
 
-    with {200, b} <- {status, body},
-         {me, issuer} <- decode(b) do
+    with {200, body} <- {status, body},
+         {me, issuer} <- decode(body) do
       {:ok, :valid}
     else
       _ ->
@@ -83,7 +82,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   end
 
   defp decode(json) do
-    decoded_body = Poison.decode!(json)
+    decoded_body = Json.decode!(json)
     {decoded_body["me"], decoded_body["issued_by"]}
   end
 
