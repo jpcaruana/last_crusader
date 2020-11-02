@@ -92,12 +92,15 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp generate_name(nil, text) do
-    Slugger.slugify_downcase(text)
-    |> Slugger.truncate_slug(31)
+    slug(text)
   end
 
   defp generate_name(name, _) do
-    Slugger.slugify_downcase(name)
+    slug(name)
+  end
+
+  defp slug(text) do
+    Slugger.slugify_downcase(text)
     |> Slugger.truncate_slug(31)
   end
 end
