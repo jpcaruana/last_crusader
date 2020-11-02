@@ -17,42 +17,79 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub.GitHub, as: GitHub
 
   def publish(conn) do
-    # - [ ] verify access token
+    # - [X] verify access token
     # - [X] discover post type
     # - [X] transform to hugo
     #   - [X] name the file
     # - [X] post to github
     # - [X] http reply to client
 
-    post_type =
-      PostTypeDiscovery.discover(
-        conn.params
-        |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
-        |> Map.new()
+    conn_headers = as_map(conn.req_headers)
+    me = "https://jp.caruana.fr/"
+
+    with {:ok, _} <-
+           check_auth_code(
+             conn_headers[:authorization],
+             me,
+             "https://tokens.indieauth.com/token",
+             "TODO check scope?"
+           ),
+         {filename, filecontent, path} <-
+           PostTypeDiscovery.discover(as_map(conn.params))
+           |> Hugo.new(Timex.local(), conn.params),
+         {:ok, _} <-
+           GitHub.new_file(
+             %{access_token: "THIS IS A SECRET"},
+             "jpcaruana",
+             "jp.caruana.fr",
+             "new " <> filename,
+             filename,
+             filecontent,
+             "master"
+           ) do
+      {status, body, headers} = {202, "", %{location: me <> path}}
+
+      conn
+      |> put_headers(headers)
+      |> send_resp(status, body)
+    else
+      {:error, :bad_token} ->
+        conn
+        |> send_resp(401, "bad auth token")
+
+      _ ->
+        conn
+        |> send_resp(400, "bad request")
+    end
+  end
+
+  defp check_auth_code(auth_header, me, issuer, scope) do
+    %{body: body, status: status} =
+      Tesla.get!(
+        "https://tokens.indieauth.com/token",
+        headers: [
+          Authorization: auth_header,
+          accept: "application/json"
+        ]
       )
 
-    {filename, filecontent, path} =
-      Hugo.new(
-        post_type,
-        Timex.local(),
-        conn.params
-      )
+    with {200, b} <- {status, body},
+         {me, issuer} <- decode(b) do
+      {:ok, :valid}
+    else
+      _ ->
+        {:error, :bad_token}
+    end
+  end
 
-    GitHub.new_file(
-      %{access_token: "secret bien gardé"},
-      "jpcaruana",
-      "jp.caruana.fr",
-      "new " <> filename,
-      filename,
-      filecontent,
-      "test_micropub"
-    )
+  defp decode(json) do
+    decoded_body = Poison.decode!(json)
+    {decoded_body["me"], decoded_body["issued_by"]}
+  end
 
-    {status, body, headers} =
-      {202, "", %{location: "https://test-micropub--jp-caruana-fr.netlify.app/" <> path}}
-
-    conn
-    |> put_headers(headers)
-    |> send_resp(status, body)
+  defp as_map(list_of_tuples) do
+    list_of_tuples
+    |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
+    |> Map.new()
   end
 end
