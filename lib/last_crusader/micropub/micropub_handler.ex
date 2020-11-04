@@ -18,13 +18,6 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias Poison, as: Json
 
   def publish(conn) do
-    # - [X] verify access token
-    # - [X] discover post type
-    # - [X] transform to hugo
-    #   - [X] name the file
-    # - [X] post to github
-    # - [X] http reply to client
-
     conn_headers = as_map(conn.req_headers)
     me = "https://jp.caruana.fr/"
 
@@ -73,7 +66,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
       )
 
     with {200, body} <- {status, body},
-         {me, issuer} <- decode(body) do
+         {^me, ^issuer} <- decode(body) do
       {:ok, :valid}
     else
       _ ->
