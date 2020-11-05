@@ -26,7 +26,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
              conn_headers[:authorization],
              me,
              "https://tokens.indieauth.com/token",
-             "TODO check scope?"
+             "create"
            ),
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(as_map(conn.params))
@@ -66,12 +66,17 @@ defmodule LastCrusader.Micropub.MicropubHandler do
       )
 
     with {200, body} <- {status, body},
-         {^me, ^issuer} <- decode(body) do
+         {^me, ^issuer, full_scope} <- decode(body),
+         true <- check_scope(scope, full_scope) do
       {:ok, :valid}
     else
       _ ->
         {:error, :bad_token}
     end
+  end
+
+  defp check_scope(scope, full_scope) do
+    scope in full_scope
   end
 
   defp decode(json) do
