@@ -34,6 +34,7 @@ defmodule LastCrusader.Micropub.Hugo do
       data
       |> Map.delete(:h)
       |> rename_key(:category, :tags)
+      |> values_as_list(:tags)
       |> rename_key(:name, :title)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
@@ -82,6 +83,15 @@ defmodule LastCrusader.Micropub.Hugo do
     if Map.has_key?(map, old_key) do
       Map.put(map, new_key, map[old_key])
       |> Map.delete(old_key)
+    else
+      map
+    end
+  end
+
+  defp values_as_list(map, key) do
+    if Map.has_key?(map, key) do
+      value = map[key]
+      Map.put(map, key, List.flatten([] ++ [value]))
     else
       map
     end

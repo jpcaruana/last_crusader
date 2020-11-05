@@ -59,13 +59,11 @@ defmodule LastCrusader.HugoTest do
     {file_name, file_content, _} =
       Hugo.new(:note, now(), [
         {"content", "Some markdown content\n"},
-        {"category", ["tag1", "tag2"]},
-        {"copy", "https://some/url"}
+        {"category", ["tag1", "tag2"]}
       ])
 
     assert file_content == """
            +++
-           copy = "https://some/url"
            date = "2015-01-23T23:50:07+00:00"
            tags = ["tag1", "tag2"]
            +++
@@ -73,6 +71,22 @@ defmodule LastCrusader.HugoTest do
            """
 
     assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+  end
+
+  test "it should transforms tags into a list" do
+    {_, file_content, _} =
+      Hugo.new(:note, now(), [
+        {"content", "Some markdown content\n"},
+        {"category", "one_tag"}
+      ])
+
+    assert file_content == """
+           +++
+           date = "2015-01-23T23:50:07+00:00"
+           tags = ["one_tag"]
+           +++
+           Some markdown content
+           """
   end
 
   test "it should shorten the generated slug for long content" do
