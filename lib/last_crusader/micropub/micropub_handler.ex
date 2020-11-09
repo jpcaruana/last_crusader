@@ -81,7 +81,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   defp decode(json) do
     decoded_body = Json.decode!(json)
-    {decoded_body["me"], decoded_body["issued_by"]}
+    {decoded_body["me"], decoded_body["issued_by"], decoded_body["scope"]}
   end
 
   defp as_map(list_of_tuples) do
