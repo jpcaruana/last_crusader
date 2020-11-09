@@ -14,6 +14,7 @@ defmodule LastCrusader.Router do
   if Application.get_env(:last_crusader, :plug_logger, true) do
     plug(Plug.Logger)
   end
+
   # Serve at "/" the static files from "priv/static" directory.
   plug(Plug.Static,
     at: "/public",
@@ -48,6 +49,10 @@ defmodule LastCrusader.Router do
 
   post "/login" do
     Login.log_user(conn)
+  end
+
+  get "/micropub" do
+    Micropub.query(conn)
   end
 
   post "/micropub" do

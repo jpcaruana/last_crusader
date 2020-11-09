@@ -17,6 +17,27 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub.GitHub, as: GitHub
   alias Poison, as: Json
 
+  def query(conn) do
+    case conn.params["q"] do
+      "config" ->
+        types = %{
+          "post-types": [
+            %{type: "note", name: "Note"},
+            %{type: "article", name: "Article de blog"},
+            %{type: "bookmark", name: "Signet"}
+          ]
+        }
+
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(200, Json.encode!(types))
+
+      _ ->
+        conn
+        |> send_resp(404, "")
+    end
+  end
+
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
     me = "https://jp.caruana.fr/"
