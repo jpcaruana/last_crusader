@@ -108,6 +108,26 @@ defmodule LastCrusader.HugoTest do
     assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated.md"
   end
 
+  test "it should create article" do
+    {file_name, _, _} =
+      Hugo.new(:article, now(), [
+        {"content", "some content"},
+        {"content", "it should shorten the generated slug for long name"}
+      ])
+
+    assert file_name == "content/posts/2015/01/23/it-should-shorten-the-generated.md"
+  end
+
+  test "it should create bookmarks" do
+    {file_name, _, _} =
+      Hugo.new(:bookmark, now(), [
+        {"content", "some content"},
+        {"content", "it should shorten the generated slug for long name"}
+      ])
+
+    assert file_name == "content/bookmarks/2015/01/23/it-should-shorten-the-generated.md"
+  end
+
   test "generate_filename should fail on inexiting type" do
     assert :error == Hugo.generate_filename(:inexisting_type, nil, nil)
   end

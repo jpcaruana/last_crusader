@@ -46,12 +46,6 @@ defmodule LastCrusader.Router do
     Auth.code_verification(conn)
   end
 
-  get "/callback" do
-    conn
-    |> put_resp_content_type("text/html; charset=utf-8")
-    |> send_resp(200, "<html><body>Dans le callback</body></html>")
-  end
-
   post "/login" do
     Login.log_user(conn)
   end
