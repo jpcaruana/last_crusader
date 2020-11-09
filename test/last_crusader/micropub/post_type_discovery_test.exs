@@ -26,7 +26,12 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryTest do
     assert :in_reply_to != discover(%{"in-reply-to": "invalid URL value"})
   end
 
-  test "3. repost-of" do
+  test "3. bookmark-of" do
+    assert :bookmark == discover(%{"bookmark-of": "http://some-url.com/"})
+    assert :bookmark != discover(%{"bookmark-of": "invalid URL value"})
+  end
+
+  test "3bis. repost-of" do
     assert :repost_of == discover(%{"repost-of": "http://some-url.com/"})
     assert :repost_of != discover(%{"repost-of": "invalid URL value"})
   end

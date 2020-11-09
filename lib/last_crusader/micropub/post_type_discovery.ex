@@ -44,6 +44,7 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
 
     - `:note`
     - `:article`
+    - `:bookmark`
     - `:rvsp`
     - `:in_reply_to`
     - `:like_of`
@@ -51,6 +52,7 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
     - `:photo`
   """
   def discover(post)
+
   def discover(m = %{rvsp: value}) do
     case valid_rvsp_value(value) do
       true -> :rvsp
@@ -69,6 +71,13 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
     case uri_valid?(url) do
       true -> :repost_of
       _ -> pop_and_continue("repost-of", m)
+    end
+  end
+
+  def discover(m = %{"bookmark-of": url}) do
+    case uri_valid?(url) do
+      true -> :bookmark
+      _ -> pop_and_continue("bookmark-of", m)
     end
   end
 
@@ -132,6 +141,7 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
   characters just to make the check a little more forgiving.
   """
   def is_name_a_title?(name, content)
+
   def is_name_a_title?(name, nil) when name != nil do
     true
   end
