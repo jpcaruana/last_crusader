@@ -76,7 +76,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   end
 
   defp check_scope(scope, full_scope) do
-    scope in full_scope
+    scope in String.split(full_scope)
   end
 
   defp decode(json) do
