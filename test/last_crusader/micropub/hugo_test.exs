@@ -101,7 +101,6 @@ defmodule LastCrusader.HugoTest do
   test "it should shorten the generated slug for long name" do
     {file_name, _, _} =
       Hugo.new(:note, now(), [
-        {"content", "some content"},
         {"content", "it should shorten the generated slug for long name"}
       ])
 
@@ -112,20 +111,28 @@ defmodule LastCrusader.HugoTest do
     {file_name, _, _} =
       Hugo.new(:article, now(), [
         {"content", "some content"},
-        {"content", "it should shorten the generated slug for long name"}
       ])
 
-    assert file_name == "content/posts/2015/01/23/it-should-shorten-the-generated.md"
+    assert file_name == "content/posts/2015/01/23/some-content.md"
   end
 
   test "it should create bookmarks" do
     {file_name, _, _} =
       Hugo.new(:bookmark, now(), [
         {"content", "some content"},
-        {"content", "it should shorten the generated slug for long name"}
       ])
 
-    assert file_name == "content/bookmarks/2015/01/23/it-should-shorten-the-generated.md"
+    assert file_name == "content/bookmarks/2015/01/23/some-content.md"
+  end
+
+  test "it should create bookmarks with an empty content (name is random)" do
+    {file_name, _, _} =
+      Hugo.new(:bookmark, now(), [
+        {"content", nil},
+        {"bookmark-of", "http://some-url.com/"}
+      ])
+
+    assert String.contains?(file_name, "content/bookmarks/2015/01/23/")
   end
 
   test "generate_filename should fail on inexiting type" do

@@ -21,7 +21,7 @@ defmodule LastCrusader.Micropub.Hugo do
 
     front_matter = generate_front_matter(date, content)
 
-    {file_name, front_matter <> text, web_path}
+    {file_name, front_matter <> not_empty(text), web_path}
   end
 
   @doc """
@@ -112,5 +112,13 @@ defmodule LastCrusader.Micropub.Hugo do
   defp slug(text) do
     Slugger.slugify_downcase(text)
     |> Slugger.truncate_slug(31)
+  end
+
+  defp not_empty(nil) do
+    ""
+  end
+
+  defp not_empty(text) do
+    text
   end
 end
