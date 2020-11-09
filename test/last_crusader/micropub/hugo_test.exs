@@ -110,7 +110,7 @@ defmodule LastCrusader.HugoTest do
   test "it should create article" do
     {file_name, _, _} =
       Hugo.new(:article, now(), [
-        {"content", "some content"},
+        {"content", "some content"}
       ])
 
     assert file_name == "content/posts/2015/01/23/some-content.md"
@@ -119,10 +119,26 @@ defmodule LastCrusader.HugoTest do
   test "it should create bookmarks" do
     {file_name, _, _} =
       Hugo.new(:bookmark, now(), [
-        {"content", "some content"},
+        {"content", "some content"}
       ])
 
     assert file_name == "content/bookmarks/2015/01/23/some-content.md"
+  end
+
+  test "it should create bookmarks with special tags: " do
+    {_, file_content, _} =
+      Hugo.new(:bookmark, now(), [
+        {"bookmark-of", "http://some-url.com/"},
+        {"category", "one_tag"}
+      ])
+
+    assert file_content == """
+           +++
+           bookmark = "http://some-url.com/"
+           bookmarktags = ["one_tag"]
+           date = "2015-01-23T23:50:07+00:00"
+           +++
+           """
   end
 
   test "it should create bookmarks with an empty content (name is random)" do

@@ -19,7 +19,7 @@ defmodule LastCrusader.Micropub.Hugo do
     file_name = generate_filename(type, name, path_date) <> ".md"
     web_path = generate_filename(type, name, path_date) <> "/"
 
-    front_matter = generate_front_matter(date, content)
+    front_matter = generate_front_matter(date, type, content)
 
     {file_name, front_matter <> not_empty(text), web_path}
   end
@@ -27,7 +27,7 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc """
     Generates TOML formatted fron-matter
   """
-  def generate_front_matter(date, data \\ %{}) do
+  def generate_front_matter(date, type, data \\ %{}) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
 
     data_as_toml =
@@ -35,6 +35,8 @@ defmodule LastCrusader.Micropub.Hugo do
       |> Map.delete(:h)
       |> rename_key(:category, :tags)
       |> values_as_list(:tags)
+      |> conditional_rename_key(type == :bookmark, :tags, :bookmarktags)
+      |> rename_key(:"bookmark-of", :bookmark)
       |> rename_key(:name, :title)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
@@ -77,6 +79,14 @@ defmodule LastCrusader.Micropub.Hugo do
 
   def generate_filename(_, _, _) do
     :error
+  end
+
+  defp conditional_rename_key(map, condition, old_key, new_key) do
+    if condition do
+      rename_key(map, old_key, new_key)
+    else
+      map
+    end
   end
 
   defp rename_key(map, old_key, new_key) do
