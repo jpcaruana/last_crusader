@@ -20,17 +20,25 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   def query(conn) do
     case conn.params["q"] do
       "config" ->
-        types = %{
-          "post-types": [
-            %{type: "note", name: "Note"},
-            %{type: "article", name: "Article de blog"},
-            %{type: "bookmark", name: "Signet"}
+        config = %{
+          types: %{
+            "post-types": [
+              %{type: "note", name: "Note"},
+              %{type: "article", name: "Article de blog"},
+              %{type: "bookmark", name: "Signet"}
+            ]
+          },
+          "syndicate-to": [
+            %{
+              uid: "https://twitter.com/jpcaruana",
+              name: "Twitter"
+            }
           ]
         }
 
         conn
         |> put_resp_content_type("application/json")
-        |> send_resp(200, Json.encode!(types))
+        |> send_resp(200, Json.encode!(config))
 
       _ ->
         conn
