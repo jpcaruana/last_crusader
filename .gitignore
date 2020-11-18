@@ -22,3 +22,5 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 last_crusader-*.tar
 
+# Ignore personal compile-time config
+config/perso.exs

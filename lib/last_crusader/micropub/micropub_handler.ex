@@ -20,25 +20,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   def query(conn) do
     case conn.params["q"] do
       "config" ->
-        config = %{
-          types: %{
-            "post-types": [
-              %{type: "note", name: "Note"},
-              %{type: "article", name: "Article de blog"},
-              %{type: "bookmark", name: "Signet"}
-            ]
-          },
-          "syndicate-to": [
-            %{
-              uid: "https://twitter.com/jpcaruana",
-              name: "Twitter"
-            }
-          ]
-        }
-
         conn
         |> put_resp_content_type("application/json")
-        |> send_resp(200, Json.encode!(config))
+        |> send_resp(200, Json.encode!(Application.get_env(:last_crusader, :micropub_config)))
 
       _ ->
         conn
@@ -62,7 +46,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
            |> Hugo.new(Timex.local(), conn.params),
          {:ok, _} <-
            GitHub.new_file(
-             %{access_token: "THIS IS A SECRET"},
+             Application.get_env(:last_crusader, :github_auth),
              "jpcaruana",
              "jp.caruana.fr",
              "new " <> filename,
