@@ -2,7 +2,7 @@
 
 # LastCrusader - Indieweb and the Last Crusade
 
-An [Indieweb](https://indieweb.org/) server taylored mainly for my needs:
+An [Indieweb](https://indieweb.org/) server taylored mainly for _my_ needs, but I hope easily configurable for yours.
 
 - Your content is yours
 - You are better connected
@@ -11,10 +11,10 @@ An [Indieweb](https://indieweb.org/) server taylored mainly for my needs:
 ## Todo
 
 - [ ] [IndieAuth](https://indieauth.com/) server
-- [ ] [Micropub](https://www.w3.org/TR/micropub/) server
+- [x] [Micropub](https://www.w3.org/TR/micropub/) server
 
 ## Notes to self
 
 - run tests: `mix test`
 - run locally: `iex -S mix`
-- make a release: `MIX_ENV=prod mix release`
+- make a release: `MIX_ENV=prod mix release` or with personal secrets `MIX_ENV=perso mix release`
