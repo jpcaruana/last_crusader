@@ -47,10 +47,6 @@ defmodule LastCrusader.Router do
     Auth.code_verification(conn)
   end
 
-  post "/login" do
-    Login.log_user(conn)
-  end
-
   get "/micropub" do
     Micropub.query(conn)
   end
