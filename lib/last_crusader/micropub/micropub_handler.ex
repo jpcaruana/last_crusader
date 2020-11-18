@@ -32,13 +32,13 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
-    me = "https://jp.caruana.fr/"
+    me = Application.get_env(:last_crusader, :me)
 
     with {:ok, _} <-
            check_auth_code(
              conn_headers[:authorization],
              me,
-             "https://tokens.indieauth.com/token",
+             Application.get_env(:last_crusader, :micropub_issuer),
              "create"
            ),
          {filename, filecontent, path} <-
@@ -47,12 +47,12 @@ defmodule LastCrusader.Micropub.MicropubHandler do
          {:ok, _} <-
            GitHub.new_file(
              Application.get_env(:last_crusader, :github_auth),
-             "jpcaruana",
-             "jp.caruana.fr",
+             Application.get_env(:last_crusader, :github_user),
+             Application.get_env(:last_crusader, :github_repo),
              "new " <> filename,
              filename,
              filecontent,
-             "master"
+             Application.get_env(:last_crusader, :github_branch, "master")
            ) do
       conn
       |> put_headers(%{location: me <> path})
@@ -71,7 +71,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   defp check_auth_code(auth_header, me, issuer, scope) do
     %{body: body, status: status} =
       Tesla.get!(
-        "https://tokens.indieauth.com/token",
+        Application.get_env(:last_crusader, :micropub_issuer),
         headers: [
           Authorization: auth_header,
           accept: "application/json"
