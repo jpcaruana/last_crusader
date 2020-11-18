@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.22.2">
-    <meta name="project" content="Last Crusader v0.1.0">
+    <meta name="project" content="Last Crusader v0.2.0">
 
-    <title>LastCrusader.Micropub.Hugo — Last Crusader v0.1.0</title>
+    <title>LastCrusader.Micropub.Hugo — Last Crusader v0.2.0</title>
     <link rel="stylesheet" href="dist/elixir-d678dad126d82ddc061f.css" />
 
-    <script src="dist/sidebar_items-cef5568ee9.js"></script>
+    <script src="dist/sidebar_items-cde93b9be1.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -50,7 +50,7 @@
 Last Crusader
       </a>
       <h2 class="sidebar-projectVersion">
-        v0.1.0
+        v0.2.0
       </h2>
     </div>
 
@@ -72,7 +72,7 @@ Last Crusader
     <div id="content" class="content-inner">
 
       <h1>
-        <small class="app-vsn">Last Crusader v0.1.0</small>
+        <small class="app-vsn">Last Crusader v0.2.0</small>
 LastCrusader.Micropub.Hugo
 
           <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L1" title="View Source" class="view-source" rel="help">
@@ -112,7 +112,7 @@ LastCrusader.Micropub.Hugo
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#generate_front_matter/2">generate_front_matter(date, data \\ %{})</a>
+    <a href="#generate_front_matter/3">generate_front_matter(date, type, data \\ %{})</a>
 
   </div>
 
@@ -121,7 +121,7 @@ LastCrusader.Micropub.Hugo
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#new/4">new(type, date, name, data)</a>
+    <a href="#new/3">new(type, date, data)</a>
 
   </div>
 
@@ -152,7 +152,7 @@ Functions
     </a>
     <h1 class="signature">generate_filename(arg1, name, date)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L63" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L68" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -165,18 +165,18 @@ Functions
 <p>  Generates the complete filename (with path) for a Hugo website</p><p>  Parameters:</p><ul><li>type: can be <code class="inline">:note</code> <code class="inline">:post</code> <code class="inline">:bookmark</code></li><li>name: for the file name</li><li>date</li></ul>
   </section>
 </section>
-<section class="detail" id="generate_front_matter/2">
+<section class="detail" id="generate_front_matter/3">
 
-    <span id="generate_front_matter/1"></span>
+    <span id="generate_front_matter/2"></span>
 
   <div class="detail-header">
-    <a href="#generate_front_matter/2" class="detail-link" title="Link to this function">
+    <a href="#generate_front_matter/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">generate_front_matter(date, data \\ %{})</h1>
+    <h1 class="signature">generate_front_matter(date, type, data \\ %{})</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L28" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L30" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -189,14 +189,14 @@ Functions
 <p>  Generates TOML formatted fron-matter</p>
   </section>
 </section>
-<section class="detail" id="new/4">
+<section class="detail" id="new/3">
 
   <div class="detail-header">
-    <a href="#new/4" class="detail-link" title="Link to this function">
+    <a href="#new/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">new(type, date, name, data)</h1>
+    <h1 class="signature">new(type, date, data)</h1>
 
       <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/hugo.ex#L9" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
