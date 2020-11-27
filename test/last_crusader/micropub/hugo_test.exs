@@ -151,6 +151,16 @@ defmodule LastCrusader.HugoTest do
     assert String.contains?(file_name, "content/bookmarks/2015/01/23/")
   end
 
+  test "it should sanitize input from emojis to prevent UnicodeConversionError from happening" do
+    {file_name, _, _} =
+      Hugo.new(:bookmark, now(), [
+        {"content", "dwyl/phoenix-liveview-counter-tutorial: 🤯  beginners tutorial building a real time counter in Phoenix 1.5.5 + LiveView 0.14.7 ⚡️"},
+        {"bookmark-of", "https://github.com/dwyl/phoenix-liveview-counter-tutorial"}
+      ])
+
+    assert file_name == "content/bookmarks/2015/01/23/dwyl-phoenix-liveview-counter.md"
+  end
+
   test "generate_filename should fail on inexiting type" do
     assert :error == Hugo.generate_filename(:inexisting_type, nil, nil)
   end

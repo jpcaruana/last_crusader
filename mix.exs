@@ -55,6 +55,7 @@ defmodule LastCrusader.MixProject do
       {:timex, "~> 3.0"},
       {:tentacat, "~> 2.0"},
       {:slugger, "~> 0.3"},
+      {:remove_emoji, "~> 1.0.0"},
       # code coverage
       {:excoveralls, "~> 0.12.2", only: :test},
       # doc generation: mix docs

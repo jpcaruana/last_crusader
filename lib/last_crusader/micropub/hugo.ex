@@ -120,7 +120,9 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp slug(text) do
-    Slugger.slugify_downcase(text)
+    text
+    |> RemoveEmoji.sanitize()
+    |> Slugger.slugify_downcase()
     |> Slugger.truncate_slug(31)
   end
 
