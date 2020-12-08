@@ -14,7 +14,7 @@ defmodule LastCrusader.HugoTest do
            """
 
     assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
-    assert web_path == "content/notes/2015/01/23/some-markdown-content/"
+    assert web_path == "notes/2015/01/23/some-markdown-content/"
   end
 
   test "it should rename name to title" do
@@ -162,7 +162,7 @@ defmodule LastCrusader.HugoTest do
   end
 
   test "generate_filename should fail on inexiting type" do
-    assert :error == Hugo.generate_filename(:inexisting_type, nil, nil)
+    assert :error == Hugo.generate_path(:inexisting_type, nil, nil)
   end
 
   def now() do

@@ -16,8 +16,8 @@ defmodule LastCrusader.Micropub.Hugo do
     name = generate_name(content[:name], text)
 
     {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
-    file_name = generate_filename(type, name, path_date) <> ".md"
-    web_path = generate_filename(type, name, path_date) <> "/"
+    file_name = "content/" <> generate_path(type, name, path_date) <> ".md"
+    web_path = generate_path(type, name, path_date) <> "/"
 
     front_matter = generate_front_matter(date, type, content)
 
@@ -65,19 +65,19 @@ defmodule LastCrusader.Micropub.Hugo do
     - name: for the file name
     - date
   """
-  def generate_filename(:note, name, date) do
-    "content/notes/" <> date <> "/" <> name
+  def generate_path(:note, name, date) do
+    "notes/" <> date <> "/" <> name
   end
 
-  def generate_filename(:article, name, date) do
-    "content/posts/" <> date <> "/" <> name
+  def generate_path(:article, name, date) do
+    "posts/" <> date <> "/" <> name
   end
 
-  def generate_filename(:bookmark, name, date) do
-    "content/bookmarks/" <> date <> "/" <> name
+  def generate_path(:bookmark, name, date) do
+    "bookmarks/" <> date <> "/" <> name
   end
 
-  def generate_filename(_, _, _) do
+  def generate_path(_, _, _) do
     :error
   end
 
