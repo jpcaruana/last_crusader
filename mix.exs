@@ -61,7 +61,8 @@ defmodule LastCrusader.MixProject do
       # doc generation: mix docs
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       # watch for tests
-      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
+      {:ex_check, "~> 0.14.0", only: [:dev], runtime: false}
     ]
   end
 end
