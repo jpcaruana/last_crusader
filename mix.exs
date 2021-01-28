@@ -31,7 +31,7 @@ defmodule LastCrusader.MixProject do
         # The main page in the docs
         main: "readme",
         # logo: "path/to/logo.png",
-        extras: ["README.md", "CONTRIBUTING.md", "LICENSE"]
+        extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE"]
       ]
     ]
   end
