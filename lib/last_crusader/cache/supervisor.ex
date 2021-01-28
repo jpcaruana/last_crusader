@@ -9,7 +9,10 @@ defmodule LastCrusader.Cache.Supervisor do
   @impl true
   def init(_init_arg) do
     children = [
-      worker(LastCrusader.Cache.MemoryTokenStore, [100])
+      %{
+        id: LastCrusader.Cache.MemoryTokenStore,
+        start: {LastCrusader.Cache.MemoryTokenStore, :start_link, [100]}
+      }
     ]
 
     Supervisor.init(children, strategy: :one_for_one)
