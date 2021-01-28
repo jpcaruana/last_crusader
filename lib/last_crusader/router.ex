@@ -1,7 +1,6 @@
 defmodule LastCrusader.Router do
   @moduledoc false
   alias LastCrusader.Auth.AuthHandler, as: Auth
-  alias LastCrusader.Login.LoginHandler, as: Login
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub
   use Plug.Router
   use Plug.ErrorHandler
