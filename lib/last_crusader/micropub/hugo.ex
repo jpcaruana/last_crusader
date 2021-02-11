@@ -122,6 +122,7 @@ defmodule LastCrusader.Micropub.Hugo do
   defp slug(text) do
     text
     |> RemoveEmoji.sanitize()
+    |> String.replace("—", "-")
     |> Slugger.slugify_downcase()
     |> Slugger.truncate_slug(31)
   end
