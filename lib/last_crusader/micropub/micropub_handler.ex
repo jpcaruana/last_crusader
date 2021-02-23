@@ -11,6 +11,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   """
   import Plug.Conn
   import LastCrusader.Utils.Http
+  require Logger
 
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
@@ -54,15 +55,25 @@ defmodule LastCrusader.Micropub.MicropubHandler do
              filecontent,
              Application.get_env(:last_crusader, :github_branch, "master")
            ) do
+      content_url = me <> path
+
+      Logger.info(
+        "Content successfully published (with a build delay) to #{inspect(content_url)}"
+      )
+
       conn
-      |> put_headers(%{location: me <> path})
+      |> put_headers(%{location: content_url})
       |> send_resp(202, "")
     else
       {:error, :bad_token} ->
+        Logger.error("bad auth token")
+
         conn
         |> send_resp(401, "bad auth token")
 
       _ ->
+        Logger.error("bad request")
+
         conn
         |> send_resp(400, "bad request")
     end
