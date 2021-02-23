@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- micropub: send webmentions to cited URL in published content
+
 ## 0.2.2
 - micropub: fix encoding issues from weird long dash
 - bump plug_cowboy from 2.3.0 to 2.4.1
