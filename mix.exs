@@ -49,13 +49,13 @@ defmodule LastCrusader.MixProject do
     [
       {:plug_cowboy, "~> 2.4.1"},
       {:poison, "~> 4.0.1"},
-      {:microformats2, "~> 0.6.0"},
-      {:tesla, "~> 1.3.0"},
+      {:tesla, "~> 1.4.0"},
       {:toml, "~> 0.6.1"},
       {:timex, "~> 3.0"},
       {:tentacat, "~> 2.0"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
+      {:webmentions, "~> 0.5.2"},
       # code coverage
       {:excoveralls, "~> 0.14.0", only: :test},
       # doc generation: mix docs
