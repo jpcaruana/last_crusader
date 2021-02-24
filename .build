@@ -8,6 +8,7 @@ LastCrusader.Micropub.PostTypeDiscovery.html
 LastCrusader.Utils.Http.html
 LastCrusader.Utils.IdentifierValidator.html
 LastCrusader.Utils.Randomizer.html
+LastCrusader.Webmentions.Sender.html
 api-reference.html
 changelog.html
 contributing.html
@@ -17,8 +18,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-87c6504e5e.js
-dist/sidebar_items-ed78de309b.js
+dist/search_items-877e7041e8.js
+dist/sidebar_items-0d65157895.js
 index.html
 license.html
 readme.html
