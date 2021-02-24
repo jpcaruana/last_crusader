@@ -1,6 +1,7 @@
 defmodule LastCrusader.Application do
   @moduledoc false
   use Application
+  require Logger
 
   @doc false
   def start(_type, _args) do
@@ -21,6 +22,11 @@ defmodule LastCrusader.Application do
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: LastCrusader.Supervisor]
-    Supervisor.start_link(children, opts)
+    started = Supervisor.start_link(children, opts)
+
+    {:ok, version} = :application.get_key(:last_crusader, :vsn)
+    Logger.info("Application LastCrusader #{version}: started")
+
+    started
   end
 end
