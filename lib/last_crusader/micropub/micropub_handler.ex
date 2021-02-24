@@ -16,6 +16,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
   alias LastCrusader.Micropub.GitHub, as: GitHub
+  alias LastCrusader.Webmentions, as: Webmentions
   alias Poison, as: Json
 
   def query(conn) do
@@ -45,6 +46,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(as_map(conn.params))
            |> Hugo.new(Timex.local(), conn.params),
+         mentionned_links <- Hugo.extract_links(filecontent),
          {:ok, _} <-
            GitHub.new_file(
              Application.get_env(:last_crusader, :github_auth),
@@ -54,9 +56,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
              filename,
              filecontent,
              Application.get_env(:last_crusader, :github_branch, "master")
-           ) do
-      content_url = me <> path
-
+           ),
+         content_url <- generate_puslished_url(me, path),
+         {:ok} <- Webmentions.Sender.schedule_webmentions(mentionned_links, content_url) do
       Logger.info(
         "Content successfully published (with a build delay) to #{inspect(content_url)}"
       )
@@ -112,5 +114,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     list_of_tuples
     |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
     |> Map.new()
+  end
+
+  defp generate_puslished_url(host, path) do
+    host <> path
   end
 end
