@@ -27,3 +27,7 @@ config :last_crusader,
   # 15 minutes
   webmention_delai_ms: 900_000,
   port: 8080
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
