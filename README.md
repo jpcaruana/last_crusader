@@ -17,7 +17,7 @@ Works fine with latest Elixir/OTP.
 - [ ] [IndieAuth](https://indieauth.com/) server
 - [x] [Micropub](https://www.w3.org/TR/micropub/) server
 - [ ] [Webmentions](https://indieweb.org/Webmention):
-    - [ ] send webmentions
+    - [X] send webmentions
     - [ ] receive webmentions
 
 ## Notes to self
