@@ -58,7 +58,12 @@ defmodule LastCrusader.Micropub.MicropubHandler do
              Application.get_env(:last_crusader, :github_branch, "master")
            ),
          content_url <- generate_puslished_url(me, path),
-         {:ok} <- Webmentions.Sender.schedule_webmentions(mentionned_links, content_url) do
+         {:ok} <-
+           Webmentions.Sender.schedule_webmentions(
+             mentionned_links,
+             content_url,
+             Application.get_env(:last_crusader, :webmention_delai_ms, 900_000)
+           ) do
       Logger.info(
         "Content successfully published (with a build delay) to #{inspect(content_url)}"
       )

@@ -24,4 +24,6 @@ config :last_crusader,
       }
     ]
   },
+  # 15 minutes
+  webmention_delai_ms: 900_000,
   port: 8080
