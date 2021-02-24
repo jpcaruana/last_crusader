@@ -179,6 +179,73 @@ defmodule LastCrusader.HugoTest do
     end
   end
 
+  describe "Hugo.extract_links/1" do
+    test "no link" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content
+      """
+
+      assert Hugo.extract_links(toml_content) == []
+    end
+
+    test "one link" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is [a link](https://some-url.org/).
+      """
+
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+    end
+
+    test "two links" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is [a link](https://some-url.org/) and there [another one](https://some-other-url.org/page).
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://some-url.org/",
+               "https://some-other-url.org/page"
+             ]
+    end
+
+    test "two links: http and https" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is [a link](https://some-url.org/) and there [another one](http://some-other-url.org/page).
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://some-url.org/",
+               "http://some-other-url.org/page"
+             ]
+    end
+
+    test "one link twice" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is a [link](https://some-url.org/) and there [the same](https://some-url.org/).
+      """
+
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+    end
+  end
+
   def now() do
     {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
     fake_now

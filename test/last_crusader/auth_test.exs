@@ -76,24 +76,24 @@ defmodule LastCrusader.AuthTest do
   end
 
   # TODO: fix this flaky test
-#  test "token read from cache" do
-#    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
-#
-#    conn =
-#      conn(
-#        :post,
-#        "/auth?redirect_uri=REDIRECT&client_id=CLIENT_ID&code=ABCD"
-#      )
-#
-#    # Invoke the plug
-#    conn = LastCrusader.Router.call(conn, @opts)
-#
-#    # Assert the response and status
-#    assert conn.state == :sent
-#    assert conn.resp_body == "{\"me\":\"url_me\"}"
-#    assert Plug.Conn.get_resp_header(conn, "content-type") == ["application/json; charset=utf-8"]
-#    assert conn.status == 200
-#  end
+  #  test "token read from cache" do
+  #    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
+  #
+  #    conn =
+  #      conn(
+  #        :post,
+  #        "/auth?redirect_uri=REDIRECT&client_id=CLIENT_ID&code=ABCD"
+  #      )
+  #
+  #    # Invoke the plug
+  #    conn = LastCrusader.Router.call(conn, @opts)
+  #
+  #    # Assert the response and status
+  #    assert conn.state == :sent
+  #    assert conn.resp_body == "{\"me\":\"url_me\"}"
+  #    assert Plug.Conn.get_resp_header(conn, "content-type") == ["application/json; charset=utf-8"]
+  #    assert conn.status == 200
+  #  end
 
   test "read from cache fails on bad token" do
     MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})

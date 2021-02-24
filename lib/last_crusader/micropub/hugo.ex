@@ -58,6 +58,24 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc """
+    Extracts links from a Hugo post
+
+    Parameters:
+    - toml_content: the file's content (with TOML frontmatter)
+
+    Some help from http://scottradcliff.com/parsing-hyperlinks-in-markdown.html
+
+    Yes, using a Regex is weak...
+  """
+  def extract_links(toml_content) do
+    [_, _frontmatter, markdown] = String.split(toml_content, "+++\n")
+
+    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, markdown)
+    |> Enum.map(fn x -> Enum.at(x, 2) end)
+    |> Enum.uniq()
+  end
+
+  @doc """
     Generates the complete filename (with path) for a Hugo website
 
     Parameters:
