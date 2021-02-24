@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1 (2021/02/24)
+- added /status route for remote monitoring
+- better logging configuration
+
 ## 0.3.0 (2021/02/24)
 - micropub: send webmentions to mentionned URL in published content (waits for a publishing delay from Github/Netlify)
 
