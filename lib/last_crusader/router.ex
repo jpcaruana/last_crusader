@@ -38,6 +38,10 @@ defmodule LastCrusader.Router do
   # responsible for dispatching responses
   plug(:dispatch)
 
+  get "/status" do
+    send_resp(conn, 200, "OK")
+  end
+
   get "/auth" do
     Auth.auth_endpoint(conn)
   end
