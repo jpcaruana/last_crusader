@@ -70,13 +70,12 @@ defmodule LastCrusader.Micropub.Hugo do
   def extract_links(toml_content) do
     [_, frontmatter, markdown] = String.split(toml_content, "+++\n")
 
-    extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter)
+    Enum.uniq(extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter))
   end
 
   defp extract_links_in_content(content) do
     Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, content)
     |> Enum.map(fn x -> Enum.at(x, 2) end)
-    |> Enum.uniq()
   end
 
   defp extract_links_in_frontmatter(frontmatter) do

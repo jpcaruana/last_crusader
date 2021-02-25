@@ -266,6 +266,18 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
     end
+
+    test "one link from bookmark also in content" do
+      toml_content = """
+      +++
+      key = "value"
+      bookmark = "https://some-url.org/"
+      +++
+      Some markdown content with [the same](https://some-url.org/) URL.
+      """
+
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+    end
   end
 
   def now() do
