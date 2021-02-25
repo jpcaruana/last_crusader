@@ -68,11 +68,31 @@ defmodule LastCrusader.Micropub.Hugo do
     Yes, using a Regex is weak...
   """
   def extract_links(toml_content) do
-    [_, _frontmatter, markdown] = String.split(toml_content, "+++\n")
+    [_, frontmatter, markdown] = String.split(toml_content, "+++\n")
 
-    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, markdown)
+    extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter)
+  end
+
+  defp extract_links_in_content(content) do
+    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, content)
     |> Enum.map(fn x -> Enum.at(x, 2) end)
     |> Enum.uniq()
+  end
+
+  defp extract_links_in_frontmatter(frontmatter) do
+    with [matching_boorkmark_line] <-
+           frontmatter
+           |> String.split("\n")
+           |> Enum.filter(fn x -> Regex.match?(~r/^bookmark =/, x) end),
+         link <-
+           matching_boorkmark_line
+           |> String.split(" = ")
+           |> List.last()
+           |> String.replace("\"", "") do
+      [link]
+    else
+      _ -> []
+    end
   end
 
   @doc """
