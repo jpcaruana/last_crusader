@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.23.0">
     <meta name="project" content="Last Crusader v0.3.2">
 
-    <title>API Reference — Last Crusader v0.3.2</title>
+    <title>LastCrusader.Micropub — Last Crusader v0.3.2</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
     <script src="dist/sidebar_items-29f8aca1c0.js"></script>
@@ -18,7 +18,7 @@
 
 
   </head>
-  <body data-type="extras">
+  <body data-type="modules">
     <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
 
 <div class="main">
@@ -72,120 +72,84 @@ Last Crusader
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1>
-  API Reference <small class="app-vsn">Last Crusader v0.3.2</small>
-</h1>
+      <h1>
+LastCrusader.Micropub <small class="app-vsn">(Last Crusader v0.3.2)</small>
 
-  <section class="details-list">
-    <h2 id="modules" class="section-heading">
-  <a href="#modules" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Modules
-</h2>
+          <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/micropub.ex#L1" title="View Source" class="view-source" rel="help">
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
+          </a>
 
-    <div class="summary">
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Handles the <em>logic</em> of micro-publishing.</p><p>Does not worry about HTTP</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="LastCrusader.Auth.AuthHandler.html">LastCrusader.Auth.AuthHandler</a>
+    <a href="#publish/2">publish(headers, params)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>IndieAuth authorization endpoint</p></div>
+    <div class="summary-synopsis"><p>Publishes as Hugo post to Github repo</p></div>
 
 </div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Cache.MemoryTokenStore.html">LastCrusader.Cache.MemoryTokenStore</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>  Simple ETS-based cache.</p></div>
+        </section>
 
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Micropub.html">LastCrusader.Micropub</a>
 
-  </div>
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="publish/2">
 
-    <div class="summary-synopsis"><p>Handles the <em>logic</em> of micro-publishing.</p></div>
+  <div class="detail-header">
+    <a href="#publish/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">publish(headers, params)</h1>
 
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Micropub.GitHub.html">LastCrusader.Micropub.GitHub</a>
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/micropub.ex#L25" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
 
-  </div>
-
-    <div class="summary-synopsis"><p>  Posts content to github</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Micropub.Hugo.html">LastCrusader.Micropub.Hugo</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Generates Hugo compatible data, file content, file name</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Micropub.MicropubHandler.html">LastCrusader.Micropub.MicropubHandler</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>The Micropub protocol is used to create, update and delete posts on one's own domain using third-party clients.</p></div>
+  <section class="docstring">
 
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Micropub.PostTypeDiscovery.html">LastCrusader.Micropub.PostTypeDiscovery</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Indieweb Post Type discovery implementation</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Utils.Http.html">LastCrusader.Utils.Http</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Utils for easy HTTP manipulation</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Utils.IdentifierValidator.html">LastCrusader.Utils.IdentifierValidator</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Indie Auth Identifier Validator</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Utils.Randomizer.html">LastCrusader.Utils.Randomizer</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Random string generator module.</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="LastCrusader.Webmentions.Sender.html">LastCrusader.Webmentions.Sender</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>Schedules webmentions to be send</p></div>
-
-</div>
-
-    </div>
+<p>Publishes as Hugo post to Github repo:</p><ul><li>checks auth code and scope</li><li>discovers post type</li><li>transforms it as a Hugo post</li><li>commits to Github repo</li><li>schedules sending webmentions if needed</li></ul>
   </section>
+</section>
 
+          </div>
+        </section>
 
       <footer class="footer">
         <p>
