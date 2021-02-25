@@ -52,7 +52,6 @@ defmodule LastCrusader.MixProject do
       {:tesla, "~> 1.4.0"},
       {:toml, "~> 0.6.1"},
       {:timex, "~> 3.0"},
-      {:tentacat, "~> 2.0"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 0.5.2"},
