@@ -4,7 +4,7 @@
 - micropub: 
     - fix encoding issues from another weird long dash (see also release 0.2.2)
     - extract links from bookmark posts for webmention
-- dependancies: remove dependacy to Tentacat
+- dependancies: remove dependancy to Tentacat
 
 ## 0.3.1 (2021/02/24)
 - added /status route for remote monitoring
