@@ -174,6 +174,16 @@ defmodule LastCrusader.HugoTest do
       assert file_name == "content/bookmarks/2015/01/23/alembic-monitoring-phoenix.md"
     end
 
+    test "it should sanitize input from another weird '–' char to prevent strange filename from existing" do
+      {file_name, _, _} =
+        Hugo.new(:bookmark, now(), [
+          {"content", "How to Write a Book – Rands in Repose"},
+          {"bookmark-of", "https://randsinrepose.com/archives/how-to-write-a-book/"}
+        ])
+
+      assert file_name == "content/bookmarks/2015/01/23/how-to-write-a-book-rands-in.md"
+    end
+
     test "generate_filename should fail on inexiting type" do
       assert :error == Hugo.generate_path(:inexisting_type, nil, nil)
     end

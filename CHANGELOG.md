@@ -1,5 +1,8 @@
 # Changelog
 
+## Next version
+- micropub: fix encoding issues from another weird long dash
+
 ## 0.3.1 (2021/02/24)
 - added /status route for remote monitoring
 - better logging configuration
