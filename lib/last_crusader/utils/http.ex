@@ -19,4 +19,13 @@ defmodule LastCrusader.Utils.Http do
       end
     )
   end
+
+  @doc """
+  Transforms a list of tuples into a Map
+  """
+  def as_map(list_of_tuples) do
+    list_of_tuples
+    |> Enum.map(fn {a, b} -> {String.to_atom(a), b} end)
+    |> Map.new()
+  end
 end
