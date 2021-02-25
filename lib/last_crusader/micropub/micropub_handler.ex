@@ -16,6 +16,11 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   alias LastCrusader.Micropub, as: Micropub
   alias Poison, as: Json
 
+  @doc """
+  Handles query requests
+
+  Note: we just reply to the "config" request
+  """
   def query(conn) do
     case conn.params["q"] do
       "config" ->
@@ -29,6 +34,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     end
   end
 
+  @doc """
+  Handles micropublish demands from HTTP
+  """
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
 

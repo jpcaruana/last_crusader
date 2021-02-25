@@ -1,4 +1,10 @@
 defmodule LastCrusader.Micropub do
+  @moduledoc """
+  Handles the _logic_ of micro-publishing.
+
+  Does not worry about HTTP
+  """
+
   import LastCrusader.Utils.Http
 
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
@@ -7,6 +13,15 @@ defmodule LastCrusader.Micropub do
   alias LastCrusader.Webmentions, as: Webmentions
   alias Poison, as: Json
 
+  @doc """
+  Publishes as Hugo post to Github repo:
+
+  - checks auth code and scope
+  - discovers post type
+  - transforms it as a Hugo post
+  - commits to Github repo
+  - schedules sending webmentions if needed
+  """
   def publish(headers, params) do
     me = Application.get_env(:last_crusader, :me)
 
