@@ -52,8 +52,6 @@ defmodule LastCrusader.Micropub do
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
       {:ok, content_url}
-    else
-      error -> error
     end
   end
 
