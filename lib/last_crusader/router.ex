@@ -74,7 +74,14 @@ defmodule LastCrusader.Router do
     send_resp(conn, 404, "not found")
   end
 
-  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: _stack}) do
-    send_resp(conn, conn.status, "Something went wrong")
+  def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
+    error_message =
+      if Mix.env() in ["test", "dev"] do
+        "Something went wrong: #{inspect(kind)} / #{inspect(reason)}}"
+      else
+        "Something went wrong"
+      end
+
+    send_resp(conn, conn.status, error_message)
   end
 end
