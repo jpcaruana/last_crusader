@@ -17,8 +17,9 @@ defmodule LastCrusader.Webmentions.Handler do
   If the receiver processes the request asynchronously but does not return a status URL, the receiver MUST reply with an HTTP 202 Accepted response. The response body MAY contain content, in which case a human-readable response is recommended.
   """
   def receive(conn) do
-    with :ok <- check_content_type(conn),
-         {:ok, source, target} <- extract_urls(conn) do
+    with {:ok, _} <- check_content_type(conn),
+         {:ok, source, target} <- extract_urls(conn),
+         {:ok, _} <- validate_urls(source, target) do
       validate(source, target)
 
       conn
@@ -42,36 +43,27 @@ defmodule LastCrusader.Webmentions.Handler do
     # Webmentions.discover_endpoint(source_url)
     # {:ok, nil} -> {:ko, "no webmention endpoint found"}
     # {:ok, ""} -> {:ko, "no webmention endpoint found"}
-    :ok
+    {:ok, :valid}
   end
 
   defp check_content_type(conn) do
     with [type] <- Plug.Conn.get_req_header(conn, "content-type"),
          {:ok, "application", "x-www-form-urlencoded", _} <- Plug.Conn.Utils.content_type(type) do
-      :ok
+      {:ok, :valid}
     else
       _ ->
         {:error, "unsupported content type"}
     end
   end
 
+  defp extract_urls(%{params: %{"source" => same, "target" => same}}) do
+    {:error, "source and target match"}
+  end
+
   defp extract_urls(%{params: %{"source" => source, "target" => target}}) do
     source = URI.parse(source)
     target = URI.parse(target)
-
-    cond do
-      URI.to_string(source) == URI.to_string(target) ->
-        {:error, "source and target match"}
-
-      source.scheme not in ["http", "https"] ->
-        {:error, "unsupported scheme for source"}
-
-      target.scheme not in ["http", "https"] ->
-        {:error, "unsupported scheme for target"}
-
-      true ->
-        {:ok, source, target}
-    end
+    {:ok, source, target}
   end
 
   defp extract_urls(%{params: %{"source" => _}}) do
@@ -80,5 +72,19 @@ defmodule LastCrusader.Webmentions.Handler do
 
   defp extract_urls(_) do
     {:error, "no source specified"}
+  end
+
+  defp validate_urls(%URI{scheme: source_scheme}, _target)
+       when source_scheme not in ["http", "https"] do
+    {:error, "unsupported scheme for source"}
+  end
+
+  defp validate_urls(_source, %URI{scheme: target_scheme})
+       when target_scheme not in ["http", "https"] do
+    {:error, "unsupported scheme for target"}
+  end
+
+  defp validate_urls(_, _) do
+    {:ok, :valid}
   end
 end

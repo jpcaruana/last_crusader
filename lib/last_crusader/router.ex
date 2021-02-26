@@ -72,6 +72,7 @@ defmodule LastCrusader.Router do
 
   options "/comment" do
     Micropub.options_comment(conn)
+  end
 
   post "/webmention" do
     Webmentions.receive(conn)
