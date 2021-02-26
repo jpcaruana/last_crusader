@@ -30,7 +30,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
       _ ->
         conn
-        |> send_resp(404, "")
+        |> send_resp(404, "Not found")
     end
   end
 
@@ -47,7 +47,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
       conn
       |> put_headers(%{location: content_url})
-      |> send_resp(202, "")
+      |> send_resp(202, "Accepted")
     else
       {:error, :bad_token} ->
         Logger.error("bad auth token")

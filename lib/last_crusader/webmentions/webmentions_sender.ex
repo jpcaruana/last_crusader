@@ -7,7 +7,8 @@ defmodule LastCrusader.Webmentions.Sender do
 
   def schedule_webmentions(links, origin, duration \\ 900_000)
 
-  def schedule_webmentions([], _origin, _duration) do
+  def schedule_webmentions([], origin, _duration) do
+    Logger.info("No webmentions to send from #{inspect(origin)}")
     {:ok, 0}
   end
 
