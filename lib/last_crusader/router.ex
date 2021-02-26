@@ -2,6 +2,7 @@ defmodule LastCrusader.Router do
   @moduledoc false
   alias LastCrusader.Auth.AuthHandler, as: Auth
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub
+  alias LastCrusader.Webmentions.Handler, as: Webmentions
   use Plug.Router
   use Plug.ErrorHandler
   require Logger
@@ -71,6 +72,9 @@ defmodule LastCrusader.Router do
 
   options "/comment" do
     Micropub.options_comment(conn)
+
+  post "/webmention" do
+    Webmentions.receive(conn)
   end
 
   get "/favicon.ico" do
