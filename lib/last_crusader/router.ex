@@ -2,6 +2,7 @@ defmodule LastCrusader.Router do
   @moduledoc false
   alias LastCrusader.Auth.AuthHandler, as: Auth
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub
+  alias LastCrusader.Webmentions.Handler, as: Webmentions
   use Plug.Router
   use Plug.ErrorHandler
 
@@ -30,11 +31,10 @@ defmodule LastCrusader.Router do
   # Note, order of plugs is important, by placing this _after_ the 'match' plug,
   # we will only parse the request AFTER there is a route match.
   # plug(Plug.Parsers, parsers: [:json], json_decoder: Poison)
-  plug(Plug.Parsers, parsers: [:urlencoded, :multipart])
-
+  # plug(Plug.Parsers, parsers: [:urlencoded, :multipart])
   plug(Plug.Parsers,
     parsers: [:urlencoded, :json],
-    pass: ["text/*"],
+    pass: ["text/*", "application/*"],
     json_decoder: Poison
   )
 
@@ -59,6 +59,10 @@ defmodule LastCrusader.Router do
 
   post "/micropub" do
     Micropub.publish(conn)
+  end
+
+  post "/webmention" do
+    Webmentions.receive(conn)
   end
 
   get "/favicon.ico" do

@@ -1,7 +1,7 @@
 defmodule LastCrusader.Micropub.MicropubHandlerTest do
   @moduledoc false
 
-  use ExUnit.Case, async: false
+  use ExUnit.Case, async: true
   use Plug.Test
 
   @opts LastCrusader.Router.init([])
