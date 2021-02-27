@@ -4,9 +4,10 @@ defmodule LastCrusader.Micropub.GitHub do
   """
   use Tesla
 
-  plug(Tesla.Middleware.BaseUrl, "https://api.github.com")
-  plug(Tesla.Middleware.Headers, %{"User-Agent" => "Last Crusader"})
-  plug(Tesla.Middleware.JSON)
+  plug Tesla.Middleware.BaseUrl, "https://api.github.com"
+  plug Tesla.Middleware.Headers, %{"User-Agent" => "Last Crusader"}
+  plug Tesla.Middleware.JSON
+  plug Tesla.Middleware.FormUrlencoded
 
   @doc """
   Creates a commit with the filecontent to GitHub
@@ -35,7 +36,7 @@ defmodule LastCrusader.Micropub.GitHub do
   # build dynamic client based on runtime arguments
   defp build_client(auth) do
     middleware = [
-      {Tesla.Middleware.Headers, [{"authorization", auth.access_token}]}
+      {Tesla.Middleware.Headers, [{"Authorization", "Bearer " <> auth.access_token}]}
     ]
 
     Tesla.client(middleware)
