@@ -22,7 +22,6 @@ defmodule LastCrusader.Micropub.GitHubTest do
              %{access_token: "THIS_SHOULD_STAY_A_SECRET"},
              "github_user",
              "github_repo",
-             "some commit message",
              "test.txt",
              "this is a text file",
              "test"
@@ -49,7 +48,6 @@ defmodule LastCrusader.Micropub.GitHubTest do
              %{access_token: "bad credentials"},
              "github_user",
              "github_repo",
-             "some commit message",
              "test.txt",
              "this is a text file",
              "test"

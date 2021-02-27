@@ -41,7 +41,6 @@ defmodule LastCrusader.Micropub do
              Application.get_env(:last_crusader, :github_auth),
              Application.get_env(:last_crusader, :github_user),
              Application.get_env(:last_crusader, :github_repo),
-             "new " <> filename,
              filename,
              filecontent,
              Application.get_env(:last_crusader, :github_branch, "master")
