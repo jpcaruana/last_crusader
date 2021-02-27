@@ -28,13 +28,15 @@ defmodule LastCrusader.Micropub.GitHub do
   end
 
   defp build_client(auth) do
+    {:ok, version} = :application.get_key(:last_crusader, :vsn)
+
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://api.github.com"},
       Tesla.Middleware.JSON,
       Tesla.Middleware.FormUrlencoded,
       {Tesla.Middleware.Headers,
        [
-         %{"User-Agent" => "Last Crusader"},
+         %{"User-Agent" => "Last Crusader/#{version}"},
          {"Authorization", "Bearer #{auth.access_token}"}
        ]}
     ]
