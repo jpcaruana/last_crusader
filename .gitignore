@@ -24,3 +24,6 @@ last_crusader-*.tar
 
 # Ignore personal compile-time config
 config/perso.exs
+
+# Ignore local logs
+*.log
