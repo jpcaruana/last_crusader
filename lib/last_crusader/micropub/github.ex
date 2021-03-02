@@ -32,11 +32,11 @@ defmodule LastCrusader.Micropub.GitHub do
 
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://api.github.com"},
-      Tesla.Middleware.JSON,
+      {Tesla.Middleware.JSON, engine: Poison},
       Tesla.Middleware.FormUrlencoded,
       {Tesla.Middleware.Headers,
        [
-         %{"User-Agent" => "Last Crusader/#{version}"},
+         {"User-Agent", "Last Crusader/#{version}"},
          {"Authorization", "Bearer #{auth.access_token}"}
        ]}
     ]
