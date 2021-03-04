@@ -10,7 +10,7 @@
     <title>LastCrusader.Utils.IdentifierValidator — Last Crusader v0.3.4</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-e7bf988eb4.js"></script>
+    <script src="dist/sidebar_items-112f5afd58.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -109,6 +109,20 @@ LastCrusader.Utils.IdentifierValidator <small class="app-vsn">(Last Crusader v0.
             Summary
           </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:url/0">url()</a>
+
+  </div>
+
+</div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -119,6 +133,8 @@ LastCrusader.Utils.IdentifierValidator <small class="app-vsn">(Last Crusader v0.
 
   </div>
 
+    <div class="summary-synopsis"><p>  Validates a user profile URL according to the IndieAuth spec</p></div>
+
 </div>
 <div class="summary-row">
   <div class="summary-signature">
@@ -126,12 +142,56 @@ LastCrusader.Utils.IdentifierValidator <small class="app-vsn">(Last Crusader v0.
 
   </div>
 
+    <div class="summary-synopsis"><p>  Validates a user profile URL according to the IndieAuth spec</p></div>
+
 </div>
 
   </div>
 
         </section>
 
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types
+          </h1>
+          <div class="types-list">
+<section class="detail" id="t:url/0">
+
+  <div class="detail-header">
+    <a href="#t:url/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">url()</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/identifier_validator.ex#L27" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>url() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+          </div>
+        </section>
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -151,7 +211,7 @@ Functions
     </a>
     <h1 class="signature">validate_user_profile_url(url)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/identifier_validator.ex#L33" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/identifier_validator.ex#L43" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -161,7 +221,14 @@ Functions
 
   <section class="docstring">
 
+      <h2>Specs</h2>
+      <div class="specs">
 
+          <pre>validate_user_profile_url(<a href="#t:url/0">url</a>()) :: :invalid | :valid</pre>
+
+      </div>
+
+<p>  Validates a user profile URL according to the IndieAuth spec</p>
   </section>
 </section>
 <section class="detail" id="validate_user_profile_url/2">
@@ -173,7 +240,7 @@ Functions
     </a>
     <h1 class="signature">validate_user_profile_url(atom, url)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/identifier_validator.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/identifier_validator.ex#L35" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -183,7 +250,14 @@ Functions
 
   <section class="docstring">
 
+      <h2>Specs</h2>
+      <div class="specs">
 
+          <pre>validate_user_profile_url(:invalid | :valid, <a href="#t:url/0">url</a>()) :: :invalid | :valid</pre>
+
+      </div>
+
+<p>  Validates a user profile URL according to the IndieAuth spec</p><p>  Useful in a validation pipe, but really relies on <a href="#validate_user_profile_url/1"><code class="inline">validate_user_profile_url/1</code></a></p>
   </section>
 </section>
 

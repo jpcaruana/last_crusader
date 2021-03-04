@@ -10,7 +10,7 @@
     <title>LastCrusader.Utils.Randomizer — Last Crusader v0.3.4</title>
     <link rel="stylesheet" href="dist/elixir-9f91ebe876dc01d67920.css" />
 
-    <script src="dist/sidebar_items-e7bf988eb4.js"></script>
+    <script src="dist/sidebar_items-112f5afd58.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -97,6 +97,20 @@ LastCrusader.Utils.Randomizer <small class="app-vsn">(Last Crusader v0.3.4)</sma
             Summary
           </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:option/0">option()</a>
+
+  </div>
+
+</div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -107,7 +121,8 @@ LastCrusader.Utils.Randomizer <small class="app-vsn">(Last Crusader v0.3.4)</sma
 
   </div>
 
-    <div class="summary-synopsis"><p>Generate random string based on the given legth. It is also possible to generate certain type of randomise string using the options below</p></div>
+    <div class="summary-synopsis"><p>Generate random string based on the given length. It is also possible to generate certain type of randomise string
+using the options below</p></div>
 
 </div>
 
@@ -115,6 +130,48 @@ LastCrusader.Utils.Randomizer <small class="app-vsn">(Last Crusader v0.3.4)</sma
 
         </section>
 
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types
+          </h1>
+          <div class="types-list">
+<section class="detail" id="t:option/0">
+
+  <div class="detail-header">
+    <a href="#t:option/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">option()</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/randomizer.ex#L7" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>option() :: :all | :alpha | :numeric | :upcase | :downcase</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+          </div>
+        </section>
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -136,7 +193,7 @@ Functions
     </a>
     <h1 class="signature">randomizer(length, type \\ :all)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/randomizer.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/randomizer.ex#L23" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -146,11 +203,19 @@ Functions
 
   <section class="docstring">
 
-<p>Generate random string based on the given legth. It is also possible to generate certain type of randomise string using the options below:</p><ul><li>:all - generate alphanumeric random string</li><li>:alpha - generate nom-numeric random string</li><li>:numeric - generate numeric random string</li><li>:upcase - generate upper case non-numeric random string</li><li>:downcase - generate lower case non-numeric random string</li></ul><h2 id="randomizer/2-example" class="section-heading">
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>randomizer(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), <a href="#t:option/0">option</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>Generate random string based on the given length. It is also possible to generate certain type of randomise string
+using the options below:</p><ul><li>:all - generate alphanumeric random string</li><li>:alpha - generate nom-numeric random string</li><li>:numeric - generate numeric random string</li><li>:upcase - generate upper case non-numeric random string</li><li>:downcase - generate lower case non-numeric random string</li></ul><h2 id="randomizer/2-example" class="section-heading">
   <a href="#randomizer/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Example
 </h2>
-<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Iurban.String</span><span class="o">.</span><span class="n">randomizer</span><span class="p" data-group-id="7652012950-1">(</span><span class="mi">20</span><span class="p" data-group-id="7652012950-1">)</span><span class="w"> </span><span class="o">/</span><span class="o">/</span><span class="s">&quot;Je5QaLj982f0Meb0ZBSK&quot;</span></code></pre>
+<pre><code class="nohighlight makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="nc">Iurban.String</span><span class="o">.</span><span class="n">randomizer</span><span class="p" data-group-id="0992344308-1">(</span><span class="mi">20</span><span class="p" data-group-id="0992344308-1">)</span><span class="w"> </span><span class="o">/</span><span class="o">/</span><span class="s">&quot;Je5QaLj982f0Meb0ZBSK&quot;</span></code></pre>
   </section>
 </section>
 
