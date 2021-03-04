@@ -24,12 +24,14 @@ defmodule LastCrusader.Utils.IdentifierValidator do
       https://example.com:8443/ - contains a port
       https://172.28.92.51/ - host is an IP address
   """
+  @type url() :: String.t()
 
   @doc """
     Validates a user profile URL according to the IndieAuth spec
 
     Useful in a validation pipe, but really relies on `validate_user_profile_url/1`
   """
+  @spec validate_user_profile_url(:invalid | :valid, url()) :: :invalid | :valid
   def validate_user_profile_url(:invalid, _), do: :invalid
   def validate_user_profile_url(:valid, url), do: validate_user_profile_url(url)
 
@@ -37,6 +39,7 @@ defmodule LastCrusader.Utils.IdentifierValidator do
   @doc """
     Validates a user profile URL according to the IndieAuth spec
   """
+  @spec validate_user_profile_url(url()) :: :invalid | :valid
   def validate_user_profile_url(nil), do: :invalid
 
   def validate_user_profile_url(url) do

@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased yet
+- CI: added doctor to check
+- added as much Typespecs as possible
 
 ## 0.3.4 (2021/03/04)
 - micropub/webmention: Handles my personal special case with my "indienews" Hugo shortcode

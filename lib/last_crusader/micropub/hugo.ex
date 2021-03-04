@@ -2,10 +2,15 @@ defmodule LastCrusader.Micropub.Hugo do
   @moduledoc """
     Generates Hugo compatible data, file content, file name
   """
+  alias LastCrusader.Micropub.PostTypeDiscovery, as: Post
+  @type toml() :: String.t()
+  @type path() :: String.t()
+  @type url() :: String.t()
 
   @doc """
     Create a new Hugo document
   """
+  @spec new(Post.post_type(), DateTime.t(), map()) :: {path(), toml(), path()}
   def new(type, date, data) do
     {text, content} =
       data
@@ -27,6 +32,7 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc """
     Generates TOML formatted fron-matter
   """
+  @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: toml()
   def generate_front_matter(date, type, data \\ %{}) do
     {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
 
@@ -69,6 +75,7 @@ defmodule LastCrusader.Micropub.Hugo do
 
     Handles my personal special case with my "indienews" shortcode
   """
+  @spec extract_links(toml()) :: list(url())
   def extract_links(toml_content) do
     [_, frontmatter, markdown] = String.split(toml_content, "+++\n")
 
@@ -107,6 +114,7 @@ defmodule LastCrusader.Micropub.Hugo do
     - name: for the file name
     - date
   """
+  @spec generate_path(Post.post_type(), String.t(), DateTime.t()) :: path()
   def generate_path(:note, name, date) do
     "notes/" <> date <> "/" <> name
   end

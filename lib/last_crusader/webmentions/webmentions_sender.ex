@@ -5,9 +5,12 @@ defmodule LastCrusader.Webmentions.Sender do
   alias Webmentions
   require Logger
 
+  @type url() :: String.t()
+
   @doc """
     Schedules webmentions to be send (default is 15 minutes)
   """
+  @spec schedule_webmentions(list(url()), url(), pos_integer()) :: {:ok, non_neg_integer()}
   def schedule_webmentions(links, origin, duration \\ 900_000)
 
   def schedule_webmentions([], origin, _duration) do

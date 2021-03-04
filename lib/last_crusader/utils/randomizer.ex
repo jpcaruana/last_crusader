@@ -4,9 +4,11 @@ defmodule LastCrusader.Utils.Randomizer do
 
   Imported from https://gist.github.com/ahmadshah/8d978bbc550128cca12dd917a09ddfb7
   """
+  @type option() :: :all | :alpha | :numeric | :upcase | :downcase
 
   @doc """
-  Generate random string based on the given legth. It is also possible to generate certain type of randomise string using the options below:
+  Generate random string based on the given length. It is also possible to generate certain type of randomise string
+  using the options below:
 
   * :all - generate alphanumeric random string
   * :alpha - generate nom-numeric random string
@@ -17,6 +19,7 @@ defmodule LastCrusader.Utils.Randomizer do
   ## Example
       iex> Iurban.String.randomizer(20) //"Je5QaLj982f0Meb0ZBSK"
   """
+  @spec randomizer(pos_integer(), option()) :: String.t()
   def randomizer(length, type \\ :all) do
     alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     numbers = "0123456789"
@@ -34,11 +37,9 @@ defmodule LastCrusader.Utils.Randomizer do
     do_randomizer(length, lists)
   end
 
-  @doc false
   defp get_range(length) when length > 1, do: 1..length
   defp get_range(_length), do: [1]
 
-  @doc false
   defp do_randomizer(length, lists) do
     get_range(length)
     |> Enum.reduce([], fn _, acc -> [Enum.random(lists) | acc] end)

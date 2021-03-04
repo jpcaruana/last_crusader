@@ -6,6 +6,8 @@ defmodule LastCrusader.Micropub.GitHub do
   @doc """
   Creates a commit with the filecontent to GitHub
   """
+  @spec new_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
+          {:error, atom()} | {:ok, any()}
   def new_file(auth, user, repo, filename, filecontent, branch \\ "master") do
     # ex: auth=%{access_token: "928392873982932"}
     body = %{
