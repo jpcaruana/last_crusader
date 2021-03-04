@@ -24,23 +24,21 @@ defmodule LastCrusader.Utils.Randomizer do
     alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     numbers = "0123456789"
 
-    lists =
-      cond do
-        type == :alpha -> alphabets <> String.downcase(alphabets)
-        type == :numeric -> numbers
-        type == :upcase -> alphabets
-        type == :downcase -> String.downcase(alphabets)
-        true -> alphabets <> String.downcase(alphabets) <> numbers
-      end
-      |> String.split("", trim: true)
-
-    do_randomizer(length, lists)
+    cond do
+      type == :alpha -> alphabets <> String.downcase(alphabets)
+      type == :numeric -> numbers
+      type == :upcase -> alphabets
+      type == :downcase -> String.downcase(alphabets)
+      true -> alphabets <> String.downcase(alphabets) <> numbers
+    end
+    |> String.split("", trim: true)
+    |> do_randomizer(length)
   end
 
   defp get_range(length) when length > 1, do: 1..length
   defp get_range(_length), do: [1]
 
-  defp do_randomizer(length, lists) do
+  defp do_randomizer(lists, length) do
     get_range(length)
     |> Enum.reduce([], fn _, acc -> [Enum.random(lists) | acc] end)
     |> Enum.join("")
