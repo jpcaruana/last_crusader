@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased yet
+- micropub/webmention: Handles my personal special case with my "indienews" Hugo shortcode
+
 ## 0.3.3 (2021/03/02)
 - micropub: fix Github integration
 - dependancies: [bump timex from 3.6.3 to 3.6.4](https://github.com/jpcaruana/last_crusader/pull/5)

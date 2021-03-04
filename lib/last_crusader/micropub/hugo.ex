@@ -66,6 +66,8 @@ defmodule LastCrusader.Micropub.Hugo do
     Some help from http://scottradcliff.com/parsing-hyperlinks-in-markdown.html
 
     Yes, using a Regex is weak...
+
+    Handles my personal special case with my "indienews" shortcode
   """
   def extract_links(toml_content) do
     [_, frontmatter, markdown] = String.split(toml_content, "+++\n")
@@ -74,7 +76,10 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp extract_links_in_content(content) do
-    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, content)
+    patched_content =
+      String.replace(content, "{{< indienews >}}", "[indienews](https://news.indieweb.org/fr)")
+
+    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, patched_content)
     |> Enum.map(fn x -> Enum.at(x, 2) end)
   end
 

@@ -213,6 +213,34 @@ defmodule LastCrusader.HugoTest do
       assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
     end
 
+    test "special case: one link from personal hugo short code indienews" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      {{< indienews >}}
+      """
+
+      assert Hugo.extract_links(toml_content) == ["https://news.indieweb.org/fr"]
+    end
+
+    test "special case: one link from personal hugo short code indienews and one regular link" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is [a link](https://some-url.org/).
+      {{< indienews >}}
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://some-url.org/",
+               "https://news.indieweb.org/fr"
+             ]
+    end
+
     test "two links" do
       toml_content = """
       +++
