@@ -5,6 +5,9 @@ defmodule LastCrusader.Webmentions.Sender do
   alias Webmentions
   require Logger
 
+  @doc """
+    Schedules webmentions to be send (default is 15 minutes)
+  """
   def schedule_webmentions(links, origin, duration \\ 900_000)
 
   def schedule_webmentions([], origin, _duration) do
