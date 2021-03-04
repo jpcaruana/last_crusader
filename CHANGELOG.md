@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased yet
+
+## 0.3.4 (2021/03/04)
 - micropub/webmention: Handles my personal special case with my "indienews" Hugo shortcode
 
 ## 0.3.3 (2021/03/02)
