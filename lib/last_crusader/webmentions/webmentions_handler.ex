@@ -20,9 +20,8 @@ defmodule LastCrusader.Webmentions.Handler do
   def receive(conn) do
     with {:ok, _} <- check_content_type(conn),
          {:ok, source, target} <- extract_urls(conn),
-         {:ok, _} <- validate_urls(source, target) do
-      validate(source, target)
-
+         {:ok, _} <- validate_urls(source, target),
+         {:ok, _} <- validate(source, target) do
       conn
       |> send_resp(202, "Accepted")
     else
@@ -40,11 +39,14 @@ defmodule LastCrusader.Webmentions.Handler do
     end
   end
 
-  defp validate(_source, _target) do
-    # Webmentions.discover_endpoint(source_url)
-    # {:ok, nil} -> {:ko, "no webmention endpoint found"}
-    # {:ok, ""} -> {:ko, "no webmention endpoint found"}
-    {:ok, :valid}
+  defp validate(source_url, _target) do
+    case Webmentions.discover_endpoint(source_url) do
+      {:error, "unknown error"} -> {:error, "source URL not found"}
+      {:ok, nil} -> {:error, "no webmention endpoint found"}
+      {:ok, ""} -> {:error, "no webmention endpoint found"}
+      {:error, a} -> {:error, a}
+      _ -> {:ok, :valid}
+    end
   end
 
   defp check_content_type(conn) do
