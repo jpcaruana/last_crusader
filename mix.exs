@@ -6,7 +6,7 @@ defmodule LastCrusader.MixProject do
       app: :last_crusader,
       version: "0.3.4",
       elixir: "~> 1.10",
-      start_permanent: Mix.env() == :prod,
+      start_permanent: Mix.env() in [:prod, :perso],
       deps: deps(),
       preferred_cli_env: [
         coveralls: :test,
