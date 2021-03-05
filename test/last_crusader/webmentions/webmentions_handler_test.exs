@@ -3,6 +3,7 @@ defmodule LastCrusader.Webmentions.HandlerTest do
 
   use ExUnit.Case, async: true
   use Plug.Test
+  import Tesla.Mock
 
   @opts LastCrusader.Router.init([])
 
@@ -46,6 +47,21 @@ defmodule LastCrusader.Webmentions.HandlerTest do
         415,
         "unsupported content type",
         "application/json"
+      )
+    end
+
+    test "source is not found" do
+      doc = %Tesla.Env{
+        status: 400,
+        body: "not found"
+      }
+
+      mock(fn _ -> {:ok, doc} end)
+
+      assert_response(
+        "/webmention?source=http://source.com/&target=http://target.com/",
+        400,
+        "source URL not found"
       )
     end
   end
