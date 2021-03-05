@@ -39,13 +39,34 @@ defmodule LastCrusader.Webmentions.Handler do
     end
   end
 
-  defp validate(source_url, _target) do
-    case Webmentions.discover_endpoint(source_url) do
-      {:error, "unknown error"} -> {:error, "source URL not found"}
-      {:ok, nil} -> {:error, "no webmention endpoint found"}
-      {:ok, ""} -> {:error, "no webmention endpoint found"}
-      {:error, a} -> {:error, a}
-      _ -> {:ok, :valid}
+  defp validate(source_url, target_url) do
+    with {:ok, response} <- Tesla.get(source_url),
+         {:ok, body} <- success?(:ok, response),
+         {:ok, _} <- document_contains_link(body, target_url) do
+      {:ok, :valid}
+    else
+      {:error, 404} ->
+        {:error, "source URL not found"}
+
+      {:error, reason} ->
+        {:error, reason}
+
+      _ ->
+        {:error, "unknown error"}
+    end
+  end
+
+  defp document_contains_link(document, link) do
+    links =
+      Floki.parse_document!(document)
+      |> Floki.find("a")
+
+    if links != nil and
+         Floki.attribute(links, "href")
+         |> Enum.any?(fn l -> l == URI.to_string(link) end) do
+      {:ok, :valid}
+    else
+      {:error, "source does not contain a link to the target"}
     end
   end
 
@@ -89,5 +110,17 @@ defmodule LastCrusader.Webmentions.Handler do
 
   defp validate_urls(_, _) do
     {:ok, :valid}
+  end
+
+  defp success?(:ok, %Tesla.Env{status: code, body: body}) when code in 200..299 do
+    {:ok, body}
+  end
+
+  defp success?(:ok, %Tesla.Env{status: code}) do
+    {:error, code}
+  end
+
+  defp success?(_, _) do
+    {:error, :unknown}
   end
 end
