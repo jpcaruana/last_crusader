@@ -75,7 +75,7 @@ defmodule LastCrusader.AuthTest do
     assert conn.status == 400
   end
 
-  # TODO: fix this flaky test
+  # FIX: flaky test
   #  test "token read from cache" do
   #    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
   #

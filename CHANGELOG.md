@@ -1,7 +1,9 @@
 # Changelog
 
 ## Unreleased yet
-- CI: added doctor to check
+- CI: 
+    - added doctor to check
+    - added credo to check
 - added as much Typespecs as possible
 
 ## 0.3.4 (2021/03/04)
