@@ -40,15 +40,16 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
 
-    with {:ok, content_url} <- Micropub.publish(conn_headers, conn.params) do
-      Logger.info(
-        "Content successfully published (with a build delay) to #{inspect(content_url)}"
-      )
+    case Micropub.publish(conn_headers, conn.params) do
+      {:ok, content_url} ->
+        Logger.info(
+          "Content successfully published (with a build delay) to #{inspect(content_url)}"
+        )
 
-      conn
-      |> put_headers(%{location: content_url})
-      |> send_resp(202, "Accepted")
-    else
+        conn
+        |> put_headers(%{location: content_url})
+        |> send_resp(202, "Accepted")
+
       {:error, :bad_token} ->
         Logger.error("bad auth token")
 
