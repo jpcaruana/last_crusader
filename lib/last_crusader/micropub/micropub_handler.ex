@@ -21,6 +21,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   Note: we just reply to the "config" request
   """
+  @spec query(Plug.Conn.t()) :: Plug.Conn.t()
   def query(conn) do
     case conn.params["q"] do
       "config" ->
@@ -37,6 +38,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   @doc """
   Handles micropublish demands from HTTP
   """
+  @spec publish(Plug.Conn.t()) :: Plug.Conn.t()
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
 
