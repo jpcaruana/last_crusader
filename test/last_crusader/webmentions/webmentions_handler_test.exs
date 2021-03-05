@@ -52,7 +52,7 @@ defmodule LastCrusader.Webmentions.HandlerTest do
 
     test "source is not found" do
       doc = %Tesla.Env{
-        status: 400,
+        status: 404,
         body: "not found"
       }
 
@@ -64,6 +64,52 @@ defmodule LastCrusader.Webmentions.HandlerTest do
         "source URL not found"
       )
     end
+
+    test "source does not contain a link to the target" do
+      doc = %Tesla.Env{
+        status: 200,
+        body: """
+        <html>
+          <head></head>
+          <body>
+            <h1>Title</h1>
+            <p>Here is a nice <a href="http://some-other-link.com/">article</a> for you to read.</p>
+          </body>
+        </html>
+        """
+      }
+
+      mock(fn _ -> {:ok, doc} end)
+
+      assert_response(
+        "/webmention?source=http://source.com/&target=http://target.com/",
+        400,
+        "source does not contain a link to the target"
+      )
+    end
+  end
+
+  test "ok case" do
+    doc = %Tesla.Env{
+      status: 200,
+      body: """
+      <html>
+        <head></head>
+        <body>
+          <h1>Title</h1>
+          <p>Here is a nice <a href="http://target.com/">article</a> for you to read.</p>
+        </body>
+      </html>
+      """
+    }
+
+    mock(fn _ -> {:ok, doc} end)
+
+    assert_response(
+      "/webmention?source=http://source.com/&target=http://target.com/",
+      202,
+      "Accepted"
+    )
   end
 
   defp assert_response(
@@ -79,7 +125,7 @@ defmodule LastCrusader.Webmentions.HandlerTest do
     conn = LastCrusader.Router.call(conn, @opts)
 
     assert conn.state == :sent
-    assert conn.status == expected_response_code
     assert conn.resp_body == expected_response_body
+    assert conn.status == expected_response_code
   end
 end
