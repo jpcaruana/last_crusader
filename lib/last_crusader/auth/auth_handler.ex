@@ -35,6 +35,7 @@ defmodule LastCrusader.Auth.AuthHandler do
     Not used and omitted in identification mode (response_type=id)
     For authorization, the scope contains a space-separated list of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
   """
+  @spec auth_endpoint(Plug.Conn.t()) :: Plug.Conn.t()
   def auth_endpoint(conn) do
     redirect_uri = conn.params["redirect_uri"]
     state = conn.params["state"]
@@ -83,6 +84,7 @@ defmodule LastCrusader.Auth.AuthHandler do
     Full URI of the user's homepage
     This may be different from the me parameter that the user originally entered, but MUST be on the same domain.
   """
+  @spec code_verification(Plug.Conn.t()) :: Plug.Conn.t()
   def code_verification(conn) do
     redirect_uri = conn.params["redirect_uri"]
     client_id = conn.params["client_id"]

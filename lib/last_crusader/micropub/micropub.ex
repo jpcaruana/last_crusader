@@ -14,6 +14,8 @@ defmodule LastCrusader.Micropub do
   alias LastCrusader.Utils.Http, as: Utils
   alias Jason, as: Json
 
+  @type url() :: String.t()
+
   @doc """
   Publishes as Hugo post to Github repo:
 
@@ -23,6 +25,7 @@ defmodule LastCrusader.Micropub do
   - commits to Github repo
   - schedules sending webmentions if needed
   """
+  @spec publish(map(), map()) :: {:ok, url()} | {:error, :bad_token} | {:error, any()}
   def publish(headers, params) do
     me = Application.get_env(:last_crusader, :me)
 

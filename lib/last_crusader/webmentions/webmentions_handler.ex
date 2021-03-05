@@ -16,6 +16,7 @@ defmodule LastCrusader.Webmentions.Handler do
 
   If the receiver processes the request asynchronously but does not return a status URL, the receiver MUST reply with an HTTP 202 Accepted response. The response body MAY contain content, in which case a human-readable response is recommended.
   """
+  @spec receive(Plug.Conn.t()) :: Plug.Conn.t()
   def receive(conn) do
     with {:ok, _} <- check_content_type(conn),
          {:ok, source, target} <- extract_urls(conn),

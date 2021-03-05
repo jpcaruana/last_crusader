@@ -23,6 +23,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   Note: we just reply to the `config`, `syndicate-to` and `category` requests
   """
+  @spec query(Plug.Conn.t()) :: Plug.Conn.t()
   def query(conn) do
     case conn.params["q"] do
       "config" ->
@@ -63,6 +64,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   See micropublish specification: https://micropub.spec.indieweb.org/#create
   """
+  @spec publish(Plug.Conn.t()) :: Plug.Conn.t()
   def publish(conn) do
     conn_headers = Utils.as_map(conn.req_headers)
 
