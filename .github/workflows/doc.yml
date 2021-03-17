@@ -13,18 +13,12 @@ jobs:
         with:
           persist-credentials: false
       - name: Setup elixir 🔧
-        uses: actions/setup-elixir@v1
+        uses: erlef/setup-elixir@v1
         with:
           otp-version: '23'
           elixir-version: '1.11'
       - name: Build docs 🔧
         uses: lee-dohm/generate-elixir-docs@v1
-#      - name: Publish to Pages
-#        uses: peaceiris/actions-gh-pages@v1.0.1
-#        env:
-#          ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
-#          PUBLISH_DIR: ./doc
-#          PUBLISH_BRANCH: gh-pages
       - name: Publish to Pages 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
