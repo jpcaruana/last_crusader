@@ -7,7 +7,7 @@
 - added as much Typespecs as possible
 - update dependancies:
     - #6: [bump ex_doc from 0.23.0 to 0.24.0](https://github.com/jpcaruana/last_crusader/pull/6)
-    - #7: [bump timex from 3.6.4 to 3.7.1](https://github.com/jpcaruana/last_crusader/pull/7)
+    - #7/8: [bump timex from 3.6.4 to 3.7.3](https://github.com/jpcaruana/last_crusader/pull/8)
 
 ## 0.3.4 (2021/03/04)
 - micropub/webmention: Handles my personal special case with my "indienews" Hugo shortcode
