@@ -50,6 +50,7 @@ defmodule LastCrusader.MixProject do
       {:plug_cowboy, "~> 2.4.1"},
       {:poison, "~> 4.0.1"},
       {:tesla, "~> 1.4.0"},
+      {:tz, "~> 0.12.0"},
       {:toml, "~> 0.6.1"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
