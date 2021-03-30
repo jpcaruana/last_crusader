@@ -9,6 +9,8 @@ config :logger, :console,
   metadata: [:request_id],
   colors: [error: [:bright, :light_red]]
 
+config :elixir, :time_zone_database, Tz.TimeZoneDatabase
+
 if Mix.env() != :prod do
   config :git_hooks,
     auto_install: false,

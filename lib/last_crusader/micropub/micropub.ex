@@ -34,7 +34,7 @@ defmodule LastCrusader.Micropub do
            ),
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(as_map(params))
-           |> Hugo.new(Timex.local(), params),
+           |> Hugo.new(DateTime.now!("Europe/Paris"), params),
          mentionned_links <- Hugo.extract_links(filecontent),
          {:ok, :content_created} <-
            GitHub.new_file(

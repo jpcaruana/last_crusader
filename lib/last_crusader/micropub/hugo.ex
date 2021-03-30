@@ -20,7 +20,7 @@ defmodule LastCrusader.Micropub.Hugo do
 
     name = generate_name(content[:name], text)
 
-    {:ok, path_date} = Timex.format(date, "%Y/%m/%d", :strftime)
+    path_date = Calendar.strftime(date, "%Y/%m/%d")
     file_name = "content/" <> generate_path(type, name, path_date) <> ".md"
     web_path = generate_path(type, name, path_date) <> "/"
 
@@ -34,7 +34,7 @@ defmodule LastCrusader.Micropub.Hugo do
   """
   @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: toml()
   def generate_front_matter(date, type, data \\ %{}) do
-    {:ok, iso_date} = Timex.format(date, "{ISO:Extended}")
+    iso_date = Calendar.strftime(date, "%Y-%m-%dT%H:%M:%S+00:00")
 
     data_as_toml =
       data
