@@ -8,6 +8,7 @@
 - added as much Typespecs as possible
 - update dependancies:
     - #6/#9: [bump ex_doc from 0.23.0 to 0.24.1](https://github.com/jpcaruana/last_crusader/pull/9)
+    - #10: [bump webmentions from 0.5.2 to 0.5.3](https://github.com/jpcaruana/last_crusader/pull/10)
     - remove dependancy to timex: drop support to Elixir < 1.11
 
 ## 0.3.4 (2021/03/04)
