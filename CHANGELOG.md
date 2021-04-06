@@ -2,6 +2,7 @@
 
 ## Unreleased yet
 - drop support for Elixir < 1.11
+- better handling of proxied HTTPS requests (see [Plug.RewriteOn](https://hexdocs.pm/plug/Plug.RewriteOn.html))
 - CI: 
     - added doctor to check
     - added credo to check

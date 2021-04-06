@@ -13,7 +13,9 @@ defmodule LastCrusader.Router do
   if Application.get_env(:last_crusader, :plug_logger, true) do
     plug(Plug.Logger)
   end
-  plug Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto]
+
+  # see https://hexdocs.pm/plug/Plug.RewriteOn.html
+  plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
 
   # Serve at "/" the static files from "priv/static" directory.
   plug(Plug.Static,
