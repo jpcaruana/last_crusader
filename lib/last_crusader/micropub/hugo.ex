@@ -101,8 +101,14 @@ defmodule LastCrusader.Micropub.Hugo do
            |> List.last()
            |> String.replace("\"", "") do
       case Regex.match?(~r/https:\/\/twitter.com\//, link) do
-        true -> [link, "https://brid.gy/publish/twitter"]
-        false -> [link]
+        true ->
+          [link, "https://brid.gy/publish/twitter"]
+
+        false ->
+          case Regex.match?(~r/https:\/\/github.com\//, link) do
+            true -> [link, "https://brid.gy/publish/github"]
+            false -> [link]
+          end
       end
     else
       _ -> []
