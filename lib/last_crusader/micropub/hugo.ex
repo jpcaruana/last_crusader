@@ -43,6 +43,7 @@ defmodule LastCrusader.Micropub.Hugo do
       |> values_as_list(:tags)
       |> conditional_rename_key(type == :bookmark, :tags, :bookmarktags)
       |> rename_key(:"bookmark-of", :bookmark)
+      |> rename_key(:"in-reply-to", :in_reply_to)
       |> rename_key(:name, :title)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)

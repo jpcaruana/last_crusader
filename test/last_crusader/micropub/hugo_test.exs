@@ -28,7 +28,7 @@ defmodule LastCrusader.HugoTest do
       assert file_content == """
              +++
              date = "2015-01-23T23:50:07+00:00"
-             in-reply-to = "https://some-url.com/"
+             in_reply_to = "https://some-url.com/"
              +++
              Some markdown content
              """
