@@ -100,19 +100,22 @@ defmodule LastCrusader.Micropub.Hugo do
            |> String.split(" = ")
            |> List.last()
            |> String.replace("\"", "") do
-      case Regex.match?(~r/https:\/\/twitter.com\//, link) do
-        true ->
-          [link, "https://brid.gy/publish/twitter"]
-
-        false ->
-          case Regex.match?(~r/https:\/\/github.com\//, link) do
-            true -> [link, "https://brid.gy/publish/github"]
-            false -> [link]
-          end
-      end
+      enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
     else
       _ -> []
     end
+  end
+
+  defp enrich_webmention_target_from_silos(link, ["https:", "", "twitter.com", _]) do
+    [link, "https://brid.gy/publish/twitter"]
+  end
+
+  defp enrich_webmention_target_from_silos(link, ["https:", "", "github.com", _]) do
+    [link, "https://brid.gy/publish/github"]
+  end
+
+  defp enrich_webmention_target_from_silos(link, _) do
+    [link]
   end
 
   @doc """
