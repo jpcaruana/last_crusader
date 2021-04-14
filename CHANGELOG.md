@@ -1,9 +1,16 @@
 # Changelog
 
 ## Unreleased yet
+
+## 0.4.1
+- micropub:
+    - Hugo: support `in-reply-to` types as Notes
+    - webmention: add brig.ly webmention endpoint for:
+        - twitter.com
+        - github.com
 - update dependancies:
-	- #11: [bump ex_doc from 0.24.1 to 0.24.2](https://github.com/jpcaruana/last_crusader/pull/11)
-	- #12: [bump tesla from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/12)
+    - #11: [bump ex_doc from 0.24.1 to 0.24.2](https://github.com/jpcaruana/last_crusader/pull/11)
+    - #12: [bump tesla from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/12)
 
 ## 0.4.0
 - drop support for Elixir < 1.11
