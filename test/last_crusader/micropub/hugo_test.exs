@@ -325,6 +325,21 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
     end
+
+    test "one silo link but webmention is handled by brid.ly: twitter" do
+      toml_content = """
+      +++
+      key = "value"
+      in-reply-to = "https://twitter.com/user/status/tweet_id"
+      +++
+      Some markdown content.
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://twitter.com/user/status/tweet_id",
+               "https://brid.gy/publish/twitter"
+             ]
+    end
   end
 
   def now() do

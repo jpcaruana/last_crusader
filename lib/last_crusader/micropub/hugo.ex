@@ -91,16 +91,19 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp extract_links_in_frontmatter(frontmatter) do
-    with [matching_boorkmark_line] <-
+    with [matching_frontmatter_line] <-
            frontmatter
            |> String.split("\n")
-           |> Enum.filter(fn x -> Regex.match?(~r/^bookmark =/, x) end),
+           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in-reply-to) =/, x) end),
          link <-
-           matching_boorkmark_line
+           matching_frontmatter_line
            |> String.split(" = ")
            |> List.last()
            |> String.replace("\"", "") do
-      [link]
+      case Regex.match?(~r/https:\/\/twitter.com\//, link) do
+        true -> [link, "https://brid.gy/publish/twitter"]
+        false -> [link]
+      end
     else
       _ -> []
     end
