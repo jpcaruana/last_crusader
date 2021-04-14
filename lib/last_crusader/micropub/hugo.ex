@@ -95,7 +95,7 @@ defmodule LastCrusader.Micropub.Hugo do
     with [matching_frontmatter_line] <-
            frontmatter
            |> String.split("\n")
-           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in-reply-to) =/, x) end),
+           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to) =/, x) end),
          link <-
            matching_frontmatter_line
            |> String.split(" = ")

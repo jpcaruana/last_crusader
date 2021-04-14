@@ -330,7 +330,7 @@ defmodule LastCrusader.HugoTest do
       toml_content = """
       +++
       key = "value"
-      in-reply-to = "https://twitter.com/user/status/tweet_id"
+      in_reply_to = "https://twitter.com/user/status/tweet_id"
       +++
       Some markdown content.
       """
@@ -345,7 +345,7 @@ defmodule LastCrusader.HugoTest do
       toml_content = """
       +++
       key = "value"
-      in-reply-to = "https://github.com/user/repo/issues"
+      in_reply_to = "https://github.com/user/repo/issues"
       +++
       Some markdown content.
       """
