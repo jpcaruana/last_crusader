@@ -2,11 +2,7 @@
 
 ## Unreleased yet
 
-## 0.4.1
-2021/04/14
-- micropub: hugo: fix dash in frontmatter for `ìn-reply-to` type (Hugo does not support keys in frontmatter with dashes `-` so we use underscores `_`)
-
-## 0.4.1
+## 0.4.3
 2021/04/14
 - micropub:
     - Hugo: support `in-reply-to` types as Notes
