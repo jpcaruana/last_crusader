@@ -18,6 +18,25 @@ defmodule LastCrusader.HugoTest do
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
+    test "it should create a note for a in-reply-to" do
+      {file_name, file_content, web_path} =
+        Hugo.new(:in_reply_to, now(), [
+          {"content", "Some markdown content\n"},
+          {"in-reply-to", "https://some-url.com/"}
+        ])
+
+      assert file_content == """
+             +++
+             date = "2015-01-23T23:50:07+00:00"
+             in-reply-to = "https://some-url.com/"
+             +++
+             Some markdown content
+             """
+
+      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert web_path == "notes/2015/01/23/some-markdown-content/"
+    end
+
     test "it should rename name to title" do
       {file_name, file_content, _} =
         Hugo.new(:note, now(), [

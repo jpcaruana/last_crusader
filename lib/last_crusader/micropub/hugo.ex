@@ -110,12 +110,16 @@ defmodule LastCrusader.Micropub.Hugo do
     Generates the complete filename (with path) for a Hugo website
 
     Parameters:
-    - type: can be `:note` `:post` `:bookmark`
+    - type: can be `:note` `:post` `:bookmark` `in_reply_to`
     - name: for the file name
     - date
   """
   @spec generate_path(Post.post_type(), String.t(), DateTime.t()) :: path()
   def generate_path(:note, name, date) do
+    "notes/" <> date <> "/" <> name
+  end
+
+  def generate_path(:in_reply_to, name, date) do
     "notes/" <> date <> "/" <> name
   end
 
