@@ -1,9 +1,14 @@
 # Changelog
 
 ## Unreleased yet
-- micropub: better logs
 
-## 0.4.3
+## 0.5.1
+2021/04/16
+- micropub:
+    - webmention: add automatic syndication to twitter.com (via brig.ly)
+    - better logs
+
+## 0.5.0
 2021/04/16
 - micropub:
     - Hugo: support `like-of` types as Notes
