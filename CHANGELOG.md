@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased yet
+## 0.4.3
+2021/04/16
 - micropub:
     - Hugo: support `like-of` types as Notes
     - Hugo: support `repost-of` types as Notes
