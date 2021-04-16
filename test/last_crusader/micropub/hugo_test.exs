@@ -150,6 +150,24 @@ defmodule LastCrusader.HugoTest do
       assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
     end
 
+    test "it should rename mp-syndicate-to to syndicate_to (micropublish.net)" do
+      {file_name, file_content, _} =
+        Hugo.new(:note, now(), [
+          {"content", "Some markdown content\n"},
+          {"mp-syndicate-to", "https://some-url.com/"}
+        ])
+
+      assert file_content == """
+             +++
+             date = "2015-01-23T23:50:07+00:00"
+             syndicate_to = "https://some-url.com/"
+             +++
+             Some markdown content
+             """
+
+      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+    end
+
     test "it should transforms tags into a list" do
       {_, file_content, _} =
         Hugo.new(:note, now(), [
