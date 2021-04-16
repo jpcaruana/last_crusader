@@ -24,6 +24,5 @@ config :last_crusader,
       }
     ]
   },
-  # 15 minutes
-  webmention_delai_ms: 900_000,
+  webmention_nb_tries: 15,
   port: 4001

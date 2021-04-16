@@ -4,6 +4,7 @@
 - micropub:
     - Hugo: support `like-of` types as Notes
     - Hugo: support `repost-of` types as Notes
+- webmention: check if origin exists every minute with a `HEAD` HTTP request. It will prevent us from waiting too long for the content to be published
 
 ## 0.4.3
 2021/04/14

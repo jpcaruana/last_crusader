@@ -50,7 +50,7 @@ defmodule LastCrusader.Micropub do
            Webmentions.Sender.schedule_webmentions(
              mentionned_links,
              content_url,
-             Application.get_env(:last_crusader, :webmention_delai_ms, 900_000)
+             Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
       {:ok, content_url}
     else
