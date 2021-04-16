@@ -460,12 +460,12 @@ defmodule LastCrusader.HugoTest do
       """
 
       assert Hugo.extract_links(toml_content) == [
-               "https://aaronparecki.com/2021/04/13/26/indieauth",
-               "https://twitter.com/jpcaruana",
-               "https://brid.gy/publish/twitter",
                "https://indieauth.spec.indieweb.org/",
                "https://indieweb.org/IndieAuth",
-               "https://news.indieweb.org/fr"
+               "https://news.indieweb.org/fr",
+               "https://aaronparecki.com/2021/04/13/26/indieauth",
+               "https://twitter.com/jpcaruana",
+               "https://brid.gy/publish/twitter"
              ]
     end
   end

@@ -89,23 +89,34 @@ defmodule LastCrusader.Micropub.Hugo do
 
   defp extract_links_in_content(content) do
     patched_content =
-      String.replace(content, "{{< indienews >}}", "[indienews](https://news.indieweb.org/fr)")
+      String.replace(
+        content,
+        "{{< indienews >}}",
+        "Also posted on [indienews](https://news.indieweb.org/fr)"
+      )
 
     Regex.scan(~r/\[(?<text>[\w\s\.]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, patched_content)
     |> Enum.map(fn x -> Enum.at(x, 2) end)
   end
 
   defp extract_links_in_frontmatter(frontmatter) do
-    with [matching_frontmatter_lines] <-
+    with matching_frontmatter_lines <-
            frontmatter
            |> String.split("\n")
            |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end),
-         link <-
+         links <-
            matching_frontmatter_lines
-           |> String.split(" = ")
-           |> List.last()
-           |> String.replace("\"", "") do
-      enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
+           |> Enum.map(fn x ->
+             x
+             |> String.split(" = ")
+             |> List.last()
+             |> String.replace("\"", "")
+           end) do
+      links
+      |> Enum.map(fn link ->
+        enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
+      end)
+      |> List.flatten()
     else
       _ -> []
     end
