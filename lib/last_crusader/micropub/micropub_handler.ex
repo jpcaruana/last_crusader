@@ -42,9 +42,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
     case Micropub.publish(conn_headers, conn.params) do
       {:ok, content_url} ->
-        Logger.info(
-          "Content successfully published (with a build delay) to #{inspect(content_url)}"
-        )
+        Logger.info("Content will be published here: #{inspect(content_url)}")
 
         conn
         |> put_headers(%{location: content_url})

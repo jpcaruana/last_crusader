@@ -36,11 +36,13 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp do_schedule_webmentions(links, origin, nb_max_tries, nb_tried) do
+    Logger.info("Sending webmentions from #{inspect(origin)} to #{inspect(links)}: scheduled. try 
+        #{inspect(nb_tried)}/#{inspect(nb_max_tries)}")
+
     Task.async(fn -> start_task(origin, links, nb_max_tries, nb_tried) end)
   end
 
   defp start_task(origin, links, nb_max_tries, nb_tried) do
-    Logger.info("Sending webmentions from #{inspect(origin)} to #{inspect(links)}: scheduled...")
     :timer.sleep(@one_minute)
 
     case Tesla.head(origin) do
@@ -50,11 +52,8 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp send_webmentions(origin, links, nb_max_tries, nb_tried) do
-    Logger.info(
-      "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: try #{inspect(nb_tried)}/#{
-        inspect(nb_max_tries)
-      }"
-    )
+    Logger.info("Sending webmentions from #{inspect(origin)} to #{inspect(links)}: try 
+      #{inspect(nb_tried)}/#{inspect(nb_max_tries)}")
 
     {:ok, sent} = Webmentions.send_webmentions_for_links(origin, links)
 
