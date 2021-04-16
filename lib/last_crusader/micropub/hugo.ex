@@ -100,23 +100,25 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp extract_links_in_frontmatter(frontmatter) do
-    with matching_frontmatter_lines <-
-           frontmatter
-           |> String.split("\n")
-           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end) do
-      matching_frontmatter_lines
-      |> Enum.map(fn line ->
-        String.split(line, " = ")
-        |> List.last()
-        |> String.replace("\"", "")
-      end)
-      |> Enum.map(fn link ->
-        enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
-      end)
-      |> List.flatten()
-    else
-      _ -> []
+    case frontmatter
+         |> String.split("\n")
+         |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end) do
+      [] ->
+        []
+
+      lines ->
+        Enum.map(lines, fn line -> extract_link(line) end)
+        |> Enum.flat_map(fn link ->
+          enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
+        end)
     end
+  end
+
+  defp extract_link(line) do
+    line
+    |> String.split(" = ")
+    |> List.last()
+    |> String.replace("\"", "")
   end
 
   defp enrich_webmention_target_from_silos(link, ["https:", "", "twitter.com", _]) do
