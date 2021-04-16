@@ -445,6 +445,30 @@ defmodule LastCrusader.HugoTest do
                "https://brid.gy/publish/github"
              ]
     end
+
+    test "real life failure: in_reply_to + syndicate_to + links in content" do
+      toml_content = """
+      +++
+      date = "2021-04-16T13:29:07+00:00"
+      in_reply_to = "https://aaronparecki.com/2021/04/13/26/indieauth"
+      syndicate_to = "https://twitter.com/jpcaruana"
+      tags = ["indieweb", "indieauth"]
+      +++
+      Thank you for this excellent step by step guide, much clearer, I think, than the [spec](https://indieauth.spec.indieweb.org/) 
+      or the explanation on [indieweb.org](https://indieweb.org/IndieAuth)
+
+      {{< indienews >}}
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://aaronparecki.com/2021/04/13/26/indieauth",
+               "https://twitter.com/jpcaruana",
+               "https://brid.gy/publish/twitter",
+               "https://indieauth.spec.indieweb.org/",
+               "https://indieweb.org/IndieAuth",
+               "https://news.indieweb.org/fr"
+             ]
+    end
   end
 
   def now() do

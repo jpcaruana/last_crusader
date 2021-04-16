@@ -96,12 +96,12 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   defp extract_links_in_frontmatter(frontmatter) do
-    with [matching_frontmatter_line] <-
+    with [matching_frontmatter_lines] <-
            frontmatter
            |> String.split("\n")
            |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end),
          link <-
-           matching_frontmatter_line
+           matching_frontmatter_lines
            |> String.split(" = ")
            |> List.last()
            |> String.replace("\"", "") do
