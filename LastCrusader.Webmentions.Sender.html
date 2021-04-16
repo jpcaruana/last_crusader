@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="Last Crusader v0.4.3">
+    <meta name="project" content="Last Crusader v0.5.0">
 
-    <title>LastCrusader.Webmentions.Sender — Last Crusader v0.4.3</title>
+    <title>LastCrusader.Webmentions.Sender — Last Crusader v0.5.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-b04d40cbfa.js"></script>
+    <script src="dist/sidebar_items-f6ed7425f4.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Last Crusader
       </a>
       <strong class="sidebar-projectVersion">
-        v0.4.3
+        v0.5.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Last Crusader
     <div id="content" class="content-inner">
 
       <h1>
-LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.4.3)</small>
+LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.5.0)</small>
 
           <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -91,7 +91,7 @@ LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.4.3)</s
 
 
         <section id="moduledoc">
-<p>Schedules webmentions to be send</p>
+<p>Schedules webmentions to be send</p><p>It first checks of the origin exists before sending webmentions. It will retry this check every minute until it reaches the configured number of tries.</p>
         </section>
 
 
@@ -124,11 +124,11 @@ LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.4.3)</s
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#schedule_webmentions/3">schedule_webmentions(links, origin, duration \\ 900000)</a>
+    <a href="#schedule_webmentions/3">schedule_webmentions(links, origin, nb_max_tries \\ 15)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>  Schedules webmentions to be send (default is 15 minutes)</p></div>
+    <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
 
 </div>
 
@@ -155,7 +155,7 @@ Types
     </a>
     <h1 class="signature">url()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L8" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L11" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -197,9 +197,9 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">schedule_webmentions(links, origin, duration \\ 900000)</h1>
+    <h1 class="signature">schedule_webmentions(links, origin, nb_max_tries \\ 15)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L18" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -216,7 +216,7 @@ Functions
 
       </div>
 
-<p>  Schedules webmentions to be send (default is 15 minutes)</p>
+<p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p>
   </section>
 </section>
 
