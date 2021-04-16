@@ -2,10 +2,14 @@
 
 ## Unreleased yet
 
+## 0.5.2
+2021/04/16
+- micropub: Hugo: treat `mp-syndicate-to` property as a `syndicate-to` one
+
 ## 0.5.1
 2021/04/16
 - micropub:
-    - webmention: add automatic syndication to twitter.com (via brig.ly)
+    - webmention: add automatic syndication to twitter.com (via [brid.gy](https://brid.gy/))
     - better logs
 
 ## 0.5.0
@@ -19,7 +23,7 @@
 2021/04/14
 - micropub:
     - Hugo: support `in-reply-to` types as Notes
-    - webmention: add brig.ly webmention endpoint for:
+    - webmention: add [brid.gy](https://brid.gy/) webmention endpoint for:
         - twitter.com
         - github.com
 - update dependancies:
