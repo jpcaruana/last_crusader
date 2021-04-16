@@ -45,6 +45,7 @@ defmodule LastCrusader.Micropub.Hugo do
       |> rename_key(:"bookmark-of", :bookmark)
       |> rename_key(:"in-reply-to", :in_reply_to)
       |> rename_key(:"like-of", :like_of)
+      |> rename_key(:"repost-of", :repost_of)
       |> rename_key(:name, :title)
       |> Map.put(:date, iso_date)
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
@@ -138,6 +139,10 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   def generate_path(:like_of, name, date) do
+    "notes/" <> date <> "/" <> name
+  end
+
+  def generate_path(:repost_of, name, date) do
     "notes/" <> date <> "/" <> name
   end
 

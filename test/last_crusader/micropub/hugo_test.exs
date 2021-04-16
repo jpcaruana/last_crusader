@@ -56,6 +56,25 @@ defmodule LastCrusader.HugoTest do
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
+    test "it should create a note for a repost-of" do
+      {file_name, file_content, web_path} =
+        Hugo.new(:repost_of, now(), [
+          {"content", "Some markdown content\n"},
+          {"repost-of", "https://some-url.com/"}
+        ])
+
+      assert file_content == """
+             +++
+             date = "2015-01-23T23:50:07+00:00"
+             repost_of = "https://some-url.com/"
+             +++
+             Some markdown content
+             """
+
+      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert web_path == "notes/2015/01/23/some-markdown-content/"
+    end
+
     test "it should rename name to title" do
       {file_name, file_content, _} =
         Hugo.new(:note, now(), [
