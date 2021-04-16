@@ -2,13 +2,11 @@
 
 ## Unreleased yet
 
-## 0.5.2
-2021/04/16
-- micropub: Hugo: treat `mp-syndicate-to` property as a `syndicate-to` one
-
-## 0.5.1
+## 0.5.3
 2021/04/16
 - micropub:
+    - Hugo: fix links extraction from Hugo posts
+    - Hugo: fix: treat `mp-syndicate-to` property as a `syndicate-to` one
     - webmention: add automatic syndication to twitter.com (via [brid.gy](https://brid.gy/))
     - better logs
 
