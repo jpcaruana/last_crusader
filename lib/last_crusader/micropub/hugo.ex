@@ -91,7 +91,7 @@ defmodule LastCrusader.Micropub.Hugo do
     patched_content =
       String.replace(content, "{{< indienews >}}", "[indienews](https://news.indieweb.org/fr)")
 
-    Regex.scan(~r/\[(?<text>[\w\s]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, patched_content)
+    Regex.scan(~r/\[(?<text>[\w\s\.]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, patched_content)
     |> Enum.map(fn x -> Enum.at(x, 2) end)
   end
 

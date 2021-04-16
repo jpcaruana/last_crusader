@@ -454,8 +454,7 @@ defmodule LastCrusader.HugoTest do
       syndicate_to = "https://twitter.com/jpcaruana"
       tags = ["indieweb", "indieauth"]
       +++
-      Thank you for this excellent step by step guide, much clearer, I think, than the [spec](https://indieauth.spec.indieweb.org/) 
-      or the explanation on [indieweb.org](https://indieweb.org/IndieAuth)
+      Thank you for this excellent step by step guide, much clearer, I think, than the [spec](https://indieauth.spec.indieweb.org/) or the explanation on [indieweb.org](https://indieweb.org/IndieAuth)
 
       {{< indienews >}}
       """
