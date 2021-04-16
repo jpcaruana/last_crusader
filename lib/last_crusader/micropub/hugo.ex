@@ -103,16 +103,13 @@ defmodule LastCrusader.Micropub.Hugo do
     with matching_frontmatter_lines <-
            frontmatter
            |> String.split("\n")
-           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end),
-         links <-
-           matching_frontmatter_lines
-           |> Enum.map(fn x ->
-             x
-             |> String.split(" = ")
-             |> List.last()
-             |> String.replace("\"", "")
-           end) do
-      links
+           |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end) do
+      matching_frontmatter_lines
+      |> Enum.map(fn line ->
+        String.split(line, " = ")
+        |> List.last()
+        |> String.replace("\"", "")
+      end)
       |> Enum.map(fn link ->
         enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
       end)
