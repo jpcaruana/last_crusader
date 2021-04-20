@@ -47,7 +47,7 @@ defmodule LastCrusader.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug_cowboy, "~> 2.4.1"},
+      {:plug_cowboy, "~> 2.5.0"},
       {:poison, "~> 4.0.1"},
       {:tesla, "~> 1.4.0"},
       {:tz, "~> 0.12.0"},
