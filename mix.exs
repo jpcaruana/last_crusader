@@ -54,7 +54,7 @@ defmodule LastCrusader.MixProject do
       {:toml, "~> 0.6.1"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
-      {:webmentions, "~> 0.5.2"},
+      {:webmentions, "~> 1.0.0"},
       # code coverage
       {:excoveralls, "~> 0.14.0", only: :test},
       # doc generation: mix docs
