@@ -10,6 +10,7 @@ config :logger, :console,
   colors: [error: [:bright, :light_red]]
 
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
+config :last_crusader, env: Mix.env()
 
 if Mix.env() != :prod do
   config :git_hooks,
