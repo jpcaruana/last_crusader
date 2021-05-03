@@ -3,8 +3,8 @@
 ## Unreleased yet
 - update dependancies:
     - #14: [bump plug_cowboy from 2.4.1 to 2.5.0](https://github.com/jpcaruana/last_crusader/pull/14)
-    - #18: [bump webmentions from 0.5.3 to 1.0.0](https://github.com/jpcaruana/last_crusader/pull/18) (with contributions from me)
-    - #19: [bump tz from 0.12.0 to 0.14.0 ](https://github.com/jpcaruana/last_crusader/pull/19)
+    - #18/#20: [bump webmentions from 0.5.3 to 1.0.1](https://github.com/jpcaruana/last_crusader/pull/20) (with contributions from me)
+    - #19/#21: [bump tz from 0.12.0 to 0.16.0 ](https://github.com/jpcaruana/last_crusader/pull/21)
     - #15/#16/#17: [bump git_hooks from 0.5.2 to 0.6.2](https://github.com/jpcaruana/last_crusader/pull/15)
 
 ## 0.5.3
