@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/jpcaruana/last_crusader.svg?branch=master)](https://travis-ci.com/jpcaruana/last_crusader)
-
 # LastCrusader - Indieweb and the Last Crusade
 
 An [Indieweb](https://indieweb.org/) server taylored mainly for _my_ needs, but I hope easily configurable for yours.
