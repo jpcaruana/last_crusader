@@ -54,8 +54,8 @@ defmodule LastCrusader.Micropub.MicropubHandler do
         conn
         |> send_resp(401, "bad auth token")
 
-      _ ->
-        Logger.error("bad request")
+      other_error ->
+        Logger.error("bad request: #{inspect(other_error)}")
 
         conn
         |> send_resp(400, "bad request")
