@@ -7,6 +7,7 @@
     - #19/#21: [bump tz from 0.12.0 to 0.16.0 ](https://github.com/jpcaruana/last_crusader/pull/21)
     - #22: [bump mint from 1.2.1 to 1.3.0](https://github.com/jpcaruana/last_crusader/pull/22)
     - #15/#16/#17: [bump git_hooks from 0.5.2 to 0.6.2](https://github.com/jpcaruana/last_crusader/pull/15)
+- script to make a release that targets a debian: `./debian_release.sh` (uses docker)
 
 ## 0.5.3
 2021/04/16

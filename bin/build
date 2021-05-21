@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+ 
+set -e
+PROJECT_NAME=last_crusader
+echo "Starting release process..."
+cd /opt/build
+ 
+echo "Creating release artifact directory..."
+mkdir -p /opt/build/rel/artifacts
+ 
+echo "Installing rebar and hex..."
+mix local.rebar --force
+mix local.hex --if-missing --force
+ 
+echo "Fetching project deps..."
+mix deps.get --only prod
+ 
+echo "Cleaning and compiling..."
+#echo "If you are using Phoenix, here is where you would run mix phx.digest"
+#mix phx.digest
+ 
+echo "Generating release..."
+MIX_ENV=perso mix release
+ 
+echo "Creating tarball..."
+tar -zcf "/opt/build/${PROJECT_NAME}-PROJECT_VERSION.tar.gz" /opt/build/_build/perso
+ 
+echo "Release generated at rel/artifacts/${PROJECT_NAME}-PROJECT_VERSION.tar.gz"
+exit 0

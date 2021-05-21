@@ -22,6 +22,7 @@ defmodule LastCrusader.MixProject do
           include_erts: false
         ]
       ],
+      aliases: aliases(),
 
       # Docs
       name: "Last Crusader",
@@ -67,6 +68,12 @@ defmodule LastCrusader.MixProject do
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_check, "~> 0.14.0", only: [:dev], runtime: false},
       {:git_hooks, "~> 0.6.0", only: [:test, :dev], runtime: false}
+    ]
+  end
+
+  defp aliases do
+    [
+      pkg: ["cmd ./build_container"]
     ]
   end
 end

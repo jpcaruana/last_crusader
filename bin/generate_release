@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+docker run -v $(pwd):/opt/build --rm -it last_crusader:latest /opt/build/bin/build

@@ -24,3 +24,4 @@ Works fine with latest Elixir/OTP, including OTP 24.
 - run locally: `iex -S mix`
 - install git hooks locally: `mix git_hooks.install`
 - make a release: `MIX_ENV=prod mix release` or with personal secrets `MIX_ENV=perso mix release`
+- make a release that targets a debian: `./debian_release.sh` (uses docker)

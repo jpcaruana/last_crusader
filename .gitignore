@@ -27,3 +27,5 @@ config/perso.exs
 
 # Ignore local logs
 *.log
+
+*.tar.gz

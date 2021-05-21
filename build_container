@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+ 
+# This file is meant to be private!
+# You should remove it from source control if
+# you plan on using this repo.
+ 
+docker build --build-arg env=perso \
+ --build-arg env=perso \
+ -t last_crusader:latest .
