@@ -4,9 +4,13 @@
 - update dependancies:
     - #14: [bump plug_cowboy from 2.4.1 to 2.5.0](https://github.com/jpcaruana/last_crusader/pull/14)
     - #18/#20: [bump webmentions from 0.5.3 to 1.0.1](https://github.com/jpcaruana/last_crusader/pull/20) (with contributions from me)
-    - #19/#21: [bump tz from 0.12.0 to 0.16.0 ](https://github.com/jpcaruana/last_crusader/pull/21)
+    - #19/#21/#24: [bump tz from 0.12.0 to 0.16.2 ](https://github.com/jpcaruana/last_crusader/pull/24)
     - #22: [bump mint from 1.2.1 to 1.3.0](https://github.com/jpcaruana/last_crusader/pull/22)
     - #15/#16/#17: [bump git_hooks from 0.5.2 to 0.6.2](https://github.com/jpcaruana/last_crusader/pull/15)
+    - #23: [bump mix_test_watch from 1.0.2 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/23)
+    - #25: [bump excoveralls from 0.14.0 to 0.14.1](https://github.com/jpcaruana/last_crusader/pull/25)
+    - #26: [bump credo from 1.5.5 to 1.5.6](https://github.com/jpcaruana/last_crusader/pull/26)
+    - #27: [bump doctor from 0.17.0 to 0.18.0](https://github.com/jpcaruana/last_crusader/pull/27)
 - script to make a release that targets a debian: `./debian_release.sh` (uses docker)
 
 ## 0.5.3
