@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased yet
+## 0.5.4
+2021/06/22
 - update dependancies:
     - #14: [bump plug_cowboy from 2.4.1 to 2.5.0](https://github.com/jpcaruana/last_crusader/pull/14)
     - #18/#20: [bump webmentions from 0.5.3 to 1.0.1](https://github.com/jpcaruana/last_crusader/pull/20) (with contributions from me)
