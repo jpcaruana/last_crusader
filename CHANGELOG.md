@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased yet
+- update dependancies:
+    - #28: [bump webmentions from 1.0.1 to 1.0.2](https://github.com/jpcaruana/last_crusader/pull/28)
+
 ## 0.5.4
 2021/06/22
 - update dependancies:
