@@ -52,7 +52,10 @@ defmodule LastCrusader.Webmentions.Sender do
     end
   end
 
-  defp send_webmentions(origin, links, nb_max_tries, nb_tried) do
+  @doc """
+    Sends Webmentions to every link
+  """
+  def send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0) do
     Logger.info(
       "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
