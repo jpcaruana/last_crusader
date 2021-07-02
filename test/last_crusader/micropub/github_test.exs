@@ -165,17 +165,69 @@ defmodule LastCrusader.Micropub.GitHubTest do
   end
 
   defp ok_create_body() do
-    "{\"content\":{\"name\":\"test.txt\",\"path\":\"test.txt\",\"sha\":\"e068544d654f426eb0b145e20d8338069b4c3851\",\"size\":19,\"url\":\"https://api.github.com/repos/github_user/github_repo/co
-ntents/test.txt?ref=test\",\"html_url\":\"https://github.com/github_user/github_repo/blob/test/test.txt\",\"git_url\":\"https://api.github.com/repos/github_user/github_repo/git/blobs/e068544d654f426eb0b14
-5e20d8338069b4c3851\",\"download_url\":\"https://raw.githubusercontent.com/github_user/github_repo/test/test.txt?token=AAAHXINDV4JXZDK4NHEGWCC7XUXY6\",\"type\":\"file\",\"_links\":{\"self\":\"https://api.
-github.com/repos/github_user/github_repo/contents/test.txt?ref=test\",\"git\":\"https://api.github.com/repos/github_user/github_repo/git/blobs/e068544d654f426eb0b145e20d8338069b4c3851\",\"html\":\"https:/
-/github.com/github_user/github_repo/blob/test/test.txt\"}},\"commit\":{\"sha\":\"fd08f572c8bca4f1058aaa876d3352f99a12f429\",\"node_id\":\"MDY6Q29tbWl0MjQxNjk4MjIxOmZkMDhmNTcyYzhiY2E0ZjEwNThhYWE4NzZkMzM1Mm
-Y5OWExMmY0Mjk=\",\"url\":\"https://api.github.com/repos/github_user/github_repo/git/commits/fd08f572c8bca4f1058aaa876d3352f99a12f429\",\"html_url\":\"https://github.com/github_user/github_repo/commit/fd08
-f572c8bca4f1058aaa876d3352f99a12f429\",\"author\":{\"name\":\"Some Github Username\",\"email\":\"user@mail.com\",\"date\":\"2020-11-24T16:05:38Z\"},\"committer\":{\"name\":\"Some Github Username\",\"email
-\":\"user@mail.com\",\"date\":\"2020-11-24T16:05:38Z\"},\"tree\":{\"sha\":\"26256f1907eb7a9444e13cec439d5f4a9e7404a7\",\"url\":\"https://api.github.com/repos/github_user/github_repo/git/trees/26256f1907eb
-7a9444e13cec439d5f4a9e7404a7\"},\"message\":\"some commit message\\n\\nposted with LastCrusader :)\",\"parents\":[{\"sha\":\"3b2d9c9fd7843002b233cbfef13c8acbf6703521\",\"url\":\"https://api.github.com/rep
-os/github_user/github_repo/git/commits/3b2d9c9fd7843002b233cbfef13c8acbf6703521\",\"html_url\":\"https://github.com/github_user/github_repo/commit/3b2d9c9fd7843002b233cbfef13c8acbf6703521\"}],\"verificati
-on\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null}}}"
+    Json.encode!(%{
+      "content" => %{
+        "name" => "test.txt",
+        "path" => "test.txt",
+        "sha" => "e068544d654f426eb0b145e20d8338069b4c3851",
+        "size" => 19,
+        "url" =>
+          "https://api.github.com/repos/github_user/github_repo/contents/test.txt?ref=test",
+        "html_url" => "https://github.com/github_user/github_repo/blob/test/test.txt",
+        "git_url" =>
+          "https://api.github.com/repos/github_user/github_repo/git/blobs/e068544d654f426eb0b145e20d8338069b4c3851",
+        "download_url" =>
+          "https://raw.githubusercontent.com/github_user/github_repo/test/test.txt?token=AZIUHSDIHE",
+        "type" => "file",
+        "_links" => %{
+          "self" =>
+            "https://api. github.com/repos/github_user/github_repo/contents/test.txt?ref=test",
+          "git" =>
+            "https://api.github.com/repos/github_user/github_repo/git/blobs/e068544d654f426eb0b145e20d8338069b4c3851",
+          "html" => "https => / /github.com/github_user/github_repo/blob/test/test.txt"
+        }
+      },
+      "commit" => %{
+        "sha" => "fd08f572c8bca4f1058aaa876d3352f99a12f429",
+        "node_id" =>
+          "MDY6Q29tbWl0MjQxNjk4MjIxOmZkMDhmNTcyYzhiY2E0ZjEwNThhYWE4NzZkMzM1Mm Y5OWExMmY0Mjk=",
+        "url" =>
+          "https://api.github.com/repos/github_user/github_repo/git/commits/fd08f572c8bca4f1058aaa876d3352f99a12f429",
+        "html_url" =>
+          "https://github.com/github_user/github_repo/commit/fd08 f572c8bca4f1058aaa876d3352f99a12f429",
+        "author" => %{
+          "name" => "Some Github Username",
+          "email" => "user@mail.com",
+          "date" => "2020-11-24T16 => 05 => 38Z"
+        },
+        "committer" => %{
+          "name" => "Some Github Username",
+          "email " => "user@mail.com",
+          "date" => "2020-11-24T16 => 05 => 38Z"
+        },
+        "tree" => %{
+          "sha" => "26256f1907eb7a9444e13cec439d5f4a9e7404a7",
+          "url" =>
+            "https://api.github.com/repos/github_user/github_repo/git/trees/26256f1907eb 7a9444e13cec439d5f4a9e7404a7"
+        },
+        "message" => "some commit message\\n\\nposted with LastCrusader :)",
+        "parents" => [
+          %{
+            "sha" => "3b2d9c9fd7843002b233cbfef13c8acbf6703521",
+            "url" =>
+              "https://api.github.com/rep os/github_user/github_repo/git/commits/3b2d9c9fd7843002b233cbfef13c8acbf6703521",
+            "html_url" =>
+              "https://github.com/github_user/github_repo/commit/3b2d9c9fd7843002b233cbfef13c8acbf6703521"
+          }
+        ],
+        "verification" => %{
+          "verified" => false,
+          "reason" => "unsigned",
+          "signature" => nil,
+          "payload" => nil
+        }
+      }
+    })
   end
 
   defp ok_get_sha_body() do
