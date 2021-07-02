@@ -7,6 +7,7 @@ defmodule LastCrusader.Webmentions.Sender do
   alias Webmentions
   require Logger
   require Tesla
+  alias Poison, as: Json
 
   @type url() :: String.t()
   @one_minute 60_000
@@ -47,8 +48,11 @@ defmodule LastCrusader.Webmentions.Sender do
     :timer.sleep(@one_minute)
 
     case Tesla.head(origin) do
-      {:ok, %Tesla.Env{status: 200}} -> send_webmentions(origin, links, nb_max_tries, nb_tried)
-      _ -> do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
+      {:ok, %Tesla.Env{status: 200}} ->
+        send_webmentions(origin, links, nb_max_tries, nb_tried)
+
+      _ ->
+        do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
     end
   end
 
@@ -65,5 +69,37 @@ defmodule LastCrusader.Webmentions.Sender do
     Logger.info("Result: webmentions: #{inspect(sent)}")
 
     {:ok, self(), sent}
+  end
+
+  @doc """
+    Finds syndications links (from bridy to twitter) in a list of Webmentions responses
+  """
+  def find_syndication_links(webmention_responses, syndication_links \\ [])
+
+  def find_syndication_links([], syndication_links) do
+    syndication_links
+  end
+
+  def find_syndication_links([head | tail], syndication_links) do
+    case head do
+      %Webmentions.Response{
+        status: :ok,
+        target: "https://brid.gy/publish/twitter",
+        endpoint: "https://brid.gy/publish/webmention",
+        message: "sent",
+        body: body
+      } ->
+        find_syndication_links(tail, syndication_links ++ find_syndication_link(body))
+
+      _ ->
+        find_syndication_links(tail, syndication_links)
+    end
+  end
+
+  defp find_syndication_link(body) do
+    case Json.decode(body) do
+      {:ok, %{"url" => url}} -> [url]
+      _ -> []
+    end
   end
 end

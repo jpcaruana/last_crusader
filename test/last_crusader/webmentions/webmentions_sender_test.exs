@@ -5,7 +5,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
 
   alias LastCrusader.Webmentions.Sender
 
-  test "find twitter link in brid.gy response" do
+  test "check webmention is OK" do
     # setup for webmentions is a bit tricky, I hope these variables will help
     webmention_target = "https://brid.gy/publish/twitter"
     webmention_endpoint = "https://brid.gy/publish/webmention"
@@ -49,6 +49,25 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
     assert responses == expected
   end
 
+  test "find twitter link in brid.gy response" do
+    webmention_target = "https://brid.gy/publish/twitter"
+    webmention_endpoint = "https://brid.gy/publish/webmention"
+
+    reponse = [
+      %Webmentions.Response{
+        status: :ok,
+        target: webmention_target,
+        endpoint: webmention_endpoint,
+        message: "sent",
+        body: bridgy_success_response_body()
+      }
+    ]
+
+    syndication_links = Sender.find_syndication_links(reponse)
+
+    assert syndication_links == ["https://twitter.com/jpcaruana/status/1409912935766544386"]
+  end
+
   defp bridgy_success_response_body() do
     """
     {
@@ -73,7 +92,6 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           }
         ]
       },
-      "source": "<a href=\"https: //brid.gy/\" rel=\"nofollow\">Bridgy</a>",
       "in_reply_to_status_id": null,
       "in_reply_to_status_id_str": null,
       "in_reply_to_user_id": null,
