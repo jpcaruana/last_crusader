@@ -10,7 +10,7 @@
     <title>LastCrusader.Micropub.GitHub — Last Crusader v0.5.4</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-4fd35c9f02.js"></script>
+    <script src="dist/sidebar_items-c6b199cbec.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -117,6 +117,15 @@ LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.5.4)</smal
     <div class="summary-synopsis"><p>Creates a commit with the filecontent to GitHub</p></div>
 
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_file/6">update_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Updates a file on GitHub</p></div>
+
+</div>
 
   </div>
 
@@ -143,7 +152,7 @@ Functions
     </a>
     <h1 class="signature">new_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L11" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L12" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -159,9 +168,36 @@ Functions
           <pre>new_file(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
   {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
 
+          <pre>new_file(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
       </div>
 
 <p>Creates a commit with the filecontent to GitHub</p>
+  </section>
+</section>
+<section class="detail" id="update_file/6">
+
+    <span id="update_file/5"></span>
+
+  <div class="detail-header">
+    <a href="#update_file/6" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L32" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Updates a file on GitHub</p>
   </section>
 </section>
 
