@@ -2,8 +2,12 @@
 
 ## Unreleased yet
 - update post after automatic syndication via [brid.gy](https://brid.gy/):
-    - github: update a file
-- update dependancies:
+    - find twitter syndication link in brid.gy's response
+    - github:
+			- retrieve a file's content
+			- update a file
+    - new `LastCrusader.Toml` module for light/easy Toml manipulation
+- dependancies update:
     - #28: [bump webmentions from 1.0.1 to 1.0.2](https://github.com/jpcaruana/last_crusader/pull/28)
     - #29: [bump tz from 0.16.2 to 0.17.0](https://github.com/jpcaruana/last_crusader/pull/29)
     - #30: [bump tesla from 1.4.1 to 1.4.2](https://github.com/jpcaruana/last_crusader/pull/30)
@@ -11,7 +15,7 @@
 
 ## 0.5.4
 2021/06/22
-- update dependancies:
+- dependancies update:
     - #14: [bump plug_cowboy from 2.4.1 to 2.5.0](https://github.com/jpcaruana/last_crusader/pull/14)
     - #18/#20: [bump webmentions from 0.5.3 to 1.0.1](https://github.com/jpcaruana/last_crusader/pull/20) (with contributions from me)
     - #19/#21/#24: [bump tz from 0.12.0 to 0.16.2 ](https://github.com/jpcaruana/last_crusader/pull/24)
@@ -45,7 +49,7 @@
     - webmention: add [brid.gy](https://brid.gy/) webmention endpoint for:
         - twitter.com
         - github.com
-- update dependancies:
+- dependancies update:
     - #11: [bump ex_doc from 0.24.1 to 0.24.2](https://github.com/jpcaruana/last_crusader/pull/11)
     - #12: [bump tesla from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/12)
 
@@ -57,7 +61,7 @@
     - added doctor to check
     - added credo to check
 - added as much Typespecs as possible
-- update dependancies:
+- dependancies update:
     - #6/#9: [bump ex_doc from 0.23.0 to 0.24.1](https://github.com/jpcaruana/last_crusader/pull/9)
     - #10: [bump webmentions from 0.5.2 to 0.5.3](https://github.com/jpcaruana/last_crusader/pull/10)
     - remove dependancy to timex: drop support to Elixir < 1.11
@@ -91,7 +95,7 @@
 ## 0.2.2
 2021/02/11
 - micropub: fix encoding issues from weird long dash
-- update dependancies:
+- dependancies update:
     - #3: [bump plug_cowboy from 2.3.0 to 2.4.1](https://github.com/jpcaruana/last_crusader/pull/3)
     - #1: [bump excoveralls from 0.12.3 to 0.13.4](https://github.com/jpcaruana/last_crusader/pull/1)
 
