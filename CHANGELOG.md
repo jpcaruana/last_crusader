@@ -6,6 +6,7 @@
 - update dependancies:
     - #28: [bump webmentions from 1.0.1 to 1.0.2](https://github.com/jpcaruana/last_crusader/pull/28)
     - #29: [bump tz from 0.16.2 to 0.17.0](https://github.com/jpcaruana/last_crusader/pull/29)
+    - #30: [bump tesla from 1.4.1 to 1.4.2](https://github.com/jpcaruana/last_crusader/pull/30)
 
 ## 0.5.4
 2021/06/22
