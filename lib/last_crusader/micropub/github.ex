@@ -27,7 +27,7 @@ defmodule LastCrusader.Micropub.GitHub do
   @doc """
   Updates a file on GitHub
   """
-  @spec new_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
+  @spec update_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
           {:error, atom()} | {:ok, any()}
   def update_file(auth, user, repo, filename, filecontent, branch \\ "master") do
     client = build_client(auth)
