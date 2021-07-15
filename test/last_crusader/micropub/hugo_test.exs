@@ -470,6 +470,16 @@ defmodule LastCrusader.HugoTest do
     end
   end
 
+  describe "Add a k/v to an existing TOML" do
+    test "Reverse post path: URL -> filepath" do
+      assert "content/notes/2021/07/15/a-post.md" ==
+               Hugo.reverse_url(
+                 "https://some.web.com/notes/2021/07/15/a-post/",
+                 "https://some.web.com/"
+               )
+    end
+  end
+
   defp now() do
     {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
     fake_now

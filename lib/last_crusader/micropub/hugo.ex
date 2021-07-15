@@ -71,6 +71,16 @@ defmodule LastCrusader.Micropub.Hugo do
     Enum.uniq(extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter))
   end
 
+  @doc """
+    Retrieves the local file path of a post from its published public URL
+  """
+  @spec reverse_url(url(), url()) :: String.t()
+  def reverse_url(post_url, host) do
+    x = String.replace(post_url, host, "")
+    x = Regex.replace(~r/\/(\w*)$/, x, "\\1")
+    "content/" <> x <> ".md"
+  end
+
   defp extract_links_in_content(content) do
     patched_content =
       String.replace(
