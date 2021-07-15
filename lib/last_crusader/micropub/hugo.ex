@@ -3,14 +3,14 @@ defmodule LastCrusader.Micropub.Hugo do
     Generates Hugo compatible data, file content, file name
   """
   alias LastCrusader.Micropub.PostTypeDiscovery, as: Post
-  @type toml() :: String.t()
+  alias LastCrusader.Utils.Toml, as: Toml
   @type path() :: String.t()
   @type url() :: String.t()
 
   @doc """
     Create a new Hugo document
   """
-  @spec new(Post.post_type(), DateTime.t(), map()) :: {path(), toml(), path()}
+  @spec new(Post.post_type(), DateTime.t(), map()) :: {path(), Toml.toml(), path()}
   def new(type, date, data) do
     {text, content} =
       data
@@ -32,7 +32,7 @@ defmodule LastCrusader.Micropub.Hugo do
   @doc """
     Generates TOML formatted front-matter
   """
-  @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: toml()
+  @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: Toml.toml()
   def generate_front_matter(date, type, data \\ %{}) do
     iso_date = Calendar.strftime(date, "%Y-%m-%dT%H:%M:%S+00:00")
 
@@ -49,70 +49,7 @@ defmodule LastCrusader.Micropub.Hugo do
     |> rename_key(:"mp-syndicate-to", :syndicate_to)
     |> rename_key(:name, :title)
     |> Map.put(:date, iso_date)
-    |> toml_map_to_string()
-  end
-
-  @spec toml_map_to_string(map()) :: toml()
-  defp toml_map_to_string(m) do
-    s =
-      m
-      |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
-      |> Enum.join("\n")
-
-    "+++\n" <> s <> "\n+++\n"
-  end
-
-  @doc """
-    Updates TOML formatted front-matter
-  """
-  @spec update_toml(toml(), map()) :: toml()
-  def update_toml(toml, {key, value}) do
-    toml
-    |> toml_to_map()
-    |> Map.put(key, value)
-    |> toml_map_to_string()
-  end
-
-  @spec toml_to_map(toml()) :: map()
-  defp toml_to_map(toml) do
-    [_, toml_content, _] = String.split(toml, "+++\n")
-
-    toml_content
-    |> String.split("\n")
-    |> Enum.filter(fn x -> x != "" end)
-    |> Enum.map(fn line -> key_value(line) end)
-    |> Enum.chunk_every(1)
-    |> Enum.map(fn [[a, b]] -> {a, b} end)
-    |> Map.new()
-  end
-
-  defp key_value(line) do
-    [key, value] = String.split(line, " = ")
-
-    case String.match?(value, ~r/^\[.*\]/) do
-      true -> [key, string_to_list(value)]
-      false -> [key, String.replace(value, "\"", "")]
-    end
-  end
-
-  defp string_to_list(s) do
-    s
-    |> String.replace("\[", "")
-    |> String.replace("\]", "")
-    |> String.split(", ")
-    |> Enum.map(fn x -> String.replace(x, "\"", "") end)
-  end
-
-  defp toml_value(s) when is_list(s) do
-    toml =
-      Enum.map(s, fn x -> toml_value(x) end)
-      |> Enum.join(", ")
-
-    "[" <> toml <> "]"
-  end
-
-  defp toml_value(s) do
-    "\"" <> s <> "\""
+    |> Toml.toml_map_to_string()
   end
 
   @doc """
@@ -127,9 +64,9 @@ defmodule LastCrusader.Micropub.Hugo do
 
     Handles my personal special case with my "indienews" shortcode
   """
-  @spec extract_links(toml()) :: list(url())
+  @spec extract_links(Toml.toml()) :: list(url())
   def extract_links(toml_content) do
-    [_, frontmatter, markdown] = String.split(toml_content, "+++\n")
+    {frontmatter, markdown} = Toml.extract_frontmatter_and_content(toml_content)
 
     Enum.uniq(extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter))
   end

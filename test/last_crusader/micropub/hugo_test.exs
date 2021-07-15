@@ -470,51 +470,7 @@ defmodule LastCrusader.HugoTest do
     end
   end
 
-  describe "Hugo update TOML" do
-    test "add new key/value" do
-      toml = """
-      +++
-      key1 = "value1"
-      key2 = "value2"
-      +++
-      """
-
-      new_toml = Hugo.update_toml(toml, {"key3", "value3"})
-
-      expected_toml = """
-      +++
-      key1 = "value1"
-      key2 = "value2"
-      key3 = "value3"
-      +++
-      """
-
-      assert new_toml == expected_toml
-    end
-
-    test "add new key/value (with list)" do
-      toml = """
-      +++
-      key1 = "value1"
-      key2 = ["value2", "value2"]
-      +++
-      """
-
-      new_toml = Hugo.update_toml(toml, {"key3", "value3"})
-
-      expected_toml = """
-      +++
-      key1 = "value1"
-      key2 = ["value2", "value2"]
-      key3 = "value3"
-      +++
-      """
-
-      assert new_toml == expected_toml
-    end
-  end
-
-  def now() do
+  defp now() do
     {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
     fake_now
   end
