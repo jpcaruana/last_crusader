@@ -30,30 +30,77 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc """
-    Generates TOML formatted fron-matter
+    Generates TOML formatted front-matter
   """
   @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: toml()
   def generate_front_matter(date, type, data \\ %{}) do
     iso_date = Calendar.strftime(date, "%Y-%m-%dT%H:%M:%S+00:00")
 
-    data_as_toml =
-      data
-      |> Map.delete(:h)
-      |> rename_key(:category, :tags)
-      |> values_as_list(:tags)
-      |> conditional_rename_key(type == :bookmark, :tags, :bookmarktags)
-      |> rename_key(:"bookmark-of", :bookmark)
-      |> rename_key(:"in-reply-to", :in_reply_to)
-      |> rename_key(:"like-of", :like_of)
-      |> rename_key(:"repost-of", :repost_of)
-      |> rename_key(:"syndicate-to", :syndicate_to)
-      |> rename_key(:"mp-syndicate-to", :syndicate_to)
-      |> rename_key(:name, :title)
-      |> Map.put(:date, iso_date)
+    data
+    |> Map.delete(:h)
+    |> rename_key(:category, :tags)
+    |> values_as_list(:tags)
+    |> conditional_rename_key(type == :bookmark, :tags, :bookmarktags)
+    |> rename_key(:"bookmark-of", :bookmark)
+    |> rename_key(:"in-reply-to", :in_reply_to)
+    |> rename_key(:"like-of", :like_of)
+    |> rename_key(:"repost-of", :repost_of)
+    |> rename_key(:"syndicate-to", :syndicate_to)
+    |> rename_key(:"mp-syndicate-to", :syndicate_to)
+    |> rename_key(:name, :title)
+    |> Map.put(:date, iso_date)
+    |> toml_map_to_string()
+  end
+
+  @spec toml_map_to_string(map()) :: toml()
+  defp toml_map_to_string(m) do
+    s =
+      m
       |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
       |> Enum.join("\n")
 
-    "+++\n" <> data_as_toml <> "\n+++\n"
+    "+++\n" <> s <> "\n+++\n"
+  end
+
+  @doc """
+    Updates TOML formatted front-matter
+  """
+  @spec update_toml(toml(), map()) :: toml()
+  def update_toml(toml, {key, value}) do
+    toml
+    |> toml_to_map()
+    |> Map.put(key, value)
+    |> toml_map_to_string()
+  end
+
+  @spec toml_to_map(toml()) :: map()
+  defp toml_to_map(toml) do
+    [_, toml_content, _] = String.split(toml, "+++\n")
+
+    toml_content
+    |> String.split("\n")
+    |> Enum.filter(fn x -> x != "" end)
+    |> Enum.map(fn line -> key_value(line) end)
+    |> Enum.chunk_every(1)
+    |> Enum.map(fn [[a, b]] -> {a, b} end)
+    |> Map.new()
+  end
+
+  defp key_value(line) do
+    [key, value] = String.split(line, " = ")
+
+    case String.match?(value, ~r/^\[.*\]/) do
+      true -> [key, string_to_list(value)]
+      false -> [key, String.replace(value, "\"", "")]
+    end
+  end
+
+  defp string_to_list(s) do
+    s
+    |> String.replace("\[", "")
+    |> String.replace("\]", "")
+    |> String.split(", ")
+    |> Enum.map(fn x -> String.replace(x, "\"", "") end)
   end
 
   defp toml_value(s) when is_list(s) do
@@ -102,7 +149,7 @@ defmodule LastCrusader.Micropub.Hugo do
   defp extract_links_in_frontmatter(frontmatter) do
     case frontmatter
          |> String.split("\n")
-         |> Enum.filter(fn x -> Regex.match?(~r/^(bookmark|in_reply_to|syndicate_to) =/, x) end) do
+         |> Enum.filter(fn x -> String.match?(x, ~r/^(bookmark|in_reply_to|syndicate_to) =/) end) do
       [] ->
         []
 
