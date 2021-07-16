@@ -6,9 +6,9 @@
 - update post after automatic syndication via [brid.gy](https://brid.gy/):
     - find twitter syndication link in brid.gy's response
     - github:
-			- retrieve a file's content
-			- update a file
-    - new `LastCrusader.Toml` module for light/easy Toml manipulation
+      - retrieve a file's content
+      - update a file
+    - new `LastCrusader.Utils.Toml` module for light/easy Toml manipulation
 - dependancies update:
     - #28: [bump webmentions from 1.0.1 to 1.0.2](https://github.com/jpcaruana/last_crusader/pull/28)
     - #29: [bump tz from 0.16.2 to 0.17.0](https://github.com/jpcaruana/last_crusader/pull/29)
