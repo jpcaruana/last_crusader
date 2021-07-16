@@ -4,6 +4,7 @@ defmodule LastCrusader.Webmentions.Sender do
 
   It first checks of the origin exists before sending webmentions. It will retry this check every minute until it reaches the configured number of tries.
   """
+  alias LastCrusader.Micropub
   alias Webmentions
   require Logger
   require Tesla
@@ -64,17 +65,24 @@ defmodule LastCrusader.Webmentions.Sender do
       "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
-    {:ok, sent} = Webmentions.send_webmentions_for_links(origin, links)
+    {:ok, webmention_response} = Webmentions.send_webmentions_for_links(origin, links)
 
-    Logger.info("Result: webmentions: #{inspect(sent)}")
+    Logger.info("Result: webmentions: #{inspect(webmention_response)}")
 
-    {:ok, self(), sent}
+    Task.async(fn -> update_content_with_syndication(origin, webmention_response) end)
+
+    {:ok, self(), webmention_response}
+  end
+
+  defp update_content_with_syndication(origin, webmention_responses) do
+    find_syndication_links(webmention_responses)
+    |> update_content(origin)
   end
 
   @doc """
     Finds syndications links (from bridy to twitter) in a list of Webmentions responses
   """
-  def find_syndication_links(webmention_responses, syndication_links \\ [])
+  def find_syndication_links(webmention_response, syndication_links \\ [])
 
   def find_syndication_links([], syndication_links) do
     syndication_links
@@ -101,5 +109,17 @@ defmodule LastCrusader.Webmentions.Sender do
       {:ok, %{"url" => url}} -> [url]
       _ -> []
     end
+  end
+
+  @spec update_content(list(url()), url()) :: nil
+  defp update_content(syndication_links, origin)
+
+  defp update_content([], origin) do
+    Logger.info("No more syndication links found for from #{inspect(origin)}")
+  end
+
+  defp update_content([link | _], origin) do
+    Micropub.add_keyword_to_post(origin, {"copy", link})
+    Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
   end
 end
