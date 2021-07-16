@@ -11,7 +11,7 @@ defmodule LastCrusader.Utils.Toml do
   """
   @spec extract_frontmatter_and_content(toml()) :: {toml(), String.t()}
   def extract_frontmatter_and_content(wholefile) do
-    [_, frontmatter, markdown] = String.split(wholefile, "+++\n")
+    [_, frontmatter, markdown] = String.split(wholefile, @separator)
     {frontmatter, markdown}
   end
 
