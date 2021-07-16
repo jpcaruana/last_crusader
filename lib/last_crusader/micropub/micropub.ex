@@ -1,8 +1,6 @@
 defmodule LastCrusader.Micropub do
   @moduledoc """
   Handles the _logic_ of micro-publishing.
-
-  Does not worry about HTTP
   """
 
   import LastCrusader.Utils.Http
@@ -92,16 +90,13 @@ defmodule LastCrusader.Micropub do
   end
 
   defp check_auth_code(auth_header, me, issuer, scope) do
-    %{body: body, status: status} =
-      Tesla.get!(
-        issuer,
-        headers: [
-          Authorization: auth_header,
-          accept: "application/json"
-        ]
-      )
-
-    with {200, body} <- {status, body},
+    with %{body: body, status: 200} <-
+           Tesla.get!(issuer,
+             headers: [
+               Authorization: auth_header,
+               accept: "application/json"
+             ]
+           ),
          {^me, ^issuer, full_scope} <- decode(body),
          true <- check_scope(scope, full_scope) do
       {:ok, :valid}
@@ -116,7 +111,7 @@ defmodule LastCrusader.Micropub do
   end
 
   defp decode(json) do
-    decoded_body = Json.decode!(json)
+    {:ok, decoded_body} = Json.decode(json)
     {decoded_body["me"], decoded_body["issued_by"], decoded_body["scope"]}
   end
 
