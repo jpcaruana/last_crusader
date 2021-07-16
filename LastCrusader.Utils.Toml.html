@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.24.2">
     <meta name="project" content="Last Crusader v0.6.0">
 
-    <title>LastCrusader.Micropub.GitHub — Last Crusader v0.6.0</title>
+    <title>LastCrusader.Utils.Toml — Last Crusader v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
     <script src="dist/sidebar_items-1c268456af.js"></script>
@@ -80,9 +80,9 @@ Last Crusader
     <div id="content" class="content-inner">
 
       <h1>
-LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.6.0)</small>
+LastCrusader.Utils.Toml <small class="app-vsn">(Last Crusader v0.6.0)</small>
 
-          <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/toml.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -91,7 +91,7 @@ LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.6.0)</smal
 
 
         <section id="moduledoc">
-<p>  Posts content to github</p>
+<p>  TOML strings manipulation</p>
         </section>
 
 
@@ -104,35 +104,49 @@ LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.6.0)</smal
             Summary
           </h1>
 
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#t:toml/0">toml()</a>
+
+  </div>
+
+</div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#get_file/5">get_file(auth, user, repo, filename, branch \\ &quot;master&quot;)</a>
+    <a href="#extract_frontmatter_and_content/1">extract_frontmatter_and_content(wholefile)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Gets file content from GitHub</p></div>
+    <div class="summary-synopsis"><p>  Extracts Frontmatter and Content from a Post</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#new_file/6">new_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</a>
+    <a href="#toml_map_to_string/1">toml_map_to_string(m)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Creates a commit with the filecontent to GitHub</p></div>
+    <div class="summary-synopsis"><p>  Transforms a Map representation of TOML into its String counterpart</p></div>
 
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#update_file/6">update_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</a>
+    <a href="#update_toml/2">update_toml(toml, arg)</a>
 
   </div>
 
-    <div class="summary-synopsis"><p>Updates a file on GitHub</p></div>
+    <div class="summary-synopsis"><p>  Updates a TOML formatted front-matter</p></div>
 
 </div>
 
@@ -140,6 +154,48 @@ LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.6.0)</smal
 
         </section>
 
+
+        <section id="types" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#types">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Types
+          </h1>
+          <div class="types-list">
+<section class="detail" id="t:toml/0">
+
+  <div class="detail-header">
+    <a href="#t:toml/0" class="detail-link" title="Link to this type">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature">toml()</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/toml.ex#L6" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>toml() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+          </div>
+        </section>
 
         <section id="functions" class="details-list">
           <h1 class="section-heading">
@@ -150,18 +206,16 @@ LastCrusader.Micropub.GitHub <small class="app-vsn">(Last Crusader v0.6.0)</smal
 Functions
           </h1>
           <div class="functions-list">
-<section class="detail" id="get_file/5">
-
-    <span id="get_file/4"></span>
+<section class="detail" id="extract_frontmatter_and_content/1">
 
   <div class="detail-header">
-    <a href="#get_file/5" class="detail-link" title="Link to this function">
+    <a href="#extract_frontmatter_and_content/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">get_file(auth, user, repo, filename, branch \\ &quot;master&quot;)</h1>
+    <h1 class="signature">extract_frontmatter_and_content(wholefile)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L48" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/toml.ex#L13" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -174,26 +228,23 @@ Functions
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>get_file(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
-  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre>extract_frontmatter_and_content(<a href="#t:toml/0">toml</a>()) :: {<a href="#t:toml/0">toml</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
 
       </div>
 
-<p>Gets file content from GitHub</p>
+<p>  Extracts Frontmatter and Content from a Post</p>
   </section>
 </section>
-<section class="detail" id="new_file/6">
-
-    <span id="new_file/5"></span>
+<section class="detail" id="toml_map_to_string/1">
 
   <div class="detail-header">
-    <a href="#new_file/6" class="detail-link" title="Link to this function">
+    <a href="#toml_map_to_string/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">new_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</h1>
+    <h1 class="signature">toml_map_to_string(m)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L12" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/toml.ex#L33" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -206,26 +257,23 @@ Functions
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>new_file(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
-  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre>toml_map_to_string(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="#t:toml/0">toml</a>()</pre>
 
       </div>
 
-<p>Creates a commit with the filecontent to GitHub</p>
+<p>  Transforms a Map representation of TOML into its String counterpart</p>
   </section>
 </section>
-<section class="detail" id="update_file/6">
-
-    <span id="update_file/5"></span>
+<section class="detail" id="update_toml/2">
 
   <div class="detail-header">
-    <a href="#update_file/6" class="detail-link" title="Link to this function">
+    <a href="#update_toml/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">update_file(auth, user, repo, filename, filecontent, branch \\ &quot;master&quot;)</h1>
+    <h1 class="signature">update_toml(toml, arg)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/micropub/github.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/utils/toml.ex#L22" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -238,12 +286,11 @@ Functions
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>update_file(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
-  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre>update_toml(<a href="#t:toml/0">toml</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: <a href="#t:toml/0">toml</a>()</pre>
 
       </div>
 
-<p>Updates a file on GitHub</p>
+<p>  Updates a TOML formatted front-matter</p>
   </section>
 </section>
 

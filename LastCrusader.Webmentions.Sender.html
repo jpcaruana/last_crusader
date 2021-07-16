@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.24.2">
-    <meta name="project" content="Last Crusader v0.5.4">
+    <meta name="project" content="Last Crusader v0.6.0">
 
-    <title>LastCrusader.Webmentions.Sender — Last Crusader v0.5.4</title>
+    <title>LastCrusader.Webmentions.Sender — Last Crusader v0.6.0</title>
     <link rel="stylesheet" href="dist/elixir-a172fe91e725dcb259e2.css" />
 
-    <script src="dist/sidebar_items-c6b199cbec.js"></script>
+    <script src="dist/sidebar_items-1c268456af.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 Last Crusader
       </a>
       <strong class="sidebar-projectVersion">
-        v0.5.4
+        v0.6.0
       </strong>
     </div>
 
@@ -80,7 +80,7 @@ Last Crusader
     <div id="content" class="content-inner">
 
       <h1>
-LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.5.4)</small>
+LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.6.0)</small>
 
           <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
@@ -124,11 +124,29 @@ LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.5.4)</s
     </h2>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#find_syndication_links/2">find_syndication_links(webmention_response, syndication_links \\ [])</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>  Finds syndications links (from bridy to twitter) in a list of Webmentions responses</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#schedule_webmentions/3">schedule_webmentions(links, origin, nb_max_tries \\ 15)</a>
 
   </div>
 
     <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_webmentions/4">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>  Sends Webmentions to every link</p></div>
 
 </div>
 
@@ -155,7 +173,7 @@ Types
     </a>
     <h1 class="signature">url()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L11" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L13" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -188,6 +206,30 @@ Types
 Functions
           </h1>
           <div class="functions-list">
+<section class="detail" id="find_syndication_links/2">
+
+    <span id="find_syndication_links/1"></span>
+
+  <div class="detail-header">
+    <a href="#find_syndication_links/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">find_syndication_links(webmention_response, syndication_links \\ [])</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L85" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>  Finds syndications links (from bridy to twitter) in a list of Webmentions responses</p>
+  </section>
+</section>
 <section class="detail" id="schedule_webmentions/3">
 
     <span id="schedule_webmentions/2"></span>
@@ -199,7 +241,7 @@ Functions
     </a>
     <h1 class="signature">schedule_webmentions(links, origin, nb_max_tries \\ 15)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L20" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -217,6 +259,32 @@ Functions
       </div>
 
 <p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p>
+  </section>
+</section>
+<section class="detail" id="send_webmentions/4">
+
+    <span id="send_webmentions/2"></span>
+
+    <span id="send_webmentions/3"></span>
+
+  <div class="detail-header">
+    <a href="#send_webmentions/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L63" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>  Sends Webmentions to every link</p>
   </section>
 </section>
 

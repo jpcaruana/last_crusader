@@ -9,6 +9,7 @@ LastCrusader.Micropub.html
 LastCrusader.Utils.Http.html
 LastCrusader.Utils.IdentifierValidator.html
 LastCrusader.Utils.Randomizer.html
+LastCrusader.Utils.Toml.html
 LastCrusader.Webmentions.Sender.html
 api-reference.html
 changelog.html
@@ -19,8 +20,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-69b99b23f2.js
-dist/sidebar_items-c6b199cbec.js
+dist/search_items-219f2a2eef.js
+dist/sidebar_items-1c268456af.js
 index.html
 license.html
 readme.html
