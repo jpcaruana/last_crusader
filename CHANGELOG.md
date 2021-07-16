@@ -1,6 +1,8 @@
 # Changelog
 
 ## Unreleased yet
+## 0.6.0
+2021/07/16
 - update post after automatic syndication via [brid.gy](https://brid.gy/):
     - find twitter syndication link in brid.gy's response
     - github:
