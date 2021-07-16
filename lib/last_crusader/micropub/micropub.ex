@@ -9,6 +9,7 @@ defmodule LastCrusader.Micropub do
 
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
+  alias LastCrusader.Utils.Toml, as: Toml
   alias LastCrusader.Micropub.GitHub, as: GitHub
   alias LastCrusader.Webmentions, as: Webmentions
   alias Poison, as: Json
@@ -53,6 +54,38 @@ defmodule LastCrusader.Micropub do
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
       {:ok, content_url}
+    else
+      error -> error
+    end
+  end
+
+  @doc """
+  Adds a keyword to a published post (most of the time, it will be the syndication link)
+  """
+  def add_keyword_to_post(published_page_url, {newkey, value}) do
+    host = Application.get_env(:last_crusader, :me)
+    filename = Hugo.reverse_url(published_page_url, host)
+
+    with {:ok, filecontent} <-
+           GitHub.get_file(
+             Application.get_env(:last_crusader, :github_auth),
+             Application.get_env(:last_crusader, :github_user),
+             Application.get_env(:last_crusader, :github_repo),
+             filename,
+             Application.get_env(:last_crusader, :github_branch, "master")
+           ),
+         {frontmatter, markdown} <- Toml.extract_frontmatter_and_content(filecontent),
+         new_frontmatter <- Toml.update_toml(frontmatter, {newkey, value}),
+         {:ok, :content_created} <-
+           GitHub.update_file(
+             Application.get_env(:last_crusader, :github_auth),
+             Application.get_env(:last_crusader, :github_user),
+             Application.get_env(:last_crusader, :github_repo),
+             filename,
+             new_frontmatter <> markdown,
+             Application.get_env(:last_crusader, :github_branch, "master")
+           ) do
+      {:ok, published_page_url}
     else
       error -> error
     end
