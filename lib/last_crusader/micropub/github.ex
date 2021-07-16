@@ -8,7 +8,7 @@ defmodule LastCrusader.Micropub.GitHub do
   Creates a commit with the filecontent to GitHub
   """
   @spec new_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
-          {:error, atom()} | {:ok, any()}
+          {:ko, atom()} | {:ok, any()}
   def new_file(auth, user, repo, filename, filecontent, branch \\ "master") do
     # ex: auth=%{access_token: "928392873982932"}
     body = %{
@@ -28,13 +28,30 @@ defmodule LastCrusader.Micropub.GitHub do
   Updates a file on GitHub
   """
   @spec update_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
-          {:error, atom()} | {:ok, any()}
+          {:ko, atom()} | {:ok, any()}
   def update_file(auth, user, repo, filename, filecontent, branch \\ "master") do
     client = build_client(auth)
 
     with {:ok, sha} <- get_file_sha(client, user, repo, filename, branch),
          {:ok, result} <- update_file(client, user, repo, filename, filecontent, sha, branch) do
       {:ok, result}
+    else
+      _ -> {:ko, :github_error}
+    end
+  end
+
+  @doc """
+  Gets file content from GitHub
+  """
+  @spec get_file(map(), String.t(), String.t(), String.t(), String.t()) ::
+          {:ko, atom()} | {:ok, any()}
+  def get_file(auth, user, repo, filename, branch \\ "master") do
+    with {:ok, %Tesla.Env{status: 200, body: body}} <-
+           get_file_content(build_client(auth), user, repo, filename, branch),
+         {:ok, decoded_body} <- Json.decode(body) do
+      decoded_body["content"]
+      |> String.replace("\n", "")
+      |> Base.decode64()
     else
       _ -> {:ko, :github_error}
     end
@@ -58,16 +75,14 @@ defmodule LastCrusader.Micropub.GitHub do
       "content" => Base.encode64(filecontent)
     }
 
-    case client
-         |> commit_new_file(user, repo, filename, body) do
+    case commit_new_file(client, user, repo, filename, body) do
       {:ok, %Tesla.Env{status: 200}} -> {:ok, :content_updated}
       _ -> :ko
     end
   end
 
   defp get_file_sha(client, user, repo, filename, ref) do
-    case client
-         |> get_file_content(user, repo, filename, ref) do
+    case get_file_content(client, user, repo, filename, ref) do
       {:ok, %Tesla.Env{status: 200, body: %{sha: sha}}} -> {:ok, sha}
       {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, Json.decode!(body)["sha"]}
       _ -> :ko

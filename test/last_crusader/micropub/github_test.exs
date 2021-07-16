@@ -164,6 +164,33 @@ defmodule LastCrusader.Micropub.GitHubTest do
     end
   end
 
+  describe "GitHub.get_file/5" do
+    test "get file success" do
+      doc = %Tesla.Env{
+        status: 200,
+        body: ok_get_sha_body(),
+        headers: [
+          {"Status", "200 OK"},
+          {"Content-Type", "application/json; charset=utf-8"},
+          {"Content-Length", "1977"},
+          {"Server", "GitHub.com"},
+          {"X-GitHub-Media-Type", "github.v3; format=json"}
+        ]
+      }
+
+      mock(fn %{method: :get} -> {:ok, doc} end)
+
+      assert {:ok, "some content in the file"} ==
+               GitHub.get_file(
+                 %{access_token: "THIS_SHOULD_STAY_A_SECRET"},
+                 "github_user",
+                 "github_repo",
+                 "test.txt",
+                 "test_branch"
+               )
+    end
+  end
+
   defp ok_create_body() do
     Json.encode!(%{
       "content" => %{
