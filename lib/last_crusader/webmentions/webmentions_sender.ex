@@ -119,7 +119,7 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp update_content([link | _], origin) do
-    Micropub.add_keyword_to_post(origin, {"copy", link})
+    {:ok, origin} = Micropub.add_keyword_to_post(origin, {"copy", link})
     Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
   end
 end
