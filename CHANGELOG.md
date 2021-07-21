@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased yet
+- dependancies update:
+    - #33: [bump ex_doc from 0.24.2 to 0.25.0](https://github.com/jpcaruana/last_crusader/pull/33)
+
 ## 0.6.0
 2021/07/16
 - update post after automatic syndication via [brid.gy](https://brid.gy/):
