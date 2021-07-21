@@ -1,6 +1,10 @@
 # Changelog
 
 ## Unreleased yet
+
+## 0.6.1
+2021/07/21
+- investigation around automatic synndication: match `Micropub.add_keyword_to_post/2` response
 - dependancies update:
     - #33: [bump ex_doc from 0.24.2 to 0.25.0](https://github.com/jpcaruana/last_crusader/pull/33)
 
