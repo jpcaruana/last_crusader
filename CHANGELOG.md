@@ -9,6 +9,7 @@
     - #33: [bump ex_doc from 0.24.2 to 0.25.0](https://github.com/jpcaruana/last_crusader/pull/33)
     - #34: [bump plug_cowboy from 2.5.0 to 2.5.1](https://github.com/jpcaruana/last_crusader/pull/34)
     - #35: [bump excoveralls from 0.14.1 to 0.14.2](https://github.com/jpcaruana/last_crusader/pull/35)
+    - #36: [bump poison from 4.0.1 to 5.0.0](https://github.com/jpcaruana/last_crusader/pull/36)
 
 
 ## 0.6.0

@@ -49,7 +49,7 @@ defmodule LastCrusader.MixProject do
   defp deps do
     [
       {:plug_cowboy, "~> 2.5.0"},
-      {:poison, "~> 4.0.1"},
+      {:poison, "~> 5.0.0"},
       {:tesla, "~> 1.4.0"},
       {:castore, "~> 0.1.5"},
       {:mint, "~> 1.0"},
