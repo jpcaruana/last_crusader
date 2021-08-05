@@ -7,6 +7,7 @@
     - #35: [bump excoveralls from 0.14.1 to 0.14.2](https://github.com/jpcaruana/last_crusader/pull/35)
     - #36: [bump poison from 4.0.1 to 5.0.0](https://github.com/jpcaruana/last_crusader/pull/36)
     - #37: [bump tz from 0.17.0 to 0.19.0](https://github.com/jpcaruana/last_crusader/pull/37)
+    - #39: [bump tesla from 1.4.2 to 1.4.3](https://github.com/jpcaruana/last_crusader/pull/39)
 
 ## 0.6.1
 2021/07/21
