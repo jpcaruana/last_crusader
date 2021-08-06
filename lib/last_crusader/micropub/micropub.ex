@@ -74,7 +74,7 @@ defmodule LastCrusader.Micropub do
            ),
          {frontmatter, markdown} <- Toml.extract_frontmatter_and_content(filecontent),
          new_frontmatter <- Toml.update_toml(frontmatter, {newkey, value}),
-         {:ok, :content_created} <-
+         {:ok, :content_updated} <-
            GitHub.update_file(
              Application.get_env(:last_crusader, :github_auth),
              Application.get_env(:last_crusader, :github_user),
