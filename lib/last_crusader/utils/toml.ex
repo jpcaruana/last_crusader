@@ -19,15 +19,15 @@ defmodule LastCrusader.Utils.Toml do
     Updates a TOML formatted front-matter
   """
   @spec update_toml(toml(), map()) :: toml()
-  def update_toml(toml, {key, value}) do
-    toml
-    |> toml_to_map()
+  def update_toml(front_matter, {key, value}) do
+    front_matter
+    |> front_matter_to_map()
     |> Map.put(key, value)
     |> toml_map_to_string()
   end
 
   @doc """
-    Transforms a Map representation of TOML into its String counterpart
+    Transforms a Map representation of TOML into its String counterpart with included separators
   """
   @spec toml_map_to_string(map()) :: toml()
   def toml_map_to_string(m) do
@@ -39,11 +39,9 @@ defmodule LastCrusader.Utils.Toml do
     @separator <> s <> "\n" <> @separator
   end
 
-  @spec toml_to_map(toml()) :: map()
-  defp toml_to_map(toml) do
-    [_, toml_content, _] = String.split(toml, @separator)
-
-    toml_content
+  @spec front_matter_to_map(toml()) :: map()
+  defp front_matter_to_map(toml) do
+    toml
     |> String.split("\n")
     |> Enum.filter(fn x -> x != "" end)
     |> Enum.map(fn line -> key_value(line) end)

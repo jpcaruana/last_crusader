@@ -5,10 +5,8 @@ defmodule LastCrusader.Utils.TomlTest do
   describe "Update TOML" do
     test "add new key/value" do
       toml = """
-      +++
       key1 = "value1"
       key2 = "value2"
-      +++
       """
 
       new_toml = Toml.update_toml(toml, {"key3", "value3"})
@@ -26,10 +24,8 @@ defmodule LastCrusader.Utils.TomlTest do
 
     test "add new key/value (with list)" do
       toml = """
-      +++
       key1 = "value1"
       key2 = ["value2", "value2"]
-      +++
       """
 
       new_toml = Toml.update_toml(toml, {"key3", "value3"})
