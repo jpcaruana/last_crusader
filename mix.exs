@@ -54,7 +54,6 @@ defmodule LastCrusader.MixProject do
       {:castore, "~> 0.1.5"},
       {:mint, "~> 1.0"},
       {:tz, "~> 0.19.0"},
-      {:toml, "~> 0.6.1"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 1.0.0"},
