@@ -3,6 +3,7 @@ defmodule LastCrusader.Micropub.GitHub do
     Posts content to github
   """
   alias Poison, as: Json
+  require Logger
 
   @doc """
   Creates a commit with the filecontent to GitHub
@@ -19,8 +20,13 @@ defmodule LastCrusader.Micropub.GitHub do
 
     case build_client(auth)
          |> commit_new_file(user, repo, filename, body) do
-      {:ok, %Tesla.Env{status: 201}} -> {:ok, :content_created}
-      _ -> {:ko, :github_error}
+      {:ok, %Tesla.Env{status: 201}} ->
+        {:ok, :content_created}
+
+      error ->
+        Logger.error("Github: Error while creating file #{inspect(filename)}:")
+        Logger.error("#{inspect(error)}")
+        {:ko, :github_error}
     end
   end
 
@@ -36,7 +42,10 @@ defmodule LastCrusader.Micropub.GitHub do
          {:ok, result} <- update_file(client, user, repo, filename, filecontent, sha, branch) do
       {:ok, result}
     else
-      _ -> {:ko, :github_error}
+      error ->
+        Logger.error("Github: Error while updating file #{inspect(filename)}:")
+        Logger.error("#{inspect(error)}")
+        {:ko, :github_error, error}
     end
   end
 
@@ -53,7 +62,10 @@ defmodule LastCrusader.Micropub.GitHub do
       |> String.replace("\n", "")
       |> Base.decode64()
     else
-      _ -> {:ko, :github_error}
+      error ->
+        Logger.error("Github: Error while getting file #{inspect(filename)}:")
+        Logger.error("#{inspect(error)}")
+        {:ko, :github_error, error}
     end
   end
 

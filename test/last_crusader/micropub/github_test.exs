@@ -135,7 +135,7 @@ defmodule LastCrusader.Micropub.GitHubTest do
                "test.txt",
                "this is a text file",
                "test"
-             ) == {:ko, :github_error}
+             ) == {:ko, :github_error, :ko}
     end
 
     test "file update failure on SHA discovery: 404" do
@@ -160,7 +160,7 @@ defmodule LastCrusader.Micropub.GitHubTest do
                "test.txt",
                "this is a text file",
                "test"
-             ) == {:ko, :github_error}
+             ) == {:ko, :github_error, :ko}
     end
   end
 
