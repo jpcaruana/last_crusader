@@ -1,12 +1,16 @@
 # Changelog
 
 ## Unreleased yet
+
+## 0.6.3
+2021/08/06
+- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in)
 - dependancies update:
     - remove unused dependancy on toml
 
 ## 0.6.2
 2021/08/06
-- fix:  `LastCrusader.Micropub.add_keyword_to_post/2`: fix bad match on github file content update
+- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: fix bad match on github file content update
     - also added some error logs (at the wrong place in `LastCrusader.Micropub.Github`)
 - dependancies update:
     - #38: [bump ex_doc from 0.25.0 to 0.25.1](https://github.com/jpcaruana/last_crusader/pull/38)
