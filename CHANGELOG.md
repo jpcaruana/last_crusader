@@ -1,6 +1,11 @@
 # Changelog
 
 ## Unreleased yet
+
+## 0.6.2
+2021/08/06
+- fix: Micropub.update: fix bad match on github file contennt update
+    - also added somme error logs (at the wrong place)
 - dependancies update:
     - #38: [bump ex_doc from 0.25.0 to 0.25.1](https://github.com/jpcaruana/last_crusader/pull/38)
     - #34: [bump plug_cowboy from 2.5.0 to 2.5.1](https://github.com/jpcaruana/last_crusader/pull/34)
