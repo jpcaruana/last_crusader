@@ -54,12 +54,12 @@ defmodule LastCrusader.Micropub.GitHub do
   @spec get_file(map(), String.t(), String.t(), String.t(), String.t()) ::
           {:ko, atom()} | {:ok, any()}
   def get_file(auth, user, repo, filename, branch \\ "master") do
-    with {:ok, %Tesla.Env{status: 200, body: body}} <-
-           get_file_content(build_client(auth), user, repo, filename, branch) do
-      body["content"]
-      |> String.replace("\n", "")
-      |> Base.decode64()
-    else
+    case get_file_content(build_client(auth), user, repo, filename, branch) do
+      {:ok, %Tesla.Env{status: 200, body: body}} ->
+        body["content"]
+        |> String.replace("\n", "")
+        |> Base.decode64()
+
       error ->
         Logger.error("Github: Error while getting file #{inspect(filename)}:")
         Logger.error("#{inspect(error)}")
