@@ -2,7 +2,6 @@ defmodule LastCrusader.Micropub.GitHub do
   @moduledoc """
     Posts content to github
   """
-  alias Jason, as: Json
   require Logger
 
   @doc """
@@ -56,9 +55,8 @@ defmodule LastCrusader.Micropub.GitHub do
           {:ko, atom()} | {:ok, any()}
   def get_file(auth, user, repo, filename, branch \\ "master") do
     with {:ok, %Tesla.Env{status: 200, body: body}} <-
-           get_file_content(build_client(auth), user, repo, filename, branch),
-         {:ok, decoded_body} <- Json.decode(body) do
-      decoded_body["content"]
+           get_file_content(build_client(auth), user, repo, filename, branch) do
+      body["content"]
       |> String.replace("\n", "")
       |> Base.decode64()
     else
@@ -96,7 +94,7 @@ defmodule LastCrusader.Micropub.GitHub do
   defp get_file_sha(client, user, repo, filename, ref) do
     case get_file_content(client, user, repo, filename, ref) do
       {:ok, %Tesla.Env{status: 200, body: %{sha: sha}}} -> {:ok, sha}
-      {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, Json.decode!(body)["sha"]}
+      {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, body["sha"]}
       _ -> :ko
     end
   end

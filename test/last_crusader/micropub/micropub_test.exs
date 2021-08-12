@@ -2,7 +2,6 @@ defmodule LastCrusader.Micropub.MicropubTest do
   use ExUnit.Case, async: true
   import Tesla.Mock
   alias LastCrusader.Micropub
-  alias Jason, as: Json
 
   test "Micropub.add_keyword_to_post/2" do
     filecontent_doc = %Tesla.Env{
@@ -41,7 +40,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
   end
 
   defp ok_create_body() do
-    Json.encode!(%{
+    %{
       "content" => %{
         "name" => "test.txt",
         "path" => "test.txt",
@@ -103,31 +102,35 @@ defmodule LastCrusader.Micropub.MicropubTest do
           "payload" => nil
         }
       }
-    })
+    }
   end
 
   defp ok_get_sha_body() do
-    Json.encode!(%{
+    %{
       "_links" => %{
         "git" =>
-          "https://api.github.com/repos/jpcaruana/jp.caruana.fr/git/blobs/0bbca6e0fc897c9b0122f84e09c349f0e0ae98ea",
-        "html" => "https://github.com/jpcaruana/jp.caruana.fr/blob/test/test1",
-        "self" => "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/test1?ref=test"
+          "https://api.github.com/repos/jpcaruana/jp.caruana.fr/git/blobs/b18938a758c1ff3386e4fefa512a3b21717b9868",
+        "html" =>
+          "https://github.com/jpcaruana/jp.caruana.fr/blob/master/content/notes/2021/08/06/test3.md",
+        "self" =>
+          "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/content/notes/2021/08/06/test3.md?ref=master"
       },
       "content" =>
-        "KysrCmRhdGUgPSAiMjAyMS0wOC0wNlQxNzoxNjo1NCswMDowMCIKc3luZGlj\nYXRlX3RvID0gImh0dHBzOi8vdHdpdHRlci5jb20vanBjYXJ1YW5hIgorKysK\ndGVzdA==\n",
+        "KysrCmRhdGUgPSAiMjAyMS0wOC0wNlQxODo0MzoyNiswMDowMCIKc3luZGlj\nYXRlX3RvID0gImh0dHBzOi8vdHdpdHRlci5jb20vanBjYXJ1YW5hIgorKysK\ndGVzdDM=\n",
       "download_url" =>
-        "https://raw.githubusercontent.com/jpcaruana/jp.caruana.fr/test/test1?token=AAAHXIMSLMW5HG7S6G4OCKTA34T7A",
+        "https://raw.githubusercontent.com/jpcaruana/jp.caruana.fr/master/content/notes/2021/08/06/test3.md?token=AAAHXIMLGFGC4BZJHSVPIXTBBVTWQ",
       "encoding" => "base64",
       "git_url" =>
-        "https://api.github.com/repos/jpcaruana/jp.caruana.fr/git/blobs/0bbca6e0fc897c9b0122f84e09c349f0e0ae98ea",
-      "html_url" => "https://github.com/jpcaruana/jp.caruana.fr/blob/test/test1",
-      "name" => "test1",
-      "path" => "test1",
-      "sha" => "0bbca6e0fc897c9b0122f84e09c349f0e0ae98ea",
-      "size" => 64,
+        "https://api.github.com/repos/jpcaruana/jp.caruana.fr/git/blobs/b18938a758c1ff3386e4fefa512a3b21717b9868",
+      "html_url" =>
+        "https://github.com/jpcaruana/jp.caruana.fr/blob/master/content/notes/2021/08/06/test3.md",
+      "name" => "test3.md",
+      "path" => "content/notes/2021/08/06/test3.md",
+      "sha" => "b18938a758c1ff3386e4fefa512a3b21717b9868",
+      "size" => 95,
       "type" => "file",
-      "url" => "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/test1?ref=test"
-    })
+      "url" =>
+        "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/content/notes/2021/08/06/test3.md?ref=master"
+    }
   end
 end

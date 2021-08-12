@@ -192,7 +192,7 @@ defmodule LastCrusader.Micropub.GitHubTest do
   end
 
   defp ok_create_body() do
-    Json.encode!(%{
+    %{
       "content" => %{
         "name" => "test.txt",
         "path" => "test.txt",
@@ -254,11 +254,11 @@ defmodule LastCrusader.Micropub.GitHubTest do
           "payload" => nil
         }
       }
-    })
+    }
   end
 
   defp ok_get_sha_body() do
-    Json.encode!(%{
+    %{
       "_links" => %{
         "git" =>
           "https://api.github.com/repos/jpcaruana/jp.caruana.fr/git/blobs/0bbca6e0fc897c9b0122f84e09c349f0e0ae98ea",
@@ -278,6 +278,6 @@ defmodule LastCrusader.Micropub.GitHubTest do
       "size" => 24,
       "type" => "file",
       "url" => "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/test1?ref=test"
-    })
+    }
   end
 end
