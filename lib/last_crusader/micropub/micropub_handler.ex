@@ -14,7 +14,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   require Logger
 
   alias LastCrusader.Micropub, as: Micropub
-  alias Poison, as: Json
+  alias Jason, as: Json
 
   @doc """
   Handles query requests

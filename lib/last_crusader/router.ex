@@ -35,7 +35,7 @@ defmodule LastCrusader.Router do
   plug(Plug.Parsers,
     parsers: [:urlencoded, :json],
     pass: ["text/*"],
-    json_decoder: Poison
+    json_decoder: Jason
   )
 
   # responsible for dispatching responses

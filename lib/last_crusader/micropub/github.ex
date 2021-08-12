@@ -2,7 +2,7 @@ defmodule LastCrusader.Micropub.GitHub do
   @moduledoc """
     Posts content to github
   """
-  alias Poison, as: Json
+  alias Jason, as: Json
   require Logger
 
   @doc """
@@ -106,7 +106,7 @@ defmodule LastCrusader.Micropub.GitHub do
 
     middleware = [
       {Tesla.Middleware.BaseUrl, "https://api.github.com"},
-      {Tesla.Middleware.JSON, engine: Poison},
+      {Tesla.Middleware.JSON, engine: Jason},
       Tesla.Middleware.FormUrlencoded,
       {Tesla.Middleware.Headers,
        [

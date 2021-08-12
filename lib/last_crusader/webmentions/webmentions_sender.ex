@@ -8,7 +8,7 @@ defmodule LastCrusader.Webmentions.Sender do
   alias Webmentions
   require Logger
   require Tesla
-  alias Poison, as: Json
+  alias Jason, as: Json
 
   @type url() :: String.t()
   @one_minute 60_000

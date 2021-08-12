@@ -2,7 +2,7 @@ defmodule LastCrusader.Micropub.GitHubTest do
   use ExUnit.Case, async: true
   import Tesla.Mock
   alias LastCrusader.Micropub.GitHub
-  alias Poison, as: Json
+  alias Jason, as: Json
 
   describe "GitHub.new_file/6" do
     test "file creation success" do

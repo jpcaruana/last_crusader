@@ -40,7 +40,7 @@ defmodule LastCrusader.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :plug_cowboy, :poison],
+      extra_applications: [:logger, :plug_cowboy, :jason],
       mod: {LastCrusader.Application, []}
     ]
   end
@@ -49,7 +49,7 @@ defmodule LastCrusader.MixProject do
   defp deps do
     [
       {:plug_cowboy, "~> 2.5.0"},
-      {:poison, "~> 5.0.0"},
+      {:jason, "~> 1.2"},
       {:tesla, "~> 1.4.0"},
       {:castore, "~> 0.1.5"},
       {:mint, "~> 1.0"},

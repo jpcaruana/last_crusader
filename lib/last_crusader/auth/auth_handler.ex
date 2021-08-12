@@ -10,7 +10,7 @@ defmodule LastCrusader.Auth.AuthHandler do
   import LastCrusader.Utils.IdentifierValidator
   import LastCrusader.Utils.Http
 
-  alias Poison, as: Json
+  alias Jason, as: Json
   alias LastCrusader.Cache.MemoryTokenStore, as: TokenStore
   alias LastCrusader.Utils.Randomizer, as: Randomizer
 

@@ -2,7 +2,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
   use ExUnit.Case, async: true
   import Tesla.Mock
   alias LastCrusader.Micropub
-  alias Poison, as: Json
+  alias Jason, as: Json
 
   test "Micropub.add_keyword_to_post/2" do
     filecontent_doc = %Tesla.Env{
