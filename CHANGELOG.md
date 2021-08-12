@@ -2,21 +2,15 @@
 
 ## Unreleased yet
 
-## 0.6.3
-2021/08/06
-- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in)
+## 0.6.4
+2021/08/12
+- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in). I learned how powerfull json decoding was with Tesla...
 - dependancies update:
     - remove unused dependancy on toml
-
-## 0.6.2
-2021/08/06
-- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: fix bad match on github file content update
-    - also added some error logs (at the wrong place in `LastCrusader.Micropub.Github`)
-- dependancies update:
+    - remove unnecessary dependancy on Poison (we use Jason for json encoding/decoding now)
     - #38: [bump ex_doc from 0.25.0 to 0.25.1](https://github.com/jpcaruana/last_crusader/pull/38)
     - #34: [bump plug_cowboy from 2.5.0 to 2.5.1](https://github.com/jpcaruana/last_crusader/pull/34)
     - #35: [bump excoveralls from 0.14.1 to 0.14.2](https://github.com/jpcaruana/last_crusader/pull/35)
-    - #36: [bump poison from 4.0.1 to 5.0.0](https://github.com/jpcaruana/last_crusader/pull/36)
     - #37: [bump tz from 0.17.0 to 0.19.0](https://github.com/jpcaruana/last_crusader/pull/37)
     - #39: [bump tesla from 1.4.2 to 1.4.3](https://github.com/jpcaruana/last_crusader/pull/39)
 
