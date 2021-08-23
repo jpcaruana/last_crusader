@@ -1,13 +1,16 @@
 # Changelog
 
 ## Unreleased yet
+- dependancies update:
+    - #40: [bump tz from 0.19.0 to 0.20.0](https://github.com/jpcaruana/last_crusader/pull/40)
+    - #41: [bump webmentions from 1.0.2 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/41)
 
 ## 0.6.4
 2021/08/12
 - fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in). I learned how powerfull json decoding was with Tesla...
 - dependancies update:
     - remove unused dependancy on toml
-    - remove unnecessary dependancy on Poison (we use Jason for json encoding/decoding now)
+    - remove unnecessary dependancy on [Poison](https://github.com/devinus/poison) (we use [Jason](https://github.com/michalmuskala/jason) for json encoding/decoding from now on)
     - #38: [bump ex_doc from 0.25.0 to 0.25.1](https://github.com/jpcaruana/last_crusader/pull/38)
     - #34: [bump plug_cowboy from 2.5.0 to 2.5.1](https://github.com/jpcaruana/last_crusader/pull/34)
     - #35: [bump excoveralls from 0.14.1 to 0.14.2](https://github.com/jpcaruana/last_crusader/pull/35)
