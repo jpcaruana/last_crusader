@@ -4,6 +4,8 @@
 - dependancies update:
     - #40: [bump tz from 0.19.0 to 0.20.0](https://github.com/jpcaruana/last_crusader/pull/40)
     - #41: [bump webmentions from 1.0.2 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/41)
+        - I had to remove OTP<24 for this one
+    - #42: [(deps-dev) bump mix_test_watch from 1.0.3 to 1.1.0](https://github.com/jpcaruana/last_crusader/pull/42)
 
 ## 0.6.4
 2021/08/12
