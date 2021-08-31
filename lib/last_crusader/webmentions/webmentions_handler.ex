@@ -3,7 +3,7 @@ defmodule LastCrusader.Webmentions.Handler do
      Webmention is a simple way to notify any URL when you mention it on your site. From the receiver's perspective, it's a way to request notifications when other sites mention it.
 
     A Webmention is a notification that one URL links to another. For example, Alice writes an interesting post on her blog. Bob then writes a response to her post on his own site, linking back to Alice's original post. Bob's publishing software sends a Webmention to Alice notifying that her article was replied to, and Alice's software can show that reply as a comment on the original post.
-    
+
     See specification: https://www.w3.org/TR/webmention/#receiving-webmentions
   """
   import Plug.Conn
@@ -23,6 +23,8 @@ defmodule LastCrusader.Webmentions.Handler do
          {:ok, source, target} <- extract_urls(conn),
          {:ok, _} <- Validator.validate_urls(source, target),
          {:ok, _} <- Validator.validate_content(source, target) do
+      Logger.info("Received webmention from #{inspect(source)}")
+
       conn
       |> send_resp(202, "Accepted")
     else

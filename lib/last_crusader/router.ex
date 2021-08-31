@@ -21,11 +21,11 @@ defmodule LastCrusader.Router do
   # see https://hexdocs.pm/plug/Plug.RewriteOn.html
   plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
 
-  # Serve at "/" the static files from "priv/static" directory.
-  plug(Plug.Static,
-    at: "/public",
-    from: {:last_crusader, "priv/static"}
-  )
+  # Serve at "/public" the static files from "priv/static" directory.
+  # plug(Plug.Static,
+  #  at: "/public",
+  #  from: {:last_crusader, "priv/static"}
+  # )
 
   # responsible for matching routes
   plug(:match)
