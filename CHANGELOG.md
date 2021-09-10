@@ -4,7 +4,6 @@
 - dependancies update:
     - #40: [bump tz from 0.19.0 to 0.20.0](https://github.com/jpcaruana/last_crusader/pull/40)
     - #41: [bump webmentions from 1.0.2 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/41)
-        - I had to remove OTP<24 for this one :(
     - #44: [bump plug_cowboy from 2.5.1 to 2.5.2](https://github.com/jpcaruana/last_crusader/pull/44)
         - telemetry: 0.4.3 -> 1.1.0
         - plug: 1.12.0 -> 1.12.1
