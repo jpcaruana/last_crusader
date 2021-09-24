@@ -1,8 +1,11 @@
 # Changelog
 
 ## Unreleased yet
+## 0.7.0
+- added [sentry](https://sentry.io/) monitoring
 - dependancies update:
-    - #40: [bump tz from 0.19.0 to 0.20.0](https://github.com/jpcaruana/last_crusader/pull/40)
+    - #40/#47: [bump tz from 0.19.0 to 0.20.1](https://github.com/jpcaruana/last_crusader/pull/47)
+    - #45: [bump mint from 1.3.0 to 1.4.0](https://github.com/jpcaruana/last_crusader/pull/45)
     - #41: [bump webmentions from 1.0.2 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/41)
     - #44: [bump plug_cowboy from 2.5.1 to 2.5.2](https://github.com/jpcaruana/last_crusader/pull/44)
         - telemetry: 0.4.3 -> 1.1.0
