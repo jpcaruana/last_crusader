@@ -38,6 +38,9 @@ defmodule LastCrusader.Router do
     json_decoder: Jason
   )
 
+  # sentry
+  plug(Sentry.PlugContext)
+
   # responsible for dispatching responses
   plug(:dispatch)
 
