@@ -31,10 +31,7 @@ defmodule LastCrusader.Utils.Toml do
   """
   @spec toml_map_to_string(map()) :: toml()
   def toml_map_to_string(m) do
-    s =
-      m
-      |> Enum.map(fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
-      |> Enum.join("\n")
+    s = Enum.map_join(m, "\n", fn {k, v} -> to_string(k) <> " = " <> toml_value(v) end)
 
     @separator <> s <> "\n" <> @separator
   end
@@ -68,9 +65,7 @@ defmodule LastCrusader.Utils.Toml do
   end
 
   defp toml_value(s) when is_list(s) do
-    toml =
-      Enum.map(s, fn x -> toml_value(x) end)
-      |> Enum.join(", ")
+    toml = Enum.map_join(s, ", ", fn x -> toml_value(x) end)
 
     "[" <> toml <> "]"
   end
