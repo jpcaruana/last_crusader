@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.25.5">
+    <meta name="generator" content="ExDoc v0.26.0">
     <meta name="project" content="Last Crusader v0.7.0">
 
     <title>LastCrusader.Webmentions.Sender — Last Crusader v0.7.0</title>
-    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
     <script src="dist/sidebar_items-1bd6a32a5b.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
 
 
   </head>
@@ -54,10 +54,10 @@
 
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
-      <a href="https://github.com/jpcaruana/last_crusader" class="sidebar-projectName">
+      <a href="https://github.com/jpcaruana/last_crusader" class="sidebar-projectName" translate="no">
 Last Crusader
       </a>
-      <strong class="sidebar-projectVersion">
+      <strong class="sidebar-projectVersion" translate="no">
         v0.7.0
       </strong>
     </div>
@@ -79,42 +79,45 @@ Last Crusader
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.7.0)</small>
+<h1>
+  <span translate="no">LastCrusader.Webmentions.Sender</span> 
+  <small class="app-vsn" translate="no">(Last Crusader v0.7.0)</small>
 
-          <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L1" title="View Source" class="view-source" rel="help">
-            <span class="icon-code" aria-hidden="true"></span>
-            <span class="sr-only">View Source</span>
-          </a>
-
-      </h1>
+    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L1" title="View Source" class="view-source" rel="help">
+      <span class="icon-code" aria-hidden="true"></span>
+      <span class="sr-only">View Source</span>
+    </a>
 
 
-        <section id="moduledoc">
+</h1>
+
+
+  <section id="moduledoc">
 <p>Schedules webmentions to be send</p><p>It first checks of the origin exists before sending webmentions. It will retry this check every minute until it reaches the configured number of tries.</p>
-        </section>
+  </section>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-types summary">
     <h2>
       <a href="#types">Types</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:url/0">url()</a>
 
-  </div>
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:url/0" translate="no">url()</a>
 
-</div>
+        </div>
+
+      </div>
 
   </div>
 
@@ -122,48 +125,51 @@ LastCrusader.Webmentions.Sender <small class="app-vsn">(Last Crusader v0.7.0)</s
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#find_syndication_links/2">find_syndication_links(webmention_response, syndication_links \\ [])</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#find_syndication_links/2" translate="no">find_syndication_links(webmention_response, syndication_links \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>  Finds syndications links (from bridy to twitter) in a list of Webmentions responses</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#schedule_webmentions/3" translate="no">schedule_webmentions(links, origin, nb_max_tries \\ 15)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#send_webmentions/4" translate="no">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>  Sends Webmentions to every link</p></div>
+
+      </div>
 
   </div>
 
-    <div class="summary-synopsis"><p>  Finds syndications links (from bridy to twitter) in a list of Webmentions responses</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#schedule_webmentions/3">schedule_webmentions(links, origin, nb_max_tries \\ 15)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
-
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#send_webmentions/4">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</a>
-
-  </div>
-
-    <div class="summary-synopsis"><p>  Sends Webmentions to every link</p></div>
-
-</div>
-
-  </div>
-
-        </section>
+  </section>
 
 
-        <section id="types" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#types">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Types
-          </h1>
-          <div class="types-list">
+    </h1>
+    <div class="types-list">
 <section class="detail" id="t:url/0">
 
   <div class="detail-header">
@@ -171,9 +177,9 @@ Types
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this type</span>
     </a>
-    <h1 class="signature">url()</h1>
+    <h1 class="signature" translate="no">url()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L13" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -186,7 +192,7 @@ Types
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>url() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+          <pre translate="no">url() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
 
       </div>
 
@@ -194,18 +200,18 @@ Types
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Functions
-          </h1>
-          <div class="functions-list">
+    </h1>
+    <div class="functions-list">
 <section class="detail" id="find_syndication_links/2">
 
     <span id="find_syndication_links/1"></span>
@@ -215,9 +221,9 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">find_syndication_links(webmention_response, syndication_links \\ [])</h1>
+    <h1 class="signature" translate="no">find_syndication_links(webmention_response, syndication_links \\ [])</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L85" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L85" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -239,9 +245,9 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">schedule_webmentions(links, origin, nb_max_tries \\ 15)</h1>
+    <h1 class="signature" translate="no">schedule_webmentions(links, origin, nb_max_tries \\ 15)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L20" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -254,7 +260,7 @@ Functions
       <h2>Specs</h2>
       <div class="specs">
 
-          <pre>schedule_webmentions([<a href="#t:url/0">url</a>()], <a href="#t:url/0">url</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
+          <pre translate="no">schedule_webmentions([<a href="#t:url/0">url</a>()], <a href="#t:url/0">url</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
 
       </div>
 
@@ -272,9 +278,9 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</h1>
+    <h1 class="signature" translate="no">send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/master/lib/last_crusader/webmentions/webmentions_sender.ex#L63" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L63" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -288,20 +294,20 @@ Functions
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
       <footer class="footer">
 
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
           </span>
           <span class="line">
             Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
           </span>
         </p>
         <p>
@@ -311,15 +317,11 @@ Functions
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
           <button class="line footer-button display-quick-switch">
             Go to a HexDocs package
           </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
+          <button class="line footer-button display-settings">
+            Settings
           </button>
         </p>
       </footer>
