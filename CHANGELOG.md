@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased yet
+## 0.7.1
+- micropub: fix date conversion to Hugo (respect the timezone)
+- fix sentry necessary dependancies and install
+- dependancies update:
+    - #50/#55: [bump bump castore from 0.1.11 to 0.1.13](https://github.com/jpcaruana/last_crusader/pull/55)
+    - #49: [bump sentry from 8.0.5 to 8.0.6](https://github.com/jpcaruana/last_crusader/pull/49)
+
 ## 0.7.0
 - added [sentry](https://sentry.io/) monitoring
 - dependancies update:
