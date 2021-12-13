@@ -2,6 +2,7 @@
 
 ## 0.7.1
 - micropub: fix date conversion to Hugo (respect the timezone)
+    - removed comptatibility with Elixir < 1.12
 - fix sentry necessary dependancies and install
 - dependancies update:
     - #50/#55: [bump bump castore from 0.1.11 to 0.1.13](https://github.com/jpcaruana/last_crusader/pull/55)
