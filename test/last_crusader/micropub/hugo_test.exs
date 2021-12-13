@@ -9,7 +9,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              +++
              Some markdown content
              """
@@ -27,7 +27,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              in_reply_to = "https://some-url.com/"
              +++
              Some markdown content
@@ -46,7 +46,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              like_of = "https://some-url.com/"
              +++
              Some markdown content
@@ -65,7 +65,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              repost_of = "https://some-url.com/"
              +++
              Some markdown content
@@ -84,7 +84,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              syndicate_to = "https://some-url.com/"
              +++
              Some markdown content
@@ -103,7 +103,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              title = "My title"
              +++
              Some other markdown content
@@ -123,7 +123,7 @@ defmodule LastCrusader.HugoTest do
       assert file_content == """
              +++
              copy = "https://some/url"
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              tags = ["tag1", "tag2"]
              +++
              Some markdown content
@@ -141,7 +141,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              tags = ["tag1", "tag2"]
              +++
              Some markdown content
@@ -159,7 +159,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              syndicate_to = "https://some-url.com/"
              +++
              Some markdown content
@@ -177,7 +177,7 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              tags = ["one_tag"]
              +++
              Some markdown content
@@ -231,7 +231,7 @@ defmodule LastCrusader.HugoTest do
              +++
              bookmark = "http://some-url.com/"
              bookmarktags = ["one_tag"]
-             date = "2015-01-23T23:50:07+00:00"
+             date = "2015-01-24T00:50:07+01:00"
              +++
              """
     end

@@ -34,7 +34,7 @@ defmodule LastCrusader.Micropub.Hugo do
   """
   @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: Toml.toml()
   def generate_front_matter(date, type, data \\ %{}) do
-    iso_date = Calendar.strftime(date, "%Y-%m-%dT%H:%M:%S+00:00")
+    iso_date = DateTime.to_iso8601(date, :extended, 3600)
 
     data
     |> Map.delete(:h)
