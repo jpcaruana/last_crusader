@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :last_crusader,
   me: "https://some.url.fr/",

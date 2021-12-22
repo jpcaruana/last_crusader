@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 config :last_crusader,
   plug_logger: false,
