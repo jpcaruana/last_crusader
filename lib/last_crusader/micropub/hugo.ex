@@ -1,7 +1,36 @@
+defmodule LastCrusader.Micropub.MdParser do
+  @moduledoc """
+    Mardown parser: extracts links
+  """
+  import NimbleParsec
+
+  md_link_text =
+    ascii_string([not: ?[], min: 0)
+    |> ignore
+    |> ignore(string("["))
+    |> ascii_string([not: ?]], min: 1)
+    |> ignore(string("]"))
+
+  md_link_url =
+    ignore(string("("))
+    |> ascii_string([not: ?)], min: 1)
+    |> ignore(string(")"))
+
+  md_link_expr = md_link_text |> ignore |> concat(md_link_url)
+
+  defparsec(:extract_md_link, repeat_while(md_link_expr, {:eof, []}))
+
+  ## Helpers
+  defp eof("", context, _, _), do: {:halt, context}
+  defp eof(_, context, _, _), do: {:cont, context}
+end
+
 defmodule LastCrusader.Micropub.Hugo do
   @moduledoc """
     Generates Hugo compatible data, file content, file name
   """
+  import LastCrusader.Micropub.MdParser
+
   alias LastCrusader.Micropub.PostTypeDiscovery, as: Post
   alias LastCrusader.Utils.Toml, as: Toml
   @type path() :: String.t()
@@ -58,10 +87,6 @@ defmodule LastCrusader.Micropub.Hugo do
     Parameters:
     - toml_content: the file's content (with TOML frontmatter)
 
-    Some help from http://scottradcliff.com/parsing-hyperlinks-in-markdown.html
-
-    Yes, using a Regex is weak...
-
     Handles my personal special case with my "indienews" shortcode
   """
   @spec extract_links(Toml.toml()) :: list(url())
@@ -89,8 +114,10 @@ defmodule LastCrusader.Micropub.Hugo do
         "Also posted on [indienews](https://news.indieweb.org/fr)"
       )
 
-    Regex.scan(~r/\[(?<text>[\w\s\.]+)\]\((?<url>https?\:\/\/.*\..*)\)/U, patched_content)
-    |> Enum.map(fn x -> Enum.at(x, 2) end)
+    case extract_md_link(patched_content) do
+      {:ok, result, _, _, _, _} -> result
+      _ -> []
+    end
   end
 
   defp extract_links_in_frontmatter(frontmatter) do

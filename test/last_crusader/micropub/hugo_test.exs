@@ -307,6 +307,18 @@ defmodule LastCrusader.HugoTest do
       assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
     end
 
+    test "one fake link" do
+      toml_content = """
+      +++
+      key = "value"
+      +++
+      Some markdown content:
+      Here is [not a link] (https://not-some-url.org/).
+      """
+
+      assert Hugo.extract_links(toml_content) == []
+    end
+
     test "special case: one link from personal hugo short code indienews" do
       toml_content = """
       +++
