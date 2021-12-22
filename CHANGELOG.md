@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.2
+- parse links from markdown: use [nimble parsec](https://hexdocs.pm/nimble_parsec/) instead of regex
+    - Note: it adds a new dependancy to this (great) library
+- dependancies update:
+    - #59: [bump castore from 0.1.13 to 0.1.14](https://github.com/jpcaruana/last_crusader/pull/59)
+    - #60: [bump tesla from 1.4.3 to 1.4.4](https://github.com/jpcaruana/last_crusader/pull/60)
+    - #61: [bump jason from 1.2.2 to 1.3.0](https://github.com/jpcaruana/last_crusader/pull/61)
+
 ## 0.7.1
 - micropub: fix date conversion to Hugo (respect the timezone)
     - removed comptatibility with Elixir < 1.12
