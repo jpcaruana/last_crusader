@@ -7,7 +7,7 @@
     <meta name="generator" content="ExDoc v0.26.0">
     <meta name="project" content="Last Crusader v0.7.1">
 
-    <title>LastCrusader.Micropub.MicropubHandler — Last Crusader v0.7.1</title>
+    <title>LastCrusader.Micropub.MdParser — Last Crusader v0.7.1</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
     <script src="dist/sidebar_items-80929716e0.js"></script>
@@ -80,10 +80,10 @@ Last Crusader
     <div id="content" class="content-inner">
 
 <h1>
-  <span translate="no">LastCrusader.Micropub.MicropubHandler</span> 
+  <span translate="no">LastCrusader.Micropub.MdParser</span> 
   <small class="app-vsn" translate="no">(Last Crusader v0.7.1)</small>
 
-    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L1" title="View Source" class="view-source" rel="help">
       <span class="icon-code" aria-hidden="true"></span>
       <span class="sr-only">View Source</span>
     </a>
@@ -93,8 +93,7 @@ Last Crusader
 
 
   <section id="moduledoc">
-<p>The Micropub protocol is used to create, update and delete posts on one's own domain using third-party clients.</p><p>Web apps and native apps (e.g., iPhone, Android) can use Micropub to post and edit articles, short notes, comments,
-likes, photos, events or other kinds of posts on your own website.</p><p>cf full specification: <a href="https://micropub.spec.indieweb.org/">https://micropub.spec.indieweb.org/</a></p><p>see also <a href="LastCrusader.Micropub.PostTypeDiscovery.html"><code class="inline">LastCrusader.Micropub.PostTypeDiscovery</code></a>.</p>
+<p>  Mardown parser: extracts links</p>
   </section>
 
 
@@ -114,21 +113,11 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#publish/1" translate="no">publish(conn)</a>
+          <a href="#extract_md_link/2" translate="no">extract_md_link(binary, opts \\ [])</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>Handles micropublish demands from HTTP</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#query/1" translate="no">query(conn)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Handles query requests</p></div>
+          <div class="summary-synopsis"><p>Parses the given <code class="inline">binary</code> as extract_md_link.</p></div>
 
       </div>
 
@@ -146,16 +135,18 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="publish/1">
+<section class="detail" id="extract_md_link/2">
+
+    <span id="extract_md_link/1"></span>
 
   <div class="detail-header">
-    <a href="#publish/1" class="detail-link" title="Link to this function">
+    <a href="#extract_md_link/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">publish(conn)</h1>
+    <h1 class="signature" translate="no">extract_md_link(binary, opts \\ [])</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L21" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -165,29 +156,27 @@ Functions
 
   <section class="docstring">
 
-<p>Handles micropublish demands from HTTP</p>
-  </section>
-</section>
-<section class="detail" id="query/1">
+      <h2>Specs</h2>
+      <div class="specs">
 
-  <div class="detail-header">
-    <a href="#query/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">query(conn)</h1>
+          <pre translate="no">extract_md_link(<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">keyword</a>()) ::
+  {:ok, [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()], rest, context, line, byte_offset}
+  | {:error, reason, rest, context, line, byte_offset}
+when line: {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), byte_offset},
+     byte_offset: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(),
+     rest: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+     reason: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+     context: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L24" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
+      </div>
 
-
-  </div>
-
-  <section class="docstring">
-
-<p>Handles query requests</p><p>Note: we just reply to the &quot;config&quot; request</p>
+<p>Parses the given <code class="inline">binary</code> as extract_md_link.</p><p>Returns <code class="inline">{:ok, [token], rest, context, position, byte_offset}</code> or
+<code class="inline">{:error, reason, rest, context, line, byte_offset}</code> where <code class="inline">position</code>
+describes the location of the extract_md_link (start position) as <code class="inline">{line, offset_to_start_of_line}</code>.</p><p>To column where the error occurred can be inferred from <code class="inline">byte_offset - offset_to_start_of_line</code>.</p><h2 id="extract_md_link/2-options" class="section-heading">
+  <a href="#extract_md_link/2-options" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Options
+</h2>
+<ul><li><code class="inline">:byte_offset</code> - the byte offset for the whole binary, defaults to 0</li><li><code class="inline">:line</code> - the line and the byte offset into that line, defaults to <code class="inline">{1, byte_offset}</code></li><li><code class="inline">:context</code> - the initial context value. It will be converted to a map</li></ul>
   </section>
 </section>
 

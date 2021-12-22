@@ -3,6 +3,7 @@ LastCrusader.Auth.AuthHandler.html
 LastCrusader.Cache.MemoryTokenStore.html
 LastCrusader.Micropub.GitHub.html
 LastCrusader.Micropub.Hugo.html
+LastCrusader.Micropub.MdParser.html
 LastCrusader.Micropub.MicropubHandler.html
 LastCrusader.Micropub.PostTypeDiscovery.html
 LastCrusader.Micropub.html
@@ -20,8 +21,8 @@ dist/html/fonts/icomoon.eot
 dist/html/fonts/icomoon.svg
 dist/html/fonts/icomoon.ttf
 dist/html/fonts/icomoon.woff
-dist/search_items-888f6da091.js
-dist/sidebar_items-0f02957146.js
+dist/search_items-e7c529fa02.js
+dist/sidebar_items-80929716e0.js
 index.html
 license.html
 readme.html

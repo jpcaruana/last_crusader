@@ -10,7 +10,7 @@
     <title>LastCrusader.Micropub.Hugo — Last Crusader v0.7.1</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-0f02957146.js"></script>
+    <script src="dist/sidebar_items-80929716e0.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -83,7 +83,7 @@ Last Crusader
   <span translate="no">LastCrusader.Micropub.Hugo</span> 
   <small class="app-vsn" translate="no">(Last Crusader v0.7.1)</small>
 
-    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L28" title="View Source" class="view-source" rel="help">
       <span class="icon-code" aria-hidden="true"></span>
       <span class="sr-only">View Source</span>
     </a>
@@ -207,7 +207,7 @@ Types
     </a>
     <h1 class="signature" translate="no">path()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L36" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -236,7 +236,7 @@ Types
     </a>
     <h1 class="signature" translate="no">url()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L8" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L37" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -278,7 +278,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">extract_links(toml_content)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L68" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L93" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -295,7 +295,7 @@ Functions
 
       </div>
 
-<p>  Extracts links from a Hugo post</p><p>  Parameters:</p><ul><li>toml_content: the file's content (with TOML frontmatter)</li></ul><p>  Some help from <a href="http://scottradcliff.com/parsing-hyperlinks-in-markdown.html">http://scottradcliff.com/parsing-hyperlinks-in-markdown.html</a></p><p>  Yes, using a Regex is weak...</p><p>  Handles my personal special case with my &quot;indienews&quot; shortcode</p>
+<p>  Extracts links from a Hugo post</p><p>  Parameters:</p><ul><li>toml_content: the file's content (with TOML frontmatter)</li></ul><p>  Handles my personal special case with my &quot;indienews&quot; shortcode</p>
   </section>
 </section>
 <section class="detail" id="generate_front_matter/3">
@@ -309,7 +309,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_front_matter(date, type, data \\ %{})</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L65" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -342,7 +342,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_path(arg1, name, date)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L139" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L166" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -375,7 +375,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">new(type, date, data)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L14" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L43" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -405,7 +405,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">reverse_url(post_url, host)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L78" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L103" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
