@@ -1,6 +1,7 @@
 # Changelog
 
 ## 0.7.2
+2021/12/22
 - parse links from markdown: use [nimble parsec](https://hexdocs.pm/nimble_parsec/) instead of regex
     - Note: it adds a new dependancy to this (great) library
 - dependancies update:
@@ -9,6 +10,7 @@
     - #61: [bump jason from 1.2.2 to 1.3.0](https://github.com/jpcaruana/last_crusader/pull/61)
 
 ## 0.7.1
+2021/12/03
 - micropub: fix date conversion to Hugo (respect the timezone)
     - removed comptatibility with Elixir < 1.12
 - fix sentry necessary dependancies and install
@@ -17,6 +19,7 @@
     - #49: [bump sentry from 8.0.5 to 8.0.6](https://github.com/jpcaruana/last_crusader/pull/49)
 
 ## 0.7.0
+2021/09/24
 - added [sentry](https://sentry.io/) monitoring
 - dependancies update:
     - #40/#47: [bump tz from 0.19.0 to 0.20.1](https://github.com/jpcaruana/last_crusader/pull/47)
