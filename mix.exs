@@ -56,7 +56,7 @@ defmodule LastCrusader.MixProject do
       {:tz, "~> 0.20.0"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
-      {:webmentions, "~> 1.0.0"},
+      {:webmentions, "~> 2.0.0"},
       {:nimble_parsec, "~> 1.0"},
       # sentry
       {:sentry, "~> 8.0"},
