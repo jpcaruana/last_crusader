@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.3
+2022/01/20
+- webapp: add `Plug.Cowboy.Drainer` for a cleaner shutdown
+- debug mode: webmention sender: more logs
+- dependancies update:
+    - #62: [bump webmentions from 1.0.3 to 2.0.0](https://github.com/jpcaruana/last_crusader/pull/62)
+
 ## 0.7.2
 2021/12/22
 - parse links from markdown: use [nimble parsec](https://hexdocs.pm/nimble_parsec/) instead of regex
