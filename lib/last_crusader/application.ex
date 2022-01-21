@@ -17,6 +17,10 @@ defmodule LastCrusader.Application do
             port: Application.get_env(:last_crusader, :port)
           ]
         ),
+        # :systemd.ready(),
+        # :systemd.set_status(down: [status: "drained"]),
+        {Plug.Cowboy.Drainer, refs: :all, shutdown: 10_000},
+        # :systemd.set_status(down: [status: "draining"]),
         LastCrusader.Cache.Supervisor
       ]
       |> append_if(
