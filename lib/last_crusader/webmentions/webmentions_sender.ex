@@ -52,8 +52,12 @@ defmodule LastCrusader.Webmentions.Sender do
       {:ok, %Tesla.Env{status: 200}} ->
         send_webmentions(origin, links, nb_max_tries, nb_tried)
 
+      {:ok, %Tesla.Env{status: status}} ->
+        Logger.info("HEAD on #{inspect(origin)}: HTTP status=#{inspect(status)}")
+        do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
+
       other ->
-        Logger.info("#{inspect(other)}")
+        Logger.info("HEAD on #{inspect(origin)}: #{inspect(other)}")
         do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
     end
   end
@@ -107,8 +111,13 @@ defmodule LastCrusader.Webmentions.Sender do
 
   defp find_syndication_link(body) do
     case Json.decode(body) do
-      {:ok, %{"url" => url}} -> [url]
-      _ -> []
+      {:ok, %{"url" => url}} ->
+        Logger.info("Syndication link found: #{inspect(url)}")
+        [url]
+
+      _ ->
+        Logger.info("No syndication link found")
+        []
     end
   end
 
@@ -120,6 +129,7 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp update_content([link | _], origin) do
+    Logger.info("Updationg content with syndication link #{inspect(link)}")
     {:ok, origin} = Micropub.add_keyword_to_post(origin, {"copy", link})
     Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
   end
