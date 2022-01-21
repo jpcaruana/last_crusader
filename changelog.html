@@ -10,7 +10,7 @@
     <title>Changelog — Last Crusader v0.7.3</title>
     <link rel="stylesheet" href="dist/elixir-784c12ef29cae13371ff.css" />
 
-    <script src="dist/sidebar_items-6e4f457c77.js"></script>
+    <script src="dist/sidebar_items-03db0d0615.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -94,91 +94,111 @@ Last Crusader
   <span>Changelog</span>
 </h1>
 
-<h2 id="0-7-3" class="section-heading">
+<h2 id="0-7-x" class="section-heading">
+  <a href="#0-7-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.7.x
+</h2>
+<h3 id="0-7-3" class="section-heading">
   <a href="#0-7-3" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.7.3
-</h2>
-<p>2022/01/20</p><ul><li>webapp: add <a href="https://hexdocs.pm/plug_cowboy/2.5.2/Plug.Cowboy.Drainer.html"><code class="inline">Plug.Cowboy.Drainer</code></a> for a cleaner shutdown</li><li>debug mode: webmention sender: more logs</li><li>dependancies update:<ul><li>#62: <a href="https://github.com/jpcaruana/last_crusader/pull/62">bump webmentions from 1.0.3 to 2.0.0</a></li></ul></li></ul><h2 id="0-7-2" class="section-heading">
+</h3>
+<p>2022/01/20</p><ul><li>webapp: add <a href="https://hexdocs.pm/plug_cowboy/2.5.2/Plug.Cowboy.Drainer.html"><code class="inline">Plug.Cowboy.Drainer</code></a> for a cleaner shutdown</li><li>debug mode: webmention sender: more logs</li><li>dependancies update:<ul><li>#62: <a href="https://github.com/jpcaruana/last_crusader/pull/62">bump webmentions from 1.0.3 to 2.0.0</a></li></ul></li></ul><h3 id="0-7-2" class="section-heading">
   <a href="#0-7-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.7.2
-</h2>
-<p>2021/12/22</p><ul><li>parse links from markdown: use <a href="https://hexdocs.pm/nimble_parsec/">nimble parsec</a> instead of regex<ul><li>Note: it adds a new dependancy to this (great) library</li></ul></li><li>dependancies update:<ul><li>#59: <a href="https://github.com/jpcaruana/last_crusader/pull/59">bump castore from 0.1.13 to 0.1.14</a></li><li>#60: <a href="https://github.com/jpcaruana/last_crusader/pull/60">bump tesla from 1.4.3 to 1.4.4</a></li><li>#61: <a href="https://github.com/jpcaruana/last_crusader/pull/61">bump jason from 1.2.2 to 1.3.0</a></li></ul></li></ul><h2 id="0-7-1" class="section-heading">
+</h3>
+<p>2021/12/22</p><ul><li>parse links from markdown: use <a href="https://hexdocs.pm/nimble_parsec/">nimble parsec</a> instead of regex<ul><li>Note: it adds a new dependancy to this (great) library</li></ul></li><li>dependancies update:<ul><li>#59: <a href="https://github.com/jpcaruana/last_crusader/pull/59">bump castore from 0.1.13 to 0.1.14</a></li><li>#60: <a href="https://github.com/jpcaruana/last_crusader/pull/60">bump tesla from 1.4.3 to 1.4.4</a></li><li>#61: <a href="https://github.com/jpcaruana/last_crusader/pull/61">bump jason from 1.2.2 to 1.3.0</a></li></ul></li></ul><h3 id="0-7-1" class="section-heading">
   <a href="#0-7-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.7.1
-</h2>
-<p>2021/12/03</p><ul><li>micropub: fix date conversion to Hugo (respect the timezone)<ul><li>removed comptatibility with Elixir &lt; 1.12</li></ul></li><li>fix sentry necessary dependancies and install</li><li>dependancies update:<ul><li>#50/#55: <a href="https://github.com/jpcaruana/last_crusader/pull/55">bump bump castore from 0.1.11 to 0.1.13</a></li><li>#49: <a href="https://github.com/jpcaruana/last_crusader/pull/49">bump sentry from 8.0.5 to 8.0.6</a></li></ul></li></ul><h2 id="0-7-0" class="section-heading">
+</h3>
+<p>2021/12/03</p><ul><li>micropub: fix date conversion to Hugo (respect the timezone)<ul><li>removed comptatibility with Elixir &lt; 1.12</li></ul></li><li>fix sentry necessary dependancies and install</li><li>dependancies update:<ul><li>#50/#55: <a href="https://github.com/jpcaruana/last_crusader/pull/55">bump bump castore from 0.1.11 to 0.1.13</a></li><li>#49: <a href="https://github.com/jpcaruana/last_crusader/pull/49">bump sentry from 8.0.5 to 8.0.6</a></li></ul></li></ul><h3 id="0-7-0" class="section-heading">
   <a href="#0-7-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.7.0
+</h3>
+<p>2021/09/24</p><ul><li>added <a href="https://sentry.io/">sentry</a> monitoring</li><li>dependancies update:<ul><li>#40/#47: <a href="https://github.com/jpcaruana/last_crusader/pull/47">bump tz from 0.19.0 to 0.20.1</a></li><li>#45: <a href="https://github.com/jpcaruana/last_crusader/pull/45">bump mint from 1.3.0 to 1.4.0</a></li><li>#41: <a href="https://github.com/jpcaruana/last_crusader/pull/41">bump webmentions from 1.0.2 to 1.0.3</a></li><li>#44: <a href="https://github.com/jpcaruana/last_crusader/pull/44">bump plug_cowboy from 2.5.1 to 2.5.2</a><ul><li>telemetry: 0.4.3 -&gt; 1.1.0</li><li>plug: 1.12.0 -&gt; 1.12.1</li><li>cowboy_telemetry: 0.3.1 -&gt; 0.4.0</li></ul></li></ul></li></ul><h2 id="0-6-x" class="section-heading">
+  <a href="#0-6-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.6.x
 </h2>
-<p>2021/09/24</p><ul><li>added <a href="https://sentry.io/">sentry</a> monitoring</li><li>dependancies update:<ul><li>#40/#47: <a href="https://github.com/jpcaruana/last_crusader/pull/47">bump tz from 0.19.0 to 0.20.1</a></li><li>#45: <a href="https://github.com/jpcaruana/last_crusader/pull/45">bump mint from 1.3.0 to 1.4.0</a></li><li>#41: <a href="https://github.com/jpcaruana/last_crusader/pull/41">bump webmentions from 1.0.2 to 1.0.3</a></li><li>#44: <a href="https://github.com/jpcaruana/last_crusader/pull/44">bump plug_cowboy from 2.5.1 to 2.5.2</a><ul><li>telemetry: 0.4.3 -&gt; 1.1.0</li><li>plug: 1.12.0 -&gt; 1.12.1</li><li>cowboy_telemetry: 0.3.1 -&gt; 0.4.0</li></ul></li></ul></li></ul><h2 id="0-6-4" class="section-heading">
+<h3 id="0-6-4" class="section-heading">
   <a href="#0-6-4" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.6.4
-</h2>
-<p>2021/08/12</p><ul><li>fix: <a href="LastCrusader.Micropub.html#add_keyword_to_post/2"><code class="inline">LastCrusader.Micropub.add_keyword_to_post/2</code></a>: one integration test was missing (and an error crept in). I learned how powerfull json decoding was with Tesla...</li><li>dependancies update:<ul><li>remove unused dependancy on toml</li><li>remove unnecessary dependancy on <a href="https://github.com/devinus/poison">Poison</a> (we use <a href="https://github.com/michalmuskala/jason">Jason</a> for json encoding/decoding from now on)</li><li>#34: <a href="https://github.com/jpcaruana/last_crusader/pull/34">bump plug_cowboy from 2.5.0 to 2.5.1</a><ul><li>plug: 1.11.0 -&gt; 1.12.0</li><li>cowlib: 2.9.1 -&gt; 2.11.0</li><li>ranch: 1.7.1 -&gt; 1.8.0</li></ul></li><li>#37: <a href="https://github.com/jpcaruana/last_crusader/pull/37">bump tz from 0.17.0 to 0.19.0</a></li><li>#39: <a href="https://github.com/jpcaruana/last_crusader/pull/39">bump tesla from 1.4.2 to 1.4.3</a></li></ul></li></ul><h2 id="0-6-1" class="section-heading">
+</h3>
+<p>2021/08/12</p><ul><li>fix: <a href="LastCrusader.Micropub.html#add_keyword_to_post/2"><code class="inline">LastCrusader.Micropub.add_keyword_to_post/2</code></a>: one integration test was missing (and an error crept in). I learned how powerfull json decoding was with Tesla...</li><li>dependancies update:<ul><li>remove unused dependancy on toml</li><li>remove unnecessary dependancy on <a href="https://github.com/devinus/poison">Poison</a> (we use <a href="https://github.com/michalmuskala/jason">Jason</a> for json encoding/decoding from now on)</li><li>#34: <a href="https://github.com/jpcaruana/last_crusader/pull/34">bump plug_cowboy from 2.5.0 to 2.5.1</a><ul><li>plug: 1.11.0 -&gt; 1.12.0</li><li>cowlib: 2.9.1 -&gt; 2.11.0</li><li>ranch: 1.7.1 -&gt; 1.8.0</li></ul></li><li>#37: <a href="https://github.com/jpcaruana/last_crusader/pull/37">bump tz from 0.17.0 to 0.19.0</a></li><li>#39: <a href="https://github.com/jpcaruana/last_crusader/pull/39">bump tesla from 1.4.2 to 1.4.3</a></li></ul></li></ul><h3 id="0-6-1" class="section-heading">
   <a href="#0-6-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.6.1
-</h2>
-<p>2021/07/21</p><ul><li>investigation around automatic syndication: match <a href="LastCrusader.Micropub.html#add_keyword_to_post/2"><code class="inline">LastCrusader.Micropub.add_keyword_to_post/2</code></a> response</li><li>some refactor/duplication hunting</li></ul><h2 id="0-6-0" class="section-heading">
+</h3>
+<p>2021/07/21</p><ul><li>investigation around automatic syndication: match <a href="LastCrusader.Micropub.html#add_keyword_to_post/2"><code class="inline">LastCrusader.Micropub.add_keyword_to_post/2</code></a> response</li><li>some refactor/duplication hunting</li></ul><h3 id="0-6-0" class="section-heading">
   <a href="#0-6-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.6.0
+</h3>
+<p>2021/07/16</p><ul><li>update post after automatic syndication via <a href="https://brid.gy/">brid.gy</a>:<ul><li>find twitter syndication link in brid.gy's response</li><li>github:<ul><li>retrieve a file's content</li><li>update a file</li></ul></li><li>new <a href="LastCrusader.Utils.Toml.html"><code class="inline">LastCrusader.Utils.Toml</code></a> module for light/easy Toml manipulation</li></ul></li><li>dependancies update:<ul><li>#28: <a href="https://github.com/jpcaruana/last_crusader/pull/28">bump webmentions from 1.0.1 to 1.0.2</a><ul><li>floki: 0.30.1 -&gt; 0.31.0</li></ul></li><li>#29: <a href="https://github.com/jpcaruana/last_crusader/pull/29">bump tz from 0.16.2 to 0.17.0</a></li><li>#30: <a href="https://github.com/jpcaruana/last_crusader/pull/30">bump tesla from 1.4.1 to 1.4.2</a><ul><li>castore: 0.1.10 -&gt; 0.1.11</li></ul></li></ul></li></ul><h2 id="0-5-x" class="section-heading">
+  <a href="#0-5-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.5.x
 </h2>
-<p>2021/07/16</p><ul><li>update post after automatic syndication via <a href="https://brid.gy/">brid.gy</a>:<ul><li>find twitter syndication link in brid.gy's response</li><li>github:<ul><li>retrieve a file's content</li><li>update a file</li></ul></li><li>new <a href="LastCrusader.Utils.Toml.html"><code class="inline">LastCrusader.Utils.Toml</code></a> module for light/easy Toml manipulation</li></ul></li><li>dependancies update:<ul><li>#28: <a href="https://github.com/jpcaruana/last_crusader/pull/28">bump webmentions from 1.0.1 to 1.0.2</a><ul><li>floki: 0.30.1 -&gt; 0.31.0</li></ul></li><li>#29: <a href="https://github.com/jpcaruana/last_crusader/pull/29">bump tz from 0.16.2 to 0.17.0</a></li><li>#30: <a href="https://github.com/jpcaruana/last_crusader/pull/30">bump tesla from 1.4.1 to 1.4.2</a><ul><li>castore: 0.1.10 -&gt; 0.1.11</li></ul></li></ul></li></ul><h2 id="0-5-4" class="section-heading">
+<h3 id="0-5-4" class="section-heading">
   <a href="#0-5-4" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.5.4
-</h2>
-<p>2021/06/22</p><ul><li>dependancies update:<ul><li>#14: <a href="https://github.com/jpcaruana/last_crusader/pull/14">bump plug_cowboy from 2.4.1 to 2.5.0</a><ul><li>telemetry: 0.4.2 -&gt; 0.4.3</li></ul></li><li>#18/#20: <a href="https://github.com/jpcaruana/last_crusader/pull/20">bump webmentions from 0.5.3 to 1.0.1</a> (with contributions from me)</li><li>#19/#21/#24: <a href="https://github.com/jpcaruana/last_crusader/pull/24">bump tz from 0.12.0 to 0.16.2 </a></li><li>#22: <a href="https://github.com/jpcaruana/last_crusader/pull/22">bump mint from 1.2.1 to 1.3.0</a></li></ul></li><li>script to make a release that targets a debian: <code class="inline">./debian_release.sh</code> (uses docker)</li></ul><h2 id="0-5-3" class="section-heading">
+</h3>
+<p>2021/06/22</p><ul><li>dependancies update:<ul><li>#14: <a href="https://github.com/jpcaruana/last_crusader/pull/14">bump plug_cowboy from 2.4.1 to 2.5.0</a><ul><li>telemetry: 0.4.2 -&gt; 0.4.3</li></ul></li><li>#18/#20: <a href="https://github.com/jpcaruana/last_crusader/pull/20">bump webmentions from 0.5.3 to 1.0.1</a> (with contributions from me)</li><li>#19/#21/#24: <a href="https://github.com/jpcaruana/last_crusader/pull/24">bump tz from 0.12.0 to 0.16.2 </a></li><li>#22: <a href="https://github.com/jpcaruana/last_crusader/pull/22">bump mint from 1.2.1 to 1.3.0</a></li></ul></li><li>script to make a release that targets a debian: <code class="inline">./debian_release.sh</code> (uses docker)</li></ul><h3 id="0-5-3" class="section-heading">
   <a href="#0-5-3" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.5.3
-</h2>
-<p>2021/04/16</p><ul><li>micropub:<ul><li>Hugo: fix links extraction from Hugo posts</li><li>Hugo: fix: treat <code class="inline">mp-syndicate-to</code> property as a <code class="inline">syndicate-to</code> one</li><li>webmention: add automatic syndication to twitter.com (via <a href="https://brid.gy/">brid.gy</a>)</li><li>better logs</li></ul></li></ul><h2 id="0-5-0" class="section-heading">
+</h3>
+<p>2021/04/16</p><ul><li>micropub:<ul><li>Hugo: fix links extraction from Hugo posts</li><li>Hugo: fix: treat <code class="inline">mp-syndicate-to</code> property as a <code class="inline">syndicate-to</code> one</li><li>webmention: add automatic syndication to twitter.com (via <a href="https://brid.gy/">brid.gy</a>)</li><li>better logs</li></ul></li></ul><h3 id="0-5-0" class="section-heading">
   <a href="#0-5-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.5.0
+</h3>
+<p>2021/04/16</p><ul><li>micropub:<ul><li>Hugo: support <code class="inline">like-of</code> types as Notes</li><li>Hugo: support <code class="inline">repost-of</code> types as Notes</li></ul></li><li>webmention: check if origin exists every minute with a <code class="inline">HEAD</code> HTTP request. It will prevent us from waiting too long for the content to be published</li></ul><h2 id="0-4-x" class="section-heading">
+  <a href="#0-4-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.4.x
 </h2>
-<p>2021/04/16</p><ul><li>micropub:<ul><li>Hugo: support <code class="inline">like-of</code> types as Notes</li><li>Hugo: support <code class="inline">repost-of</code> types as Notes</li></ul></li><li>webmention: check if origin exists every minute with a <code class="inline">HEAD</code> HTTP request. It will prevent us from waiting too long for the content to be published</li></ul><h2 id="0-4-3" class="section-heading">
+<h3 id="0-4-3" class="section-heading">
   <a href="#0-4-3" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.4.3
-</h2>
-<p>2021/04/14</p><ul><li>micropub:<ul><li>Hugo: support <code class="inline">in-reply-to</code> types as Notes</li><li>webmention: add <a href="https://brid.gy/">brid.gy</a> webmention endpoint for:<ul><li>twitter.com</li><li>github.com</li></ul></li></ul></li><li>dependancies update:<ul><li>#11: <a href="https://github.com/jpcaruana/last_crusader/pull/11">bump tesla from 1.4.0 to 1.4.1</a><ul><li>mime: 1.5.0 -&gt; 1.6.0</li></ul></li></ul></li></ul><h2 id="0-4-0" class="section-heading">
+</h3>
+<p>2021/04/14</p><ul><li>micropub:<ul><li>Hugo: support <code class="inline">in-reply-to</code> types as Notes</li><li>webmention: add <a href="https://brid.gy/">brid.gy</a> webmention endpoint for:<ul><li>twitter.com</li><li>github.com</li></ul></li></ul></li><li>dependancies update:<ul><li>#11: <a href="https://github.com/jpcaruana/last_crusader/pull/11">bump tesla from 1.4.0 to 1.4.1</a><ul><li>mime: 1.5.0 -&gt; 1.6.0</li></ul></li></ul></li></ul><h3 id="0-4-0" class="section-heading">
   <a href="#0-4-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.4.0
+</h3>
+<p>2021/04/06</p><ul><li>drop support for Elixir &lt; 1.11</li><li>better handling of proxied HTTPS requests (see <a href="https://hexdocs.pm/plug/Plug.RewriteOn.html">Plug.RewriteOn</a>)</li><li>CI: <ul><li>added doctor to check</li><li>added credo to check</li></ul></li><li>added as much Typespecs as possible</li><li>dependancies update:<ul><li>#10: <a href="https://github.com/jpcaruana/last_crusader/pull/10">bump webmentions from 0.5.2 to 0.5.3</a></li><li>remove dependancy to timex: drop support to Elixir &lt; 1.11</li></ul></li></ul><h2 id="0-3-x" class="section-heading">
+  <a href="#0-3-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.3.x
 </h2>
-<p>2021/04/06</p><ul><li>drop support for Elixir &lt; 1.11</li><li>better handling of proxied HTTPS requests (see <a href="https://hexdocs.pm/plug/Plug.RewriteOn.html">Plug.RewriteOn</a>)</li><li>CI: <ul><li>added doctor to check</li><li>added credo to check</li></ul></li><li>added as much Typespecs as possible</li><li>dependancies update:<ul><li>#10: <a href="https://github.com/jpcaruana/last_crusader/pull/10">bump webmentions from 0.5.2 to 0.5.3</a></li><li>remove dependancy to timex: drop support to Elixir &lt; 1.11</li></ul></li></ul><h2 id="0-3-4" class="section-heading">
+<h3 id="0-3-4" class="section-heading">
   <a href="#0-3-4" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.3.4
-</h2>
-<p>2021/03/04</p><ul><li>micropub/webmention: Handles my personal special case with my &quot;indienews&quot; Hugo shortcode</li></ul><h2 id="0-3-3" class="section-heading">
+</h3>
+<p>2021/03/04</p><ul><li>micropub/webmention: Handles my personal special case with my &quot;indienews&quot; Hugo shortcode</li></ul><h3 id="0-3-3" class="section-heading">
   <a href="#0-3-3" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.3.3
-</h2>
-<p>2021/03/02</p><ul><li>micropub: fix Github integration</li><li>#5: dependancies: <a href="https://github.com/jpcaruana/last_crusader/pull/5">bump timex from 3.6.3 to 3.6.4</a><pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="ss">tzdata</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="o">.</span><span class="mi">5</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">1.1</span><span class="o">.</span><span class="mi">0</span></code></pre></li></ul><h2 id="0-3-2" class="section-heading">
+</h3>
+<p>2021/03/02</p><ul><li>micropub: fix Github integration</li><li>#5: dependancies: <a href="https://github.com/jpcaruana/last_crusader/pull/5">bump timex from 3.6.3 to 3.6.4</a><ul><li>tzdata: 1.0.5 -&gt; 1.1.0</li></ul></li></ul><h3 id="0-3-2" class="section-heading">
   <a href="#0-3-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.3.2
-</h2>
-<p>2021/02/25</p><ul><li>micropub: <ul><li>fix encoding issues from another weird long dash (see also release 0.2.2)</li><li>extract links from bookmark posts for webmention</li></ul></li><li>dependancies: remove unnecessary dependancy to Tentacat</li></ul><h2 id="0-3-1" class="section-heading">
+</h3>
+<p>2021/02/25</p><ul><li>micropub: <ul><li>fix encoding issues from another weird long dash (see also release 0.2.2)</li><li>extract links from bookmark posts for webmention</li></ul></li><li>dependancies: remove unnecessary dependancy to Tentacat</li></ul><h3 id="0-3-1" class="section-heading">
   <a href="#0-3-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.3.1
-</h2>
-<p>2021/02/24</p><ul><li>added /status route for remote monitoring</li><li>better logging configuration</li></ul><h2 id="0-3-0" class="section-heading">
+</h3>
+<p>2021/02/24</p><ul><li>added /status route for remote monitoring</li><li>better logging configuration</li></ul><h3 id="0-3-0" class="section-heading">
   <a href="#0-3-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.3.0
+</h3>
+<p>2021/02/24</p><ul><li>micropub: send webmentions to mentionned URL in published content (waits for a publishing delay from Github/Netlify)</li></ul><h2 id="0-2-x" class="section-heading">
+  <a href="#0-2-x" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  0.2.x
 </h2>
-<p>2021/02/24</p><ul><li>micropub: send webmentions to mentionned URL in published content (waits for a publishing delay from Github/Netlify)</li></ul><h2 id="0-2-2" class="section-heading">
+<h3 id="0-2-2" class="section-heading">
   <a href="#0-2-2" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.2.2
-</h2>
-<p>2021/02/11</p><ul><li>micropub: fix encoding issues from weird long dash</li><li>dependancies update:<ul><li>#3: <a href="https://github.com/jpcaruana/last_crusader/pull/3">bump plug_cowboy from 2.3.0 to 2.4.1</a><ul><li>cowboy_telemetry: 0.3.1</li></ul></li></ul></li></ul><h2 id="0-2-1" class="section-heading">
+</h3>
+<p>2021/02/11</p><ul><li>micropub: fix encoding issues from weird long dash</li><li>dependancies update:<ul><li>#3: <a href="https://github.com/jpcaruana/last_crusader/pull/3">bump plug_cowboy from 2.3.0 to 2.4.1</a><ul><li>cowboy_telemetry: 0.3.1</li></ul></li></ul></li></ul><h3 id="0-2-1" class="section-heading">
   <a href="#0-2-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.2.1
-</h2>
-<p>2021/01/28</p><ul><li>micropub: fix encoding issues from emojis</li></ul><h2 id="0-2-0" class="section-heading">
+</h3>
+<p>2021/01/28</p><ul><li>micropub: fix encoding issues from emojis</li></ul><h3 id="0-2-0" class="section-heading">
   <a href="#0-2-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   0.2.0
-</h2>
-<p>2020/11/18</p><ul><li>First &quot;production&quot; release</li></ul><h2 id="0-1-0" class="section-heading">
-  <a href="#0-1-0" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
-  0.1.0
-</h2>
-<ul><li>Draft / test</li></ul>
+</h3>
+<p>2020/11/18</p><ul><li>First &quot;production&quot; release (lol)</li></ul>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
