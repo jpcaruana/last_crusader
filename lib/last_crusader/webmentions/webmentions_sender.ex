@@ -52,7 +52,8 @@ defmodule LastCrusader.Webmentions.Sender do
       {:ok, %Tesla.Env{status: 200}} ->
         send_webmentions(origin, links, nb_max_tries, nb_tried)
 
-      _ ->
+      other ->
+        Logger.info("#{inspect(other)}")
         do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
     end
   end
