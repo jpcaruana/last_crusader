@@ -1,6 +1,12 @@
 # Changelog
 
 ## 0.7.x
+### 0.7.4
+2022/02/02
+- dependancies update:
+    - #69: [bump castore from 0.1.14 to 0.1.15](https://github.com/jpcaruana/last_crusader/pull/69)
+    - #67: [bump nimble_parsec from 1.2.0 to 1.2.1](https://github.com/jpcaruana/last_crusader/pull/67)
+
 ### 0.7.3
 2022/01/20
 - webapp: add `Plug.Cowboy.Drainer` for a cleaner shutdown
