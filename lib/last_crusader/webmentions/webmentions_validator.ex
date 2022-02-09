@@ -31,7 +31,7 @@ defmodule LastCrusader.Webmentions.Validator do
   """
   @spec validate_content(URI.t(), URI.t()) :: {:ok, :valid} | {:error, reason()}
   def validate_content(source_url, target_url) do
-    with {:ok, response} <- Tesla.get(source_url),
+    with {:ok, response} <- Tesla.get(URI.to_string(source_url)),
          {:ok, body} <- success?(:ok, response),
          {:ok, _} <- document_contains_link(body, target_url) do
       {:ok, :valid}

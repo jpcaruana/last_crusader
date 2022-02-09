@@ -89,6 +89,7 @@ defmodule LastCrusader.Router do
 
   def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
     Logger.error("Error on request: #{inspect(kind)} / : #{inspect(reason)}")
+
     error_message =
       if Mix.env() in ["test", "dev"] do
         "Something went wrong: #{inspect(kind)} / #{inspect(reason)}}"
