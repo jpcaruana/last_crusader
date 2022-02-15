@@ -234,6 +234,8 @@ defmodule LastCrusader.Micropub.Hugo do
     |> RemoveEmoji.sanitize()
     |> String.replace("—", "-")
     |> String.replace("–", "-")
+    |> String.replace("{{< twittos ", "")
+    |> String.replace(" >}}", "")
     |> Slugger.slugify_downcase()
     |> Slugger.truncate_slug(31)
   end
