@@ -1,6 +1,14 @@
 # Changelog
 
 ## 0.7.x
+### 0.7.5
+2022/02/15
+- micropub: Hugo: avoid hugo shortcode for twitter user for filename generation
+- dependancies update:
+    - #71: [bump hackney from 1.18.0 to 1.18.1](https://github.com/jpcaruana/last_crusader/pull/71)
+        - certify: 2.8.0 -> 2.9.0
+    - #72: [bump nimble_parsec from 1.2.1 to 1.2.2](https://github.com/jpcaruana/last_crusader/pull/72)
+
 ### 0.7.4
 2022/02/02
 - dependancies update:
