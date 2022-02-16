@@ -76,7 +76,8 @@ defmodule LastCrusader.MixProject do
 
   defp aliases do
     [
-      pkg: ["cmd ./build_container"]
+      pkg: ["cmd ./build_container"],
+      sentry_recompile: ["compile", "deps.compile sentry --force"]
     ]
   end
 end
