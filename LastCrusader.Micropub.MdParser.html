@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.0">
+    <meta name="generator" content="ExDoc v0.28.1">
     <meta name="project" content="Last Crusader v0.7.5">
 
     <title>LastCrusader.Micropub.MdParser — Last Crusader v0.7.5</title>
-    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
+    <link rel="stylesheet" href="dist/elixir-b2f127a8512920f0fe13.css" />
 
     <script src="dist/sidebar_items-03db0d0615.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
+    <script async src="dist/app-073abeeda7b7e6d5d7e9.js"></script>
 
 
   </head>
@@ -32,7 +32,7 @@
 
 
 <section class="sidebar">
-  <button class="sidebar-button sidebar-toggle">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
     <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
   </button>
 
@@ -44,6 +44,7 @@
       <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -179,7 +180,9 @@ when line: {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_i
 <p>Parses the given <code class="inline">binary</code> as extract_md_link.</p><p>Returns <code class="inline">{:ok, [token], rest, context, position, byte_offset}</code> or
 <code class="inline">{:error, reason, rest, context, line, byte_offset}</code> where <code class="inline">position</code>
 describes the location of the extract_md_link (start position) as <code class="inline">{line, offset_to_start_of_line}</code>.</p><p>To column where the error occurred can be inferred from <code class="inline">byte_offset - offset_to_start_of_line</code>.</p><h2 id="extract_md_link/2-options" class="section-heading">
-  <a href="#extract_md_link/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#extract_md_link/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">options</p>
+  </a>
   Options
 </h2>
 <ul><li><code class="inline">:byte_offset</code> - the byte offset for the whole binary, defaults to 0</li><li><code class="inline">:line</code> - the line and the byte offset into that line, defaults to <code class="inline">{1, byte_offset}</code></li><li><code class="inline">:context</code> - the initial context value. It will be converted to a map</li></ul>
@@ -193,7 +196,7 @@ describes the location of the extract_md_link (start position) as <code class="i
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.1) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

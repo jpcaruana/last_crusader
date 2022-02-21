@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.0">
+    <meta name="generator" content="ExDoc v0.28.1">
     <meta name="project" content="Last Crusader v0.7.5">
 
     <title>LastCrusader.Auth.AuthHandler — Last Crusader v0.7.5</title>
-    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
+    <link rel="stylesheet" href="dist/elixir-b2f127a8512920f0fe13.css" />
 
     <script src="dist/sidebar_items-03db0d0615.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
+    <script async src="dist/app-073abeeda7b7e6d5d7e9.js"></script>
 
 
   </head>
@@ -32,7 +32,7 @@
 
 
 <section class="sidebar">
-  <button class="sidebar-button sidebar-toggle">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
     <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
   </button>
 
@@ -44,6 +44,7 @@
       <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -171,7 +172,9 @@ Functions
   <section class="docstring">
 
 <p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p><h2 id="auth_endpoint/1-parameters" class="section-heading">
-  <a href="#auth_endpoint/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#auth_endpoint/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">parameters</p>
+  </a>
   Parameters:
 </h2>
 <ul><li>me:
@@ -211,7 +214,9 @@ For authorization, the scope contains a space-separated list of scopes that the 
 </span><span class="n">code</span><span class="o">=</span><span class="n">xxxxxxxx</span><span class="w">
 </span><span class="o">&amp;</span><span class="n">redirect_uri</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">callback</span><span class="w">
 </span><span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span></code></pre><p>After the authorization server verifies that redirect_uri, client_id match the code given, the response will include the &quot;me&quot; value indicating the URL of the user who signed in. The response content-type should be either application/x-www-form-urlencoded or application/json depending on the value of the HTTP Accept header.</p><h2 id="code_verification/1-parameters" class="section-heading">
-  <a href="#code_verification/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#code_verification/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">parameters</p>
+  </a>
   Parameters:
 </h2>
 <ul><li>me:
@@ -227,7 +232,7 @@ This may be different from the me parameter that the user originally entered, bu
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.1) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
