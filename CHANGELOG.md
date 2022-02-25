@@ -1,6 +1,13 @@
 # Changelog
 
 ## 0.7.x
+### 0.7.6
+2022/02/25
+- micropub: Hugo: avoid markdown 'quote' char (`>`) for filename generation
+- dependancies update:
+    - #74: [bump mint from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/74)
+        - added dep on hpax 0.1.1
+
 ### 0.7.5
 2022/02/15
 - micropub: Hugo: avoid hugo shortcode for twitter user for filename generation
