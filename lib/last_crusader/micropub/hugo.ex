@@ -236,6 +236,7 @@ defmodule LastCrusader.Micropub.Hugo do
     |> String.replace("–", "-")
     |> String.replace("{{< twittos ", "")
     |> String.replace(" >}}", "")
+    |> String.replace(">", "")
     |> Slugger.slugify_downcase()
     |> Slugger.truncate_slug(31)
   end
