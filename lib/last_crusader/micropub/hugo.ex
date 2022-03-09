@@ -47,7 +47,7 @@ defmodule LastCrusader.Micropub.Hugo do
       |> Map.new()
       |> Map.pop(:content)
 
-    name = generate_name(content[:name], text)
+    name = generate_name(content[:name], text, date)
 
     path_date = Calendar.strftime(date, "%Y/%m/%d")
     file_name = "content/" <> generate_path(type, name, path_date) <> "/index.md"
@@ -217,15 +217,15 @@ defmodule LastCrusader.Micropub.Hugo do
     end
   end
 
-  defp generate_name(nil, nil) do
-    Integer.to_string(Enum.random(10..100_000))
+  defp generate_name(nil, nil, date) do
+    Integer.to_string(DateTime.to_unix(date, :second))
   end
 
-  defp generate_name(nil, text) do
+  defp generate_name(nil, text, _date) do
     slug(text)
   end
 
-  defp generate_name(name, _) do
+  defp generate_name(name, _, _date) do
     slug(name)
   end
 

@@ -266,14 +266,14 @@ defmodule LastCrusader.HugoTest do
              """
     end
 
-    test "it should create bookmarks with an empty content (name is random)" do
+    test "it should create bookmarks with an empty content" do
       {file_name, _, _} =
         Hugo.new(:bookmark, now(), [
           {"content", nil},
           {"bookmark-of", "http://some-url.com/"}
         ])
 
-      assert String.contains?(file_name, "content/bookmarks/2015/01/23/")
+      assert file_name == "content/bookmarks/2015/01/23/1422057007/index.md"
     end
 
     test "it should sanitize input from emojis to prevent UnicodeConversionError from happening" do
