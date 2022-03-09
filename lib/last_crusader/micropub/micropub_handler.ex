@@ -84,6 +84,32 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     end
   end
 
+  @doc """
+  Handles comment posts from HTTP
+  """
+  def comment(conn) do
+    case Micropub.comment(as_map(conn.params), DateTime.now!("Europe/Paris")) do
+      {:ok, content_url} ->
+        Logger.info("Content will be published here: #{inspect(content_url)}")
+
+        conn
+        |> put_headers(%{location: content_url})
+        |> send_resp(202, "Accepted")
+
+      {:error, :bad_token} ->
+        Logger.error("bad auth token")
+
+        conn
+        |> send_resp(401, "bad auth token")
+
+      other_error ->
+        Logger.error("bad request: #{inspect(other_error)}")
+
+        conn
+        |> send_resp(400, "bad request")
+    end
+  end
+
   defp json_reply(conn, map) do
     conn
     |> put_resp_content_type("application/json")

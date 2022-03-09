@@ -3,40 +3,85 @@ defmodule LastCrusader.Micropub.MicropubTest do
   import Tesla.Mock
   alias LastCrusader.Micropub
 
-  test "Micropub.add_keyword_to_post/2" do
-    filecontent_doc = %Tesla.Env{
-      status: 200,
-      body: ok_get_sha_body(),
-      headers: [
-        {"Status", "200 OK"},
-        {"Content-Type", "application/json; charset=utf-8"},
-        {"Content-Length", "1977"},
-        {"Server", "GitHub.com"},
-        {"X-GitHub-Media-Type", "github.v3; format=json"}
-      ]
-    }
+  describe "Micropub.add_keyword_to_post/2" do
+    test "success" do
+      filecontent_doc = %Tesla.Env{
+        status: 200,
+        body: ok_get_sha_body(),
+        headers: [
+          {"Status", "200 OK"},
+          {"Content-Type", "application/json; charset=utf-8"},
+          {"Content-Length", "1977"},
+          {"Server", "GitHub.com"},
+          {"X-GitHub-Media-Type", "github.v3; format=json"}
+        ]
+      }
 
-    updated_doc = %Tesla.Env{
-      status: 200,
-      body: ok_create_body(),
-      headers: [
-        {"Status", "200 OK"},
-        {"Content-Type", "application/json; charset=utf-8"},
-        {"Content-Length", "1977"},
-        {"Server", "GitHub.com"},
-        {"X-GitHub-Media-Type", "github.v3; format=json"}
-      ]
-    }
+      updated_doc = %Tesla.Env{
+        status: 200,
+        body: ok_create_body(),
+        headers: [
+          {"Status", "200 OK"},
+          {"Content-Type", "application/json; charset=utf-8"},
+          {"Content-Length", "1977"},
+          {"Server", "GitHub.com"},
+          {"X-GitHub-Media-Type", "github.v3; format=json"}
+        ]
+      }
 
-    mock(fn
-      %{method: :get} -> {:ok, filecontent_doc}
-      %{method: :put} -> {:ok, updated_doc}
-    end)
+      mock(fn
+        %{method: :get} -> {:ok, filecontent_doc}
+        %{method: :put} -> {:ok, updated_doc}
+      end)
 
-    published_page_url = "https://some.url.fr/notes/2021/08/06/test.hthml"
+      published_page_url = "https://some.url.fr/notes/2021/08/06/test.hthml"
 
-    {:ok, ^published_page_url} =
-      Micropub.add_keyword_to_post(published_page_url, {"newkey", "value"})
+      {:ok, ^published_page_url} =
+        Micropub.add_keyword_to_post(published_page_url, {"newkey", "value"})
+    end
+  end
+
+  describe "Micropub.comment/2" do
+    test "success" do
+      filecontent_doc = %Tesla.Env{
+        status: 200,
+        body: ok_get_sha_body(),
+        headers: [
+          {"Status", "200 OK"},
+          {"Content-Type", "application/json; charset=utf-8"},
+          {"Content-Length", "1977"},
+          {"Server", "GitHub.com"},
+          {"X-GitHub-Media-Type", "github.v3; format=json"}
+        ]
+      }
+
+      comment_doc = %Tesla.Env{
+        status: 200,
+        body: ok_create_body(),
+        headers: [
+          {"Status", "200 OK"},
+          {"Content-Type", "application/json; charset=utf-8"},
+          {"Content-Length", "1977"},
+          {"Server", "GitHub.com"},
+          {"X-GitHub-Media-Type", "github.v3; format=json"}
+        ]
+      }
+
+      mock(fn
+        %{method: :get} -> {:ok, filecontent_doc}
+        %{method: :put} -> {:ok, comment_doc}
+      end)
+
+      params = %{
+        :author => "Author of the Comment",
+        :original_page => "https://some.web.com/notes/2021/07/15/a-post/",
+        :comment => "This is the comment: Great content!",
+        :date => "2015-01-23T20:00:00Z",
+        :link => "https://some-user-page.com"
+      }
+
+      assert {:ok, :content_created} == Micropub.comment(params, now())
+    end
   end
 
   defp ok_create_body() do
@@ -132,5 +177,11 @@ defmodule LastCrusader.Micropub.MicropubTest do
       "url" =>
         "https://api.github.com/repos/jpcaruana/jp.caruana.fr/contents/content/notes/2021/08/06/test3.md?ref=master"
     }
+  end
+
+  defp now() do
+    # int value: 1422057007
+    {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
+    fake_now
   end
 end

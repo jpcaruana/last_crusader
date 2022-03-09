@@ -512,10 +512,16 @@ defmodule LastCrusader.HugoTest do
     end
   end
 
-  describe "Hugo.reverse_url/2" do
+  describe "Hugo.reverse_url/2 --  Hugo.reverse_url_root/2" do
     test "Reverse post path: URL -> filepath" do
       assert "content/notes/2021/07/15/a-post/index.md" ==
                Hugo.reverse_url(
+                 "https://some.web.com/notes/2021/07/15/a-post/",
+                 "https://some.web.com/"
+               )
+
+      assert "content/notes/2021/07/15/a-post" ==
+               Hugo.reverse_url_root(
                  "https://some.web.com/notes/2021/07/15/a-post/",
                  "https://some.web.com/"
                )

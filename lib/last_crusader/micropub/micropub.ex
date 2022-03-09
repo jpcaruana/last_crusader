@@ -58,6 +58,63 @@ defmodule LastCrusader.Micropub do
   end
 
   @doc """
+  Adds a comment to a post into Github repo
+  """
+  def comment(params, now) do
+    me = Application.get_env(:last_crusader, :me)
+    filename = Hugo.reverse_url_root(params.original_page, me)
+
+    comment_filename =
+      filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
+
+    comment_author = params.author
+    comment_content = params.comment
+    # ne pas oublier: hugo format
+    comment_date = params.date
+    # not mandatory, can be nil
+    comment_link = params[:link]
+
+    comment_yml_template = """
+    date: <%= date %>
+    author: <%= author %>
+    <%= if link != nil do %>
+    link: <%= link %>
+    <% end %>
+    comment: |
+      <%= content %>
+    """
+
+    case GitHub.get_file(
+           Application.get_env(:last_crusader, :github_auth),
+           Application.get_env(:last_crusader, :github_user),
+           Application.get_env(:last_crusader, :github_repo),
+           filename,
+           Application.get_env(:last_crusader, :github_branch, "master")
+         ) do
+      {:ok, _page_exists} ->
+        comment_filecontent =
+          EEx.eval_string(comment_yml_template,
+            date: comment_date,
+            author: comment_author,
+            link: comment_link,
+            content: comment_content
+          )
+
+        GitHub.new_file(
+          Application.get_env(:last_crusader, :github_auth),
+          Application.get_env(:last_crusader, :github_user),
+          Application.get_env(:last_crusader, :github_repo),
+          comment_filename,
+          comment_filecontent,
+          Application.get_env(:last_crusader, :github_branch, "master")
+        )
+
+      error ->
+        error
+    end
+  end
+
+  @doc """
   Adds a keyword to a published post (most of the time, it will be the syndication link)
   """
   def add_keyword_to_post(published_page_url, {newkey, value}) do

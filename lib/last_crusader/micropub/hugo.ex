@@ -97,13 +97,21 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc """
+    Retrieves the local directory path of a post from its published public URL
+  """
+  @spec reverse_url_root(url(), url()) :: String.t()
+  def reverse_url_root(post_url, host) do
+    x = String.replace(post_url, host, "")
+    x = Regex.replace(~r/\/(\w*)$/, x, "\\1")
+    "content/" <> x
+  end
+
+  @doc """
     Retrieves the local file path of a post from its published public URL
   """
   @spec reverse_url(url(), url()) :: String.t()
   def reverse_url(post_url, host) do
-    x = String.replace(post_url, host, "")
-    x = Regex.replace(~r/\/(\w*)$/, x, "\\1")
-    "content/" <> x <> "/index.md"
+    reverse_url_root(post_url, host) <> "/index.md"
   end
 
   defp extract_links_in_content(content) do
