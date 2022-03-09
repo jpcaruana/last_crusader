@@ -14,7 +14,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -33,7 +33,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -52,7 +52,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -71,7 +71,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -90,7 +90,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -109,7 +109,7 @@ defmodule LastCrusader.HugoTest do
              Some other markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/my-title.md"
+      assert file_name == "content/notes/2015/01/23/my-title/index.md"
     end
 
     test "it should generate a name without Hugo special code" do
@@ -123,7 +123,7 @@ defmodule LastCrusader.HugoTest do
              Some {{< twittos markdown >}} content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -138,7 +138,7 @@ defmodule LastCrusader.HugoTest do
              > Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
       assert web_path == "notes/2015/01/23/some-markdown-content/"
     end
 
@@ -159,7 +159,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
     end
 
     test "it should rename category to tags" do
@@ -177,7 +177,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
     end
 
     test "it should rename mp-syndicate-to to syndicate_to (micropublish.net)" do
@@ -195,7 +195,7 @@ defmodule LastCrusader.HugoTest do
              Some markdown content
              """
 
-      assert file_name == "content/notes/2015/01/23/some-markdown-content.md"
+      assert file_name == "content/notes/2015/01/23/some-markdown-content/index.md"
     end
 
     test "it should transforms tags into a list" do
@@ -220,7 +220,7 @@ defmodule LastCrusader.HugoTest do
           {"content", "it should shorten the generated slug for long content"}
         ])
 
-      assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated.md"
+      assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated/index.md"
     end
 
     test "it should shorten the generated slug for long name" do
@@ -229,7 +229,7 @@ defmodule LastCrusader.HugoTest do
           {"content", "it should shorten the generated slug for long name"}
         ])
 
-      assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated.md"
+      assert file_name == "content/notes/2015/01/23/it-should-shorten-the-generated/index.md"
     end
 
     test "it should create article" do
@@ -238,7 +238,7 @@ defmodule LastCrusader.HugoTest do
           {"content", "some content"}
         ])
 
-      assert file_name == "content/posts/2015/01/23/some-content.md"
+      assert file_name == "content/posts/2015/01/23/some-content/index.md"
     end
 
     test "it should create bookmarks" do
@@ -247,7 +247,7 @@ defmodule LastCrusader.HugoTest do
           {"content", "some content"}
         ])
 
-      assert file_name == "content/bookmarks/2015/01/23/some-content.md"
+      assert file_name == "content/bookmarks/2015/01/23/some-content/index.md"
     end
 
     test "it should create bookmarks with special tags: " do
@@ -284,7 +284,7 @@ defmodule LastCrusader.HugoTest do
           {"bookmark-of", "https://github.com/dwyl/phoenix-liveview-counter-tutorial"}
         ])
 
-      assert file_name == "content/bookmarks/2015/01/23/dwyl-phoenix-liveview-counter.md"
+      assert file_name == "content/bookmarks/2015/01/23/dwyl-phoenix-liveview-counter/index.md"
     end
 
     test "it should sanitize input from weird '—' char to prevent strange filename from existing" do
@@ -295,7 +295,7 @@ defmodule LastCrusader.HugoTest do
            "https://alembic.com.au/blog/2021-02-05-monitoring-phoenix-liveview-performance"}
         ])
 
-      assert file_name == "content/bookmarks/2015/01/23/alembic-monitoring-phoenix.md"
+      assert file_name == "content/bookmarks/2015/01/23/alembic-monitoring-phoenix/index.md"
     end
 
     test "it should sanitize input from another weird '–' char to prevent strange filename from existing" do
@@ -305,10 +305,10 @@ defmodule LastCrusader.HugoTest do
           {"bookmark-of", "https://randsinrepose.com/archives/how-to-write-a-book/"}
         ])
 
-      assert file_name == "content/bookmarks/2015/01/23/how-to-write-a-book-rands-in.md"
+      assert file_name == "content/bookmarks/2015/01/23/how-to-write-a-book-rands-in/index.md"
     end
 
-    test "generate_filename should fail on inexiting type" do
+    test "generate_filename should fail on non existing type" do
       assert :error == Hugo.generate_path(:inexisting_type, nil, nil)
     end
   end

@@ -50,7 +50,7 @@ defmodule LastCrusader.Micropub.Hugo do
     name = generate_name(content[:name], text)
 
     path_date = Calendar.strftime(date, "%Y/%m/%d")
-    file_name = "content/" <> generate_path(type, name, path_date) <> ".md"
+    file_name = "content/" <> generate_path(type, name, path_date) <> "/index.md"
     web_path = generate_path(type, name, path_date) <> "/"
 
     front_matter = generate_front_matter(date, type, content)
