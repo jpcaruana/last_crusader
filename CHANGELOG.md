@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.8.x
+### 0.8.0
+2022/03/09
+- micropub: Hugo: generate files as [Pages Bundles](https://gohugo.io/content-management/page-bundles/)
+    - as a preparation for welcoming comments in addition to webmentions
+- micropub: Hugo: remove randomness from filename generation (use EPOCH seconds)
+- dependancies update:
+    - #81: [bump nimble_parsec from 1.2.2 to 1.2.3](https://github.com/jpcaruana/last_crusader/pull/81)
+    - #79: [bump webmentions from 2.0.0 to 3.0.0](https://github.com/jpcaruana/last_crusader/pull/79)
+
 ## 0.7.x
 ### 0.7.6
 2022/02/25
