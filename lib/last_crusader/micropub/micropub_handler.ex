@@ -28,6 +28,14 @@ defmodule LastCrusader.Micropub.MicropubHandler do
         |> put_resp_content_type("application/json")
         |> send_resp(200, Json.encode!(Application.get_env(:last_crusader, :micropub_config)))
 
+      "syndicate-to" ->
+        syndicate_to =
+          Map.get(Application.get_env(:last_crusader, :micropub_config), :"syndicate-to")
+
+        conn
+        |> put_resp_content_type("application/json")
+        |> send_resp(200, Json.encode!(%{"syndicate-to": syndicate_to}))
+
       _ ->
         conn
         |> send_resp(404, "Not found")
