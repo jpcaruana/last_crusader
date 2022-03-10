@@ -34,7 +34,10 @@ defmodule LastCrusader.Application do
     started = Supervisor.start_link(children, opts)
 
     {:ok, version} = :application.get_key(:last_crusader, :vsn)
-    Logger.info("Application LastCrusader #{version}: started")
+
+    Logger.info(
+      "Application LastCrusader #{version}: started on port #{Application.get_env(:last_crusader, :port)}}"
+    )
 
     started
   end
