@@ -1,6 +1,11 @@
 # Changelog
 
 ## 0.8.x
+### 0.8.1
+2022/03/10
+- micropub: q=syndicate-to: return syndication links
+- micropub: github: fix reverse URL guessing
+
 ### 0.8.0
 2022/03/09
 - micropub: Hugo: generate files as [Pages Bundles](https://gohugo.io/content-management/page-bundles/)
