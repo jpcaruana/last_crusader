@@ -19,7 +19,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   @doc """
   Handles query requests
 
-  Note: we just reply to the "config" request
+  Note: we just reply to the "config" and "syndicate-to" requests
   """
   def query(conn) do
     case conn.params["q"] do
