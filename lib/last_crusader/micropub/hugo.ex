@@ -103,7 +103,7 @@ defmodule LastCrusader.Micropub.Hugo do
   def reverse_url(post_url, host) do
     x = String.replace(post_url, host, "")
     x = Regex.replace(~r/\/(\w*)$/, x, "\\1")
-    "content/" <> x <> ".md"
+    "content/" <> x <> "/index.md"
   end
 
   defp extract_links_in_content(content) do

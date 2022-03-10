@@ -512,9 +512,9 @@ defmodule LastCrusader.HugoTest do
     end
   end
 
-  describe "Add a k/v to an existing TOML" do
+  describe "Hugo.reverse_url/2" do
     test "Reverse post path: URL -> filepath" do
-      assert "content/notes/2021/07/15/a-post.md" ==
+      assert "content/notes/2021/07/15/a-post/index.md" ==
                Hugo.reverse_url(
                  "https://some.web.com/notes/2021/07/15/a-post/",
                  "https://some.web.com/"
