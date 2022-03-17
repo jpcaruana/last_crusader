@@ -19,7 +19,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   @doc """
   Handles query requests
 
-  Note: we just reply to the "config" and "syndicate-to" requests
+  Note: we just reply to the "config", "syndicate-to" and "category" requests
   """
   def query(conn) do
     case conn.params["q"] do
@@ -32,9 +32,27 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
         conn |> json_reply(%{"syndicate-to": syndicate_to})
 
+      "category" ->
+        me = Application.get_env(:last_crusader, :me)
+
+        with {:ok, %Tesla.Env{body: body, status: 200}} <- Tesla.get(me <> "tags/index.json"),
+             {:ok, json_body} <- Json.decode(body),
+             {:ok, categories} <- Map.fetch(json_body, "tags") do
+          ordered_by_weight =
+            categories
+            |> Enum.flat_map(&Enum.to_list/1)
+            |> Enum.sort_by(&elem(&1, 1))
+            |> Enum.map(&elem(&1, 0))
+            |> Enum.reverse()
+
+          conn |> json_reply(%{categories: ordered_by_weight})
+        else
+          _ ->
+            conn |> send_resp(404, "Not found")
+        end
+
       _ ->
-        conn
-        |> send_resp(404, "Not found")
+        conn |> send_resp(404, "Not found")
     end
   end
 
