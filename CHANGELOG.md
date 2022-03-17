@@ -1,6 +1,15 @@
 # Changelog
 
 ## 0.8.x
+### 0.8.2
+2022/03/17
+- micropub: q=syndicate-to: return syndication links
+- log server port on application start
+- dependancies update:
+    - bump plug from 1.12.1 to 1.13.4
+    - bump makeup_elixir from 0.15.2 to 0.16.0
+    - bump earmark_parser from 1.4.20 to 1.4.23
+
 ### 0.8.1
 2022/03/10
 - micropub: q=syndicate-to: return syndication links
@@ -205,4 +214,3 @@
 ### 0.2.0
 2020/11/18
 - First "production" release (lol)
-
