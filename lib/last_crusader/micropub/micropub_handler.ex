@@ -24,17 +24,13 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   def query(conn) do
     case conn.params["q"] do
       "config" ->
-        conn
-        |> put_resp_content_type("application/json")
-        |> send_resp(200, Json.encode!(Application.get_env(:last_crusader, :micropub_config)))
+        conn |> json_reply(Application.get_env(:last_crusader, :micropub_config))
 
       "syndicate-to" ->
         syndicate_to =
           Map.get(Application.get_env(:last_crusader, :micropub_config), :"syndicate-to")
 
-        conn
-        |> put_resp_content_type("application/json")
-        |> send_resp(200, Json.encode!(%{"syndicate-to": syndicate_to}))
+        conn |> json_reply(%{"syndicate-to": syndicate_to})
 
       _ ->
         conn
@@ -68,5 +64,11 @@ defmodule LastCrusader.Micropub.MicropubHandler do
         conn
         |> send_resp(400, "bad request")
     end
+  end
+
+  defp json_reply(conn, map) do
+    conn
+    |> put_resp_content_type("application/json")
+    |> send_resp(200, Json.encode!(map))
   end
 end
