@@ -34,20 +34,12 @@ defmodule LastCrusader.Micropub do
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(as_map(params))
            |> Hugo.new(DateTime.now!("Europe/Paris"), params),
-         mentionned_links <- Hugo.extract_links(filecontent),
-         {:ok, :content_created} <-
-           GitHub.new_file(
-             Application.get_env(:last_crusader, :github_auth),
-             Application.get_env(:last_crusader, :github_user),
-             Application.get_env(:last_crusader, :github_repo),
-             filename,
-             filecontent,
-             Application.get_env(:last_crusader, :github_branch, "master")
-           ),
+         mentioned_links <- Hugo.extract_links(filecontent),
+         {:ok, :content_created} <- GitHub.new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
          {:ok, _} <-
            Webmentions.Sender.schedule_webmentions(
-             mentionned_links,
+             mentioned_links,
              content_url,
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
@@ -58,15 +50,13 @@ defmodule LastCrusader.Micropub do
   end
 
   @doc """
-  Adds a comment to a post into Github repo
+  Adds a comment to a post into Github repo.
+
+  It checks that the commented page exists in the Github repo (not on the real website)
   """
   def comment(params, now) do
     me = Application.get_env(:last_crusader, :me)
     filename = Hugo.reverse_url_root(params.original_page, me)
-
-    comment_filename =
-      filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
-
     comment_author = params.author
     comment_content = params.comment
     # ne pas oublier: hugo format
@@ -84,14 +74,11 @@ defmodule LastCrusader.Micropub do
       <%= content %>
     """
 
-    case GitHub.get_file(
-           Application.get_env(:last_crusader, :github_auth),
-           Application.get_env(:last_crusader, :github_user),
-           Application.get_env(:last_crusader, :github_repo),
-           filename,
-           Application.get_env(:last_crusader, :github_branch, "master")
-         ) do
+    case GitHub.get_file(filename) do
       {:ok, _page_exists} ->
+        comment_filename =
+          filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
+
         comment_filecontent =
           EEx.eval_string(comment_yml_template,
             date: comment_date,
@@ -100,14 +87,7 @@ defmodule LastCrusader.Micropub do
             content: comment_content
           )
 
-        GitHub.new_file(
-          Application.get_env(:last_crusader, :github_auth),
-          Application.get_env(:last_crusader, :github_user),
-          Application.get_env(:last_crusader, :github_repo),
-          comment_filename,
-          comment_filecontent,
-          Application.get_env(:last_crusader, :github_branch, "master")
-        )
+        GitHub.new_file(comment_filename, comment_filecontent)
 
       error ->
         error
@@ -121,25 +101,10 @@ defmodule LastCrusader.Micropub do
     host = Application.get_env(:last_crusader, :me)
     filename = Hugo.reverse_url(published_page_url, host)
 
-    with {:ok, filecontent} <-
-           GitHub.get_file(
-             Application.get_env(:last_crusader, :github_auth),
-             Application.get_env(:last_crusader, :github_user),
-             Application.get_env(:last_crusader, :github_repo),
-             filename,
-             Application.get_env(:last_crusader, :github_branch, "master")
-           ),
+    with {:ok, filecontent} <- GitHub.get_file(filename),
          {frontmatter, markdown} <- Toml.extract_frontmatter_and_content(filecontent),
          new_frontmatter <- Toml.update_toml(frontmatter, {newkey, value}),
-         {:ok, :content_updated} <-
-           GitHub.update_file(
-             Application.get_env(:last_crusader, :github_auth),
-             Application.get_env(:last_crusader, :github_user),
-             Application.get_env(:last_crusader, :github_repo),
-             filename,
-             new_frontmatter <> markdown,
-             Application.get_env(:last_crusader, :github_branch, "master")
-           ) do
+         {:ok, :content_updated} <- GitHub.update_file(filename, new_frontmatter <> markdown) do
       {:ok, published_page_url}
     else
       error -> error
