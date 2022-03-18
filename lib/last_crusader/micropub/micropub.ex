@@ -1,6 +1,10 @@
 defmodule LastCrusader.Micropub do
   @moduledoc """
   Handles the _logic_ of micro-publishing.
+
+  See also:
+  - `LastCrusader.Micropub.Hugo`
+  - `LastCrusader.Micropub.Github`
   """
 
   import LastCrusader.Utils.Http
@@ -51,8 +55,26 @@ defmodule LastCrusader.Micropub do
 
   @doc """
   Adds a comment to a post into Github repo.
+  It checks that the commented page exists in the Github repo (not on the real website).
 
-  It checks that the commented page exists in the Github repo (not on the real website)
+  To make it work in Hugo, you have to publish your content as
+  [Pages Bundles](https://gohugo.io/content-management/page-bundles/).
+  In your post template, include the following partial:
+
+      {{ partial "comments.html" . }}
+
+  The Hugo partial ("comments.html") to display comments looks like this:
+
+      {{ $comments := (.Resources.Match "comments/*yml") }}
+
+      {{ range $comments }}
+      <li>
+        <i class="fas fa-reply"></i>
+      {{ $comment := (.Content | transform.Unmarshal) }}
+        <a href="{{ $comment.link }}">{{ $comment.author }}</a> le {{ substr $comment.date 0 10 }} :
+        {{ $comment.comment | markdownify }}
+      </li>
+      {{ end }}
   """
   def comment(params, now) do
     me = Application.get_env(:last_crusader, :me)
@@ -95,7 +117,7 @@ defmodule LastCrusader.Micropub do
   end
 
   @doc """
-  Adds a keyword to a published post (most of the time, it will be the syndication link)
+  Adds a keyword to a published post (most of the time, it will be the syndication link).
   """
   def add_keyword_to_post(published_page_url, {newkey, value}) do
     host = Application.get_env(:last_crusader, :me)
