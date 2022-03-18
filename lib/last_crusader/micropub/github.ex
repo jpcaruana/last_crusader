@@ -5,6 +5,23 @@ defmodule LastCrusader.Micropub.GitHub do
   require Logger
 
   @doc """
+  shortcut for `new_file/6`
+
+  Uses `Application.get_env/2` for default parameters.
+  """
+  @spec new_file(String.t(), String.t()) :: {:ko, atom()} | {:ok, any()}
+  def new_file(filename, filecontent) do
+    new_file(
+      Application.get_env(:last_crusader, :github_auth),
+      Application.get_env(:last_crusader, :github_user),
+      Application.get_env(:last_crusader, :github_repo),
+      filename,
+      filecontent,
+      Application.get_env(:last_crusader, :github_branch, "master")
+    )
+  end
+
+  @doc """
   Creates a commit with the filecontent to GitHub
   """
   @spec new_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
@@ -30,6 +47,23 @@ defmodule LastCrusader.Micropub.GitHub do
   end
 
   @doc """
+  shortcut for `update_file/6`
+
+  Uses `Application.get_env/2` for default parameters.
+  """
+  @spec update_file(String.t(), String.t()) :: {:ko, atom()} | {:ok, any()}
+  def update_file(filename, filecontent) do
+    update_file(
+      Application.get_env(:last_crusader, :github_auth),
+      Application.get_env(:last_crusader, :github_user),
+      Application.get_env(:last_crusader, :github_repo),
+      filename,
+      filecontent,
+      Application.get_env(:last_crusader, :github_branch, "master")
+    )
+  end
+
+  @doc """
   Updates a file on GitHub
   """
   @spec update_file(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
@@ -46,6 +80,22 @@ defmodule LastCrusader.Micropub.GitHub do
         Logger.error("#{inspect(error)}")
         {:ko, :github_error, error}
     end
+  end
+
+  @doc """
+  shortcut for `get_file/5`
+  
+  Uses `Application.get_env/2` for default parameters.
+  """
+  @spec get_file(String.t()) :: {:ko, atom()} | {:ok, any()}
+  def get_file(filename) do
+    get_file(
+      Application.get_env(:last_crusader, :github_auth),
+      Application.get_env(:last_crusader, :github_user),
+      Application.get_env(:last_crusader, :github_repo),
+      filename,
+      Application.get_env(:last_crusader, :github_branch, "master")
+    )
   end
 
   @doc """
