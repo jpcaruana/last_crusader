@@ -12,11 +12,12 @@ Works fine with latest Elixir/OTP, including OTP 24.
 
 ## Todo
 
-- [ ] [IndieAuth](https://indieauth.com/) server
-- [x] [Micropub](https://www.w3.org/TR/micropub/) server
-- [ ] [Webmentions](https://indieweb.org/Webmention):
-    - [X] send webmentions
-    - [ ] receive webmentions
+- [ ] [IndieAuth](https://indieauth.com/) endpoint
+- [x] [Micropub](https://www.w3.org/TR/micropub/) endpoint
+  - [ ] [Webmentions](https://indieweb.org/Webmention):
+      - [X] send webmentions on new posts
+      - [ ] receive webmentions
+- [ ] Comment API
 
 ## Notes to self
 
