@@ -10,7 +10,7 @@
     <title>LastCrusader.Micropub.Hugo — Last Crusader v0.8.2</title>
     <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-6bd90d6c83.js"></script>
+    <script src="dist/sidebar_items-8fcb63f64d.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -148,6 +148,16 @@ Last Crusader
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#convert_date_to_hugo_format/1" translate="no">convert_date_to_hugo_format(date)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Renders the post date into Hugo's expected date format (<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#extract_links/1" translate="no">extract_links(toml_content)</a>
 
         </div>
@@ -193,6 +203,16 @@ Last Crusader
         </div>
 
           <div class="summary-synopsis"><p>  Retrieves the local file path of a post from its published public URL</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#reverse_url_root/2" translate="no">reverse_url_root(post_url, host)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>  Retrieves the local directory path of a post from its published public URL</p></div>
 
       </div>
 
@@ -279,6 +299,34 @@ Types
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="convert_date_to_hugo_format/1">
+
+  <div class="detail-header">
+    <a href="#convert_date_to_hugo_format/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">convert_date_to_hugo_format(date)</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L86" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> convert_date_to_hugo_format(<a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>()) :: BitString.t()</pre>
+
+      </div>
+
+<p>Renders the post date into Hugo's expected date format (<a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>)</p>
+  </section>
+</section>
 <section class="detail" id="extract_links/1">
 
   <div class="detail-header">
@@ -288,7 +336,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">extract_links(toml_content)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L93" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L99" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -351,7 +399,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_path(arg1, name, date)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L166" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L180" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -413,7 +461,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">reverse_url(post_url, host)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L103" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L119" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -430,6 +478,34 @@ Functions
       </div>
 
 <p>  Retrieves the local file path of a post from its published public URL</p>
+  </section>
+</section>
+<section class="detail" id="reverse_url_root/2">
+
+  <div class="detail-header">
+    <a href="#reverse_url_root/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">reverse_url_root(post_url, host)</h1>
+
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L109" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> reverse_url_root(<a href="#t:url/0">url</a>(), <a href="#t:url/0">url</a>()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+<p>  Retrieves the local directory path of a post from its published public URL</p>
   </section>
 </section>
 
