@@ -46,14 +46,15 @@ defmodule LastCrusader.Micropub.GitHubTest do
 
       mock(fn %{method: :put} -> {:ok, doc} end)
 
-      assert GitHub.new_file(
-               %{access_token: "bad credentials"},
-               "github_user",
-               "github_repo",
-               "test.txt",
-               "this is a text file",
-               "test"
-             ) == {:ko, :github_error}
+      {:ko, :github_error, _error_detail} =
+        GitHub.new_file(
+          %{access_token: "bad credentials"},
+          "github_user",
+          "github_repo",
+          "test.txt",
+          "this is a text file",
+          "test"
+        )
     end
   end
 

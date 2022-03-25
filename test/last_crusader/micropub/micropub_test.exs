@@ -74,13 +74,20 @@ defmodule LastCrusader.Micropub.MicropubTest do
 
       params = %{
         :author => "Author of the Comment",
-        :original_page => "https://some.web.com/notes/2021/07/15/a-post/",
+        :original_page => "https://some.url.fr/notes/2021/07/15/a-post/",
         :comment => "This is the comment: Great content!",
-        :date => "2015-01-23T20:00:00Z",
-        :link => "https://some-user-page.com"
+        :link => "https://some-user-page.com/"
       }
 
-      assert {:ok, :content_created} == Micropub.comment(params, now())
+      expected_text = """
+      date: 2015-01-24T00:50:07+01:00
+      author: Author of the Comment
+      link: https://some-user-page.com/
+      comment: |
+        This is the comment: Great content!
+      """
+
+      assert {{:ok, :content_created}, expected_text} == Micropub.comment(params, now())
     end
   end
 
@@ -181,6 +188,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
 
   defp now() do
     # int value: 1422057007
+    # Hugo value: 2015-01-24T00:50:07+01:00
     {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
     fake_now
   end

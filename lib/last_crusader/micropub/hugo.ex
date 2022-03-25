@@ -63,8 +63,6 @@ defmodule LastCrusader.Micropub.Hugo do
   """
   @spec generate_front_matter(DateTime.t(), Post.post_type(), map()) :: Toml.toml()
   def generate_front_matter(date, type, data \\ %{}) do
-    iso_date = DateTime.to_iso8601(date, :extended, 3600)
-
     data
     |> Map.delete(:h)
     |> rename_key(:category, :tags)
@@ -77,8 +75,16 @@ defmodule LastCrusader.Micropub.Hugo do
     |> rename_key(:"syndicate-to", :syndicate_to)
     |> rename_key(:"mp-syndicate-to", :syndicate_to)
     |> rename_key(:name, :title)
-    |> Map.put(:date, iso_date)
+    |> Map.put(:date, convert_date_to_hugo_format(date))
     |> Toml.toml_map_to_string()
+  end
+
+  @doc """
+  Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601))
+  """
+  @spec convert_date_to_hugo_format(DateTime.t()) :: BitString.t()
+  def convert_date_to_hugo_format(date) do
+    DateTime.to_iso8601(date, :extended, 3600)
   end
 
   @doc """

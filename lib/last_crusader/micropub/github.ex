@@ -36,13 +36,13 @@ defmodule LastCrusader.Micropub.GitHub do
 
     case build_client(auth)
          |> commit_new_file(user, repo, filename, body) do
-      {:ok, %Tesla.Env{status: 201}} ->
+      {:ok, %Tesla.Env{status: status}} when status in [200, 201] ->
         {:ok, :content_created}
 
       error ->
         Logger.error("Github: Error while creating file #{inspect(filename)}:")
         Logger.error("#{inspect(error)}")
-        {:ko, :github_error}
+        {:ko, :github_error, error}
     end
   end
 
@@ -84,7 +84,7 @@ defmodule LastCrusader.Micropub.GitHub do
 
   @doc """
   shortcut for `get_file/5`
-  
+
   Uses `Application.get_env/2` for default parameters.
   """
   @spec get_file(String.t()) :: {:ko, atom()} | {:ok, any()}

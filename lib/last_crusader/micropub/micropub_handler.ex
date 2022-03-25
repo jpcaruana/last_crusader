@@ -89,11 +89,10 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   """
   def comment(conn) do
     case Micropub.comment(as_map(conn.params), DateTime.now!("Europe/Paris")) do
-      {:ok, content_url} ->
-        Logger.info("Content will be published here: #{inspect(content_url)}")
+      {{:ok, :content_created}, _comment} ->
+        Logger.info("Comment successfully accepted! It will soon be published.")
 
         conn
-        |> put_headers(%{location: content_url})
         |> send_resp(202, "Accepted")
 
       {:error, :bad_token} ->
