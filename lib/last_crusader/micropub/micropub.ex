@@ -77,21 +77,19 @@ defmodule LastCrusader.Micropub do
       {{ end }}
   """
   def comment(params, now) do
-    me = Application.get_env(:last_crusader, :me)
-    filename = Hugo.reverse_url_root(params.original_page, me)
+    filename =
+      Hugo.reverse_url_root(params.original_page, Application.get_env(:last_crusader, :me))
+
     comment_author = params.author
     comment_content = params.comment
-    # ne pas oublier: hugo format
-    comment_date = params.date
+    comment_date = Hugo.convert_date_to_hugo_format(now)
     # not mandatory, can be nil
     comment_link = params[:link]
 
     comment_yml_template = """
     date: <%= date %>
     author: <%= author %>
-    <%= if link != nil do %>
-    link: <%= link %>
-    <% end %>
+    <%= if link != nil do %>link: <%= link %><% end %>
     comment: |
       <%= content %>
     """
@@ -109,7 +107,7 @@ defmodule LastCrusader.Micropub do
             content: comment_content
           )
 
-        GitHub.new_file(comment_filename, comment_filecontent)
+        {GitHub.new_file(comment_filename, comment_filecontent), comment_filecontent}
 
       error ->
         error
