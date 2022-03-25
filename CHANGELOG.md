@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.x
+### 0.9.0
+2022/03/25
+- new comments API
+- dependencies update:
+    - #82: [bump castore from 0.1.15 to 0.1.16](https://github.com/jpcaruana/last_crusader/pull/82)
+
 ## 0.8.x
 ### 0.8.2
 2022/03/17
