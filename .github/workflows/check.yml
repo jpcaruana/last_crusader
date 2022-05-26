@@ -30,6 +30,8 @@ jobs:
             otp: '24.2'
           - elixir: '1.13'
             otp: '24.3'
+          - elixir: '1.13'
+            otp: '25.0'
 
     runs-on: ubuntu-18.04
 
