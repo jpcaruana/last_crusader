@@ -1,6 +1,17 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.1
+2022/07/28
+- dependencies update:
+    - bump earmark_parser from 1.4.25 to 1.4.26
+    - bump floki from 0.32.0 to 0.33.1 (minor)
+    - bump plug from 1.13.4 to 1.13.6
+    - bump telemetry from 1.0.0 to 1.1.0
+    - #92/#93: [bump tz from 0.20.1 to 0.21.1](https://github.com/jpcaruana/last_crusader/pull/92)
+    - #89: [bump mint from 1.4.1 to 1.4.2](https://github.com/jpcaruana/last_crusader/pull/89)
+    - #86: [bump castore from 0.1.16 to 0.1.17](https://github.com/jpcaruana/last_crusader/pull/86)
+
 ### 0.9.0
 2022/03/25
 - new comments API
