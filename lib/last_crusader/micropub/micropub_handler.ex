@@ -98,7 +98,7 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   - `link` (optional): Link to the personal page of the author
   """
   def comment(conn) do
-    case Micropub.comment(as_map(conn.params), DateTime.now!("Europe/Paris")) do
+    case Micropub.comment(conn.params, DateTime.now!("Europe/Paris")) do
       {{:ok, :content_created}, _comment} ->
         Logger.info("Comment successfully accepted! It will soon be published.")
 

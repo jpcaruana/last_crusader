@@ -78,13 +78,13 @@ defmodule LastCrusader.Micropub do
   """
   def comment(params, now) do
     filename =
-      Hugo.reverse_url_root(params.original_page, Application.get_env(:last_crusader, :me))
+      Hugo.reverse_url_root(params["original_page"], Application.get_env(:last_crusader, :me))
 
-    comment_author = params.author
-    comment_content = params.comment
+    comment_author = params["author"]
+    comment_content = params["comment"]
     comment_date = Hugo.convert_date_to_hugo_format(now)
     # not mandatory, can be nil
-    comment_link = params[:link]
+    comment_link = params["link"]
 
     comment_yml_template = """
     date: <%= date %>

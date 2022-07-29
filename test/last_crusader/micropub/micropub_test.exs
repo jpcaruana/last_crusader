@@ -18,10 +18,10 @@ defmodule LastCrusader.Micropub.MicropubTest do
       LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
 
       params = %{
-        :author => "Author of the Comment",
-        :original_page => "https://some.url.fr/notes/2021/07/15/a-post/",
-        :comment => "This is the comment: Great content!",
-        :link => "https://some-user-page.com/"
+        "author" => "Author of the Comment",
+        "original_page" => "https://some.url.fr/notes/2021/07/15/a-post/",
+        "comment" => "This is the comment: Great content!",
+        "link" => "https://some-user-page.com/"
       }
 
       expected_text = """
