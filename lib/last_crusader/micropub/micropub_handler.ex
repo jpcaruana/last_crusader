@@ -19,7 +19,9 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   @doc """
   Handles query requests
 
-  Note: we just reply to the "config", "syndicate-to" and "category" requests
+  See micropub query specification: https://micropub.spec.indieweb.org/#querying
+
+  Note: we just reply to the `config`, `syndicate-to` and `category` requests
   """
   def query(conn) do
     case conn.params["q"] do
@@ -58,6 +60,8 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   @doc """
   Handles micropublish demands from HTTP
+
+  See micropublish specification: https://micropub.spec.indieweb.org/#create
   """
   def publish(conn) do
     conn_headers = as_map(conn.req_headers)
@@ -86,6 +90,12 @@ defmodule LastCrusader.Micropub.MicropubHandler do
 
   @doc """
   Handles comment posts from HTTP
+
+  Parameters:
+  - `author` (mandatory): Name of the comment author (just one field, so we allow aliases)
+  - `comment` (mandatory): Content of the comment. Can be in markdown format
+  - `original_page` (mandatory): URL of the page to comment to
+  - `link` (optional): Link to the personal page of the author
   """
   def comment(conn) do
     case Micropub.comment(as_map(conn.params), DateTime.now!("Europe/Paris")) do

@@ -14,14 +14,14 @@
 
 ### 0.9.0
 2022/03/25
-- new comments API
+- new comments API, see `LastCrusader.Micropub.MicropubHandler.comment/1`
 - dependencies update:
     - #82: [bump castore from 0.1.15 to 0.1.16](https://github.com/jpcaruana/last_crusader/pull/82)
 
 ## 0.8.x
 ### 0.8.2
 2022/03/17
-- micropub: q=categories: returns an ordered list of (weighted) tags from your website
+- micropub: `q=categories`: returns an ordered list of (weighted) tags from your website
 - log server port on application start
 - dependencies update:
     - bump plug from 1.12.1 to 1.13.4
@@ -30,7 +30,7 @@
 
 ### 0.8.1
 2022/03/10
-- micropub: q=syndicate-to: return syndication links
+- micropub: `q=syndicate-to`: return syndication links
 - micropub: github: fix reverse URL guessing
 
 ### 0.8.0
@@ -85,7 +85,7 @@
 ### 0.7.1
 2021/12/03
 - micropub: fix date conversion to Hugo (respect the timezone)
-    - removed comptatibility with Elixir < 1.12
+    - removed compatibility with Elixir < 1.12
 - fix sentry necessary dependencies and install
 - dependencies update:
     - #50/#55: [bump bump castore from 0.1.11 to 0.1.13](https://github.com/jpcaruana/last_crusader/pull/55)
@@ -108,7 +108,7 @@
 ## 0.6.x
 ### 0.6.4
 2021/08/12
-- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in). I learned how powerfull json decoding was with Tesla...
+- fix: `LastCrusader.Micropub.add_keyword_to_post/2`: one integration test was missing (and an error crept in). I learned how powerful json decoding was with Tesla...
 - dependencies update:
     - remove unused dependency on toml
     - remove unnecessary dependency on [Poison](https://github.com/devinus/poison) (we use [Jason](https://github.com/michalmuskala/jason) for json encoding/decoding from now on)
