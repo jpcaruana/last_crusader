@@ -4,6 +4,7 @@ defmodule LastCrusader.Router do
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub
   use Plug.Router
   use Plug.ErrorHandler
+  require Logger
 
   if Mix.env() == :dev do
     use Plug.Debugger
@@ -77,7 +78,8 @@ defmodule LastCrusader.Router do
     send_resp(conn, 404, "not found")
   end
 
-  def handle_errors(conn, %{kind: _kind, reason: _reason, stack: _stack}) do
+  def handle_errors(conn, %{kind: kind, reason: reason, stack: _stack}) do
+    Logger.error("Error on request: #{inspect(kind)} / : #{inspect(reason)}")
     send_resp(conn, conn.status, "Something went wrong")
   end
 end
