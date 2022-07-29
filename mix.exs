@@ -6,6 +6,7 @@ defmodule LastCrusader.MixProject do
       app: :last_crusader,
       version: "0.9.1",
       elixir: "~> 1.12",
+      elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() in [:prod, :perso],
       deps: deps(),
       preferred_cli_env: [
@@ -80,4 +81,7 @@ defmodule LastCrusader.MixProject do
       sentry_recompile: ["compile", "deps.compile sentry --force"]
     ]
   end
+
+  defp elixirc_paths(:test), do: ["lib", "test"]
+  defp elixirc_paths(_), do: ["lib"]
 end
