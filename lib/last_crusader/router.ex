@@ -31,10 +31,8 @@ defmodule LastCrusader.Router do
   # Note, order of plugs is important, by placing this _after_ the 'match' plug,
   # we will only parse the request AFTER there is a route match.
   # plug(Plug.Parsers, parsers: [:json], json_decoder: Poison)
-  plug(Plug.Parsers, parsers: [:urlencoded, :multipart])
-
   plug(Plug.Parsers,
-    parsers: [:urlencoded, :json],
+    parsers: [:urlencoded, :multipart, :json],
     pass: ["text/*"],
     json_decoder: Jason
   )
