@@ -41,7 +41,6 @@ defmodule LastCrusader.Micropub.GitHub do
 
       error ->
         Logger.error("Github: Error while creating file #{inspect(filename)}:")
-        Logger.error("#{inspect(error)}")
         {:ko, :github_error, error}
     end
   end
@@ -77,7 +76,6 @@ defmodule LastCrusader.Micropub.GitHub do
     else
       error ->
         Logger.error("Github: Error while updating file #{inspect(filename)}:")
-        Logger.error("#{inspect(error)}")
         {:ko, :github_error, error}
     end
   end
@@ -112,7 +110,6 @@ defmodule LastCrusader.Micropub.GitHub do
 
       error ->
         Logger.error("Github: Error while getting file #{inspect(filename)}:")
-        Logger.error("#{inspect(error)}")
         {:ko, :github_error, error}
     end
   end
