@@ -1,9 +1,11 @@
 # Changelog
 
 ## 0.9.x
-### 0.9.2
+### 0.9.3
 2022/07/29
-- comments API: accept JSON and url-formencoded requests
+- comments API:
+	- accept JSON and url-formencoded requests
+	- fix confusion in Map with atoms and string for keys / avoid getting atoms from the outside
 
 ### 0.9.1
 2022/07/28
