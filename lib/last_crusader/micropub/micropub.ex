@@ -77,40 +77,46 @@ defmodule LastCrusader.Micropub do
       {{ end }}
   """
   def comment(params, now) do
-    filename =
-      Hugo.reverse_url_root(params["original_page"], Application.get_env(:last_crusader, :me))
-
+    original_page = params["original_page"]
     comment_author = params["author"]
     comment_content = params["comment"]
     comment_date = Hugo.convert_date_to_hugo_format(now)
-    # not mandatory, can be nil
     comment_link = params["link"]
 
     comment_yml_template = """
     date: <%= date %>
-    author: <%= author %>
-    <%= if link != nil do %>link: <%= link %><% end %>
+    author: <%= author %><%= if link != nil do %>
+    link: <%= link %><% end %>
     comment: |
       <%= content %>
     """
 
-    case GitHub.get_file(filename) do
-      {:ok, _page_exists} ->
-        comment_filename =
-          filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
+    with :ok <- all_not_nil?([original_page, comment_author, comment_content]),
+         filename <-
+           Hugo.reverse_url_root(original_page, Application.get_env(:last_crusader, :me)),
+         {:ok, _page_exists} <- GitHub.get_file(filename) do
+      comment_filename =
+        filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
 
-        comment_filecontent =
-          EEx.eval_string(comment_yml_template,
-            date: comment_date,
-            author: comment_author,
-            link: comment_link,
-            content: comment_content
-          )
+      comment_filecontent =
+        EEx.eval_string(comment_yml_template,
+          date: comment_date,
+          author: comment_author,
+          link: comment_link,
+          content: comment_content
+        )
 
-        {GitHub.new_file(comment_filename, comment_filecontent), comment_filecontent}
-
+      {GitHub.new_file(comment_filename, comment_filecontent), comment_filecontent}
+    else
       error ->
         error
+    end
+  end
+
+  defp all_not_nil?(l) do
+    case Enum.all?(l) do
+      true -> :ok
+      false -> {:error, :missing_parameter}
     end
   end
 
