@@ -1,6 +1,10 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.2
+2022/07/29
+- comments API: accept JSON and url-formencoded requests
+
 ### 0.9.1
 2022/07/28
 - dependencies update:
