@@ -93,7 +93,8 @@ defmodule LastCrusader.Micropub do
 
     with :ok <- all_not_nil?([original_page, comment_author, comment_content]),
          filename <-
-           Hugo.reverse_url_root(original_page, Application.get_env(:last_crusader, :me)),
+           Hugo.reverse_url_root(original_page, Application.get_env(:last_crusader, :me)) <>
+             "/index.md",
          {:ok, _page_exists} <- GitHub.get_file(filename) do
       comment_filename =
         filename <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
