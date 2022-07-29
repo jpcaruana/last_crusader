@@ -8,8 +8,8 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
   @opts LastCrusader.Router.init([])
 
   describe "config endpoint" do
-    test "it should return 404 on unkown queries" do
-      conn = conn(:get, "/micropub?q=unkkown_query")
+    test "it should return 404 on unknown queries" do
+      conn = conn(:get, "/micropub?q=unknown_query")
 
       conn = LastCrusader.Router.call(conn, @opts)
 
@@ -52,7 +52,7 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
     test "it should return tags ordered by weight" do
       tags_from_website = %Tesla.Env{
         status: 200,
-        body: comments_as_json(),
+        body: tags_as_json(),
         headers: [
           {"Status", "200 OK"},
           {"Content-Type", "application/json; charset=utf-8"}
@@ -103,7 +103,7 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
     end
   end
 
-  defp comments_as_json() do
+  defp tags_as_json() do
     """
     {
         "tags": [
