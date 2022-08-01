@@ -15,7 +15,8 @@ config :last_crusader,
 
 config :last_crusader, LastCrusader.Repo,
   adapter: Ecto.Adapters.SQLite3,
-  database: ":memory:"
+  # database: ":memory:"
+  database: "db.sqlite3"
 
 config :sentry,
   environment_name: :test

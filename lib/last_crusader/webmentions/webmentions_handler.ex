@@ -8,6 +8,7 @@ defmodule LastCrusader.Webmentions.Handler do
   """
   import Plug.Conn
   alias LastCrusader.Webmentions.Validator, as: Validator
+  alias LastCrusader.Webmentions.Webmention, as: Mention
   require Logger
 
   @doc """
@@ -24,6 +25,11 @@ defmodule LastCrusader.Webmentions.Handler do
          {:ok, _} <- Validator.validate_urls(source, target),
          {:ok, _} <- Validator.validate_content(source, target) do
       Logger.info("Received webmention from #{inspect(source)}")
+
+      Mention.register_webmention(%Mention{
+        url_source: URI.to_string(source),
+        url_target: URI.to_string(target)
+      })
 
       conn
       |> send_resp(202, "Accepted")
