@@ -10,10 +10,10 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   see also `LastCrusader.Micropub.PostTypeDiscovery`.
   """
   import Plug.Conn
-  import LastCrusader.Utils.Http
   require Logger
 
   alias LastCrusader.Micropub, as: Micropub
+  alias LastCrusader.Utils.Http, as: Utils
   alias Jason, as: Json
 
   @doc """
@@ -64,14 +64,14 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   See micropublish specification: https://micropub.spec.indieweb.org/#create
   """
   def publish(conn) do
-    conn_headers = as_map(conn.req_headers)
+    conn_headers = Utils.as_map(conn.req_headers)
 
     case Micropub.publish(conn_headers, conn.params) do
       {:ok, content_url} ->
         Logger.info("Content will be published here: #{inspect(content_url)}")
 
         conn
-        |> put_headers(%{location: content_url})
+        |> Utils.put_headers(%{location: content_url})
         |> send_resp(202, "Accepted")
 
       {:error, :bad_token} ->

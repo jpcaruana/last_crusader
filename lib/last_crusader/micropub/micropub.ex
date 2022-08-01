@@ -6,14 +6,12 @@ defmodule LastCrusader.Micropub do
   - `LastCrusader.Micropub.Hugo`
   - `LastCrusader.Micropub.Github`
   """
-
-  import LastCrusader.Utils.Http
-
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
   alias LastCrusader.Utils.Toml, as: Toml
   alias LastCrusader.Micropub.GitHub, as: GitHub
   alias LastCrusader.Webmentions, as: Webmentions
+  alias LastCrusader.Utils.Http, as: Utils
   alias Jason, as: Json
 
   @doc """
@@ -36,7 +34,7 @@ defmodule LastCrusader.Micropub do
              "create"
            ),
          {filename, filecontent, path} <-
-           PostTypeDiscovery.discover(as_map(params))
+           PostTypeDiscovery.discover(Utils.as_map(params))
            |> Hugo.new(DateTime.now!("Europe/Paris"), params),
          mentioned_links <- Hugo.extract_links(filecontent),
          {:ok, :content_created} <- GitHub.new_file(filename, filecontent),

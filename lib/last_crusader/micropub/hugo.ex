@@ -30,10 +30,10 @@ defmodule LastCrusader.Micropub.Hugo do
     Generates Hugo compatible data, file content, file name
   """
   import LastCrusader.Micropub.MdParser
-  import LastCrusader.Utils.Http
 
   alias LastCrusader.Micropub.PostTypeDiscovery, as: Post
   alias LastCrusader.Utils.Toml, as: Toml
+  alias LastCrusader.Utils.Http, as: Utils
   @type path() :: String.t()
   @type url() :: String.t()
 
@@ -44,7 +44,7 @@ defmodule LastCrusader.Micropub.Hugo do
   def new(type, date, data) do
     {text, content} =
       data
-      |> as_map()
+      |> Utils.as_map()
       |> Map.pop(:content)
 
     name = generate_name(content[:name], text, date)

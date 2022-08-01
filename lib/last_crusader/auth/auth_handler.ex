@@ -7,12 +7,12 @@ defmodule LastCrusader.Auth.AuthHandler do
   see https://indieweb.org/authorization-endpoint
   """
   import Plug.Conn
-  import LastCrusader.Utils.IdentifierValidator
-  import LastCrusader.Utils.Http
 
   alias Jason, as: Json
   alias LastCrusader.Cache.MemoryTokenStore, as: TokenStore
   alias LastCrusader.Utils.Randomizer, as: Randomizer
+  alias LastCrusader.Utils.Http, as: Utils
+  alias LastCrusader.Utils.IdentifierValidator, as: Validator
 
   @doc """
   authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.
@@ -42,15 +42,15 @@ defmodule LastCrusader.Auth.AuthHandler do
     client_id = conn.params["client_id"]
 
     {status, body, headers} =
-      case validate_user_profile_url(client_id)
-           |> validate_user_profile_url(redirect_uri)
-           |> validate_user_profile_url(me) do
+      case Validator.validate_user_profile_url(client_id)
+           |> Validator.validate_user_profile_url(redirect_uri)
+           |> Validator.validate_user_profile_url(me) do
         :invalid -> {400, "", nil}
         _ -> generate_token(redirect_uri, client_id, me, state)
       end
 
     conn
-    |> put_headers(headers)
+    |> Utils.put_headers(headers)
     |> send_resp(status, body)
   end
 
