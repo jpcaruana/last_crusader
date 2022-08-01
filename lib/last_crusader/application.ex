@@ -18,7 +18,8 @@ defmodule LastCrusader.Application do
         {
           Task.Supervisor,
           name: LastCrusader.TaskSupervisor
-        }
+        },
+        LastCrusader.Repo
       ]
       |> append_if(
         Application.get_env(:last_crusader, :env) != :test &&

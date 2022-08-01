@@ -41,7 +41,7 @@ defmodule LastCrusader.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :jason],
+      extra_applications: [:logger, :jason, :exqlite, :ecto],
       mod: {LastCrusader.Application, []}
     ]
   end

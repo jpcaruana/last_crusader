@@ -7,7 +7,15 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
+
 config :last_crusader, env: config_env()
+
+config :last_crusader,
+  ecto_repos: [LastCrusader.Repo]
+
+config :last_crusader, LastCrusader.Repo,
+  adapter: Ecto.Adapters.SQLite3,
+  database: ":memory:"
 
 config :sentry,
   environment_name: :test
