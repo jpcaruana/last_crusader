@@ -80,6 +80,10 @@ defmodule LastCrusader.MixProject do
 
   defp aliases do
     [
+      setup: ["deps.get", "ecto.setup"],
+      "ecto.setup": ["ecto.create", "ecto.migrate"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       pkg: ["cmd ./build_container"],
       sentry_recompile: ["compile", "deps.compile sentry --force"]
     ]

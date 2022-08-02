@@ -67,5 +67,9 @@ jobs:
       - name: Compile Elixir deps
         run: mix deps.compile
 
+      - name: Create test database
+        run: mix do ecto.drop, ecto.create, ecto.migrate
+
       - name: Run check
         run: mix check
+
