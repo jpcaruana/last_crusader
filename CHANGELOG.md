@@ -1,6 +1,14 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.5
+2022/09/02
+- Micropub: Hugo: accept `listen-of` notes
+- dependencies update:
+    - #96: [bump castore from 0.1.17 to 0.1.18](https://github.com/jpcaruana/last_crusader/pull/96)
+    - #98: [bump tz from 0.21.1 to 0.22.0](https://github.com/jpcaruana/last_crusader/pull/98)
+        - hpax: 0.1.1 -> 0.1.2
+
 ### 0.9.4
 2022/07/29
 - comments API:
