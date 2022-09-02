@@ -71,6 +71,7 @@ defmodule LastCrusader.Micropub.Hugo do
     |> rename_key(:"bookmark-of", :bookmark)
     |> rename_key(:"in-reply-to", :in_reply_to)
     |> rename_key(:"like-of", :like_of)
+    |> rename_key(:"listen-of", :listen_of)
     |> rename_key(:"repost-of", :repost_of)
     |> rename_key(:"syndicate-to", :syndicate_to)
     |> rename_key(:"mp-syndicate-to", :syndicate_to)
