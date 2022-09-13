@@ -11,7 +11,7 @@ defmodule LastCrusader.Router do
   end
 
   # Using Plug.Logger for logging request information
-  if Application.get_env(:last_crusader, :plug_logger, true) do
+  if Application.compile_env(:last_crusader, :plug_logger, true) do
     plug(Plug.Logger)
   end
 
