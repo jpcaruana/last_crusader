@@ -63,7 +63,7 @@ defmodule LastCrusader.MixProject do
       {:sentry, "~> 8.0"},
       {:hackney, "~> 1.8"},
       # code coverage
-      {:excoveralls, "~> 0.14.0", only: :test},
+      {:excoveralls, "~> 0.15.0", only: :test},
       # doc generation: mix docs
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:doctor, "~> 0.19.0", only: :dev},
