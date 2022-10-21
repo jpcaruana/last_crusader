@@ -1,6 +1,16 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.6
+2022/10/21
+- fix elixir 1.14: use `Application.compile_env/3` instead of `Application.get_env/3`
+- dependencies update:
+    - #100: [bump jason from 1.3.0 to 1.4.0](https://github.com/jpcaruana/last_crusader/pull/100)
+    - earmark_parser 1.4.28 => 1.4.29
+    - mime 2.0.2 => 2.0.3
+    - plug_crypto 1.2.2 => 1.2.3
+
+
 ### 0.9.5
 2022/09/02
 - Micropub: Hugo: accept `listen-of` notes
