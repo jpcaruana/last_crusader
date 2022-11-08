@@ -85,7 +85,7 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   @doc """
-    Finds syndications links (from bridy to twitter) in a list of Webmentions responses
+    Finds syndication links (from bridy to twitter) in a list of Webmentions responses
   """
   def find_syndication_links(webmention_response, syndication_links \\ [])
 
@@ -129,7 +129,7 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp update_content([link | _], origin) do
-    Logger.info("Updationg content with syndication link #{inspect(link)}")
+    Logger.info("Updating content with syndication link #{inspect(link)}")
     {:ok, origin} = Micropub.add_keyword_to_post(origin, {"copy", link})
     Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
   end

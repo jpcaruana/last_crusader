@@ -5,70 +5,150 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
 
   alias LastCrusader.Webmentions.Sender
 
-  test "check webmention is OK" do
-    # setup for webmentions is a bit tricky, I hope these variables will help
-    webmention_target = "https://brid.gy/publish/twitter"
-    webmention_endpoint = "https://brid.gy/publish/webmention"
+  describe "send_webmentions/3" do
+    test "check twitter webmention is OK" do
+      # setup for webmentions is a bit tricky, I hope these variables will help
+      webmention_target = "https://brid.gy/publish/twitter"
+      webmention_endpoint = "https://brid.gy/publish/webmention"
 
-    mock(fn
-      # page target for webmention: links to webmention enpoint
-      %{method: :get, url: ^webmention_target} ->
-        {:ok,
-         %Tesla.Env{
-           status: 200,
-           body: "<html class=\"h-entry\"><a href=\"#{webmention_target}\">Publish</a>",
-           headers: [{"Link", "<#{webmention_endpoint}>; rel=\"webmention\""}]
-         }}
+      mock(fn
+        # page target for webmention: links to webmention endpoint
+        %{method: :get, url: ^webmention_target} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body: "<html class=\"h-entry\"><a href=\"#{webmention_target}\">Publish</a>",
+             headers: [{"Link", "<#{webmention_endpoint}>; rel=\"webmention\""}]
+           }}
 
-      # webmention enpoint
-      %{method: :post, url: ^webmention_endpoint} ->
-        {:ok,
-         %Tesla.Env{
-           status: 201,
-           body: bridgy_success_response_body(),
-           headers: [
-             {"Status", "201 Created"},
-             {"Content-Type", "application/json; charset=utf-8"}
-           ]
-         }}
-    end)
+        # webmention endpoint
+        %{method: :post, url: ^webmention_endpoint} ->
+          {:ok,
+           %Tesla.Env{
+             status: 201,
+             body: bridgy_twitter_success_response_body(),
+             headers: [
+               {"Status", "201 Created"},
+               {"Content-Type", "application/json; charset=utf-8"}
+             ]
+           }}
+      end)
 
-    {:ok, _pid, responses} =
-      Sender.send_webmentions("https://some-origin.com", [webmention_target])
+      {:ok, _pid, responses} =
+        Sender.send_webmentions("https://some-origin.com", [webmention_target])
 
-    expected = [
-      %Webmentions.Response{
-        status: :ok,
-        target: webmention_target,
-        endpoint: webmention_endpoint,
-        message: "sent",
-        body: bridgy_success_response_body()
-      }
-    ]
+      expected = [
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target,
+          endpoint: webmention_endpoint,
+          message: "sent",
+          body: bridgy_twitter_success_response_body()
+        }
+      ]
 
-    assert responses == expected
+      assert responses == expected
+    end
+
+    test "check several webmentions are OK" do
+      # setup for webmentions is a bit tricky, I hope these variables will help
+      webmention_target_1 = "https://target1.com/"
+      webmention_endpoint_1 = "https://endpoint1.com/"
+
+      webmention_target_2 = "https://target2.com/"
+      webmention_endpoint_2 = "https://endpoint2.com/"
+
+      mock(fn
+        # page target for webmention: links to webmention endpoint
+        %{method: :get, url: ^webmention_target_1} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body: "<html class=\"h-entry\"><a href=\"#{webmention_target_1}\">Publish</a>",
+             headers: [{"Link", "<#{webmention_endpoint_1}>; rel=\"webmention\""}]
+           }}
+
+        %{method: :get, url: ^webmention_target_2} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body: "<html class=\"h-entry\"><a href=\"#{webmention_target_2}\">Publish</a>",
+             headers: [{"Link", "<#{webmention_endpoint_2}>; rel=\"webmention\""}]
+           }}
+
+        # webmention endpoint
+        %{method: :post, url: ^webmention_endpoint_1} ->
+          {:ok,
+           %Tesla.Env{
+             status: 201,
+             body: bridgy_twitter_success_response_body(),
+             headers: [
+               {"Status", "201 Created"},
+               {"Content-Type", "application/json; charset=utf-8"}
+             ]
+           }}
+
+        %{method: :post, url: ^webmention_endpoint_2} ->
+          {:ok,
+           %Tesla.Env{
+             status: 201,
+             body: bridgy_twitter_success_response_body(),
+             headers: [
+               {"Status", "201 Created"},
+               {"Content-Type", "application/json; charset=utf-8"}
+             ]
+           }}
+      end)
+
+      {:ok, _pid, responses} =
+        Sender.send_webmentions("https://some-origin.com", [
+          webmention_target_1,
+          webmention_target_2
+        ])
+
+      expected = [
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target_1,
+          endpoint: webmention_endpoint_1,
+          message: "sent",
+          body: bridgy_twitter_success_response_body()
+        },
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target_2,
+          endpoint: webmention_endpoint_2,
+          message: "sent",
+          body: bridgy_twitter_success_response_body()
+        }
+      ]
+
+      assert responses == expected
+    end
   end
 
-  test "find twitter link in brid.gy response" do
-    webmention_target = "https://brid.gy/publish/twitter"
-    webmention_endpoint = "https://brid.gy/publish/webmention"
+  describe "find_syndication_links/2" do
+    test "find twitter link in brid.gy response" do
+      webmention_target = "https://brid.gy/publish/twitter"
+      webmention_endpoint = "https://brid.gy/publish/webmention"
 
-    reponse = [
-      %Webmentions.Response{
-        status: :ok,
-        target: webmention_target,
-        endpoint: webmention_endpoint,
-        message: "sent",
-        body: bridgy_success_response_body()
-      }
-    ]
+      reponse = [
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target,
+          endpoint: webmention_endpoint,
+          message: "sent",
+          body: bridgy_twitter_success_response_body()
+        }
+      ]
 
-    syndication_links = Sender.find_syndication_links(reponse)
+      syndication_links = Sender.find_syndication_links(reponse)
 
-    assert syndication_links == ["https://twitter.com/jpcaruana/status/1409912935766544386"]
+      assert syndication_links == ["https://twitter.com/jpcaruana/status/1409912935766544386"]
+    end
   end
 
-  defp bridgy_success_response_body() do
+  defp bridgy_twitter_success_response_body() do
     """
     {
       "created_at": "Tue Jun 29 16:33:33 +0000 2021",
