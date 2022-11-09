@@ -450,6 +450,18 @@ defmodule LastCrusader.HugoTest do
       assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
     end
 
+    test "one link from like_of" do
+      toml_content = """
+      +++
+      key = "value"
+      like_of = "https://some-url.org/"
+      +++
+      Some markdown content
+      """
+
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+    end
+
     test "one link from bookmark also in content" do
       toml_content = """
       +++
@@ -477,7 +489,7 @@ defmodule LastCrusader.HugoTest do
              ]
     end
 
-    test "syndication to one silo link: webmention is handled by brid.ly: twitter" do
+    test "syndication to one silo link (twitter): webmention is handled by brid.ly: twitter" do
       toml_content = """
       +++
       key = "value"

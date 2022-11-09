@@ -138,7 +138,9 @@ defmodule LastCrusader.Micropub.Hugo do
   defp extract_links_in_frontmatter(frontmatter) do
     case frontmatter
          |> String.split("\n")
-         |> Enum.filter(fn x -> String.match?(x, ~r/^(bookmark|in_reply_to|syndicate_to) =/) end) do
+         |> Enum.filter(fn x ->
+           String.match?(x, ~r/^(bookmark|in_reply_to|syndicate_to|like_of) =/)
+         end) do
       [] ->
         []
 
