@@ -163,6 +163,10 @@ defmodule LastCrusader.Micropub.Hugo do
     [link, "https://brid.gy/publish/twitter"]
   end
 
+  defp enrich_webmention_target_from_silos(link, ["https:", "", "indieweb.social", _]) do
+    [link, "https://brid.gy/publish/mastodon"]
+  end
+
   defp enrich_webmention_target_from_silos(link, ["https:", "", "github.com", _]) do
     [link, "https://brid.gy/publish/github"]
   end
