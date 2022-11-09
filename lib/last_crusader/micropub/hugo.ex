@@ -145,7 +145,10 @@ defmodule LastCrusader.Micropub.Hugo do
         []
 
       lines ->
-        Enum.map(lines, fn line -> extract_link(line) end)
+        lines
+        |> Enum.map(fn line -> extract_link(line) end)
+        |> Enum.map(fn line -> Toml.extract_list(line) end)
+        |> List.flatten()
         |> Enum.flat_map(fn link ->
           enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
         end)

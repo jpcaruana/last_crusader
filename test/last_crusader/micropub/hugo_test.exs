@@ -534,6 +534,23 @@ defmodule LastCrusader.HugoTest do
              ]
     end
 
+    test "reply to several silo link: webmention is handled by brid.ly: twitter and mastodon" do
+      toml_content = """
+      +++
+      key = "value"
+      syndicate_to = ["https://twitter.com/user/", "https://indieweb.social/@some_user"]
+      +++
+      Some markdown content.
+      """
+
+      assert Hugo.extract_links(toml_content) == [
+               "https://twitter.com/user/",
+               "https://brid.gy/publish/twitter",
+               "https://indieweb.social/@some_user",
+               "https://brid.gy/publish/mastodon"
+             ]
+    end
+
     test "real life failure: in_reply_to + syndicate_to + links in content" do
       toml_content = """
       +++
