@@ -26,7 +26,10 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           {:ok,
            %Tesla.Env{
              status: 201,
-             body: bridgy_twitter_success_response_body(),
+             body:
+               bridgy_success_response_body(
+                 "https://twitter.com/jpcaruana/status/1409912935766544386"
+               ),
              headers: [
                {"Status", "201 Created"},
                {"Content-Type", "application/json; charset=utf-8"}
@@ -43,7 +46,10 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           target: webmention_target,
           endpoint: webmention_endpoint,
           message: "sent",
-          body: bridgy_twitter_success_response_body()
+          body:
+            bridgy_success_response_body(
+              "https://twitter.com/jpcaruana/status/1409912935766544386"
+            )
         }
       ]
 
@@ -81,7 +87,10 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           {:ok,
            %Tesla.Env{
              status: 201,
-             body: bridgy_twitter_success_response_body(),
+             body:
+               bridgy_success_response_body(
+                 "https://twitter.com/jpcaruana/status/1409912935766544386"
+               ),
              headers: [
                {"Status", "201 Created"},
                {"Content-Type", "application/json; charset=utf-8"}
@@ -92,7 +101,10 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           {:ok,
            %Tesla.Env{
              status: 201,
-             body: bridgy_twitter_success_response_body(),
+             body:
+               bridgy_success_response_body(
+                 "https://indieweb.social/@tchambers/109309801099794571"
+               ),
              headers: [
                {"Status", "201 Created"},
                {"Content-Type", "application/json; charset=utf-8"}
@@ -112,14 +124,18 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           target: webmention_target_1,
           endpoint: webmention_endpoint_1,
           message: "sent",
-          body: bridgy_twitter_success_response_body()
+          body:
+            bridgy_success_response_body(
+              "https://twitter.com/jpcaruana/status/1409912935766544386"
+            )
         },
         %Webmentions.Response{
           status: :ok,
           target: webmention_target_2,
           endpoint: webmention_endpoint_2,
           message: "sent",
-          body: bridgy_twitter_success_response_body()
+          body:
+            bridgy_success_response_body("https://indieweb.social/@tchambers/109309801099794571")
         }
       ]
 
@@ -128,27 +144,42 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
   end
 
   describe "find_syndication_links/2" do
-    test "find twitter link in brid.gy response" do
-      webmention_target = "https://brid.gy/publish/twitter"
+    test "find twitter and mastodon links in brid.gy response" do
+      webmention_target_twitter = "https://brid.gy/publish/twitter"
+      webmention_target_mastodon = "https://brid.gy/publish/mastodon"
       webmention_endpoint = "https://brid.gy/publish/webmention"
 
       reponse = [
         %Webmentions.Response{
           status: :ok,
-          target: webmention_target,
+          target: webmention_target_twitter,
           endpoint: webmention_endpoint,
           message: "sent",
-          body: bridgy_twitter_success_response_body()
+          body:
+            bridgy_success_response_body(
+              "https://twitter.com/jpcaruana/status/1409912935766544386"
+            )
+        },
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target_mastodon,
+          endpoint: webmention_endpoint,
+          message: "sent",
+          body:
+            bridgy_success_response_body("https://indieweb.social/@tchambers/109309801099794571")
         }
       ]
 
       syndication_links = Sender.find_syndication_links(reponse)
 
-      assert syndication_links == ["https://twitter.com/jpcaruana/status/1409912935766544386"]
+      assert syndication_links == [
+               "https://twitter.com/jpcaruana/status/1409912935766544386",
+               "https://indieweb.social/@tchambers/109309801099794571"
+             ]
     end
   end
 
-  defp bridgy_twitter_success_response_body() do
+  defp bridgy_success_response_body(syndication_link) do
     """
     {
       "created_at": "Tue Jun 29 16:33:33 +0000 2021",
@@ -162,9 +193,9 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
         "user_mentions": [],
         "urls": [
           {
-            "url": "https://t.co/oobSu6B0lr",
-            "expanded_url": "https://twitter.com/i/web/status/1409912935766544386",
-            "display_url": "twitter.com/i/web/status/1\\u2026",
+            "url": "#{syndication_link}",
+            "expanded_url": "#{syndication_link}",
+            "display_url": "#{syndication_link}",
             "indices": [
               116,
               139
@@ -251,7 +282,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       "possibly_sensitive": false,
       "lang": "fr",
       "type": "post",
-      "url": "https://twitter.com/jpcaruana/status/1409912935766544386"
+      "url": "#{syndication_link}"
     }
     """
   end

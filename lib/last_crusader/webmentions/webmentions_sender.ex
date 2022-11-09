@@ -104,6 +104,15 @@ defmodule LastCrusader.Webmentions.Sender do
       } ->
         find_syndication_links(tail, syndication_links ++ find_syndication_link(body))
 
+      %Webmentions.Response{
+        status: :ok,
+        target: "https://brid.gy/publish/mastodon",
+        endpoint: "https://brid.gy/publish/webmention",
+        message: "sent",
+        body: body
+      } ->
+        find_syndication_links(tail, syndication_links ++ find_syndication_link(body))
+
       _ ->
         find_syndication_links(tail, syndication_links)
     end
