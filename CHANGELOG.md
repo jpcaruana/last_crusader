@@ -1,6 +1,17 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.7
+2022/11/09: 1st mastodon edition
+- hugo syndication:
+	  - send webmentions for mastodon silo (should be a parameter)
+    - a post can syndicate to several silos (e.g. twitter _and_ mastodon)
+    - send webmentions for `like_of` posts
+- dependencies update:
+    - #105: [bump plug_cowboy from 2.5.2 to 2.6.0](https://github.com/jpcaruana/last_crusader/pull/105)
+    - #106: [bump tz from 0.22.0 to 0.23.0](https://github.com/jpcaruana/last_crusader/pull/106)
+    - floki 0.33.1 => 0.34.0
+
 ### 0.9.6
 2022/10/21
 - fix elixir 1.14: use `Application.compile_env/3` instead of `Application.get_env/3`
@@ -9,7 +20,6 @@
     - earmark_parser 1.4.28 => 1.4.29
     - mime 2.0.2 => 2.0.3
     - plug_crypto 1.2.2 => 1.2.3
-
 
 ### 0.9.5
 2022/09/02
