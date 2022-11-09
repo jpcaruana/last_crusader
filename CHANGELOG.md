@@ -4,7 +4,7 @@
 ### 0.9.7
 2022/11/09: 1st mastodon edition
 - hugo syndication:
-	  - send webmentions for mastodon silo (should be a parameter)
+    - send webmentions for mastodon silo (should be a parameter)
     - a post can syndicate to several silos (e.g. twitter _and_ mastodon)
     - send webmentions for `like_of` posts
 - dependencies update:
