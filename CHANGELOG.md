@@ -1,6 +1,12 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.8
+2022/11/20
+- hugo: link extraction for webmentions: always include https://fed.brid.gy/
+- dependencies update:
+    - #106: [bump tz from 0.23.0 to 0.24.0](https://github.com/jpcaruana/last_crusader/pull/106)
+
 ### 0.9.7
 2022/11/09: 1st mastodon edition
 - hugo syndication:
