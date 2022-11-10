@@ -100,7 +100,10 @@ defmodule LastCrusader.Micropub.Hugo do
   def extract_links(toml_content) do
     {frontmatter, markdown} = Toml.extract_frontmatter_and_content(toml_content)
 
-    Enum.uniq(extract_links_in_content(markdown) ++ extract_links_in_frontmatter(frontmatter))
+    Enum.uniq(
+      extract_links_in_content(markdown) ++
+        extract_links_in_frontmatter(frontmatter) ++ ["https://fed.brid.gy/"]
+    )
   end
 
   @doc """

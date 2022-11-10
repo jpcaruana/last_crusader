@@ -333,7 +333,7 @@ defmodule LastCrusader.HugoTest do
   end
 
   describe "Hugo.extract_links/1" do
-    test "no link" do
+    test "no link, always add fediverse" do
       toml_content = """
       +++
       key = "value"
@@ -341,7 +341,7 @@ defmodule LastCrusader.HugoTest do
       Some markdown content
       """
 
-      assert Hugo.extract_links(toml_content) == []
+      assert Hugo.extract_links(toml_content) == ["https://fed.brid.gy/"]
     end
 
     test "one link" do
@@ -353,7 +353,7 @@ defmodule LastCrusader.HugoTest do
       Here is [a link](https://some-url.org/).
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/", "https://fed.brid.gy/"]
     end
 
     test "one fake link" do
@@ -365,7 +365,7 @@ defmodule LastCrusader.HugoTest do
       Here is [not a link] (https://not-some-url.org/).
       """
 
-      assert Hugo.extract_links(toml_content) == []
+      assert Hugo.extract_links(toml_content) == ["https://fed.brid.gy/"]
     end
 
     test "special case: one link from personal hugo short code indienews" do
@@ -377,7 +377,10 @@ defmodule LastCrusader.HugoTest do
       {{< indienews >}}
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://news.indieweb.org/fr"]
+      assert Hugo.extract_links(toml_content) == [
+               "https://news.indieweb.org/fr",
+               "https://fed.brid.gy/"
+             ]
     end
 
     test "special case: one link from personal hugo short code indienews and one regular link" do
@@ -392,7 +395,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://some-url.org/",
-               "https://news.indieweb.org/fr"
+               "https://news.indieweb.org/fr",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -407,7 +411,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://some-url.org/",
-               "https://some-other-url.org/page"
+               "https://some-other-url.org/page",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -422,7 +427,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://some-url.org/",
-               "http://some-other-url.org/page"
+               "http://some-other-url.org/page",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -435,7 +441,7 @@ defmodule LastCrusader.HugoTest do
       Here is a [link](https://some-url.org/) and there [the same](https://some-url.org/).
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/", "https://fed.brid.gy/"]
     end
 
     test "one link from bookmark" do
@@ -447,7 +453,7 @@ defmodule LastCrusader.HugoTest do
       Some markdown content
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/", "https://fed.brid.gy/"]
     end
 
     test "one link from like_of" do
@@ -459,7 +465,7 @@ defmodule LastCrusader.HugoTest do
       Some markdown content
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/", "https://fed.brid.gy/"]
     end
 
     test "one link from bookmark also in content" do
@@ -471,7 +477,7 @@ defmodule LastCrusader.HugoTest do
       Some markdown content with [the same](https://some-url.org/) URL.
       """
 
-      assert Hugo.extract_links(toml_content) == ["https://some-url.org/"]
+      assert Hugo.extract_links(toml_content) == ["https://some-url.org/", "https://fed.brid.gy/"]
     end
 
     test "reply to one silo link: webmention is handled by brid.ly: twitter" do
@@ -485,7 +491,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://twitter.com/user/status/tweet_id",
-               "https://brid.gy/publish/twitter"
+               "https://brid.gy/publish/twitter",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -500,7 +507,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://twitter.com/user/",
-               "https://brid.gy/publish/twitter"
+               "https://brid.gy/publish/twitter",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -515,7 +523,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://github.com/user/repo/issues",
-               "https://brid.gy/publish/github"
+               "https://brid.gy/publish/github",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -530,7 +539,8 @@ defmodule LastCrusader.HugoTest do
 
       assert Hugo.extract_links(toml_content) == [
                "https://indieweb.social/@some_user",
-               "https://brid.gy/publish/mastodon"
+               "https://brid.gy/publish/mastodon",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -547,7 +557,8 @@ defmodule LastCrusader.HugoTest do
                "https://twitter.com/user/",
                "https://brid.gy/publish/twitter",
                "https://indieweb.social/@some_user",
-               "https://brid.gy/publish/mastodon"
+               "https://brid.gy/publish/mastodon",
+               "https://fed.brid.gy/"
              ]
     end
 
@@ -570,7 +581,8 @@ defmodule LastCrusader.HugoTest do
                "https://news.indieweb.org/fr",
                "https://aaronparecki.com/2021/04/13/26/indieauth",
                "https://twitter.com/jpcaruana",
-               "https://brid.gy/publish/twitter"
+               "https://brid.gy/publish/twitter",
+               "https://fed.brid.gy/"
              ]
     end
   end
