@@ -36,22 +36,6 @@ defmodule LastCrusader.Utils.Toml do
     @separator <> s <> "\n" <> @separator
   end
 
-  @doc """
-    Extract a TOML list to an Elixir list
-  """
-  @spec extract_list(String.t()) :: list(String.t())
-  def extract_list(s) do
-    if String.match?(s, ~r/^\[.*\]$/) do
-      s
-      |> String.replace("[", "")
-      |> String.replace("]", "")
-      |> String.replace("\"", "")
-      |> String.split(", ")
-    else
-      [s]
-    end
-  end
-
   @spec front_matter_to_map(toml()) :: map()
   defp front_matter_to_map(toml) do
     toml

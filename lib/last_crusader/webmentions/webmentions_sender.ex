@@ -16,61 +16,52 @@ defmodule LastCrusader.Webmentions.Sender do
   @doc """
     Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)
   """
-  @spec schedule_webmentions(list(url()), url(), pos_integer()) :: {:ok, non_neg_integer()}
-  def schedule_webmentions(links, origin, nb_max_tries \\ 15)
-
-  def schedule_webmentions([], origin, _nb_max_tries) do
-    Logger.info("No webmentions to send from #{inspect(origin)}")
-    {:ok, 0}
-  end
-
-  def schedule_webmentions(links, origin, nb_max_tries) do
-    do_schedule_webmentions(links, origin, nb_max_tries, 0)
+  @spec schedule_webmentions(url(), pos_integer()) :: {:ok, non_neg_integer()}
+  def schedule_webmentions(origin, nb_max_tries \\ 15) do
+    do_schedule_webmentions(origin, nb_max_tries, 0)
     {:ok, nb_max_tries}
   end
 
-  defp do_schedule_webmentions(links, origin, all_tried, all_tried) do
-    Logger.warning(
-      "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: aborted (too many tries)"
-    )
+  defp do_schedule_webmentions(origin, all_tried, all_tried) do
+    Logger.warning("Sending webmentions from #{inspect(origin)}: aborted (too many tries)")
 
     {:ok, self(), []}
   end
 
-  defp do_schedule_webmentions(links, origin, nb_max_tries, nb_tried) do
+  defp do_schedule_webmentions(origin, nb_max_tries, nb_tried) do
     Logger.info(
-      "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: scheduled. try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
+      "Sending webmentions from #{inspect(origin)}: scheduled. try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
-    Task.async(fn -> start_task(origin, links, nb_max_tries, nb_tried) end)
+    Task.async(fn -> start_task(origin, nb_max_tries, nb_tried) end)
   end
 
-  defp start_task(origin, links, nb_max_tries, nb_tried) do
+  defp start_task(origin, nb_max_tries, nb_tried) do
     :timer.sleep(@one_minute)
 
     case Tesla.head(origin) do
       {:ok, %Tesla.Env{status: 200}} ->
-        send_webmentions(origin, links, nb_max_tries, nb_tried)
+        send_webmentions(origin, nb_max_tries, nb_tried)
 
       {:ok, %Tesla.Env{status: status}} ->
         Logger.info("HEAD on #{inspect(origin)}: HTTP status=#{inspect(status)}")
-        do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, nb_max_tries, nb_tried + 1)
 
       other ->
         Logger.info("HEAD on #{inspect(origin)}: #{inspect(other)}")
-        do_schedule_webmentions(links, origin, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, nb_max_tries, nb_tried + 1)
     end
   end
 
   @doc """
     Sends Webmentions to every link
   """
-  def send_webmentions(origin, links, nb_max_tries \\ 1, nb_tried \\ 0) do
+  def send_webmentions(origin, nb_max_tries \\ 1, nb_tried \\ 0) do
     Logger.info(
-      "Sending webmentions from #{inspect(origin)} to #{inspect(links)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
+      "Sending webmentions from #{inspect(origin)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
-    {:ok, webmention_response} = Webmentions.send_webmentions_for_links(origin, links)
+    {:ok, webmention_response} = Webmentions.send_webmentions(origin)
 
     Logger.info("Result: webmentions: #{inspect(webmention_response)}")
 

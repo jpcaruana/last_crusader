@@ -36,12 +36,10 @@ defmodule LastCrusader.Micropub do
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(Utils.as_map(params))
            |> Hugo.new(DateTime.now!("Europe/Paris"), params),
-         mentioned_links <- Hugo.extract_links(filecontent),
          {:ok, :content_created} <- GitHub.new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
          {:ok, _} <-
            Webmentions.Sender.schedule_webmentions(
-             mentioned_links,
              content_url,
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do

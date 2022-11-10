@@ -1,36 +1,7 @@
-defmodule LastCrusader.Micropub.MdParser do
-  @moduledoc """
-    Mardown parser: extracts links
-  """
-  import NimbleParsec
-
-  md_link_text =
-    ascii_string([not: ?[], min: 0)
-    |> ignore
-    |> ignore(string("["))
-    |> ascii_string([not: ?]], min: 1)
-    |> ignore(string("]"))
-
-  md_link_url =
-    ignore(string("("))
-    |> ascii_string([not: ?)], min: 1)
-    |> ignore(string(")"))
-
-  md_link_expr = md_link_text |> ignore |> concat(md_link_url)
-
-  defparsec(:extract_md_link, repeat_while(md_link_expr, {:eof, []}))
-
-  ## Helpers
-  defp eof("", context, _, _), do: {:halt, context}
-  defp eof(_, context, _, _), do: {:cont, context}
-end
-
 defmodule LastCrusader.Micropub.Hugo do
   @moduledoc """
     Generates Hugo compatible data, file content, file name
   """
-  import LastCrusader.Micropub.MdParser
-
   alias LastCrusader.Micropub.PostTypeDiscovery, as: Post
   alias LastCrusader.Utils.Toml, as: Toml
   alias LastCrusader.Utils.Http, as: Utils
@@ -89,24 +60,6 @@ defmodule LastCrusader.Micropub.Hugo do
   end
 
   @doc """
-    Extracts links from a Hugo post
-
-    Parameters:
-    - toml_content: the file's content (with TOML frontmatter)
-
-    Handles my personal special case with my "indienews" shortcode
-  """
-  @spec extract_links(Toml.toml()) :: list(url())
-  def extract_links(toml_content) do
-    {frontmatter, markdown} = Toml.extract_frontmatter_and_content(toml_content)
-
-    Enum.uniq(
-      extract_links_in_content(markdown) ++
-        extract_links_in_frontmatter(frontmatter) ++ ["https://fed.brid.gy/"]
-    )
-  end
-
-  @doc """
     Retrieves the local directory path of a post from its published public URL
   """
   @spec reverse_url_root(url(), url()) :: String.t()
@@ -122,63 +75,6 @@ defmodule LastCrusader.Micropub.Hugo do
   @spec reverse_url(url(), url()) :: String.t()
   def reverse_url(post_url, host) do
     reverse_url_root(post_url, host) <> "/index.md"
-  end
-
-  defp extract_links_in_content(content) do
-    patched_content =
-      String.replace(
-        content,
-        "{{< indienews >}}",
-        "Also posted on [indienews](https://news.indieweb.org/fr)"
-      )
-
-    case extract_md_link(patched_content) do
-      {:ok, result, _, _, _, _} -> result
-      _ -> []
-    end
-  end
-
-  defp extract_links_in_frontmatter(frontmatter) do
-    case frontmatter
-         |> String.split("\n")
-         |> Enum.filter(fn x ->
-           String.match?(x, ~r/^(bookmark|in_reply_to|syndicate_to|like_of) =/)
-         end) do
-      [] ->
-        []
-
-      lines ->
-        lines
-        |> Enum.map(fn line -> extract_link(line) end)
-        |> Enum.map(fn line -> Toml.extract_list(line) end)
-        |> List.flatten()
-        |> Enum.flat_map(fn link ->
-          enrich_webmention_target_from_silos(link, String.split(link, "/", parts: 4))
-        end)
-    end
-  end
-
-  defp extract_link(line) do
-    line
-    |> String.split(" = ")
-    |> List.last()
-    |> String.replace("\"", "")
-  end
-
-  defp enrich_webmention_target_from_silos(link, ["https:", "", "twitter.com", _]) do
-    [link, "https://brid.gy/publish/twitter"]
-  end
-
-  defp enrich_webmention_target_from_silos(link, ["https:", "", "indieweb.social", _]) do
-    [link, "https://brid.gy/publish/mastodon"]
-  end
-
-  defp enrich_webmention_target_from_silos(link, ["https:", "", "github.com", _]) do
-    [link, "https://brid.gy/publish/github"]
-  end
-
-  defp enrich_webmention_target_from_silos(link, _) do
-    [link]
   end
 
   @doc """

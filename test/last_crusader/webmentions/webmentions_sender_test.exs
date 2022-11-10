@@ -8,10 +8,19 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
   describe "send_webmentions/3" do
     test "check twitter webmention is OK" do
       # setup for webmentions is a bit tricky, I hope these variables will help
+      source = "https://some-origin.com"
       webmention_target = "https://brid.gy/publish/twitter"
       webmention_endpoint = "https://brid.gy/publish/webmention"
 
       mock(fn
+        # source page for webmention
+        %{method: :get, url: ^source} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body: "<html class=\"h-entry\"><a href=\"#{webmention_target}\"></a>"
+           }}
+
         # page target for webmention: links to webmention endpoint
         %{method: :get, url: ^webmention_target} ->
           {:ok,
@@ -37,8 +46,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
            }}
       end)
 
-      {:ok, _pid, responses} =
-        Sender.send_webmentions("https://some-origin.com", [webmention_target])
+      {:ok, _pid, responses} = Sender.send_webmentions(source)
 
       expected = [
         %Webmentions.Response{
@@ -58,6 +66,8 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
 
     test "check several webmentions are OK" do
       # setup for webmentions is a bit tricky, I hope these variables will help
+      source = "https://some-origin.com"
+
       webmention_target_1 = "https://target1.com/"
       webmention_endpoint_1 = "https://endpoint1.com/"
 
@@ -65,6 +75,15 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       webmention_endpoint_2 = "https://endpoint2.com/"
 
       mock(fn
+        # setup for webmentions is a bit tricky, I hope these variables will help
+        %{method: :get, url: ^source} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body:
+               "<html class=\"h-entry\"><a href=\"#{webmention_target_1}\"></a><a href=\"#{webmention_target_2}\"></a>"
+           }}
+
         # page target for webmention: links to webmention endpoint
         %{method: :get, url: ^webmention_target_1} ->
           {:ok,
@@ -112,11 +131,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
            }}
       end)
 
-      {:ok, _pid, responses} =
-        Sender.send_webmentions("https://some-origin.com", [
-          webmention_target_1,
-          webmention_target_2
-        ])
+      {:ok, _pid, responses} = Sender.send_webmentions(source)
 
       expected = [
         %Webmentions.Response{
