@@ -3,7 +3,6 @@ LastCrusader.Auth.AuthHandler.html
 LastCrusader.Cache.MemoryTokenStore.html
 LastCrusader.Micropub.GitHub.html
 LastCrusader.Micropub.Hugo.html
-LastCrusader.Micropub.MdParser.html
 LastCrusader.Micropub.MicropubHandler.html
 LastCrusader.Micropub.PostTypeDiscovery.html
 LastCrusader.Micropub.html
@@ -40,8 +39,8 @@ dist/merriweather-latin-ext-300-normal-K6L27CZ5.woff2
 dist/merriweather-vietnamese-300-italic-EHHNZPUO.woff2
 dist/merriweather-vietnamese-300-normal-U376L4Z4.woff2
 dist/remixicon-E5UFLALU.woff2
-dist/search_items-DC150BB5.js
-dist/sidebar_items-B05673D5.js
+dist/search_items-BE0FCEFA.js
+dist/sidebar_items-2FDA4726.js
 index.html
 license.html
 readme.html
