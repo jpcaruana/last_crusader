@@ -63,7 +63,7 @@ defmodule LastCrusader.Webmentions.Sender do
 
     {:ok, webmention_response} = Webmentions.send_webmentions(origin)
 
-    Logger.info("Result: webmentions: #{inspect(webmention_response)}")
+    Enum.each(webmention_response, fn x -> Logger.debug("Result: webmention: #{inspect(x)}") end)
 
     Task.async(fn -> update_content_with_syndication(origin, webmention_response) end)
 
