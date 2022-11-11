@@ -93,7 +93,7 @@ defmodule LastCrusader.Webmentions.Sender do
         message: "sent",
         body: body
       } ->
-        find_syndication_links(tail, syndication_links ++ find_syndication_link(body))
+        find_syndication_links(tail, syndication_links ++ find_syndication_link(body, "twitter"))
 
       %Webmentions.Response{
         status: :ok,
@@ -102,18 +102,18 @@ defmodule LastCrusader.Webmentions.Sender do
         message: "sent",
         body: body
       } ->
-        find_syndication_links(tail, syndication_links ++ find_syndication_link(body))
+        find_syndication_links(tail, syndication_links ++ find_syndication_link(body, "mastodon"))
 
       _ ->
         find_syndication_links(tail, syndication_links)
     end
   end
 
-  defp find_syndication_link(body) do
+  defp find_syndication_link(body, type) do
     case Json.decode(body) do
       {:ok, %{"url" => url}} ->
-        Logger.info("Syndication link found: #{inspect(url)}")
-        [url]
+        Logger.info("Syndication link (#{inspect(type)}) found: #{inspect(url)}")
+        [{url, type}]
 
       _ ->
         Logger.info("No syndication link found")
@@ -128,9 +128,11 @@ defmodule LastCrusader.Webmentions.Sender do
     Logger.info("No more syndication links found for from #{inspect(origin)}")
   end
 
-  defp update_content([link | _], origin) do
-    Logger.info("Updating content with syndication link #{inspect(link)}")
-    {:ok, origin} = Micropub.add_keyword_to_post(origin, {"copy", link})
+  defp update_content([{link, type} | tail], origin) do
+    Logger.info("Updating content with #{inspect(type)} syndication link #{inspect(link)}")
+    {:ok, origin} = Micropub.add_keyword_to_post(origin, {type, link})
     Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
+
+    update_content(tail, origin)
   end
 end

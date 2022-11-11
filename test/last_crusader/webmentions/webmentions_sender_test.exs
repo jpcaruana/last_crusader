@@ -188,8 +188,8 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       syndication_links = Sender.find_syndication_links(reponse)
 
       assert syndication_links == [
-               "https://twitter.com/jpcaruana/status/1409912935766544386",
-               "https://indieweb.social/@tchambers/109309801099794571"
+               {"https://twitter.com/jpcaruana/status/1409912935766544386", "twitter"},
+               {"https://indieweb.social/@tchambers/109309801099794571", "mastodon"}
              ]
     end
   end
