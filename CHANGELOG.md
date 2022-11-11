@@ -1,6 +1,10 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.10
+2022/11/11
+- syndication links: dedicated silo keywords (like twitter, mastodon) to display syndication to several studios for one note/post
+
 ### 0.9.9
 2022/11/10
 - simplify webmention links detection: not done by hand, extracted from the published page
