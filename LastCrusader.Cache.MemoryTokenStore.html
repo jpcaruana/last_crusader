@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.0">
+    <meta name="generator" content="ExDoc v0.29.1">
     <meta name="project" content="Last Crusader v0.9.10">
 
     <title>LastCrusader.Cache.MemoryTokenStore — Last Crusader v0.9.10</title>
-    <link rel="stylesheet" href="dist/html-elixir-2YOS5DIE.css" />
+    <link rel="stylesheet" href="dist/html-elixir-V2ETBPMB.css" />
+
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-2FDA4726.js"></script>
+    <script src="dist/handlebars.templates-IV5W3OL2.js"></script>
+    <script src="dist/sidebar_items-9C68367E.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -51,7 +52,7 @@
     </button>
     <label class="search-label">
       <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
     </label>
   </form>
 
@@ -89,13 +90,13 @@ Last Crusader
     <div id="content" class="content-inner">
 
 <h1>
-<button class="settings display-settings">
+<button class="icon-action display-settings">
   <i class="ri-settings-3-line"></i>
   <span class="sr-only">Settings</span>
 </button>
 
 
-    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
@@ -119,120 +120,118 @@ Last Crusader
       </a>
       Summary
     </h1>
+<div class="summary-types summary">
+  <h2>
+    <a href="#types">Types</a>
+  </h2>
 
-  <div class="summary-types summary">
-    <h2>
-      <a href="#types">Types</a>
-    </h2>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#t:cache_key/0" translate="no">cache_key()</a>
-
-        </div>
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:cache_key/0" translate="no">cache_key()</a>
 
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#t:cache_value/0" translate="no">cache_value()</a>
+    </div>
 
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#t:t/0" translate="no">t()</a>
-
-        </div>
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:cache_value/0" translate="no">cache_value()</a>
 
       </div>
 
-  </div>
+    </div>
 
-  <div class="summary-functions summary">
-    <h2>
-      <a href="#functions">Functions</a>
-    </h2>
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#t:t/0" translate="no">t()</a>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#cache/2" translate="no">cache(key, val)</a>
+      </div>
 
-        </div>
+    </div>
 
-          <div class="summary-synopsis"><p>  Asynchronous call to cache a value at the provided key. Any key that can
+</div>
+<div class="summary-functions summary">
+  <h2>
+    <a href="#functions">Functions</a>
+  </h2>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#cache/2" translate="no">cache(key, val)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>  Asynchronous call to cache a value at the provided key. Any key that can
   be used with ETS can be used, and will be evaluated using <code class="inline">==</code>.</p></div>
 
-      </div>
+    </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
 
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#clear/0" translate="no">clear()</a>
+        <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
 
-        </div>
+    </div>
 
-          <div class="summary-synopsis"><p>  Asynchronous clears all values in the cache.</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#init/1" translate="no">init(ttl_seconds)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/elixir/GenServer.html#c:init/1"><code class="inline">GenServer.init/1</code></a>.</p></div>
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#clear/0" translate="no">clear()</a>
 
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#read/1" translate="no">read(key)</a>
+        <div class="summary-synopsis"><p>  Asynchronous clears all values in the cache.</p></div>
 
-        </div>
+    </div>
 
-          <div class="summary-synopsis"><p>  Sychronously reads the cache for the provided key. If no value is found,
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#init/1" translate="no">init(ttl_seconds)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/elixir/GenServer.html#c:init/1"><code class="inline">GenServer.init/1</code></a>.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#read/1" translate="no">read(key)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>  Sychronously reads the cache for the provided key. If no value is found,
   returns :not_found .</p></div>
 
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#read_or_cache_default/2" translate="no">read_or_cache_default(key, default_fn)</a>
+
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#read_or_cache_default/2" translate="no">read_or_cache_default(key, default_fn)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>  Sychronously reads the cache for the provided key. If no value is found,
+        <div class="summary-synopsis"><p>  Sychronously reads the cache for the provided key. If no value is found,
   invokes default_fn and caches the result. Note: in order to prevent congestion
   of the RequestCache process, default_fn is invoked in the context of the caller
   process.</p></div>
 
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#start_link/1" translate="no">start_link(ttl_seconds \\ 21600)</a>
+
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#start_link/1" translate="no">start_link(ttl_seconds \\ 21600)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>  Starts a RequestCache process linked to the current process. See
+        <div class="summary-synopsis"><p>  Starts a RequestCache process linked to the current process. See
   <a href="https://hexdocs.pm/elixir/GenServer.html#start_link/2"><code class="inline">GenServer.start_link/2</code></a> for details.</p></div>
 
-      </div>
+    </div>
 
-  </div>
+</div>
 
   </section>
 
@@ -255,7 +254,7 @@ Types
     </a>
     <h1 class="signature" translate="no">cache_key()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L10" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L10" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -283,7 +282,7 @@ Types
     </a>
     <h1 class="signature" translate="no">cache_value()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L11" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L11" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -311,7 +310,7 @@ Types
     </a>
     <h1 class="signature" translate="no">t()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L9" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L9" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -352,7 +351,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">cache(key, val)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L29" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -381,7 +380,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">child_spec(init_arg)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L7" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L7" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -403,7 +402,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">clear()</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L37" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -431,7 +430,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">init(ttl_seconds)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L75" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L75" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -459,7 +458,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">read(key)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L46" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L46" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -488,7 +487,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">read_or_cache_default(key, default_fn)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L60" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L60" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -521,7 +520,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">start_link(ttl_seconds \\ 21600)</h1>
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L20" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -546,10 +545,23 @@ Functions
   </section>
 
       <footer class="footer">
-
         <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+              <a href="Last Crusader.epub" title="ePub version">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.1) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
