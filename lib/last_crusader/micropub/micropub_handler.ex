@@ -119,6 +119,12 @@ defmodule LastCrusader.Micropub.MicropubHandler do
     end
   end
 
+  def options_comment(conn) do
+    conn
+    |> Utils.put_headers(%{allow: "OPTIONS, POST", "access-control-request-method": "POST"})
+    |> send_resp(204, "No Content")
+  end
+
   defp json_reply(conn, map) do
     conn
     |> put_resp_content_type("application/json")

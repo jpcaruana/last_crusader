@@ -67,6 +67,10 @@ defmodule LastCrusader.Router do
     Micropub.comment(conn)
   end
 
+  options "/comment" do
+    Micropub.options_comment(conn)
+  end
+
   get "/favicon.ico" do
     send_resp(conn, 204, "")
   end

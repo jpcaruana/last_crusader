@@ -114,6 +114,17 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
       assert conn.status == 404
     end
 
+    test "it should reply to OPTIONS queries" do
+      conn = conn(:options, "/comment")
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.state == :sent
+      assert conn.status == 204
+      assert Plug.Conn.get_resp_header(conn, "allow") == ["OPTIONS, POST"]
+      assert Plug.Conn.get_resp_header(conn, "access-control-request-method") == ["POST"]
+    end
+
     test "it should accept json requests" do
       LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
 
