@@ -1,6 +1,13 @@
 # Changelog
 
 ## 0.9.x
+### 0.9.11
+2023/01/23
+- comment API: allow http OPTIONS requests
+- dependencies update:
+    - #108/#113/#116: [bump castore from 0.1.18 to 0.1.22](https://github.com/jpcaruana/last_crusader/pull/116)
+    - bump telemetry from 1.1.0 to 1.2.1
+
 ### 0.9.10
 2022/11/11
 - syndication links: dedicated silo keywords (like twitter, mastodon) to display syndication to several studios for one note/post
