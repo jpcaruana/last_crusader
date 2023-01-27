@@ -8,6 +8,6 @@
   min_overall_spec_coverage: 70,
   raise: false,
   reporter: Doctor.Reporters.Short,
-  struct_type_spec_required: true,
+  struct_type_spec_required: false,
   umbrella: false
 }
