@@ -44,8 +44,6 @@ defmodule LastCrusader.Micropub do
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
       {:ok, content_url}
-    else
-      error -> error
     end
   end
 
@@ -103,9 +101,6 @@ defmodule LastCrusader.Micropub do
         )
 
       {GitHub.new_file(comment_filename, comment_filecontent), comment_filecontent}
-    else
-      error ->
-        error
     end
   end
 
@@ -128,8 +123,6 @@ defmodule LastCrusader.Micropub do
          new_frontmatter <- Toml.update_toml(frontmatter, {newkey, value}),
          {:ok, :content_updated} <- GitHub.update_file(filename, new_frontmatter <> markdown) do
       {:ok, published_page_url}
-    else
-      error -> error
     end
   end
 
