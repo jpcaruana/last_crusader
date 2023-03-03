@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.x
+### 0.10.0
+2023/03/03
+- [#119](https://github.com/jpcaruana/last_crusader/pull/119): webserver: move from [Cowboy](https://github.com/ninenines/cowboy) to [Bandit](https://github.com/mtrudel/bandit), based on [Thousand Island](https://github.com/mtrudel/thousand_island). Bandit is a pure Elixir HTTP server for Plug & WebSock applications 
+- dependencies update:
+    - #117: [bump mint from 1.4.2 to 1.5.0](https://github.com/jpcaruana/last_crusader/pull/117)
+    - removed Cowboy deps
+
 ## 0.9.x
 ### 0.9.11
 2023/01/23
