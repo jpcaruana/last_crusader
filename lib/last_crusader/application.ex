@@ -8,7 +8,10 @@ defmodule LastCrusader.Application do
     # List all child processes to be supervised
     children =
       [
-        {Bandit, plug: LastCrusader.Router},
+        {Bandit,
+         plug: LastCrusader.Router,
+         scheme: :http,
+         options: [port: Application.get_env(:last_crusader, :port)]},
         # :systemd.ready(),
         # :systemd.set_status(down: [status: "drained"]),
         # :systemd.set_status(down: [status: "draining"]),
