@@ -8,18 +8,9 @@ defmodule LastCrusader.Application do
     # List all child processes to be supervised
     children =
       [
-        # Use Plug.Cowboy.child_spec/3 to register our endpoint as a plug
-        Plug.Cowboy.child_spec(
-          scheme: :http,
-          plug: LastCrusader.Router,
-          # Set the port per environment, see ./config/MIX_ENV.exs
-          options: [
-            port: Application.get_env(:last_crusader, :port)
-          ]
-        ),
+        {Bandit, plug: LastCrusader.Router},
         # :systemd.ready(),
         # :systemd.set_status(down: [status: "drained"]),
-        {Plug.Cowboy.Drainer, refs: :all, shutdown: 10_000},
         # :systemd.set_status(down: [status: "draining"]),
         LastCrusader.Cache.Supervisor
       ]
