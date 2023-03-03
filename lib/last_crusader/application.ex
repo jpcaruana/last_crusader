@@ -15,7 +15,8 @@ defmodule LastCrusader.Application do
         LastCrusader.Cache.Supervisor
       ]
       |> append_if(
-        Application.get_env(:last_crusader, :env) != :test,
+        Application.get_env(:last_crusader, :env) != :test &&
+          Application.get_env(:last_crusader, :env) != :dev,
         {Tz.UpdatePeriodically, []}
       )
 
@@ -27,7 +28,7 @@ defmodule LastCrusader.Application do
     {:ok, version} = :application.get_key(:last_crusader, :vsn)
 
     Logger.info(
-      "Application LastCrusader #{version}: started on port #{Application.get_env(:last_crusader, :port)}}"
+      "Application LastCrusader #{version}: started on port #{Application.get_env(:last_crusader, :port)}"
     )
 
     started
