@@ -11,7 +11,7 @@ defmodule LastCrusader.Application do
         {Bandit,
          plug: LastCrusader.Router,
          scheme: :http,
-         options: [port: Application.get_env(:last_crusader, :port)]},
+         thousand_island_options: [port: Application.get_env(:last_crusader, :port)]},
         # :systemd.ready(),
         # :systemd.set_status(down: [status: "drained"]),
         # :systemd.set_status(down: [status: "draining"]),
