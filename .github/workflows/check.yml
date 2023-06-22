@@ -15,14 +15,23 @@ jobs:
             otp: '24.3'
 
           - elixir: '1.13'
-            otp: '24.2'
-          - elixir: '1.13'
             otp: '24.3'
           - elixir: '1.13'
             otp: '25.0'
 
           - elixir: '1.14'
+            otp: '24.3'
+          - elixir: '1.14'
             otp: '25.0'
+          - elixir: '1.14'
+            otp: '26.0'
+
+          - elixir: '1.15'
+            otp: '24.3'
+          - elixir: '1.15'
+            otp: '25.0'
+          - elixir: '1.15'
+            otp: '26.0'
 
     runs-on: ubuntu-latest
 
