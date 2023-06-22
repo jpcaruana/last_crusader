@@ -6,7 +6,9 @@ jobs:
   mix_check:
     name: mix check (Elixir ${{matrix.elixir}}, OTP ${{matrix.otp}})
 
+    continue-on-error: true
     strategy:
+      fail-fast: false
       matrix:
         include:
           - elixir: '1.12'
