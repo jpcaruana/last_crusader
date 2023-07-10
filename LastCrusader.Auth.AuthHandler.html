@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="generator" content="ExDoc v0.30.1">
     <meta name="project" content="Last Crusader v0.10.0">
 
     <title>LastCrusader.Auth.AuthHandler — Last Crusader v0.10.0</title>
-    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+    <link rel="stylesheet" href="dist/html-elixir-JUCHUGAD.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-1EC2887C.js"></script>
+    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/sidebar_items-4AB13853.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-JDI3AVDD.js"></script>
+    <script async src="dist/html-WC6MMJK3.js"></script>
 
 
   </head>
@@ -116,9 +116,8 @@ Last Crusader
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
+        Summary
       </a>
-      Summary
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -154,9 +153,8 @@ Last Crusader
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
 Functions
+      </a>
     </h1>
     <div class="functions-list">
 <section class="detail" id="auth_endpoint/1">
@@ -179,10 +177,10 @@ Functions
   <section class="docstring">
 
 <p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p><h2 id="auth_endpoint/1-parameters" class="section-heading">
-  <a href="#auth_endpoint/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">parameters</p>
+  <a href="#auth_endpoint/1-parameters">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Parameters:
   </a>
-  Parameters:
 </h2>
 <ul><li>me:
 Full URI of the user's homepage</li><li>client_id:
@@ -221,10 +219,10 @@ For authorization, the scope contains a space-separated list of scopes that the 
 </span><span class="n">code</span><span class="o">=</span><span class="n">xxxxxxxx</span><span class="w">
 </span><span class="o">&amp;</span><span class="n">redirect_uri</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">callback</span><span class="w">
 </span><span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span></code></pre><p>After the authorization server verifies that redirect_uri, client_id match the code given, the response will include the &quot;me&quot; value indicating the URL of the user who signed in. The response content-type should be either application/x-www-form-urlencoded or application/json depending on the value of the HTTP Accept header.</p><h2 id="code_verification/1-parameters" class="section-heading">
-  <a href="#code_verification/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">parameters</p>
+  <a href="#code_verification/1-parameters">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Parameters:
   </a>
-  Parameters:
 </h2>
 <ul><li>me:
 Full URI of the user's homepage
@@ -252,7 +250,7 @@ This may be different from the me parameter that the user originally entered, bu
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.1) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
