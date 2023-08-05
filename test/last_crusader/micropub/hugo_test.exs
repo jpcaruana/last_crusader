@@ -278,9 +278,9 @@ defmodule LastCrusader.HugoTest do
 
       assert file_content == """
              +++
+             date = "2015-01-24T00:50:07+01:00"
              bookmark = "http://some-url.com/"
              bookmarktags = ["one_tag"]
-             date = "2015-01-24T00:50:07+01:00"
              +++
              """
     end
