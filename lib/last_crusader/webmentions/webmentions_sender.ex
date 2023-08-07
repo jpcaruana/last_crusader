@@ -34,7 +34,9 @@ defmodule LastCrusader.Webmentions.Sender do
       "Sending webmentions from #{inspect(origin)}: scheduled. try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
-    Task.async(fn -> start_task(origin, nb_max_tries, nb_tried) end)
+    Task.Supervisor.async_nolink(LastCrusader.TaskSupervisor, fn ->
+      start_task(origin, nb_max_tries, nb_tried)
+    end)
   end
 
   defp start_task(origin, nb_max_tries, nb_tried) do
