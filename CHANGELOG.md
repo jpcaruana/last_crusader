@@ -1,6 +1,24 @@
 # Changelog
 
 ## 0.10.x
+### 0.10.1
+2023/08/07
+- [#149](https://github.com/jpcaruana/last_crusader/pull/149) upgrade broken Webmentions dependancy
+	- webmentions 3.0.0 => 3.0.1
+	- tesla 1.4.4 => 1.7.0
+	- floki 0.34.2 => 0.34.3
+- CI build: remove one spec line that fails between Elixir 1.15 and previous Elixir versions
+- dependencies update:
+    - #142: [bump sentry from 8.0.6 to 8.1.0](https://github.com/jpcaruana/last_crusader/pull/142)
+    - #139: [bump jason from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/139)
+    - #133/#137: [bump tz from 0.24.0 to 0.26.2](https://github.com/jpcaruana/last_crusader/pull/137)
+    - #122#124/#134/#135/#136: [bump bandit from 0.6.9 to 0.7.7](https://github.com/jpcaruana/last_crusader/pull/136)
+    - #125: [bump plug from 1.14.0 to 1.14.1](https://github.com/jpcaruana/last_crusader/pull/125)
+    - #121: [bump mint from 1.5.0 to 1.5.1](https://github.com/jpcaruana/last_crusader/pull/121)
+		- also manually bumped the following deps:
+			- earmark_parser 1.4.30 => 1.4.31
+			- floki 0.34.0 => 0.34.2
+
 ### 0.10.0
 2023/03/03
 - [#119](https://github.com/jpcaruana/last_crusader/pull/119): webserver: move from [Cowboy](https://github.com/ninenines/cowboy) to [Bandit](https://github.com/mtrudel/bandit), based on [Thousand Island](https://github.com/mtrudel/thousand_island). Bandit is a pure Elixir HTTP server for Plug & WebSock applications 
