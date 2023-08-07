@@ -56,7 +56,8 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
     of the RequestCache process, default_fn is invoked in the context of the caller
     process.
   """
-  @spec read_or_cache_default(cache_key, (() -> cache_value)) :: cache_value
+  # this spec differ between Elixir 1.15 and previous versions and breaks our build
+  # @spec read_or_cache_default(cache_key, (() -> cache_value)) :: cache_value
   def read_or_cache_default(key, default_fn) do
     case read(key) do
       :not_found ->
