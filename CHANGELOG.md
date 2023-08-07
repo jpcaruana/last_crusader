@@ -1,6 +1,12 @@
 # Changelog
 
 ## 0.10.x
+### 0.10.2
+2023/08/07
+- webmention scheduling: use `Task.Supervisor.async_nolink/3` for a better async job handling
+- webmention: added more logs for more context
+- use Elixir's `Process.sleep/1` instead of erlang's `:timer.sleep`
+
 ### 0.10.1
 2023/08/07
 - [#149](https://github.com/jpcaruana/last_crusader/pull/149) upgrade broken Webmentions dependancy
