@@ -71,7 +71,9 @@ defmodule LastCrusader.Webmentions.Sender do
 
     Enum.each(webmention_response, fn x -> Logger.debug("Result: webmention: #{inspect(x)}") end)
 
-    Task.async(fn -> update_content_with_syndication(origin, webmention_response) end)
+    Task.Supervisor.async_nolink(LastCrusader.TaskSupervisor, fn ->
+      update_content_with_syndication(origin, webmention_response)
+    end)
 
     {:ok, self(), webmention_response}
   end
