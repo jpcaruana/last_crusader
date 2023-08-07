@@ -11,6 +11,7 @@ defmodule LastCrusader.Webmentions.Sender do
   alias Jason, as: Json
 
   @type url() :: String.t()
+  # one minute is 60 000ms
   @one_minute 60_000
 
   @doc """
@@ -37,7 +38,7 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp start_task(origin, nb_max_tries, nb_tried) do
-    :timer.sleep(@one_minute)
+    Process.sleep(@one_minute)
 
     case Tesla.head(origin) do
       {:ok, %Tesla.Env{status: 200}} ->
