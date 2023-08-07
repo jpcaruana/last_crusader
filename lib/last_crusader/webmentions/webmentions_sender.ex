@@ -38,11 +38,16 @@ defmodule LastCrusader.Webmentions.Sender do
   end
 
   defp start_task(origin, nb_max_tries, nb_tried) do
+    Logger.info(
+      "Started async task for webmentions on #{inspect(origin)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}. Will wait for #{inspect(@one_minute)}ms"
+    )
+
     Process.sleep(@one_minute)
 
     case Tesla.head(origin) do
       {:ok, %Tesla.Env{status: 200}} ->
-        send_webmentions(origin, nb_max_tries, nb_tried)
+        Logger.info("Success on #{inspect(origin)}. I will send webmentions.")
+        send_webmentions(origin)
 
       {:ok, %Tesla.Env{status: status}} ->
         Logger.info("HEAD on #{inspect(origin)}: HTTP status=#{inspect(status)}")
@@ -57,10 +62,8 @@ defmodule LastCrusader.Webmentions.Sender do
   @doc """
     Sends Webmentions to every link
   """
-  def send_webmentions(origin, nb_max_tries \\ 1, nb_tried \\ 0) do
-    Logger.info(
-      "Sending webmentions from #{inspect(origin)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
-    )
+  def send_webmentions(origin) do
+    Logger.info("Sending webmentions from #{inspect(origin)}")
 
     {:ok, webmention_response} = Webmentions.send_webmentions(origin)
 
