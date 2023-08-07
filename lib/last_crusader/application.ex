@@ -8,14 +8,17 @@ defmodule LastCrusader.Application do
     # List all child processes to be supervised
     children =
       [
-        {Bandit,
-         plug: LastCrusader.Router,
-         scheme: :http,
-         thousand_island_options: [port: Application.get_env(:last_crusader, :port)]},
-        # :systemd.ready(),
-        # :systemd.set_status(down: [status: "drained"]),
-        # :systemd.set_status(down: [status: "draining"]),
-        LastCrusader.Cache.Supervisor
+        {
+          Bandit,
+          plug: LastCrusader.Router,
+          scheme: :http,
+          thousand_island_options: [port: Application.get_env(:last_crusader, :port)]
+        },
+        LastCrusader.Cache.Supervisor,
+        {
+          Task.Supervisor,
+          name: LastCrusader.TaskSupervisor
+        }
       ]
       |> append_if(
         Application.get_env(:last_crusader, :env) != :test &&
@@ -23,8 +26,6 @@ defmodule LastCrusader.Application do
         {Tz.UpdatePeriodically, []}
       )
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: LastCrusader.Supervisor]
     started = Supervisor.start_link(children, opts)
 
