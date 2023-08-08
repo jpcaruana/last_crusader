@@ -1,6 +1,10 @@
 # Changelog
 
 ## 0.10.x
+### 0.10.3
+2023/08/08
+- dependencie update: #152: [bump castore from 0.1.22 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/152)
+
 ### 0.10.2
 2023/08/07
 - webmention scheduling: use `Task.Supervisor.async_nolink/3` for a better async job handling
