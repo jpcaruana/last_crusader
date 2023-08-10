@@ -1,18 +1,17 @@
 # This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
+# and its dependencies with the aid of the Config module.
 import Config
-
-import_config "#{Mix.env()}.exs"
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id],
-  colors: [error: [:bright, :light_red]]
+  metadata: [:request_id]
 
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
-config :last_crusader, env: Mix.env()
+config :last_crusader, env: config_env()
 
-if Mix.env() != :prod do
+import_config "#{config_env()}.exs"
+
+if config_env() != :prod do
   config :git_hooks,
     auto_install: false,
     verbose: true,
