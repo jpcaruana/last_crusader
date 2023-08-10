@@ -6,7 +6,7 @@ defmodule LastCrusader.Router do
   use Plug.ErrorHandler
   require Logger
 
-  if Mix.env() == :dev do
+  if Application.compile_env(:last_crusader, :env) == :dev do
     use Plug.Debugger
   end
 
