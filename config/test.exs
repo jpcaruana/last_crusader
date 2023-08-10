@@ -5,7 +5,7 @@ config :last_crusader,
 
 config :tesla, adapter: Tesla.Mock
 
-config :logger,
+config :logger, :console,
   level: :critical,
   always_evaluate_messages: true
 
