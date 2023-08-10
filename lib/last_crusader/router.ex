@@ -15,6 +15,8 @@ defmodule LastCrusader.Router do
     plug(Plug.Logger)
   end
 
+  plug(Plug.RequestId)
+
   # see https://hexdocs.pm/plug/Plug.RewriteOn.html
   plug(Plug.RewriteOn, [:x_forwarded_host, :x_forwarded_port, :x_forwarded_proto])
 
