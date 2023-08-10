@@ -4,7 +4,10 @@ config :last_crusader,
   port: 4002
 
 config :tesla, adapter: Tesla.Mock
-config :logger, level: :critical
+
+config :logger,
+  level: :critical,
+  always_evaluate_messages: true
 
 config :last_crusader,
   me: "https://some.url.fr/",
