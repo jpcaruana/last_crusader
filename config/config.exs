@@ -9,6 +9,9 @@ config :logger, :console,
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 config :last_crusader, env: config_env()
 
+config :sentry,
+  environment_name: :test
+
 import_config "#{config_env()}.exs"
 
 if config_env() != :prod do

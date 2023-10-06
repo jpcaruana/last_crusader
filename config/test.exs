@@ -33,3 +33,6 @@ config :last_crusader,
   },
   webmention_nb_tries: 15,
   port: 4001
+
+config :sentry,
+  environment_name: :test
