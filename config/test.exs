@@ -19,17 +19,17 @@ config :last_crusader,
     access_token: "THIS IS A SECRET"
   },
   micropub_config: %{
-    types: %{
-      "post-types": [
-        %{type: "note", name: "Note"}
-      ]
-    },
     "syndicate-to": [
       %{
         uid: "https://twitter.com/some_twitter_account",
         name: "Twitter"
       }
-    ]
+    ],
+    types: %{
+      "post-types": [
+        %{type: "note", name: "Note"}
+      ]
+    }
   },
   webmention_nb_tries: 15,
   port: 4001

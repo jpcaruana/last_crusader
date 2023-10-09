@@ -31,7 +31,7 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
              ]
 
       assert conn.resp_body ==
-               ~S({"syndicate-to":[{"name":"Twitter","uid":"https://twitter.com/some_twitter_account"}],"types":{"post-types":[{"name":"Note","type":"note"}]}})
+               ~S({"types":{"post-types":[{"name":"Note","type":"note"}]},"syndicate-to":[{"name":"Twitter","uid":"https://twitter.com/some_twitter_account"}]})
     end
 
     test "it should return syndication targets" do
