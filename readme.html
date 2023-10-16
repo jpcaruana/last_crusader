@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.5">
+    <meta name="generator" content="ExDoc v0.30.7">
     <meta name="project" content="Last Crusader v0.10.3">
 
     <title>LastCrusader - Indieweb and the Last Crusade — Last Crusader v0.10.3</title>
-    <link rel="stylesheet" href="dist/html-elixir-WZEKIBKB.css" />
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
     <script src="dist/sidebar_items-A32ED495.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-B3DGGEY7.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of Last Crusader</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -71,20 +71,35 @@ Last Crusader
         v0.10.3
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
     </ul>
   </div>
 
-  <div class="gradient"></div>
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -106,16 +121,16 @@ Last Crusader
 </h1>
 
 <p>An <a href="https://indieweb.org/">Indieweb</a> server taylored mainly for <em>my</em> needs, but I hope easily configurable for yours.</p><ul><li>Your content is yours</li><li>You are better connected</li><li>You are in control</li></ul><p>Requires at least Elixir 12.0 with OTP 22.</p><p>Works fine with latest Elixir/OTP, including OTP 24.</p><h2 id="todo" class="section-heading">
-  <a href="#todo">
+  <a href="#todo" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Todo
   </a>
+  <span class="text">Todo</span>
 </h2>
 <ul><li>[ ] <a href="https://indieauth.com/">IndieAuth</a> endpoint</li><li>[X] <a href="https://www.w3.org/TR/micropub/">Micropub</a> endpoint<ul><li>[ ] <a href="https://indieweb.org/Webmention">Webmentions</a>:<ul><li>[X] send webmentions on new posts</li><li>[ ] receive webmentions</li></ul></li></ul></li><li>[X] Comment API</li></ul><h2 id="notes-to-self" class="section-heading">
-  <a href="#notes-to-self">
+  <a href="#notes-to-self" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Notes to self
   </a>
+  <span class="text">Notes to self</span>
 </h2>
 <ul><li>run tests: <a href="https://hexdocs.pm/mix/Mix.Tasks.Test.html"><code class="inline">mix test</code></a></li><li>run locally: <code class="inline">iex -S mix</code></li><li>install git hooks locally: <code class="inline">mix git_hooks.install</code></li><li>make a release: <code class="inline">MIX_ENV=prod mix release</code> or with personal secrets <code class="inline">MIX_ENV=perso mix release</code></li><li>make a release that targets a debian: <code class="inline">./debian_release.sh</code> (uses docker)</li></ul>
 <div class="bottom-actions">
@@ -161,7 +176,7 @@ Changelog
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.5) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.7) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -169,7 +184,7 @@ Changelog
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 
