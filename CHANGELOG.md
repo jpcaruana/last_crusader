@@ -1,6 +1,18 @@
 # Changelog
 
 ## 0.10.x
+### 0.10.4
+2023/10/17
+- unit tests: logger config for tests: always evaluate all logs
+- refactor: do not use (long) deprecated Mix.Config
+- enable `Plug.RequestId` module
+- loggers: :console backend configuration is automatically maped to the default handler and default formatter
+- dependencies update:
+    - #165: [bump sentry from 8.1.0 to 9.1.0](https://github.com/jpcaruana/last_crusader/pull/165) and upgrade related config
+    - #164: [bump castore from 1.0.3 to 1.0.4](https://github.com/jpcaruana/last_crusader/pull/164)
+    - #158/##160/#168/#170: [bump hackney from 1.18.1 to 1.20.0](https://github.com/jpcaruana/last_crusader/pull/170)
+    - #162/#166: [bump plug from 1.14.2 to 1.15.1](https://github.com/jpcaruana/last_crusader/pull/162)
+
 ### 0.10.3
 2023/08/08
 - dependencie update: #152: [bump castore from 0.1.22 to 1.0.3](https://github.com/jpcaruana/last_crusader/pull/152)
