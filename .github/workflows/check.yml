@@ -6,7 +6,6 @@ jobs:
   mix_check:
     name: mix check (Elixir ${{matrix.elixir}}, OTP ${{matrix.otp}})
 
-    # continue-on-error: true
     strategy:
       fail-fast: false
       matrix:
@@ -37,7 +36,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup Elixir
         uses: erlef/setup-elixir@v1
@@ -46,7 +45,7 @@ jobs:
           otp-version: ${{ matrix.otp }}
 
       - name: Cache Elixir deps
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: deps
           key: elixir-deps-${{ runner.os }}-${{ hashFiles('mix.lock') }}
@@ -57,7 +56,7 @@ jobs:
         run: mix deps.get
 
       - name: Cache Elixir build
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: _build
           key: elixir-build-${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-${{ hashFiles('mix.lock') }}-${{ hashFiles('lib/**/*.ex', 'config/*.exs', 'mix.exs') }}
