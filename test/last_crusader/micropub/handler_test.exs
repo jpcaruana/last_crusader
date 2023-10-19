@@ -30,8 +30,12 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
                "application/json; charset=utf-8"
              ]
 
-      assert conn.resp_body ==
-               ~S({"syndicate-to":[{"name":"Twitter","uid":"https://twitter.com/some_twitter_account"}],"types":{"post-types":[{"name":"Note","type":"note"}]}})
+      expected_body =
+        ~S({"syndicate-to":[{"name":"Twitter","uid":"https://twitter.com/some_twitter_account"}],"types":{"post-types":[{"name":"Note","type":"note"}]}})
+
+      # deactivated direct test as I can't make it work with OPT 26 and OTP 25 at the same time
+      # assert conn.resp_body == expected_body
+      assert Json.decode!(conn.resp_body) == Json.decode!(expected_body)
     end
 
     test "it should return syndication targets" do

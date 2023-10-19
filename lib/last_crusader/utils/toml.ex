@@ -37,7 +37,7 @@ defmodule LastCrusader.Utils.Toml do
   end
 
   @spec front_matter_to_map(toml()) :: map()
-  defp front_matter_to_map(toml) do
+  def front_matter_to_map(toml) do
     toml
     |> String.split("\n")
     |> Enum.filter(fn x -> x != "" end)
