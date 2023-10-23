@@ -21,6 +21,6 @@ defmodule LastCrusader.Webmentions.Webmention do
 
   @doc false
   def register_webmention(webmention) do
-    Repo.insert!(webmention)
+    webmention |> changeset |> Repo.insert!()
   end
 end
