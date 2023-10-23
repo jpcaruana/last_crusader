@@ -3,8 +3,8 @@
 ## 0.10.x
 ### 0.10.4
 2023/10/17
-- unit tests: logger config for tests: always evaluate all logs
-- refactor: do not use (long) deprecated Mix.Config
+- unit tests: logger config for tests: always evaluate all logs to prevent bad formatted logs to crash production
+- refactor: do not use (long) deprecated `Mix.Config`
 - enable `Plug.RequestId` module
 - loggers: :console backend configuration is automatically maped to the default handler and default formatter
 - dependencies update:
@@ -29,7 +29,6 @@
 	- webmentions 3.0.0 => 3.0.1
 	- tesla 1.4.4 => 1.7.0
 	- floki 0.34.2 => 0.34.3
-- CI build: remove one spec line that fails between Elixir 1.15 and previous Elixir versions
 - dependencies update:
     - #142: [bump sentry from 8.0.6 to 8.1.0](https://github.com/jpcaruana/last_crusader/pull/142)
     - #139: [bump jason from 1.4.0 to 1.4.1](https://github.com/jpcaruana/last_crusader/pull/139)
@@ -42,7 +41,7 @@
 			- floki 0.34.0 => 0.34.2
 
 ### 0.10.0
-2023/03/03
+2023/03/03: Bandit edition
 - [#119](https://github.com/jpcaruana/last_crusader/pull/119): webserver: move from [Cowboy](https://github.com/ninenines/cowboy) to [Bandit](https://github.com/mtrudel/bandit), based on [Thousand Island](https://github.com/mtrudel/thousand_island). Bandit is a pure Elixir HTTP server for Plug & WebSock applications 
 - dependencies update:
     - #117: [bump mint from 1.4.2 to 1.5.0](https://github.com/jpcaruana/last_crusader/pull/117)
@@ -116,7 +115,7 @@
     - #86: [bump castore from 0.1.16 to 0.1.17](https://github.com/jpcaruana/last_crusader/pull/86)
 
 ### 0.9.0
-2022/03/25
+2022/03/25: comment API edition
 - new comments API, see `LastCrusader.Micropub.MicropubHandler.comment/1`
 - dependencies update:
     - #82: [bump castore from 0.1.15 to 0.1.16](https://github.com/jpcaruana/last_crusader/pull/82)
@@ -124,7 +123,7 @@
 ## 0.8.x
 ### 0.8.2
 2022/03/17
-- micropub: `q=categories`: returns an ordered list of (weighted) tags from your website
+- micropub: `q=category`: returns an ordered list of (weighted) tags from your website
 - log server port on application start
 - dependencies update:
     - bump plug from 1.12.1 to 1.13.4
@@ -228,7 +227,7 @@
 - some refactor/duplication hunting
 
 ### 0.6.0
-2021/07/16
+2021/07/16: back syndication
 - update post after automatic syndication via [brid.gy](https://brid.gy/):
     - find twitter syndication link in brid.gy's response
     - github:

@@ -8,7 +8,7 @@ An [Indieweb](https://indieweb.org/) server taylored mainly for _my_ needs, but 
 
 Requires at least Elixir 12.0 with OTP 22.
 
-Works fine with latest Elixir/OTP, including OTP 24.
+Works fine with latest Elixir/OTP, including OTP 26.
 
 ## Todo
 
