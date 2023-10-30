@@ -132,7 +132,7 @@ Pages
   </a>
   <span class="text">0.10.4</span>
 </h3>
-<p>2023/10/17</p><ul><li>unit tests: logger config for tests: always evaluate all logs</li><li>refactor: do not use (long) deprecated Mix.Config</li><li>enable <a href="https://hexdocs.pm/plug/1.15.1/Plug.RequestId.html"><code class="inline">Plug.RequestId</code></a> module</li><li>loggers: :console backend configuration is automatically maped to the default handler and default formatter</li><li>dependencies update:<ul><li>#165: <a href="https://github.com/jpcaruana/last_crusader/pull/165">bump sentry from 8.1.0 to 9.1.0</a> and upgrade related config</li><li>#164: <a href="https://github.com/jpcaruana/last_crusader/pull/164">bump castore from 1.0.3 to 1.0.4</a></li><li>#158/##160/#168/#170: <a href="https://github.com/jpcaruana/last_crusader/pull/170">bump hackney from 1.18.1 to 1.20.0</a></li><li>#162/#166: <a href="https://github.com/jpcaruana/last_crusader/pull/162">bump plug from 1.14.2 to 1.15.1</a></li></ul></li></ul><h3 id="0-10-3" class="section-heading">
+<p>2023/10/17</p><ul><li>unit tests: logger config for tests: always evaluate all logs to prevent bad formatted logs to crash production</li><li>refactor: do not use (long) deprecated <a href="https://hexdocs.pm/mix/Mix.Config.html"><code class="inline">Mix.Config</code></a></li><li>enable <a href="https://hexdocs.pm/plug/1.15.1/Plug.RequestId.html"><code class="inline">Plug.RequestId</code></a> module</li><li>loggers: :console backend configuration is automatically maped to the default handler and default formatter</li><li>dependencies update:<ul><li>#165: <a href="https://github.com/jpcaruana/last_crusader/pull/165">bump sentry from 8.1.0 to 9.1.0</a> and upgrade related config</li><li>#164: <a href="https://github.com/jpcaruana/last_crusader/pull/164">bump castore from 1.0.3 to 1.0.4</a></li><li>#158/##160/#168/#170: <a href="https://github.com/jpcaruana/last_crusader/pull/170">bump hackney from 1.18.1 to 1.20.0</a></li><li>#162/#166: <a href="https://github.com/jpcaruana/last_crusader/pull/162">bump plug from 1.14.2 to 1.15.1</a></li></ul></li></ul><h3 id="0-10-3" class="section-heading">
   <a href="#0-10-3" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -150,13 +150,13 @@ Pages
   </a>
   <span class="text">0.10.1</span>
 </h3>
-<p>2023/08/07</p><ul><li><a href="https://github.com/jpcaruana/last_crusader/pull/149">#149</a> upgrade broken Webmentions dependancy<ul><li>webmentions 3.0.0 =&gt; 3.0.1</li><li>tesla 1.4.4 =&gt; 1.7.0</li><li>floki 0.34.2 =&gt; 0.34.3</li></ul></li><li>CI build: remove one spec line that fails between Elixir 1.15 and previous Elixir versions</li><li>dependencies update:<ul><li>#142: <a href="https://github.com/jpcaruana/last_crusader/pull/142">bump sentry from 8.0.6 to 8.1.0</a></li><li>#139: <a href="https://github.com/jpcaruana/last_crusader/pull/139">bump jason from 1.4.0 to 1.4.1</a></li><li>#133/#137: <a href="https://github.com/jpcaruana/last_crusader/pull/137">bump tz from 0.24.0 to 0.26.2</a></li><li>#122#124/#134/#135/#136: <a href="https://github.com/jpcaruana/last_crusader/pull/136">bump bandit from 0.6.9 to 0.7.7</a></li><li>#125: <a href="https://github.com/jpcaruana/last_crusader/pull/125">bump plug from 1.14.0 to 1.14.1</a></li><li>#121: <a href="https://github.com/jpcaruana/last_crusader/pull/121">bump mint from 1.5.0 to 1.5.1</a><ul><li>also manually bumped the following deps:<ul><li>earmark_parser 1.4.30 =&gt; 1.4.31</li><li>floki 0.34.0 =&gt; 0.34.2</li></ul></li></ul></li></ul></li></ul><h3 id="0-10-0" class="section-heading">
+<p>2023/08/07</p><ul><li><a href="https://github.com/jpcaruana/last_crusader/pull/149">#149</a> upgrade broken Webmentions dependancy<ul><li>webmentions 3.0.0 =&gt; 3.0.1</li><li>tesla 1.4.4 =&gt; 1.7.0</li><li>floki 0.34.2 =&gt; 0.34.3</li></ul></li><li>dependencies update:<ul><li>#142: <a href="https://github.com/jpcaruana/last_crusader/pull/142">bump sentry from 8.0.6 to 8.1.0</a></li><li>#139: <a href="https://github.com/jpcaruana/last_crusader/pull/139">bump jason from 1.4.0 to 1.4.1</a></li><li>#133/#137: <a href="https://github.com/jpcaruana/last_crusader/pull/137">bump tz from 0.24.0 to 0.26.2</a></li><li>#122#124/#134/#135/#136: <a href="https://github.com/jpcaruana/last_crusader/pull/136">bump bandit from 0.6.9 to 0.7.7</a></li><li>#125: <a href="https://github.com/jpcaruana/last_crusader/pull/125">bump plug from 1.14.0 to 1.14.1</a></li><li>#121: <a href="https://github.com/jpcaruana/last_crusader/pull/121">bump mint from 1.5.0 to 1.5.1</a><ul><li>also manually bumped the following deps:<ul><li>earmark_parser 1.4.30 =&gt; 1.4.31</li><li>floki 0.34.0 =&gt; 0.34.2</li></ul></li></ul></li></ul></li></ul><h3 id="0-10-0" class="section-heading">
   <a href="#0-10-0" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
   <span class="text">0.10.0</span>
 </h3>
-<p>2023/03/03</p><ul><li><a href="https://github.com/jpcaruana/last_crusader/pull/119">#119</a>: webserver: move from <a href="https://github.com/ninenines/cowboy">Cowboy</a> to <a href="https://github.com/mtrudel/bandit">Bandit</a>, based on <a href="https://github.com/mtrudel/thousand_island">Thousand Island</a>. Bandit is a pure Elixir HTTP server for Plug &amp; WebSock applications </li><li>dependencies update:<ul><li>#117: <a href="https://github.com/jpcaruana/last_crusader/pull/117">bump mint from 1.4.2 to 1.5.0</a></li><li>removed Cowboy deps</li></ul></li></ul><h2 id="0-9-x" class="section-heading">
+<p>2023/03/03: Bandit edition</p><ul><li><a href="https://github.com/jpcaruana/last_crusader/pull/119">#119</a>: webserver: move from <a href="https://github.com/ninenines/cowboy">Cowboy</a> to <a href="https://github.com/mtrudel/bandit">Bandit</a>, based on <a href="https://github.com/mtrudel/thousand_island">Thousand Island</a>. Bandit is a pure Elixir HTTP server for Plug &amp; WebSock applications </li><li>dependencies update:<ul><li>#117: <a href="https://github.com/jpcaruana/last_crusader/pull/117">bump mint from 1.4.2 to 1.5.0</a></li><li>removed Cowboy deps</li></ul></li></ul><h2 id="0-9-x" class="section-heading">
   <a href="#0-9-x" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -222,7 +222,7 @@ Pages
   </a>
   <span class="text">0.9.0</span>
 </h3>
-<p>2022/03/25</p><ul><li>new comments API, see <a href="LastCrusader.Micropub.MicropubHandler.html#comment/1"><code class="inline">LastCrusader.Micropub.MicropubHandler.comment/1</code></a></li><li>dependencies update:<ul><li>#82: <a href="https://github.com/jpcaruana/last_crusader/pull/82">bump castore from 0.1.15 to 0.1.16</a></li></ul></li></ul><h2 id="0-8-x" class="section-heading">
+<p>2022/03/25: comment API edition</p><ul><li>new comments API, see <a href="LastCrusader.Micropub.MicropubHandler.html#comment/1"><code class="inline">LastCrusader.Micropub.MicropubHandler.comment/1</code></a></li><li>dependencies update:<ul><li>#82: <a href="https://github.com/jpcaruana/last_crusader/pull/82">bump castore from 0.1.15 to 0.1.16</a></li></ul></li></ul><h2 id="0-8-x" class="section-heading">
   <a href="#0-8-x" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -234,7 +234,7 @@ Pages
   </a>
   <span class="text">0.8.2</span>
 </h3>
-<p>2022/03/17</p><ul><li>micropub: <code class="inline">q=categories</code>: returns an ordered list of (weighted) tags from your website</li><li>log server port on application start</li><li>dependencies update:<ul><li>bump plug from 1.12.1 to 1.13.4</li><li>bump makeup_elixir from 0.15.2 to 0.16.0</li><li>bump earmark_parser from 1.4.20 to 1.4.23</li></ul></li></ul><h3 id="0-8-1" class="section-heading">
+<p>2022/03/17</p><ul><li>micropub: <code class="inline">q=category</code>: returns an ordered list of (weighted) tags from your website</li><li>log server port on application start</li><li>dependencies update:<ul><li>bump plug from 1.12.1 to 1.13.4</li><li>bump makeup_elixir from 0.15.2 to 0.16.0</li><li>bump earmark_parser from 1.4.20 to 1.4.23</li></ul></li></ul><h3 id="0-8-1" class="section-heading">
   <a href="#0-8-1" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -318,7 +318,7 @@ Pages
   </a>
   <span class="text">0.6.0</span>
 </h3>
-<p>2021/07/16</p><ul><li>update post after automatic syndication via <a href="https://brid.gy/">brid.gy</a>:<ul><li>find twitter syndication link in brid.gy's response</li><li>github:<ul><li>retrieve a file's content</li><li>update a file</li></ul></li><li>new <a href="LastCrusader.Utils.Toml.html"><code class="inline">LastCrusader.Utils.Toml</code></a> module for light/easy Toml manipulation</li></ul></li><li>dependencies update:<ul><li>#28: <a href="https://github.com/jpcaruana/last_crusader/pull/28">bump webmentions from 1.0.1 to 1.0.2</a><ul><li>floki: 0.30.1 -&gt; 0.31.0</li></ul></li><li>#29: <a href="https://github.com/jpcaruana/last_crusader/pull/29">bump tz from 0.16.2 to 0.17.0</a></li><li>#30: <a href="https://github.com/jpcaruana/last_crusader/pull/30">bump tesla from 1.4.1 to 1.4.2</a><ul><li>castore: 0.1.10 -&gt; 0.1.11</li></ul></li></ul></li></ul><h2 id="0-5-x" class="section-heading">
+<p>2021/07/16: back syndication</p><ul><li>update post after automatic syndication via <a href="https://brid.gy/">brid.gy</a>:<ul><li>find twitter syndication link in brid.gy's response</li><li>github:<ul><li>retrieve a file's content</li><li>update a file</li></ul></li><li>new <a href="LastCrusader.Utils.Toml.html"><code class="inline">LastCrusader.Utils.Toml</code></a> module for light/easy Toml manipulation</li></ul></li><li>dependencies update:<ul><li>#28: <a href="https://github.com/jpcaruana/last_crusader/pull/28">bump webmentions from 1.0.1 to 1.0.2</a><ul><li>floki: 0.30.1 -&gt; 0.31.0</li></ul></li><li>#29: <a href="https://github.com/jpcaruana/last_crusader/pull/29">bump tz from 0.16.2 to 0.17.0</a></li><li>#30: <a href="https://github.com/jpcaruana/last_crusader/pull/30">bump tesla from 1.4.1 to 1.4.2</a><ul><li>castore: 0.1.10 -&gt; 0.1.11</li></ul></li></ul></li></ul><h2 id="0-5-x" class="section-heading">
   <a href="#0-5-x" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
