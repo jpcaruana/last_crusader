@@ -13,4 +13,4 @@ config :sentry,
   tags: %{
     env: "production"
   },
-  included_environments: [:prod]
+  environment_name: :prod
