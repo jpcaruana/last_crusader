@@ -60,7 +60,7 @@ defmodule LastCrusader.MixProject do
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 3.0.1"},
       # sentry
-      {:sentry, "~> 9.1"},
+      {:sentry, "~> 10.0"},
       {:hackney, "~> 1.8"},
       # code coverage
       {:excoveralls, "~> 0.18.0", only: :test},
