@@ -72,17 +72,17 @@ defmodule LastCrusader.Micropub.PostTypeDiscoveryIsNameTitleTest do
   import LastCrusader.Micropub.PostTypeDiscovery
 
   test "find title in name: simple case" do
-    assert false == is_name_a_title?("this is the content", "this is the content")
-    assert true == is_name_a_title?("This is a title", "This is some content")
+    assert false == name_is_title?("this is the content", "this is the content")
+    assert true == name_is_title?("This is a title", "This is some content")
   end
 
   test "find title in name: common case with no explicit p-name" do
-    assert false == is_name_a_title?("nonsensethe contentnonsense", "the content")
+    assert false == name_is_title?("nonsensethe contentnonsense", "the content")
   end
 
   test "find title in name: ignore case, spaces and punctuation" do
-    assert false == is_name_a_title?("the content", "ThE cONTeNT")
-    assert false == is_name_a_title?("the content", "the content...")
-    assert false == is_name_a_title?("the content", " the  content  ")
+    assert false == name_is_title?("the content", "ThE cONTeNT")
+    assert false == name_is_title?("the content", "the content...")
+    assert false == name_is_title?("the content", " the  content  ")
   end
 end
