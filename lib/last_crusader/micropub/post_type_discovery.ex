@@ -106,14 +106,14 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
   end
 
   def discover(%{name: name, content: content}) when content != "" do
-    case is_name_a_title?(name, content) do
+    case name_is_title?(name, content) do
       true -> :article
       _ -> :note
     end
   end
 
   def discover(%{name: name, summary: content}) do
-    case is_name_a_title?(name, content) do
+    case name_is_title?(name, content) do
       true -> :article
       _ -> :note
     end
@@ -143,18 +143,18 @@ defmodule LastCrusader.Micropub.PostTypeDiscovery do
   content is a subset of name. We also strip out non-alphanumeric
   characters just to make the check a little more forgiving.
   """
-  @spec is_name_a_title?(String.t(), String.t()) :: boolean()
-  def is_name_a_title?(name, content)
+  @spec name_is_title?(String.t(), String.t()) :: boolean()
+  def name_is_title?(name, content)
 
-  def is_name_a_title?(name, nil) when name != nil do
+  def name_is_title?(name, nil) when name != nil do
     true
   end
 
-  def is_name_a_title?(nil, _) do
+  def name_is_title?(nil, _) do
     false
   end
 
-  def is_name_a_title?(name, content) do
+  def name_is_title?(name, content) do
     not String.contains?(
       strip_spaces_and_punctuation(name),
       strip_spaces_and_punctuation(content)
