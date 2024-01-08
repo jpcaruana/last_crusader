@@ -4,7 +4,7 @@
 ### 0.10.4
 2023/10/17
 - unit tests: logger config for tests: always evaluate all logs to prevent bad formatted logs to crash production
-- refactor: do not use (long) deprecated `Mix.Config`
+- refactor: do not use (long) deprecated Mix.Config
 - enable `Plug.RequestId` module
 - loggers: :console backend configuration is automatically maped to the default handler and default formatter
 - dependencies update:
