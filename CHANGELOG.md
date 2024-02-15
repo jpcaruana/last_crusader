@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.11.x
+### 0.11.0
+2024/02/15
+- hugo syndication:
+    - send webmentions for bluesky silo
+- Elixir 1.16 and OTP 26 compatibility
+- dependencies update:
+    - #174/#176/#178/#189/#193/#195: [bump bandit from 0.7.7 to 1.2.0](https://github.com/jpcaruana/last_crusader/pull/195)
+    - #179/#180/#181/#182/#184: [bump sentry from 9.1.0 to 10.1.0](https://github.com/jpcaruana/last_crusader/pull/184)
+    - #186: [bump mint from 1.5.1 to 1.5.2](https://github.com/jpcaruana/last_crusader/pull/186)
+    - #177/#194: [bump plug from 1.15.1 to 1.15.3](https://github.com/jpcaruana/last_crusader/pull/194)
+
 ## 0.10.x
 ### 0.10.4
 2023/10/17
