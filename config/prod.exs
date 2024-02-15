@@ -12,5 +12,4 @@ config :sentry,
   root_source_code_paths: [File.cwd!()],
   tags: %{
     env: "production"
-  },
-  environment_name: :prod
+  }
