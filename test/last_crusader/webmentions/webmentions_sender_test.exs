@@ -159,9 +159,10 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
   end
 
   describe "find_syndication_links/2" do
-    test "find twitter and mastodon links in brid.gy response" do
+    test "find twitter, mastodon and bluesky links in brid.gy response" do
       webmention_target_twitter = "https://brid.gy/publish/twitter"
       webmention_target_mastodon = "https://brid.gy/publish/mastodon"
+      webmention_target_bluesky = "https://brid.gy/publish/bluesky"
       webmention_endpoint = "https://brid.gy/publish/webmention"
 
       reponse = [
@@ -182,6 +183,16 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
           message: "sent",
           body:
             bridgy_success_response_body("https://indieweb.social/@tchambers/109309801099794571")
+        },
+        %Webmentions.Response{
+          status: :ok,
+          target: webmention_target_bluesky,
+          endpoint: webmention_endpoint,
+          message: "sent",
+          body:
+            bridgy_success_response_body(
+              "https://bsky.app/profile/jpcaruana.bsky.social/post/3klh6khcztl2g"
+            )
         }
       ]
 
@@ -189,7 +200,8 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
 
       assert syndication_links == [
                {"https://twitter.com/jpcaruana/status/1409912935766544386", "twitter"},
-               {"https://indieweb.social/@tchambers/109309801099794571", "mastodon"}
+               {"https://indieweb.social/@tchambers/109309801099794571", "mastodon"},
+               {"https://bsky.app/profile/jpcaruana.bsky.social/post/3klh6khcztl2g", "bluesky"}
              ]
     end
   end
