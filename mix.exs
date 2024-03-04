@@ -70,7 +70,7 @@ defmodule LastCrusader.MixProject do
       # watch for tests
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
-      {:ex_check, "~> 0.15.0", only: [:dev], runtime: false},
+      {:ex_check, "~> 0.16.0", only: [:dev], runtime: false},
       {:git_hooks, "~> 0.7.0", only: [:test, :dev], runtime: false},
       {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false}
     ]
