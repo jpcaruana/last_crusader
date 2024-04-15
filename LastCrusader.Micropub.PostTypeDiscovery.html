@@ -4,21 +4,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.31.2">
+    <meta name="generator" content="ExDoc v0.32.1">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Micropub.PostTypeDiscovery — Last Crusader v0.11.0</title>
-    <link rel="stylesheet" href="dist/html-elixir-JKHCEBPC.css" />
+    <link rel="stylesheet" href="dist/html-elixir-2C5PUTIB.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-A7S2WMC7.js"></script>
+    <script src="dist/handlebars.templates-IHH6HKET.js"></script>
     <script src="dist/sidebar_items-6A496790.js"></script>
-
-      <script src="docs_config.js"></script>
-
-    <script async src="dist/html-JRPQ5PR6.js"></script>
+    <script src="docs_config.js"></script>
+    <script async src="dist/html-GXQ6W6IF.js"></script>
 
 
   </head>
@@ -37,13 +35,11 @@
       } catch (error) { }
     </script>
 
-<div class="main">
+<div class="body-wrapper">
 
 <button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
-
-<div class="background-layer"></div>
 
 <nav id="sidebar" class="sidebar">
 
@@ -89,54 +85,54 @@ Pages
 
 <main class="content">
   <output role="status" id="toast"></output>
-  <div class="content-outer">
-    <div id="content" class="content-inner">
-      <div class="top-search">
-        <div class="search-settings">
-          <form class="search-bar" action="search.html">
-            <label class="search-label">
-              <span class="sr-only">Search documentation of Last Crusader</span>
-              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-            </label>
-            <button type="submit" class="search-button" aria-label="Submit Search">
-              <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
-            </button>
-            <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-              <i class="ri-close-line ri-lg" title="Cancel search"></i>
-            </button>
-          </form>
-          <div class="autocomplete">
-          </div>
-          <button class="icon-settings display-settings">
-            <i class="ri-settings-3-line"></i>
-            <span class="sr-only">Settings</span>
+
+  <div id="content" class="content-inner">
+    <div class="top-search">
+      <div class="search-settings">
+        <form class="search-bar" action="search.html">
+          <label class="search-label">
+            <span class="sr-only">Search documentation of Last Crusader</span>
+            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+          </label>
+          <button type="submit" class="search-button" aria-label="Submit Search">
+            <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
           </button>
+          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+            <i class="ri-close-line ri-lg" title="Cancel search"></i>
+          </button>
+        </form>
+        <div class="autocomplete">
         </div>
-
+        <button class="icon-settings display-settings">
+          <i class="ri-settings-3-line"></i>
+          <span class="sr-only">Settings</span>
+        </button>
       </div>
+    </div>
 
-<h1>
+<div id="top-content">
+  <h1>
 
-    <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/post_type_discovery.ex#L1" title="View Source" class="icon-action" rel="help">
-      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-      <span class="sr-only">View Source</span>
-    </a>
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/post_type_discovery.ex#L1" title="View Source" class="icon-action" rel="help">
+        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        <span class="sr-only">View Source</span>
+      </a>
 
-  <span translate="no">LastCrusader.Micropub.PostTypeDiscovery</span> 
-  <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
+    <span translate="no">LastCrusader.Micropub.PostTypeDiscovery</span> 
+    <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
 
-</h1>
+  </h1>
 
 
-  <section id="moduledoc">
+    <section id="moduledoc">
 <p>  Indieweb Post Type discovery implementation</p><p>  see <a href="https://indieweb.org/post-type-discovery">https://indieweb.org/post-type-discovery</a></p><p>  Post Type Discovery specifies an algorithm for consuming code to determine the type of a post by its content properties and their values rather than an explicit “post type” property, thus better matched to modern post creation UIs that allow combining text, media, etc in a variety of ways without burdening users with any notion of what kind of post they are creating.</p><p>  The Post Type Discovery algorithm (&quot;the algorithm&quot;) discovers the type of a post given a data structure representing a post with a flat set of properties (e.g. Activity Streams (1.0 or 2.0) JSON, or JSON output from parsing [microformats2]), each with one or more values, by following these steps until reaching the first &quot;it is a(n) ... post&quot; statement at which point the &quot;...&quot; is the discovered post type.</p><pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="mi">1</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="s">&quot;rsvp&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w">
   </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="nc">RSVP</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">2</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="s">&quot;in-reply-to&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="nc">URL</span><span class="p">,</span><span class="w">
   </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">3</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;repost-of&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="nc">URL</span><span class="p">,</span><span class="w">
-  </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">repost</span><span class="w"> </span><span class="p" data-group-id="9172032387-1">(</span><span class="nc">AKA</span><span class="w"> </span><span class="s">&quot;share&quot;</span><span class="p" data-group-id="9172032387-1">)</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
+  </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">repost</span><span class="w"> </span><span class="p" data-group-id="8888982693-1">(</span><span class="nc">AKA</span><span class="w"> </span><span class="s">&quot;share&quot;</span><span class="p" data-group-id="8888982693-1">)</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">4</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;like-of&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="nc">URL</span><span class="p">,</span><span class="w">
-  </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="p" data-group-id="9172032387-2">(</span><span class="nc">AKA</span><span class="w"> </span><span class="s">&quot;favorite&quot;</span><span class="p" data-group-id="9172032387-2">)</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
+  </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="p" data-group-id="8888982693-2">(</span><span class="nc">AKA</span><span class="w"> </span><span class="s">&quot;favorite&quot;</span><span class="p" data-group-id="8888982693-2">)</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">5</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;video&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="nc">URL</span><span class="p">,</span><span class="w">
   </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">video</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">6</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;photo&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">valid</span><span class="w"> </span><span class="nc">URL</span><span class="p">,</span><span class="w">
@@ -147,17 +143,18 @@ Pages
   </span><span class="nc">Then</span><span class="w"> </span><span class="kn">use</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">empty</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">content</span><span class="w">
   </span><span class="mi">9</span><span class="o">.</span><span class="w"> </span><span class="nc">Else</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">10</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">post</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="n">property</span><span class="w">
-    </span><span class="ow">or</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p" data-group-id="9172032387-3">(</span><span class="ow">or</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="9172032387-3">)</span><span class="w">
+    </span><span class="ow">or</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">string</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="p" data-group-id="8888982693-3">(</span><span class="ow">or</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">value</span><span class="p" data-group-id="8888982693-3">)</span><span class="w">
   </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">11</span><span class="o">.</span><span class="w"> </span><span class="nc">Take</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="n">non</span><span class="o">-</span><span class="n">empty</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="n">property</span><span class="w">
   </span><span class="mi">12</span><span class="o">.</span><span class="w"> </span><span class="nc">Trim</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">leading</span><span class="o">/</span><span class="n">trailing</span><span class="w"> </span><span class="n">whitespace</span><span class="w">
-  </span><span class="mi">13</span><span class="o">.</span><span class="w"> </span><span class="nc">Collapse</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="n">whitespace</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">space</span><span class="w"> </span><span class="p" data-group-id="9172032387-4">(</span><span class="mh">0x20</span><span class="p" data-group-id="9172032387-4">)</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">each</span><span class="w">
+  </span><span class="mi">13</span><span class="o">.</span><span class="w"> </span><span class="nc">Collapse</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">sequences</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="n">whitespace</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">single</span><span class="w"> </span><span class="n">space</span><span class="w"> </span><span class="p" data-group-id="8888982693-4">(</span><span class="mh">0x20</span><span class="p" data-group-id="8888982693-4">)</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">each</span><span class="w">
   </span><span class="mi">14</span><span class="o">.</span><span class="w"> </span><span class="nc">Do</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">content</span><span class="w">
   </span><span class="mi">15</span><span class="o">.</span><span class="w"> </span><span class="nc">If</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">processed</span><span class="w"> </span><span class="s">&quot;name&quot;</span><span class="w"> </span><span class="n">property</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="nc">NOT</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">prefix</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">processed</span><span class="w"> </span><span class="n">content</span><span class="p">,</span><span class="w">
   </span><span class="nc">Then</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">article</span><span class="w"> </span><span class="n">post</span><span class="o">.</span><span class="w">
   </span><span class="mi">16</span><span class="o">.</span><span class="w"> </span><span class="nc">It</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="n">post</span><span class="o">.</span></code></pre><p>  Quoted property names in the algorithm are defined in h-entry.</p>
-  </section>
+    </section>
 
+</div>
 
   <section id="summary" class="details-list">
     <h1 class="section-heading">
@@ -334,31 +331,30 @@ characters just to make the check a little more forgiving.</p>
     </div>
   </section>
 
-      <footer class="footer">
-        <p>
+    <footer class="footer">
+      <p>
 
-          <span class="line">
-            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
-              Search HexDocs
-            </button>
+        <span class="line">
+          <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+            Search HexDocs
+          </button>
 
-              <a href="Last Crusader.epub" title="ePub version">
-                Download ePub version
-              </a>
+            <a href="Last Crusader.epub" title="ePub version">
+              Download ePub version
+            </a>
 
-          </span>
-        </p>
+        </span>
+      </p>
 
-        <p class="built-using">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.31.2) for the
+      <p class="built-using">
+        Built using
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.32.1) for the
 
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
-        </p>
+      </p>
 
-      </footer>
-    </div>
+    </footer>
   </div>
 </main>
 </div>
