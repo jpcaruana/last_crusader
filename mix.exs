@@ -53,7 +53,6 @@ defmodule LastCrusader.MixProject do
       {:bandit, ">= 0.6.9"},
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.7.0"},
-      {:castore, "~> 1.0.3"},
       {:mint, "~> 1.0"},
       {:tz, "~> 0.26.1"},
       {:slugger, "~> 0.3"},
