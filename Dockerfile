@@ -1,4 +1,4 @@
-FROM elixir:1.12.1
+FROM elixir:1.3
  
 ARG env=prod
  
