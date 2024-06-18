@@ -15,8 +15,8 @@ jobs:
       - name: Setup elixir 🔧
         uses: erlef/setup-elixir@v1
         with:
-          otp-version: '25.0'
-          elixir-version: '1.14'
+          otp-version: '26.0'
+          elixir-version: '1.16'
       - name: Build docs 🔧
         uses: lee-dohm/generate-elixir-docs@v1
       - name: Publish to Pages 🚀
