@@ -53,7 +53,6 @@ defmodule LastCrusader.MixProject do
       {:bandit, ">= 0.6.9"},
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.7.0"},
-      {:mint, "~> 1.0"},
       {:tz, "~> 0.26.1"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
@@ -70,8 +69,7 @@ defmodule LastCrusader.MixProject do
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:ex_check, "~> 0.16.0", only: [:dev], runtime: false},
-      {:git_hooks, "~> 0.7.0", only: [:test, :dev], runtime: false},
-      {:mix_audit, "~> 2.0", only: [:dev, :test], runtime: false}
+      {:git_hooks, "~> 0.7.0", only: [:test, :dev], runtime: false}
     ]
   end
 
