@@ -51,6 +51,8 @@ defmodule LastCrusader.MixProject do
     [
       {:plug, "~> 1.13"},
       {:bandit, ">= 0.6.9"},
+      # force hpax version because mix and bandit dont agree here
+      {:hpax, "~> 1.0", [override: true]},
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.7.0"},
       {:mint, "~> 1.0"},
