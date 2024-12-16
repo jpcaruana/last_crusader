@@ -6,9 +6,9 @@ An [Indieweb](https://indieweb.org/) server taylored mainly for _my_ needs, but 
 - You are better connected
 - You are in control
 
-Requires at least Elixir 13.0 with OTP 24.
+Requires at least Elixir 14.0 with OTP 24.
 
-Works fine with latest Elixir/OTP, including OTP 26.
+Works fine with latest Elixir/OTP
 
 ## Todo
 
