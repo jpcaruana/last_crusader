@@ -60,7 +60,13 @@ defmodule LastCrusader.Utils.IdentifierValidator do
          validate_path(path)
          |> validate_host(host)
 
-  defp validate_profile(%URI{scheme: "http", path: path, host: host, userinfo: nil, fragment: nil}),
+  defp validate_profile(%URI{
+         scheme: "http",
+         path: path,
+         host: host,
+         userinfo: nil,
+         fragment: nil
+       }),
        do:
          validate_path(path)
          |> validate_host(host)
