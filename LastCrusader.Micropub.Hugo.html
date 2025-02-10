@@ -4,34 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.36.1">
+    <meta name="generator" content="ExDoc v0.37.0">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Micropub.Hugo — Last Crusader v0.11.0</title>
-    <link rel="stylesheet" href="dist/html-elixir-QYVRUQZX.css" />
 
-    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-K7URE6B4.js"></script>
-    <script src="dist/sidebar_items-48CE352F.js"></script>
-    <script src="docs_config.js"></script>
-    <script async src="dist/html-HJ5ACJPS.js"></script>
+    <link rel="stylesheet" href="dist/html-elixir-6X3L5KMG.css" />
+
+    <script defer src="dist/sidebar_items-48CE352F.js"></script>
+    <script defer src="docs_config.js"></script>
+    <script defer src="dist/html-6VTPNSGQ.js"></script>
 
   </head>
-  <body class="sidebar-closed">
-    <script>
-
-      try {
-        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
-
-        if (settings.theme === 'dark' ||
-           ((settings.theme === 'system' || settings.theme == null) &&
-             window.matchMedia('(prefers-color-scheme: dark)').matches)
-           ) {
-          document.body.classList.add('dark')
-        }
-      } catch (error) { }
-    </script>
+  <body>
+    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+</script>
 
 <div class="body-wrapper">
 
@@ -53,32 +41,8 @@ Last Crusader
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist">
-      <li>
-        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
-Pages
-        </button>
-      </li>
-
-        <li>
-          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
-            Modules
-          </button>
-        </li>
-
-
-    </ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
   </div>
-
-  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
-    <ul id="extras-full-list" class="full-list"></ul>
-  </div>
-
-    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
-      <ul id="modules-full-list" class="full-list"></ul>
-    </div>
-
-
 </nav>
 
 <output role="status" id="toast"></output>
@@ -109,17 +73,19 @@ Pages
     </div>
 
 <div id="top-content">
-  <h1>
+  <div class="heading-with-actions top-heading">
+    <h1>
+      <span translate="no">LastCrusader.Micropub.Hugo</span> 
+      <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
+
+    </h1>
 
       <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L1" title="View Source" class="icon-action" rel="help">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
 
-    <span translate="no">LastCrusader.Micropub.Hugo</span> 
-    <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
-
-  </h1>
+  </div>
 
 
     <section id="moduledoc">
@@ -142,7 +108,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#t:path/0" data-no-tooltip translate="no">path()</a>
+        <a href="#t:path/0" data-no-tooltip="" translate="no">path()</a>
 
       </div>
 
@@ -150,7 +116,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#t:url/0" data-no-tooltip translate="no">url()</a>
+        <a href="#t:url/0" data-no-tooltip="" translate="no">url()</a>
 
       </div>
 
@@ -164,7 +130,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#convert_date_to_hugo_format/1" data-no-tooltip translate="no">convert_date_to_hugo_format(date)</a>
+        <a href="#convert_date_to_hugo_format/1" data-no-tooltip="" translate="no">convert_date_to_hugo_format(date)</a>
 
       </div>
 
@@ -174,7 +140,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#generate_front_matter/3" data-no-tooltip translate="no">generate_front_matter(date, type, data \\ %{})</a>
+        <a href="#generate_front_matter/3" data-no-tooltip="" translate="no">generate_front_matter(date, type, data \\ %{})</a>
 
       </div>
 
@@ -184,7 +150,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#generate_path/3" data-no-tooltip translate="no">generate_path(arg1, name, date)</a>
+        <a href="#generate_path/3" data-no-tooltip="" translate="no">generate_path(arg1, name, date)</a>
 
       </div>
 
@@ -194,7 +160,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#new/3" data-no-tooltip translate="no">new(type, date, data)</a>
+        <a href="#new/3" data-no-tooltip="" translate="no">new(type, date, data)</a>
 
       </div>
 
@@ -204,7 +170,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#reverse_url/2" data-no-tooltip translate="no">reverse_url(post_url, host)</a>
+        <a href="#reverse_url/2" data-no-tooltip="" translate="no">reverse_url(post_url, host)</a>
 
       </div>
 
@@ -214,7 +180,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#reverse_url_root/2" data-no-tooltip translate="no">reverse_url_root(post_url, host)</a>
+        <a href="#reverse_url_root/2" data-no-tooltip="" translate="no">reverse_url_root(post_url, host)</a>
 
       </div>
 
@@ -238,16 +204,18 @@ Pages
 <section class="detail" id="t:path/0">
 
   <div class="detail-header">
-    <a href="#t:path/0" class="detail-link" data-no-tooltip aria-label="Link to this type">
+    <a href="#t:path/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">path()</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L8" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">path()</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L8" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -264,16 +232,18 @@ Pages
 <section class="detail" id="t:url/0">
 
   <div class="detail-header">
-    <a href="#t:url/0" class="detail-link" data-no-tooltip aria-label="Link to this type">
+    <a href="#t:url/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">url()</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L9" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">url()</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L9" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -302,16 +272,18 @@ Pages
 <section class="detail" id="convert_date_to_hugo_format/1">
 
   <div class="detail-header">
-    <a href="#convert_date_to_hugo_format/1" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#convert_date_to_hugo_format/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">convert_date_to_hugo_format(date)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L58" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">convert_date_to_hugo_format(date)</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L58" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -330,16 +302,18 @@ Pages
     <span id="generate_front_matter/2"></span>
 
   <div class="detail-header">
-    <a href="#generate_front_matter/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#generate_front_matter/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">generate_front_matter(date, type, data \\ %{})</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L36" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">generate_front_matter(date, type, data \\ %{})</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L36" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -361,16 +335,18 @@ Pages
 <section class="detail" id="generate_path/3">
 
   <div class="detail-header">
-    <a href="#generate_path/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#generate_path/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">generate_path(arg1, name, date)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L89" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">generate_path(arg1, name, date)</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L89" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -392,16 +368,18 @@ Pages
 <section class="detail" id="new/3">
 
   <div class="detail-header">
-    <a href="#new/3" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#new/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">new(type, date, data)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L15" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">new(type, date, data)</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L15" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -419,16 +397,18 @@ Pages
 <section class="detail" id="reverse_url/2">
 
   <div class="detail-header">
-    <a href="#reverse_url/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#reverse_url/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">reverse_url(post_url, host)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L76" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">reverse_url(post_url, host)</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L76" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -445,16 +425,18 @@ Pages
 <section class="detail" id="reverse_url_root/2">
 
   <div class="detail-header">
-    <a href="#reverse_url_root/2" class="detail-link" data-no-tooltip aria-label="Link to this function">
+    <a href="#reverse_url_root/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
-    <h1 class="signature" translate="no">reverse_url_root(post_url, host)</h1>
-
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L66" class="icon-action" rel="help" aria-label="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-     </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">reverse_url_root(post_url, host)</h1>
 
 
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L66" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
   </div>
 
   <section class="docstring">
@@ -489,7 +471,7 @@ Pages
 
       <p class="built-using">
         Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.36.1) for the
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.37.0) for the
 
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
