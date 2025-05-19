@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.37.2">
+    <meta name="generator" content="ExDoc v0.38.1">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Auth.AuthHandler — Last Crusader v0.11.0</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-6X3L5KMG.css" />
+    <link rel="stylesheet" href="dist/html-elixir-J3PIVQVA.css" />
 
     <script defer src="dist/sidebar_items-48CE352F.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-6XHBGSGW.js"></script>
+    <script defer src="dist/html-DPJLHKSM.js"></script>
 
   </head>
   <body>
@@ -158,13 +158,7 @@ Last Crusader
 
   <section class="docstring">
 
-<p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p><h2 id="auth_endpoint/1-parameters" class="section-heading">
-  <a href="#auth_endpoint/1-parameters" class="hover-link">
-    <i class="ri-link-m" aria-hidden="true"></i>
-  </a>
-  <span class="text">Parameters:</span>
-</h2>
-<ul><li>me:
+<p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p><h2 id="auth_endpoint/1-parameters" class="section-heading"><a href="#auth_endpoint/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Parameters:</span></h2><ul><li>me:
 Full URI of the user's homepage</li><li>client_id:
 Full URI of the application's/website's home page. Used to identify the application. An authorization endpoint may show the application's icon and title to the user during the auth process.</li><li>redirect_uri:
 Full URI to redirect back to when the login process is finished</li><li>state:
@@ -200,13 +194,7 @@ For authorization, the scope contains a space-separated list of scopes that the 
 
 </span><span class="n">code</span><span class="o">=</span><span class="n">xxxxxxxx</span><span class="w">
 </span><span class="o">&amp;</span><span class="n">redirect_uri</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">callback</span><span class="w">
-</span><span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span></code></pre><p>After the authorization server verifies that redirect_uri, client_id match the code given, the response will include the &quot;me&quot; value indicating the URL of the user who signed in. The response content-type should be either application/x-www-form-urlencoded or application/json depending on the value of the HTTP Accept header.</p><h2 id="code_verification/1-parameters" class="section-heading">
-  <a href="#code_verification/1-parameters" class="hover-link">
-    <i class="ri-link-m" aria-hidden="true"></i>
-  </a>
-  <span class="text">Parameters:</span>
-</h2>
-<ul><li>me:
+</span><span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span></code></pre><p>After the authorization server verifies that redirect_uri, client_id match the code given, the response will include the &quot;me&quot; value indicating the URL of the user who signed in. The response content-type should be either application/x-www-form-urlencoded or application/json depending on the value of the HTTP Accept header.</p><h2 id="code_verification/1-parameters" class="section-heading"><a href="#code_verification/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Parameters:</span></h2><ul><li>me:
 Full URI of the user's homepage
 This may be different from the me parameter that the user originally entered, but MUST be on the same domain.</li></ul>
   </section>
@@ -232,7 +220,7 @@ This may be different from the me parameter that the user originally entered, bu
 
       <p class="built-using">
         Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.37.2) for the
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.38.1) for the
 
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
