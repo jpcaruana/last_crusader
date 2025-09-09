@@ -11,7 +11,6 @@ defmodule LastCrusader.Micropub do
   alias LastCrusader.Utils.Toml, as: Toml
   alias LastCrusader.Micropub.GitHub, as: GitHub
   alias LastCrusader.Webmentions, as: Webmentions
-  alias LastCrusader.Utils.Http, as: Utils
   alias Jason, as: Json
 
   @doc """
