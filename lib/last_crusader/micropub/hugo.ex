@@ -12,19 +12,36 @@ defmodule LastCrusader.Micropub.Hugo do
     Create a new Hugo document
   """
   @spec new(Post.post_type(), DateTime.t(), map()) :: {path(), Toml.toml(), path()}
+
   def new(type, date, data) do
-    {text, content} =
+    {content, data} =
       data
       |> Utils.as_map()
       |> Map.pop(:content)
 
-    name = generate_name(content[:name], text, date)
+    # Handle content which could be a list of values
+    text =
+      case content do
+        nil -> nil
+        [h | _tail] -> h
+        _ -> content
+      end
+
+    # Handle name which could be a list of values
+    name =
+      case Map.get(data, :name) do
+        [h | _tail] -> h
+        _ -> Map.get(data, :name)
+      end
+
+    # ... (rest of the function using `text` and `name`) ...
+    new_name = generate_name(name, text, date)
 
     path_date = Calendar.strftime(date, "%Y/%m/%d")
-    file_name = "content/" <> generate_path(type, name, path_date) <> "/index.md"
-    web_path = generate_path(type, name, path_date) <> "/"
+    file_name = "content/" <> generate_path(type, new_name, path_date) <> "/index.md"
+    web_path = generate_path(type, new_name, path_date) <> "/"
 
-    front_matter = generate_front_matter(date, type, content)
+    front_matter = generate_front_matter(date, type, data)
 
     {file_name, front_matter <> not_empty(text), web_path}
   end
