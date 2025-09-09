@@ -26,6 +26,9 @@ defmodule LastCrusader.Micropub do
   def publish(headers, params) do
     me = Application.get_env(:last_crusader, :me)
 
+    # Normalize params to ensure single values where expected
+    normalized_params = normalize_params(params)
+
     with {:ok, :valid} <-
            check_auth_code(
              headers[:authorization],
@@ -34,8 +37,8 @@ defmodule LastCrusader.Micropub do
              "create"
            ),
          {filename, filecontent, path} <-
-           PostTypeDiscovery.discover(Utils.as_map(params))
-           |> Hugo.new(DateTime.now!("Europe/Paris"), params),
+           PostTypeDiscovery.discover(normalized_params)
+           |> Hugo.new(DateTime.now!("Europe/Paris"), normalized_params),
          {:ok, :content_created} <- GitHub.new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
          {:ok, _} <-
@@ -45,6 +48,21 @@ defmodule LastCrusader.Micropub do
            ) do
       {:ok, content_url}
     end
+  end
+
+  # Helper function to normalize parameters
+  defp normalize_params(params) do
+    Enum.map(params, fn {key, value} ->
+      {
+        key,
+        case value do
+          # If it's a list, take the first item
+          [head | _tail] -> head
+          _ -> value
+        end
+      }
+    end)
+    |> Map.new()
   end
 
   @doc """
