@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.38.4">
+    <meta name="generator" content="ExDoc v0.39.1">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Micropub — Last Crusader v0.11.0</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-RLZO5U2C.css" />
+    <link rel="stylesheet" href="dist/html-elixir-ZFNMEJKT.css" />
 
     <script defer src="dist/sidebar_items-48CE352F.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-Y223O6DN.js"></script>
+    <script defer src="dist/html-HBZYRXZS.js"></script>
 
   </head>
   <body>
@@ -54,16 +54,34 @@ Last Crusader
         <form class="search-bar" action="search.html">
           <label class="search-label">
             <span class="sr-only">Search documentation of Last Crusader</span>
-            <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            <div class="search-input-wrapper">
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+              <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+                <i class="ri-close-line ri-lg" title="Cancel search"></i>
+              </button>
+            </div>
           </label>
-          <button type="submit" class="search-button" aria-label="Submit Search" tabindex="-1">
-            <i class="ri-search-2-line ri-lg" aria-hidden="true"></i>
-          </button>
-          <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-            <i class="ri-close-line ri-lg" title="Cancel search"></i>
-          </button>
         </form>
         <div class="autocomplete">
+        </div>
+        <div class="engine-selector" data-multiple="false">
+          <button type="button" class="engine-button" aria-label="Select search engine" aria-haspopup="true" aria-expanded="false">
+            <i class="ri-search-2-line" aria-hidden="true"></i>
+            <span class="engine-name">Default</span>
+            <i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+          </button>
+          <div class="engine-dropdown" hidden role="menu">
+
+              <button type="button"
+                      class="engine-option"
+                      data-engine-url="search.html?q="
+                      role="menuitemradio"
+                      aria-checked="true">
+                <span class="name">Default</span>
+                <span class="help">In-browser search</span>
+              </button>
+
+          </div>
         </div>
         <button class="icon-settings display-settings">
           <i class="ri-settings-3-line"></i>
@@ -195,16 +213,16 @@ It checks that the commented page exists in the Github repo (not on the real web
 <p>Adds a comment to a post into Github repo.
 It checks that the commented page exists in the Github repo (not on the real website).</p><p>To make it work in Hugo, you have to publish your content as
 <a href="https://gohugo.io/content-management/page-bundles/">Pages Bundles</a>.
-In your post template, include the following partial:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="2095621265-1">{</span><span class="p" data-group-id="2095621265-2">{</span><span class="w"> </span><span class="n">partial</span><span class="w"> </span><span class="s">&quot;comments.html&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p" data-group-id="2095621265-2">}</span><span class="p" data-group-id="2095621265-1">}</span></code></pre><p>The Hugo partial (&quot;comments.html&quot;) to display comments looks like this:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="1167265523-1">{</span><span class="p" data-group-id="1167265523-2">{</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1167265523-3">(</span><span class="o">.</span><span class="nc">Resources.Match</span><span class="w"> </span><span class="s">&quot;comments/*yml&quot;</span><span class="p" data-group-id="1167265523-3">)</span><span class="w"> </span><span class="p" data-group-id="1167265523-2">}</span><span class="p" data-group-id="1167265523-1">}</span><span class="w">
+In your post template, include the following partial:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="9007605560-1">{</span><span class="p" data-group-id="9007605560-2">{</span><span class="w"> </span><span class="n">partial</span><span class="w"> </span><span class="s">&quot;comments.html&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p" data-group-id="9007605560-2">}</span><span class="p" data-group-id="9007605560-1">}</span></code></pre><p>The Hugo partial (&quot;comments.html&quot;) to display comments looks like this:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="2139156581-1">{</span><span class="p" data-group-id="2139156581-2">{</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="2139156581-3">(</span><span class="o">.</span><span class="nc">Resources.Match</span><span class="w"> </span><span class="s">&quot;comments/*yml&quot;</span><span class="p" data-group-id="2139156581-3">)</span><span class="w"> </span><span class="p" data-group-id="2139156581-2">}</span><span class="p" data-group-id="2139156581-1">}</span><span class="w">
 
-</span><span class="p" data-group-id="1167265523-4">{</span><span class="p" data-group-id="1167265523-5">{</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="p" data-group-id="1167265523-5">}</span><span class="p" data-group-id="1167265523-4">}</span><span class="w">
+</span><span class="p" data-group-id="2139156581-4">{</span><span class="p" data-group-id="2139156581-5">{</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="p" data-group-id="2139156581-5">}</span><span class="p" data-group-id="2139156581-4">}</span><span class="w">
 </span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s">&quot;fas fa-reply&quot;</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">i</span><span class="o">&gt;</span><span class="w">
-</span><span class="p" data-group-id="1167265523-6">{</span><span class="p" data-group-id="1167265523-7">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1167265523-8">(</span><span class="o">.</span><span class="nc">Content</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nc">Unmarshal</span><span class="p" data-group-id="1167265523-8">)</span><span class="w"> </span><span class="p" data-group-id="1167265523-7">}</span><span class="p" data-group-id="1167265523-6">}</span><span class="w">
-  </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ $comment.link }}&quot;</span><span class="o">&gt;</span><span class="p" data-group-id="1167265523-9">{</span><span class="p" data-group-id="1167265523-10">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">author</span><span class="w"> </span><span class="p" data-group-id="1167265523-10">}</span><span class="p" data-group-id="1167265523-9">}</span><span class="o">&lt;</span><span class="o">/</span><span class="n">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="p" data-group-id="1167265523-11">{</span><span class="p" data-group-id="1167265523-12">{</span><span class="w"> </span><span class="n">substr</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">date</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="1167265523-12">}</span><span class="p" data-group-id="1167265523-11">}</span><span class="w"> </span><span class="p">:</span><span class="w">
-  </span><span class="p" data-group-id="1167265523-13">{</span><span class="p" data-group-id="1167265523-14">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">markdownify</span><span class="w"> </span><span class="p" data-group-id="1167265523-14">}</span><span class="p" data-group-id="1167265523-13">}</span><span class="w">
+</span><span class="p" data-group-id="2139156581-6">{</span><span class="p" data-group-id="2139156581-7">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="2139156581-8">(</span><span class="o">.</span><span class="nc">Content</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nc">Unmarshal</span><span class="p" data-group-id="2139156581-8">)</span><span class="w"> </span><span class="p" data-group-id="2139156581-7">}</span><span class="p" data-group-id="2139156581-6">}</span><span class="w">
+  </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ $comment.link }}&quot;</span><span class="o">&gt;</span><span class="p" data-group-id="2139156581-9">{</span><span class="p" data-group-id="2139156581-10">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">author</span><span class="w"> </span><span class="p" data-group-id="2139156581-10">}</span><span class="p" data-group-id="2139156581-9">}</span><span class="o">&lt;</span><span class="o">/</span><span class="n">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="p" data-group-id="2139156581-11">{</span><span class="p" data-group-id="2139156581-12">{</span><span class="w"> </span><span class="n">substr</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">date</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="2139156581-12">}</span><span class="p" data-group-id="2139156581-11">}</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="p" data-group-id="2139156581-13">{</span><span class="p" data-group-id="2139156581-14">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">markdownify</span><span class="w"> </span><span class="p" data-group-id="2139156581-14">}</span><span class="p" data-group-id="2139156581-13">}</span><span class="w">
 </span><span class="o">&lt;</span><span class="o">/</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
-</span><span class="p" data-group-id="1167265523-15">{</span><span class="p" data-group-id="1167265523-16">{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="p" data-group-id="1167265523-16">}</span><span class="p" data-group-id="1167265523-15">}</span></code></pre>
+</span><span class="p" data-group-id="2139156581-15">{</span><span class="p" data-group-id="2139156581-16">{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="p" data-group-id="2139156581-16">}</span><span class="p" data-group-id="2139156581-15">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="publish/2">
@@ -250,7 +268,7 @@ In your post template, include the following partial:</p><pre><code class="makeu
 
       <p class="built-using">
         Built using
-        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.38.4) for the
+        <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.1) for the
 
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
