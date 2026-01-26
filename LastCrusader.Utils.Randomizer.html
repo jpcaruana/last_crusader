@@ -4,21 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.3">
+    <meta name="generator" content="ExDoc v0.40.0">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Utils.Randomizer — Last Crusader v0.11.0</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-VYWJUHZE.css" />
+    <link rel="stylesheet" href="dist/html-elixir-PEPNOX6A.css" />
 
     <script defer src="dist/sidebar_items-48CE352F.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-XBCM4BHM.js"></script>
+    <script defer src="dist/html-E23W6NAF.js"></script>
 
   </head>
   <body>
-    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+    <script>(() => {
+  // js/constants.js
+  var t = "ex_doc:settings", e = "dark";
+  var o = "dark", s = "light";
+
+  // js/sidebar/constants.js
+  var E = "sidebar_state", n = "closed";
+  var r = "sidebar_width";
+  var a = "sidebar-open";
+
+  // js/entry/inline_html.js
+  var i = new URLSearchParams(window.location.search), S = i.get("theme") || JSON.parse(localStorage.getItem(t) || "{}").theme;
+  (S === o || S !== s && window.matchMedia("(prefers-color-scheme: dark)").matches) && document.body.classList.add(e);
+  var d = sessionStorage.getItem(E), A = d !== n && !window.matchMedia(`screen and (max-width: ${768}px)`).matches;
+  document.body.classList.toggle(a, A);
+  var c = sessionStorage.getItem(r);
+  c && document.body.style.setProperty("--sidebarWidth", `${c}px`);
+  var p = /(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);
+  document.documentElement.classList.toggle("apple-os", p);
+})();
 </script>
 
 <div class="body-wrapper">
@@ -41,7 +60,7 @@ Last Crusader
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -97,6 +116,13 @@ Last Crusader
       <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
 
     </h1>
+
+<a href="LastCrusader.Utils.Randomizer.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
 
       <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/utils/randomizer.ex#L1" title="View Source" class="icon-action" rel="help">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -232,7 +258,7 @@ using the options below</p></div>
       </div>
 
 <p>Generate random string based on the given length. It is also possible to generate certain type of randomise string
-using the options below:</p><ul><li>:all - generate alphanumeric random string</li><li>:alpha - generate nom-numeric random string</li><li>:numeric - generate numeric random string</li><li>:upcase - generate upper case non-numeric random string</li><li>:downcase - generate lower case non-numeric random string</li></ul><h2 id="randomizer/2-example" class="section-heading"><a href="#randomizer/2-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Example</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Iurban.String</span><span class="o">.</span><span class="n">randomizer</span><span class="p" data-group-id="6186558083-1">(</span><span class="mi">20</span><span class="p" data-group-id="6186558083-1">)</span><span class="w"> </span><span class="o">//</span><span class="s">&quot;Je5QaLj982f0Meb0ZBSK&quot;</span></code></pre>
+using the options below:</p><ul><li>:all - generate alphanumeric random string</li><li>:alpha - generate nom-numeric random string</li><li>:numeric - generate numeric random string</li><li>:upcase - generate upper case non-numeric random string</li><li>:downcase - generate lower case non-numeric random string</li></ul><h2 id="randomizer/2-example" class="section-heading"><a href="#randomizer/2-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Example</span></h2><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Iurban.String</span><span class="o">.</span><span class="n">randomizer</span><span class="p" data-group-id="5588475349-1">(</span><span class="mi">20</span><span class="p" data-group-id="5588475349-1">)</span><span class="w"> </span><span class="o">//</span><span class="s">&quot;Je5QaLj982f0Meb0ZBSK&quot;</span></code></pre>
   </section>
 </section>
 
@@ -248,7 +274,12 @@ using the options below:</p><ul><li>:all - generate alphanumeric random string</
               Go to package docs
             </button>
 
-              <a href="Last Crusader.epub" title="ePub version">
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Last Crusader.epub">
                 Download ePub version
               </a>
 
@@ -257,7 +288,7 @@ using the options below:</p><ul><li>:all - generate alphanumeric random string</
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.3) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.0) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 

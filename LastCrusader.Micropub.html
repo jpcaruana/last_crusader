@@ -4,21 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.39.3">
+    <meta name="generator" content="ExDoc v0.40.0">
     <meta name="project" content="Last Crusader v0.11.0">
 
 
     <title>LastCrusader.Micropub — Last Crusader v0.11.0</title>
 
-    <link rel="stylesheet" href="dist/html-elixir-VYWJUHZE.css" />
+    <link rel="stylesheet" href="dist/html-elixir-PEPNOX6A.css" />
 
     <script defer src="dist/sidebar_items-48CE352F.js"></script>
     <script defer src="docs_config.js"></script>
-    <script defer src="dist/html-XBCM4BHM.js"></script>
+    <script defer src="dist/html-E23W6NAF.js"></script>
 
   </head>
   <body>
-    <script>(()=>{var t="ex_doc:settings",e="dark";var o="dark",s="light";var E="sidebar_state",n="closed";var r="sidebar_width";var a="sidebar-open";var i=new URLSearchParams(window.location.search),S=i.get("theme")||JSON.parse(localStorage.getItem(t)||"{}").theme;(S===o||S!==s&&window.matchMedia("(prefers-color-scheme: dark)").matches)&&document.body.classList.add(e);var d=sessionStorage.getItem(E),A=d!==n&&!window.matchMedia(`screen and (max-width: ${768}px)`).matches;document.body.classList.toggle(a,A);var c=sessionStorage.getItem(r);c&&document.body.style.setProperty("--sidebarWidth",`${c}px`);var p=/(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);document.documentElement.classList.toggle("apple-os",p);})();
+    <script>(() => {
+  // js/constants.js
+  var t = "ex_doc:settings", e = "dark";
+  var o = "dark", s = "light";
+
+  // js/sidebar/constants.js
+  var E = "sidebar_state", n = "closed";
+  var r = "sidebar_width";
+  var a = "sidebar-open";
+
+  // js/entry/inline_html.js
+  var i = new URLSearchParams(window.location.search), S = i.get("theme") || JSON.parse(localStorage.getItem(t) || "{}").theme;
+  (S === o || S !== s && window.matchMedia("(prefers-color-scheme: dark)").matches) && document.body.classList.add(e);
+  var d = sessionStorage.getItem(E), A = d !== n && !window.matchMedia(`screen and (max-width: ${768}px)`).matches;
+  document.body.classList.toggle(a, A);
+  var c = sessionStorage.getItem(r);
+  c && document.body.style.setProperty("--sidebarWidth", `${c}px`);
+  var p = /(Macintosh|iPhone|iPad|iPod)/.test(window.navigator.userAgent);
+  document.documentElement.classList.toggle("apple-os", p);
+})();
 </script>
 
 <div class="body-wrapper">
@@ -41,7 +60,7 @@ Last Crusader
         </div>
       </div>
     </div>
-    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras=""></ul>
+    <ul id="sidebar-list-nav" class="sidebar-list-nav" role="tablist" data-extras="Pages"></ul>
   </div>
 </nav>
 
@@ -97,6 +116,13 @@ Last Crusader
       <small class="app-vsn" translate="no">(Last Crusader v0.11.0)</small>
 
     </h1>
+
+<a href="LastCrusader.Micropub.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+  <i class="ri-markdown-line" aria-hidden="true"></i>
+  <span class="sr-only">Copy Markdown</span>
+</a>
+
+
 
       <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub.ex#L1" title="View Source" class="icon-action" rel="help">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -213,16 +239,16 @@ It checks that the commented page exists in the Github repo (not on the real web
 <p>Adds a comment to a post into Github repo.
 It checks that the commented page exists in the Github repo (not on the real website).</p><p>To make it work in Hugo, you have to publish your content as
 <a href="https://gohugo.io/content-management/page-bundles/">Pages Bundles</a>.
-In your post template, include the following partial:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="4090965842-1">{</span><span class="p" data-group-id="4090965842-2">{</span><span class="w"> </span><span class="n">partial</span><span class="w"> </span><span class="s">&quot;comments.html&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p" data-group-id="4090965842-2">}</span><span class="p" data-group-id="4090965842-1">}</span></code></pre><p>The Hugo partial (&quot;comments.html&quot;) to display comments looks like this:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="1773905991-1">{</span><span class="p" data-group-id="1773905991-2">{</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1773905991-3">(</span><span class="o">.</span><span class="nc">Resources.Match</span><span class="w"> </span><span class="s">&quot;comments/*yml&quot;</span><span class="p" data-group-id="1773905991-3">)</span><span class="w"> </span><span class="p" data-group-id="1773905991-2">}</span><span class="p" data-group-id="1773905991-1">}</span><span class="w">
+In your post template, include the following partial:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="0355926305-1">{</span><span class="p" data-group-id="0355926305-2">{</span><span class="w"> </span><span class="n">partial</span><span class="w"> </span><span class="s">&quot;comments.html&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="p" data-group-id="0355926305-2">}</span><span class="p" data-group-id="0355926305-1">}</span></code></pre><p>The Hugo partial (&quot;comments.html&quot;) to display comments looks like this:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="1865762075-1">{</span><span class="p" data-group-id="1865762075-2">{</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1865762075-3">(</span><span class="o">.</span><span class="nc">Resources.Match</span><span class="w"> </span><span class="s">&quot;comments/*yml&quot;</span><span class="p" data-group-id="1865762075-3">)</span><span class="w"> </span><span class="p" data-group-id="1865762075-2">}</span><span class="p" data-group-id="1865762075-1">}</span><span class="w">
 
-</span><span class="p" data-group-id="1773905991-4">{</span><span class="p" data-group-id="1773905991-5">{</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="p" data-group-id="1773905991-5">}</span><span class="p" data-group-id="1773905991-4">}</span><span class="w">
+</span><span class="p" data-group-id="1865762075-4">{</span><span class="p" data-group-id="1865762075-5">{</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="err">$</span><span class="n">comments</span><span class="w"> </span><span class="p" data-group-id="1865762075-5">}</span><span class="p" data-group-id="1865762075-4">}</span><span class="w">
 </span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">i</span><span class="w"> </span><span class="n">class</span><span class="o">=</span><span class="s">&quot;fas fa-reply&quot;</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">i</span><span class="o">&gt;</span><span class="w">
-</span><span class="p" data-group-id="1773905991-6">{</span><span class="p" data-group-id="1773905991-7">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1773905991-8">(</span><span class="o">.</span><span class="nc">Content</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nc">Unmarshal</span><span class="p" data-group-id="1773905991-8">)</span><span class="w"> </span><span class="p" data-group-id="1773905991-7">}</span><span class="p" data-group-id="1773905991-6">}</span><span class="w">
-  </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ $comment.link }}&quot;</span><span class="o">&gt;</span><span class="p" data-group-id="1773905991-9">{</span><span class="p" data-group-id="1773905991-10">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">author</span><span class="w"> </span><span class="p" data-group-id="1773905991-10">}</span><span class="p" data-group-id="1773905991-9">}</span><span class="o">&lt;</span><span class="o">/</span><span class="n">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="p" data-group-id="1773905991-11">{</span><span class="p" data-group-id="1773905991-12">{</span><span class="w"> </span><span class="n">substr</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">date</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="1773905991-12">}</span><span class="p" data-group-id="1773905991-11">}</span><span class="w"> </span><span class="p">:</span><span class="w">
-  </span><span class="p" data-group-id="1773905991-13">{</span><span class="p" data-group-id="1773905991-14">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">markdownify</span><span class="w"> </span><span class="p" data-group-id="1773905991-14">}</span><span class="p" data-group-id="1773905991-13">}</span><span class="w">
+</span><span class="p" data-group-id="1865762075-6">{</span><span class="p" data-group-id="1865762075-7">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="w"> </span><span class="ss">:=</span><span class="w"> </span><span class="p" data-group-id="1865762075-8">(</span><span class="o">.</span><span class="nc">Content</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">transform</span><span class="o">.</span><span class="nc">Unmarshal</span><span class="p" data-group-id="1865762075-8">)</span><span class="w"> </span><span class="p" data-group-id="1865762075-7">}</span><span class="p" data-group-id="1865762075-6">}</span><span class="w">
+  </span><span class="o">&lt;</span><span class="n">a</span><span class="w"> </span><span class="n">href</span><span class="o">=</span><span class="s">&quot;{{ $comment.link }}&quot;</span><span class="o">&gt;</span><span class="p" data-group-id="1865762075-9">{</span><span class="p" data-group-id="1865762075-10">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">author</span><span class="w"> </span><span class="p" data-group-id="1865762075-10">}</span><span class="p" data-group-id="1865762075-9">}</span><span class="o">&lt;</span><span class="o">/</span><span class="n">a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">le</span><span class="w"> </span><span class="p" data-group-id="1865762075-11">{</span><span class="p" data-group-id="1865762075-12">{</span><span class="w"> </span><span class="n">substr</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">date</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p" data-group-id="1865762075-12">}</span><span class="p" data-group-id="1865762075-11">}</span><span class="w"> </span><span class="p">:</span><span class="w">
+  </span><span class="p" data-group-id="1865762075-13">{</span><span class="p" data-group-id="1865762075-14">{</span><span class="w"> </span><span class="err">$</span><span class="n">comment</span><span class="o">.</span><span class="n">comment</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">markdownify</span><span class="w"> </span><span class="p" data-group-id="1865762075-14">}</span><span class="p" data-group-id="1865762075-13">}</span><span class="w">
 </span><span class="o">&lt;</span><span class="o">/</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
-</span><span class="p" data-group-id="1773905991-15">{</span><span class="p" data-group-id="1773905991-16">{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="p" data-group-id="1773905991-16">}</span><span class="p" data-group-id="1773905991-15">}</span></code></pre>
+</span><span class="p" data-group-id="1865762075-15">{</span><span class="p" data-group-id="1865762075-16">{</span><span class="w"> </span><span class="k">end</span><span class="w"> </span><span class="p" data-group-id="1865762075-16">}</span><span class="p" data-group-id="1865762075-15">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="publish/2">
@@ -260,7 +286,12 @@ In your post template, include the following partial:</p><pre><code class="makeu
               Go to package docs
             </button>
 
-              <a href="Last Crusader.epub" title="ePub version">
+              <a href="llms.txt" target="_blank">
+                View llms.txt
+              </a>
+
+
+              <a href="Last Crusader.epub">
                 Download ePub version
               </a>
 
@@ -269,7 +300,7 @@ In your post template, include the following partial:</p><pre><code class="makeu
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.39.3) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.40.0) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
