@@ -64,13 +64,25 @@ defmodule LastCrusader.Utils.Toml do
     |> Enum.map(fn x -> String.replace(x, "\"", "") end)
   end
 
-  defp toml_value(s) when is_list(s) do
-    toml = Enum.map_join(s, ", ", fn x -> toml_value(x) end)
-
-    "[" <> toml <> "]"
+  defp toml_value(value) when is_list(value) do
+    # Handle lists/arrays
+    "[" <> Enum.map_join(value, ", ", &toml_value/1) <> "]"
   end
 
-  defp toml_value(s) do
-    "\"" <> s <> "\""
+  defp toml_value(value) when is_map(value) do
+    # Handle nested maps - this is what's missing!
+    "{" <> toml_map_to_string(value) <> "}"
+    # OR if TOML tables are expected:
+    # toml_map_to_string(value)
+  end
+
+  defp toml_value(value) when is_binary(value) do
+    # Handle strings
+    "\"" <> value <> "\""
+  end
+
+  defp toml_value(value) when is_boolean(value) or is_number(value) do
+    # Handle booleans and numbers
+    to_string(value)
   end
 end
