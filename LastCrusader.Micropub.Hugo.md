@@ -4,21 +4,18 @@
   Generates Hugo compatible data, file content, file name
 
 # `path`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L8)
 
 ```elixir
 @type path() :: String.t()
 ```
 
 # `url`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L9)
 
 ```elixir
 @type url() :: String.t()
 ```
 
 # `convert_date_to_hugo_format`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L58)
 
 ```elixir
 @spec convert_date_to_hugo_format(DateTime.t()) :: BitString.t()
@@ -27,7 +24,6 @@
 Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wikipedia.org/wiki/ISO_8601))
 
 # `generate_front_matter`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L36)
 
 ```elixir
 @spec generate_front_matter(
@@ -41,7 +37,6 @@ Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wi
   Generates TOML formatted front-matter
 
 # `generate_path`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L89)
 
 ```elixir
 @spec generate_path(
@@ -60,7 +55,6 @@ Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wi
   - date
 
 # `new`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L15)
 
 ```elixir
 @spec new(LastCrusader.Micropub.PostTypeDiscovery.post_type(), DateTime.t(), map()) ::
@@ -70,7 +64,6 @@ Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wi
   Create a new Hugo document
 
 # `reverse_url`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L76)
 
 ```elixir
 @spec reverse_url(url(), url()) :: String.t()
@@ -79,7 +72,6 @@ Renders the post date into Hugo's expected date format ([ISO 8601](https://en.wi
   Retrieves the local file path of a post from its published public URL
 
 # `reverse_url_root`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/hugo.ex#L66)
 
 ```elixir
 @spec reverse_url_root(url(), url()) :: String.t()

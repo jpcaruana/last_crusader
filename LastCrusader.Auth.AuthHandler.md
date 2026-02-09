@@ -8,7 +8,6 @@ IndieAuth authorization endpoint
 see https://indieweb.org/authorization-endpoint
 
 # `auth_endpoint`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L38)
 
 authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.
 
@@ -31,7 +30,6 @@ authorization-endpoint. To start the sign-in flow, the user's browser will be re
   For authorization, the scope contains a space-separated list of scopes that the web application requests permission for, e.g. "create". Multiple values are supported, e.g. create delete
 
 # `code_verification`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L86)
 
 Auth code verification
 

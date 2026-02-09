@@ -40,7 +40,6 @@
   Quoted property names in the algorithm are defined in h-entry.
 
 # `post_type`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/post_type_discovery.ex#L41)
 
 ```elixir
 @type post_type() ::
@@ -55,7 +54,6 @@
 ```
 
 # `discover`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/post_type_discovery.ex#L57)
 
 ```elixir
 @spec discover(any()) :: post_type()
@@ -73,7 +71,6 @@
   - `:photo`
 
 # `name_is_title?`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/post_type_discovery.ex#L147)
 
 ```elixir
 @spec name_is_title?(String.t(), String.t()) :: boolean()

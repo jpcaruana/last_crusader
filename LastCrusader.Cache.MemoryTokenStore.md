@@ -6,28 +6,24 @@
   https://gist.github.com/raorao/a4bb34726af2e3fa071adfa504505e1d
 
 # `cache_key`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L10)
 
 ```elixir
 @type cache_key() :: any()
 ```
 
 # `cache_value`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L11)
 
 ```elixir
 @type cache_value() :: any()
 ```
 
 # `t`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L9)
 
 ```elixir
 @type t() :: %{ttl: integer(), invalidators: %{}}
 ```
 
 # `cache`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L29)
 
 ```elixir
 @spec cache(cache_key(), cache_value()) :: :ok
@@ -37,14 +33,12 @@
   be used with ETS can be used, and will be evaluated using `==`.
 
 # `child_spec`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L7)
 
 Returns a specification to start this module under a supervisor.
 
 See `Supervisor`.
 
 # `clear`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L37)
 
 ```elixir
 @spec clear() :: :ok
@@ -53,14 +47,12 @@ See `Supervisor`.
   Asynchronous clears all values in the cache.
 
 # `init`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L76)
 
 ```elixir
 @spec init(integer()) :: {:ok, t()}
 ```
 
 # `read`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L46)
 
 ```elixir
 @spec read(cache_key()) :: cache_value() | :not_found
@@ -70,7 +62,6 @@ See `Supervisor`.
   returns :not_found .
 
 # `read_or_cache_default`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L61)
 
   Sychronously reads the cache for the provided key. If no value is found,
   invokes default_fn and caches the result. Note: in order to prevent congestion
@@ -78,7 +69,6 @@ See `Supervisor`.
   process.
 
 # `start_link`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L20)
 
 ```elixir
 @spec start_link(integer()) :: GenServer.on_start()

@@ -26,14 +26,12 @@ Some examples of invalid profile URLs are:
     https://172.28.92.51/ - host is an IP address
 
 # `url`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/utils/identifier_validator.ex#L27)
 
 ```elixir
 @type url() :: String.t()
 ```
 
 # `validate_user_profile_url`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/utils/identifier_validator.ex#L43)
 
 ```elixir
 @spec validate_user_profile_url(url()) :: :invalid | :valid
@@ -42,7 +40,6 @@ Some examples of invalid profile URLs are:
   Validates a user profile URL according to the IndieAuth spec
 
 # `validate_user_profile_url`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/utils/identifier_validator.ex#L35)
 
 ```elixir
 @spec validate_user_profile_url(:invalid | :valid, url()) :: :invalid | :valid

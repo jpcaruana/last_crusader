@@ -8,12 +8,10 @@ See also:
 - `LastCrusader.Micropub.Github`
 
 # `add_keyword_to_post`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub.ex#L117)
 
 Adds a keyword to a published post (most of the time, it will be the syndication link).
 
 # `comment`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub.ex#L73)
 
 Adds a comment to a post into Github repo.
 It checks that the commented page exists in the Github repo (not on the real website).
@@ -38,7 +36,6 @@ The Hugo partial ("comments.html") to display comments looks like this:
     {{ end }}
 
 # `publish`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub.ex#L26)
 
 Publishes as Hugo post to Github repo:
 

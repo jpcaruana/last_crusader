@@ -11,7 +11,6 @@ cf full specification: https://micropub.spec.indieweb.org/
 see also `LastCrusader.Micropub.PostTypeDiscovery`.
 
 # `comment`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L100)
 
 Handles comment posts from HTTP
 
@@ -22,17 +21,14 @@ Parameters:
 - `link` (optional): Link to the personal page of the author
 
 # `options_comment`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L122)
 
 # `publish`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L66)
 
 Handles micropublish demands from HTTP
 
 See micropublish specification: https://micropub.spec.indieweb.org/#create
 
 # `query`
-[🔗](https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L26)
 
 Handles query requests
 
