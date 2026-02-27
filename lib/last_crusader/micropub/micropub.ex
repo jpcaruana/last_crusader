@@ -33,9 +33,10 @@ defmodule LastCrusader.Micropub do
              Application.get_env(:last_crusader, :micropub_issuer),
              "create"
            ),
+         normalized = normalize_params(params),
          {filename, filecontent, path} <-
-           PostTypeDiscovery.discover(Utils.as_map(params))
-           |> Hugo.new(DateTime.now!("Europe/Paris"), params),
+           PostTypeDiscovery.discover(Utils.as_map(normalized))
+           |> Hugo.new(DateTime.now!("Europe/Paris"), normalized),
          {:ok, :content_created} <- GitHub.new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
          {:ok, _} <-
@@ -125,6 +126,15 @@ defmodule LastCrusader.Micropub do
       {:ok, published_page_url}
     end
   end
+
+  defp normalize_params(%{"properties" => properties}) do
+    Enum.map(properties, fn
+      {k, [v]} when is_binary(v) -> {k, v}
+      {k, v} -> {k, v}
+    end)
+  end
+
+  defp normalize_params(params), do: params
 
   defp check_auth_code(auth_header, me, issuer, scope) do
     with %{body: body, status: 200} <-
