@@ -36,5 +36,12 @@ config :last_crusader,
 
 config :last_crusader, :git_backend, LastCrusader.Micropub.GitHub
 
+config :last_crusader, LastCrusader.Repo,
+  database: ":memory:",
+  pool_size: 1
+
+config :last_crusader,
+  webmention_viewer_token: "test-secret-token"
+
 config :sentry,
   environment_name: :test
