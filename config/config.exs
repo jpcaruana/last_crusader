@@ -13,6 +13,8 @@ config :last_crusader, LastCrusader.Repo,
   otp_app: :last_crusader,
   adapter: Ecto.Adapters.SQLite3
 
+config :last_crusader, ecto_repos: [LastCrusader.Repo]
+
 config :sentry,
   environment_name: :test
 
