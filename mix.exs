@@ -5,7 +5,7 @@ defmodule LastCrusader.MixProject do
     [
       app: :last_crusader,
       version: "0.14.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() in [:prod, :perso],
       deps: deps(),
