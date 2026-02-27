@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.12.x
+### 0.12.0
+2026/02/27
+- fixes:
+    - [#326](https://github.com/jpcaruana/last_crusader/pull/326) fix: unwrap JSON Micropub format properties before processing
+    - [#327](https://github.com/jpcaruana/last_crusader/pull/327) fix: move preferred_cli_env into cli/0 callback
+    - [#323](https://github.com/jpcaruana/last_crusader/pull/323) fix TOML error
+    - fix git-hook install
+- Elixir 1.19 and OTP 27 compatibility
+- removed unused deps: blankable, mix_audit, castore
+- removed elixir 1.12 compatibility
+- dependencies update:
+    - bump bandit from 1.2.0 to 1.10.2
+    - bump sentry from 10.1.0 to 11.0.4
+    - bump plug from 1.15.3 to 1.19.1
+    - bump credo from 1.7.4 to 1.7.16
+    - bump ex_doc from 0.31.1 to 0.40.1
+    - bump mint from 1.5.2 to 1.7.1
+    - bump hackney from 1.20.0 to 1.23.0
+    - bump excoveralls from 0.18.0 to 0.18.5
+
 ## 0.11.x
 ### 0.11.0
 2024/02/15
