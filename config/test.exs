@@ -34,5 +34,7 @@ config :last_crusader,
   webmention_nb_tries: 15,
   port: 4001
 
+config :last_crusader, :git_backend, LastCrusader.Micropub.GitHub
+
 config :sentry,
   environment_name: :test
