@@ -5,7 +5,7 @@ Handles the _logic_ of micro-publishing.
 
 See also:
 - `LastCrusader.Micropub.Hugo`
-- `LastCrusader.Micropub.Github`
+- `LastCrusader.Micropub.Backend`
 
 # `add_keyword_to_post`
 

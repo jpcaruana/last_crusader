@@ -12,7 +12,11 @@
 - [LastCrusader.Auth.AuthHandler](LastCrusader.Auth.AuthHandler.md): IndieAuth authorization endpoint
 - [LastCrusader.Cache.MemoryTokenStore](LastCrusader.Cache.MemoryTokenStore.md):   Simple ETS-based cache.
 - [LastCrusader.Micropub](LastCrusader.Micropub.md): Handles the _logic_ of micro-publishing.
+- [LastCrusader.Micropub.Backend](LastCrusader.Micropub.Backend.md): Behaviour for git backends used to persist Hugo post files.
+
 - [LastCrusader.Micropub.GitHub](LastCrusader.Micropub.GitHub.md):   Posts content to github
+
+- [LastCrusader.Micropub.GitLab](LastCrusader.Micropub.GitLab.md):   Posts content to GitLab
 
 - [LastCrusader.Micropub.Hugo](LastCrusader.Micropub.Hugo.md):   Generates Hugo compatible data, file content, file name
 

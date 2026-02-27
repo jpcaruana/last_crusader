@@ -8,7 +8,7 @@
     <meta name="project" content="Last Crusader v0.12.0">
 
 
-    <title>LastCrusader.Webmentions.Sender — Last Crusader v0.12.0</title>
+    <title>LastCrusader.Micropub.GitLab — Last Crusader v0.12.0</title>
 
     <link rel="stylesheet" href="dist/html-elixir-YJO4MOOW.css" />
 
@@ -93,19 +93,19 @@ Last Crusader
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">LastCrusader.<wbr>Webmentions.<wbr>Sender</span> 
+      <span translate="no">LastCrusader.<wbr>Micropub.<wbr>GitLab</span> 
       <small class="app-vsn" translate="no">(Last Crusader v0.12.0)</small>
 
     </h1>
 
-<a href="LastCrusader.Webmentions.Sender.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+<a href="LastCrusader.Micropub.GitLab.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
   <i class="ri-markdown-line" aria-hidden="true"></i>
   <span class="sr-only">Copy Markdown</span>
 </a>
 
 
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L1" title="View Source" class="icon-action" rel="help">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/gitlab.ex#L1" title="View Source" class="icon-action" rel="help">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -114,7 +114,7 @@ Last Crusader
 
 
     <section id="moduledoc">
-<p>Schedules webmentions to be send</p><p>It first checks of the origin exists before sending webmentions. It will retry this check every minute until it reaches the configured number of tries.</p>
+<p>  Posts content to GitLab</p>
     </section>
 
 </div>
@@ -126,20 +126,6 @@ Last Crusader
       </a>
       <span class="text">Summary</span>
     </h2>
-<div class="summary-types summary">
-  <h3>
-    <a href="#types">Types</a>
-  </h3>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#t:url/0" data-no-tooltip="" translate="no">url()</a>
-
-      </div>
-
-    </div>
-
-</div>
 <div class="summary-functions summary">
   <h3>
     <a href="#functions">Functions</a>
@@ -147,31 +133,31 @@ Last Crusader
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#find_syndication_links/2" data-no-tooltip="" translate="no">find_syndication_links(webmention_response, syndication_links \\ [])</a>
+        <a href="#get_file/5" data-no-tooltip="" translate="no">get_file(host, token, project_id, filename, branch)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  Finds syndication links (from bridy to twitter) in a list of Webmentions responses</p></div>
+        <div class="summary-synopsis"><p>Gets file content from GitLab</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#schedule_webmentions/2" data-no-tooltip="" translate="no">schedule_webmentions(origin, nb_max_tries \\ 15)</a>
+        <a href="#new_file/6" data-no-tooltip="" translate="no">new_file(host, token, project_id, filename, filecontent, branch)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
+        <div class="summary-synopsis"><p>Creates a commit with the filecontent to GitLab</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#send_webmentions/1" data-no-tooltip="" translate="no">send_webmentions(origin)</a>
+        <a href="#update_file/6" data-no-tooltip="" translate="no">update_file(host, token, project_id, filename, filecontent, branch)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  Sends Webmentions to every link</p></div>
+        <div class="summary-synopsis"><p>Updates a file on GitLab</p></div>
 
     </div>
 
@@ -179,47 +165,6 @@ Last Crusader
 
   </section>
 
-
-  <section id="types" class="details-list">
-    <h2 class="section-heading">
-      <a class="hover-link" href="#types">
-        <i class="ri-link-m" aria-hidden="true"></i>
-      </a>
-      <span class="text">Types</span>
-    </h2>
-
-    <div class="types-list">
-<section class="detail" id="t:url/0">
-
-  <div class="detail-header">
-    <a href="#t:url/0" class="detail-link" data-no-tooltip="" aria-label="Link to this type">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">url()</h1>
-
-
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L13" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@type</span> url() :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
-
-      </div>
-
-
-  </section>
-</section>
-
-    </div>
-  </section>
 
   <section id="functions" class="details-list">
     <h2 class="section-heading">
@@ -230,43 +175,17 @@ Last Crusader
     </h2>
 
     <div class="functions-list">
-<section class="detail" id="find_syndication_links/2">
-
-    <span id="find_syndication_links/1"></span>
+<section class="detail" id="get_file/5">
 
   <div class="detail-header">
-    <a href="#find_syndication_links/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#get_file/5" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">find_syndication_links(webmention_response, syndication_links \\ [])</h1>
+      <h1 class="signature" translate="no">get_file(host, token, project_id, filename, branch)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L89" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-<p>  Finds syndication links (from bridy to twitter) in a list of Webmentions responses</p>
-  </section>
-</section>
-<section class="detail" id="schedule_webmentions/2">
-
-    <span id="schedule_webmentions/1"></span>
-
-  <div class="detail-header">
-    <a href="#schedule_webmentions/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">schedule_webmentions(origin, nb_max_tries \\ 15)</h1>
-
-
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L21" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/gitlab.ex#L110" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -277,24 +196,25 @@ Last Crusader
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> schedule_webmentions(<a href="#t:url/0">url</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> get_file(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
 
       </div>
 
-<p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p>
+<p>Gets file content from GitLab</p>
   </section>
 </section>
-<section class="detail" id="send_webmentions/1">
+<section class="detail" id="new_file/6">
 
   <div class="detail-header">
-    <a href="#send_webmentions/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#new_file/6" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">send_webmentions(origin)</h1>
+      <h1 class="signature" translate="no">new_file(host, token, project_id, filename, filecontent, branch)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L67" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/gitlab.ex#L27" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -303,7 +223,50 @@ Last Crusader
 
   <section class="docstring">
 
-<p>  Sends Webmentions to every link</p>
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> new_file(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) ::
+  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:ok, :content_created}</pre>
+
+      </div>
+
+<p>Creates a commit with the filecontent to GitLab</p>
+  </section>
+</section>
+<section class="detail" id="update_file/6">
+
+  <div class="detail-header">
+    <a href="#update_file/6" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">update_file(host, token, project_id, filename, filecontent, branch)</h1>
+
+
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/gitlab.ex#L69" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> update_file(
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+  <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()
+) ::
+  {:ko, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()} | {:ok, :content_updated}</pre>
+
+      </div>
+
+<p>Updates a file on GitLab</p>
   </section>
 </section>
 

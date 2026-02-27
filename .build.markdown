@@ -1,6 +1,8 @@
 LastCrusader.Auth.AuthHandler.md
 LastCrusader.Cache.MemoryTokenStore.md
+LastCrusader.Micropub.Backend.md
 LastCrusader.Micropub.GitHub.md
+LastCrusader.Micropub.GitLab.md
 LastCrusader.Micropub.Hugo.md
 LastCrusader.Micropub.MicropubHandler.md
 LastCrusader.Micropub.PostTypeDiscovery.md
