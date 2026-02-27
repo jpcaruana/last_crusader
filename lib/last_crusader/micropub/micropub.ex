@@ -11,7 +11,7 @@ defmodule LastCrusader.Micropub do
   alias LastCrusader.Utils.Toml, as: Toml
   alias LastCrusader.Webmentions, as: Webmentions
   alias LastCrusader.Utils.Http, as: Utils
-  alias Jason, as: Json
+  alias LastCrusader.Cache.MemoryTokenStore, as: TokenStore
 
   @doc """
   Publishes as Hugo post to Github repo:
@@ -26,12 +26,7 @@ defmodule LastCrusader.Micropub do
     me = Application.get_env(:last_crusader, :me)
 
     with {:ok, :valid} <-
-           check_auth_code(
-             headers[:authorization],
-             me,
-             Application.get_env(:last_crusader, :micropub_issuer),
-             "create"
-           ),
+           check_auth_token(headers[:authorization], me, "create"),
          normalized = normalize_params(params),
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(Utils.as_map(normalized))
@@ -138,31 +133,19 @@ defmodule LastCrusader.Micropub do
 
   defp normalize_params(params), do: params
 
-  defp check_auth_code(auth_header, me, issuer, scope) do
-    with %{body: body, status: 200} <-
-           Tesla.get!(issuer,
-             headers: [
-               Authorization: auth_header,
-               accept: "application/json"
-             ]
-           ),
-         {^me, ^issuer, full_scope} <- decode(body),
-         true <- check_scope(scope, full_scope) do
+  defp check_auth_token(auth_header, me, required_scope) do
+    with token when is_binary(token) <- extract_bearer(auth_header),
+         %{me: ^me, scope: scope} when is_binary(scope) <-
+           TokenStore.read({:access_token, token}),
+         true <- required_scope in String.split(scope) do
       {:ok, :valid}
     else
-      _ ->
-        {:error, :bad_token}
+      _ -> {:error, :bad_token}
     end
   end
 
-  defp check_scope(scope, full_scope) do
-    scope in String.split(full_scope)
-  end
-
-  defp decode(json) do
-    {:ok, decoded_body} = Json.decode(json)
-    {decoded_body["me"], decoded_body["issued_by"], decoded_body["scope"]}
-  end
+  defp extract_bearer("Bearer " <> token), do: token
+  defp extract_bearer(_), do: nil
 
   defp generate_published_url(host, path) do
     host <> path

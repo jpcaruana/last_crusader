@@ -1,6 +1,8 @@
 defmodule LastCrusader.Router do
   @moduledoc false
   alias LastCrusader.Auth.AuthHandler, as: Auth
+  alias LastCrusader.Auth.TokenHandler, as: Token
+  alias LastCrusader.Auth.MetadataHandler, as: Metadata
   alias LastCrusader.Micropub.MicropubHandler, as: Micropub
   use Plug.Router
   use Plug.ErrorHandler
@@ -49,12 +51,28 @@ defmodule LastCrusader.Router do
     send_resp(conn, 200, "OK")
   end
 
+  get "/.well-known/oauth-authorization-server" do
+    Metadata.metadata(conn)
+  end
+
   get "/auth" do
     Auth.auth_endpoint(conn)
   end
 
   post "/auth" do
     Auth.code_verification(conn)
+  end
+
+  post "/token" do
+    Token.issue_token(conn)
+  end
+
+  post "/introspect" do
+    Token.introspect(conn)
+  end
+
+  post "/revoke" do
+    Token.revoke(conn)
   end
 
   get "/micropub" do

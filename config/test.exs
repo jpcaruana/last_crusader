@@ -11,7 +11,7 @@ config :logger, :console,
 
 config :last_crusader,
   me: "https://some.url.fr/",
-  micropub_issuer: "https://some.issuer.com/token",
+  issuer: "https://some.url.fr",
   github_user: "some_uer",
   github_repo: "some_repo",
   github_branch: "master",
