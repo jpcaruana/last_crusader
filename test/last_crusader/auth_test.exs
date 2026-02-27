@@ -7,131 +7,202 @@ defmodule LastCrusader.AuthTest do
 
   @opts LastCrusader.Router.init([])
 
-  test "auth should redirect to web application" do
-    conn =
-      conn(
-        :get,
-        "/auth?me=https://aaronparecki.com/&client_id=https://webapp.example.org/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
-      )
+  @client_id "https://webapp.example.org/"
+  @redirect_uri "https://webapp.example.org/auth/callback"
+  @me "https://aaronparecki.com/"
+  @state "1234567890"
+  @issuer "https://some.url.fr"
 
-    conn = LastCrusader.Router.call(conn, @opts)
+  # Stable PKCE pair for tests
+  @code_verifier "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
+  @code_challenge :crypto.hash(:sha256, @code_verifier) |> Base.url_encode64(padding: false)
 
-    assert_redirect(
-      conn,
-      302,
-      "https://webapp.example.org/auth/callback?code=xxxxxxxx&state=1234567890"
-    )
+  describe "GET /auth" do
+    test "redirects with code, state, and iss when PKCE params are valid" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&client_id=#{@client_id}&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 302
+
+      [location] = Plug.Conn.get_resp_header(conn, "location")
+      uri = URI.parse(location)
+      params = URI.decode_query(uri.query)
+
+      assert params["iss"] == @issuer
+      assert params["state"] == @state
+      assert String.length(params["code"]) == 50
+    end
+
+    test "missing code_challenge returns 400" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&client_id=#{@client_id}&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 400
+    end
+
+    test "unsupported code_challenge_method returns 400" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&client_id=#{@client_id}&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=plain"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 400
+    end
+
+    test "me is optional" do
+      conn =
+        conn(
+          :get,
+          "/auth?client_id=#{@client_id}&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 302
+    end
+
+    test "missing client_id returns 400" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 400
+    end
+
+    test "missing redirect_uri returns 400" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&client_id=#{@client_id}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 400
+    end
+
+    test "invalid client_id URL returns 400" do
+      conn =
+        conn(
+          :get,
+          "/auth?me=#{@me}&client_id=invalid://webapp.example.org/&redirect_uri=#{@redirect_uri}&state=#{@state}&code_challenge=#{@code_challenge}&code_challenge_method=S256"
+        )
+
+      conn = LastCrusader.Router.call(conn, @opts)
+
+      assert conn.status == 400
+    end
   end
 
-  test "auth should receive the client_id parameter" do
-    conn =
-      conn(
-        :get,
-        "/auth?me=https://aaronparecki.com/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
-      )
+  describe "POST /auth" do
+    setup do
+      MemoryTokenStore.cache({:auth_code, "VALID_CODE"}, %{
+        redirect_uri: @redirect_uri,
+        client_id: @client_id,
+        me: @me,
+        scope: "create",
+        code_challenge: @code_challenge
+      })
 
-    conn = LastCrusader.Router.call(conn, @opts)
+      :ok
+    end
 
-    assert conn.state == :sent
-    assert conn.status == 400
-  end
+    test "correct code_verifier returns me in JSON" do
+      conn =
+        conn(
+          :post,
+          "/auth?code=VALID_CODE&code_verifier=#{@code_verifier}&redirect_uri=#{@redirect_uri}&client_id=#{@client_id}"
+        )
 
-  test "auth should receive the redirect_uri parameter" do
-    conn =
-      conn(
-        :get,
-        "/auth?me=https://aaronparecki.com/&client_id=https://webapp.example.org/&state=1234567890&response_type=id"
-      )
+      conn = LastCrusader.Router.call(conn, @opts)
 
-    conn = LastCrusader.Router.call(conn, @opts)
+      assert conn.status == 200
+      assert conn.resp_body == ~s({"me":"#{@me}"})
 
-    assert conn.state == :sent
-    assert conn.status == 400
-  end
+      assert Plug.Conn.get_resp_header(conn, "content-type") == [
+               "application/json; charset=utf-8"
+             ]
+    end
 
-  test "auth should receive the me parameter" do
-    conn =
-      conn(
-        :get,
-        "/auth?client_id=https://webapp.example.org/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
-      )
+    test "wrong code_verifier returns 401" do
+      conn =
+        conn(
+          :post,
+          "/auth?code=VALID_CODE&code_verifier=WRONG_VERIFIER&redirect_uri=#{@redirect_uri}&client_id=#{@client_id}"
+        )
 
-    conn = LastCrusader.Router.call(conn, @opts)
+      conn = LastCrusader.Router.call(conn, @opts)
 
-    assert conn.state == :sent
-    assert conn.status == 400
-  end
+      assert conn.status == 401
+    end
 
-  test "auth should reject invalid client_id" do
-    conn =
-      conn(
-        :get,
-        "/auth?me=https://aaronparecki.com/&client_id=invalid://webapp.example.org/&redirect_uri=https://webapp.example.org/auth/callback&state=1234567890&response_type=id"
-      )
+    test "code is single-use: replaying returns 401" do
+      MemoryTokenStore.cache({:auth_code, "SINGLE_USE_CODE"}, %{
+        redirect_uri: @redirect_uri,
+        client_id: @client_id,
+        me: @me,
+        scope: "create",
+        code_challenge: @code_challenge
+      })
 
-    conn = LastCrusader.Router.call(conn, @opts)
+      conn1 =
+        conn(
+          :post,
+          "/auth?code=SINGLE_USE_CODE&code_verifier=#{@code_verifier}"
+        )
 
-    assert conn.state == :sent
-    assert conn.status == 400
-  end
+      conn1 = LastCrusader.Router.call(conn1, @opts)
+      assert conn1.status == 200
 
-  # FIX: flaky test
-  #  test "token read from cache" do
-  #    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
-  #
-  #    conn =
-  #      conn(
-  #        :post,
-  #        "/auth?redirect_uri=REDIRECT&client_id=CLIENT_ID&code=ABCD"
-  #      )
-  #
-  #    # Invoke the plug
-  #    conn = LastCrusader.Router.call(conn, @opts)
-  #
-  #    # Assert the response and status
-  #    assert conn.state == :sent
-  #    assert conn.resp_body == "{\"me\":\"url_me\"}"
-  #    assert Plug.Conn.get_resp_header(conn, "content-type") == ["application/json; charset=utf-8"]
-  #    assert conn.status == 200
-  #  end
+      conn2 =
+        conn(
+          :post,
+          "/auth?code=SINGLE_USE_CODE&code_verifier=#{@code_verifier}"
+        )
 
-  test "read from cache fails on bad token" do
-    MemoryTokenStore.cache({"REDIRECT", "CLIENT_ID"}, {"ABCD", "url_me"})
+      conn2 = LastCrusader.Router.call(conn2, @opts)
+      assert conn2.status == 401
+    end
 
-    conn =
-      conn(
-        :post,
-        "/auth?redirect_uri=REDIRECT&client_id=CLIENT_ID&code=BAD_TOKEN"
-      )
+    test "bad token returns 401" do
+      conn =
+        conn(
+          :post,
+          "/auth?code=BAD_TOKEN&code_verifier=#{@code_verifier}"
+        )
 
-    # Invoke the plug
-    conn = LastCrusader.Router.call(conn, @opts)
+      conn = LastCrusader.Router.call(conn, @opts)
 
-    # Assert the response and status
-    assert conn.state == :sent
-    assert conn.status == 401
-    assert conn.resp_body == "Unauthorized"
-  end
+      assert conn.status == 401
+    end
 
-  test "fail read from cache" do
-    conn =
-      conn(
-        :post,
-        "/auth?redirect_uri=toto&client_id=client_id&code=code"
-      )
+    test "cache miss returns 401" do
+      conn =
+        conn(
+          :post,
+          "/auth?code=NO_SUCH_CODE&code_verifier=any_verifier"
+        )
 
-    # Invoke the plug
-    conn = LastCrusader.Router.call(conn, @opts)
+      conn = LastCrusader.Router.call(conn, @opts)
 
-    # Assert the response and status
-    assert conn.state == :sent
-    assert conn.status == 401
-    assert conn.resp_body == "Unauthorized"
-  end
-
-  defp assert_redirect(conn, code, _to) do
-    assert conn.state == :sent
-    assert conn.status == code
-    # assert Plug.Conn.get_resp_header(conn, "location") == [to]
+      assert conn.status == 401
+    end
   end
 end

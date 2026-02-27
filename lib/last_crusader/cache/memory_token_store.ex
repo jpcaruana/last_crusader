@@ -22,12 +22,12 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
   end
 
   @doc """
-    Asynchronous call to cache a value at the provided key. Any key that can
+    Synchronous call to cache a value at the provided key. Any key that can
     be used with ETS can be used, and will be evaluated using `==`.
   """
   @spec cache(cache_key, cache_value) :: :ok
   def cache(key, val) do
-    GenServer.cast(__MODULE__, {:cache, key, val})
+    GenServer.call(__MODULE__, {:cache, key, val})
   end
 
   @doc """
@@ -49,6 +49,12 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
       [] -> :not_found
     end
   end
+
+  @doc """
+    Synchronously deletes a key from the cache, cancelling any pending TTL timer.
+  """
+  @spec delete(cache_key) :: :ok
+  def delete(key), do: GenServer.call(__MODULE__, {:delete, key})
 
   @doc """
     Sychronously reads the cache for the provided key. If no value is found,
@@ -79,8 +85,8 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
     {:ok, initial_state}
   end
 
-  @spec handle_cast({:cache, cache_key, cache_value}, t) :: {:noreply, t}
-  def handle_cast({:cache, key, val}, state = %{ttl: ttl, invalidators: invalidators}) do
+  @spec handle_call({:cache, cache_key, cache_value}, GenServer.from(), t) :: {:reply, :ok, t}
+  def handle_call({:cache, key, val}, _from, state = %{ttl: ttl, invalidators: invalidators}) do
     # since we're updating the value, let's kill off the last invalidator.
     case Map.get(invalidators, key) do
       nil -> nil
@@ -94,7 +100,18 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
     invalidator = Process.send_after(self(), {:invalidate, key}, ttl)
 
     # and store it.
-    {:noreply, %{state | invalidators: Map.put(invalidators, key, invalidator)}}
+    {:reply, :ok, %{state | invalidators: Map.put(invalidators, key, invalidator)}}
+  end
+
+  @spec handle_call({:delete, cache_key}, GenServer.from(), t) :: {:reply, :ok, t}
+  def handle_call({:delete, key}, _from, state = %{invalidators: invalidators}) do
+    case Map.get(invalidators, key) do
+      nil -> :ok
+      timer -> Process.cancel_timer(timer)
+    end
+
+    :ets.delete(:request_cache, key)
+    {:reply, :ok, %{state | invalidators: Map.delete(invalidators, key)}}
   end
 
   @spec handle_cast(:clear, t) :: {:noreply, t}

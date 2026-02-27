@@ -1,7 +1,18 @@
 defmodule LastCrusader.Micropub.MicropubTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
   import Tesla.Mock
   alias LastCrusader.Micropub
+  alias LastCrusader.Cache.MemoryTokenStore
+
+  @me "https://some.url.fr/"
+
+  defp cache_token(token, scope) do
+    MemoryTokenStore.cache({:access_token, token}, %{
+      me: @me,
+      scope: scope,
+      client_id: "https://webapp.example.org/"
+    })
+  end
 
   describe "Micropub.add_keyword_to_post/2" do
     test "success" do
@@ -93,30 +104,48 @@ defmodule LastCrusader.Micropub.MicropubTest do
   end
 
   describe "Micropub.publish/2" do
-    test "JSON format: simple note with content is published successfully" do
-      setup_publish_mocks()
+    test "valid access token with correct me and scope allows publish" do
+      cache_token("valid_token", "create")
+      mock(fn %{method: :put} -> {:ok, %Tesla.Env{status: 201, body: "{}"}} end)
 
       params = %{
         "type" => ["h-entry"],
-        "properties" => %{
-          "content" => ["sync test, please ignore"]
-        }
+        "properties" => %{"content" => ["sync test, please ignore"]}
       }
 
-      assert {:ok, url} = Micropub.publish([authorization: "Bearer token"], params)
+      assert {:ok, url} = Micropub.publish([authorization: "Bearer valid_token"], params)
       assert url =~ "sync-test-please-ignore"
     end
 
+    test "unknown token returns error" do
+      params = %{
+        "type" => ["h-entry"],
+        "properties" => %{"content" => ["some content"]}
+      }
+
+      assert {:error, :bad_token} =
+               Micropub.publish([authorization: "Bearer unknown_token_xyz"], params)
+    end
+
+    test "token with insufficient scope returns error" do
+      cache_token("scope_token", "delete")
+
+      params = %{
+        "type" => ["h-entry"],
+        "properties" => %{"content" => ["some content"]}
+      }
+
+      assert {:error, :bad_token} =
+               Micropub.publish([authorization: "Bearer scope_token"], params)
+    end
+
     test "JSON format: mp-syndicate-to is normalized to syndicate_to" do
+      cache_token("syndicate_token", "create")
       test_pid = self()
 
-      mock(fn
-        %{method: :get} ->
-          {:ok, auth_ok_env()}
-
-        %{method: :put, body: body} ->
-          send(test_pid, {:put_body, body})
-          {:ok, %Tesla.Env{status: 201, body: "{}"}}
+      mock(fn %{method: :put, body: body} ->
+        send(test_pid, {:put_body, body})
+        {:ok, %Tesla.Env{status: 201, body: "{}"}}
       end)
 
       params = %{
@@ -127,7 +156,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
         }
       }
 
-      {:ok, _} = Micropub.publish([authorization: "Bearer token"], params)
+      {:ok, _} = Micropub.publish([authorization: "Bearer syndicate_token"], params)
 
       assert_received {:put_body, body}
       file_content = decode_github_content(body)
@@ -137,15 +166,12 @@ defmodule LastCrusader.Micropub.MicropubTest do
     end
 
     test "JSON format: multi-value category is preserved as tags list" do
+      cache_token("category_token", "create")
       test_pid = self()
 
-      mock(fn
-        %{method: :get} ->
-          {:ok, auth_ok_env()}
-
-        %{method: :put, body: body} ->
-          send(test_pid, {:put_body, body})
-          {:ok, %Tesla.Env{status: 201, body: "{}"}}
+      mock(fn %{method: :put, body: body} ->
+        send(test_pid, {:put_body, body})
+        {:ok, %Tesla.Env{status: 201, body: "{}"}}
       end)
 
       params = %{
@@ -156,7 +182,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
         }
       }
 
-      {:ok, _} = Micropub.publish([authorization: "Bearer token"], params)
+      {:ok, _} = Micropub.publish([authorization: "Bearer category_token"], params)
 
       assert_received {:put_body, body}
       file_content = decode_github_content(body)
@@ -164,11 +190,12 @@ defmodule LastCrusader.Micropub.MicropubTest do
     end
 
     test "form-encoded format still works unchanged" do
-      setup_publish_mocks()
+      cache_token("form_token", "create")
+      mock(fn %{method: :put} -> {:ok, %Tesla.Env{status: 201, body: "{}"}} end)
 
       params = %{"content" => "a form-encoded note", "h" => "entry"}
 
-      assert {:ok, url} = Micropub.publish([authorization: "Bearer token"], params)
+      assert {:ok, url} = Micropub.publish([authorization: "Bearer form_token"], params)
       assert url =~ "a-form-encoded-note"
     end
   end
@@ -178,21 +205,6 @@ defmodule LastCrusader.Micropub.MicropubTest do
     # Hugo value: 2015-01-24T00:50:07+01:00
     {:ok, fake_now, 0} = DateTime.from_iso8601("2015-01-23T23:50:07Z")
     fake_now
-  end
-
-  defp setup_publish_mocks() do
-    mock(fn
-      %{method: :get} -> {:ok, auth_ok_env()}
-      %{method: :put} -> {:ok, %Tesla.Env{status: 201, body: "{}"}}
-    end)
-  end
-
-  defp auth_ok_env() do
-    %Tesla.Env{
-      status: 200,
-      body:
-        ~S({"me":"https://some.url.fr/","issued_by":"https://some.issuer.com/token","scope":"create"})
-    }
   end
 
   defp decode_github_content(body) do
