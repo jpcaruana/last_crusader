@@ -2,6 +2,8 @@ defmodule LastCrusader.Micropub.GitHub do
   @moduledoc """
     Posts content to github
   """
+  @behaviour LastCrusader.Micropub.Backend
+
   require Logger
 
   @doc """

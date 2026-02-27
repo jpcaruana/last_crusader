@@ -4,12 +4,11 @@ defmodule LastCrusader.Micropub do
 
   See also:
   - `LastCrusader.Micropub.Hugo`
-  - `LastCrusader.Micropub.Github`
+  - `LastCrusader.Micropub.Backend`
   """
   alias LastCrusader.Micropub.PostTypeDiscovery, as: PostTypeDiscovery
   alias LastCrusader.Micropub.Hugo, as: Hugo
   alias LastCrusader.Utils.Toml, as: Toml
-  alias LastCrusader.Micropub.GitHub, as: GitHub
   alias LastCrusader.Webmentions, as: Webmentions
   alias LastCrusader.Utils.Http, as: Utils
   alias Jason, as: Json
@@ -37,7 +36,7 @@ defmodule LastCrusader.Micropub do
          {filename, filecontent, path} <-
            PostTypeDiscovery.discover(Utils.as_map(normalized))
            |> Hugo.new(DateTime.now!("Europe/Paris"), normalized),
-         {:ok, :content_created} <- GitHub.new_file(filename, filecontent),
+         {:ok, :content_created} <- backend().new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
          {:ok, _} <-
            Webmentions.Sender.schedule_webmentions(
@@ -89,7 +88,7 @@ defmodule LastCrusader.Micropub do
     with :ok <- all_not_nil?([original_page, comment_author, comment_content]),
          fileroot <-
            Hugo.reverse_url_root(original_page, Application.get_env(:last_crusader, :me)),
-         {:ok, _page_exists} <- GitHub.get_file(fileroot <> "/index.md") do
+         {:ok, _page_exists} <- backend().get_file(fileroot <> "/index.md") do
       comment_filename =
         fileroot <> "/comments/" <> Integer.to_string(DateTime.to_unix(now, :second)) <> ".yml"
 
@@ -101,7 +100,7 @@ defmodule LastCrusader.Micropub do
           content: comment_content
         )
 
-      {GitHub.new_file(comment_filename, comment_filecontent), comment_filecontent}
+      {backend().new_file(comment_filename, comment_filecontent), comment_filecontent}
     end
   end
 
@@ -119,13 +118,15 @@ defmodule LastCrusader.Micropub do
     host = Application.get_env(:last_crusader, :me)
     filename = Hugo.reverse_url(published_page_url, host)
 
-    with {:ok, filecontent} <- GitHub.get_file(filename),
+    with {:ok, filecontent} <- backend().get_file(filename),
          {frontmatter, markdown} <- Toml.extract_frontmatter_and_content(filecontent),
          new_frontmatter <- Toml.update_toml(frontmatter, {newkey, value}),
-         {:ok, :content_updated} <- GitHub.update_file(filename, new_frontmatter <> markdown) do
+         {:ok, :content_updated} <- backend().update_file(filename, new_frontmatter <> markdown) do
       {:ok, published_page_url}
     end
   end
+
+  defp backend, do: Application.get_env(:last_crusader, :git_backend, LastCrusader.Micropub.GitHub)
 
   defp normalize_params(%{"properties" => properties}) do
     Enum.map(properties, fn

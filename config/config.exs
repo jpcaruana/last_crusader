@@ -12,6 +12,13 @@ config :last_crusader, env: config_env()
 config :sentry,
   environment_name: :test
 
+# GitLab backend (set :git_backend to LastCrusader.Micropub.GitLab to use)
+# config :last_crusader,
+#   gitlab_host: "https://gitlab.com",
+#   gitlab_token: "glpat-...",
+#   gitlab_project_id: "namespace%2Frepo",
+#   gitlab_branch: "main"
+
 import_config "#{config_env()}.exs"
 
 if config_env() != :prod do
