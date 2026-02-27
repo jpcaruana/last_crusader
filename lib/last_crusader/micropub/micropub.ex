@@ -126,7 +126,8 @@ defmodule LastCrusader.Micropub do
     end
   end
 
-  defp backend, do: Application.get_env(:last_crusader, :git_backend, LastCrusader.Micropub.GitHub)
+  defp backend,
+    do: Application.get_env(:last_crusader, :git_backend, LastCrusader.Micropub.GitHub)
 
   defp normalize_params(%{"properties" => properties}) do
     Enum.map(properties, fn
