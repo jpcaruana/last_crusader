@@ -25,7 +25,7 @@ config :sentry,
 
 import_config "#{config_env()}.exs"
 
-if config_env() != :prod do
+if config_env() == :dev do
   config :git_hooks,
     auto_install: false,
     verbose: true,
