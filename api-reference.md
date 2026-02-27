@@ -1,4 +1,4 @@
-# Last Crusader v0.12.0 - API Reference
+# Last Crusader v0.13.0 - API Reference
 
 ## Modules
 

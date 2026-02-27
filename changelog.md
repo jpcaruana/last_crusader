@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.13.x
+### 0.13.0
+2026/02/27
+- feat: add GitLab as a configurable git backend (closes [#147](https://github.com/jpcaruana/last_crusader/pull/147))
+
 ## 0.12.x
 ### 0.12.0
 2026/02/27
