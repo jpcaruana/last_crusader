@@ -9,11 +9,6 @@ defmodule LastCrusader.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() in [:prod, :perso],
       deps: deps(),
-      preferred_cli_env: [
-        coveralls: :test,
-        "coveralls.html": :test,
-        "coveralls.json": :test
-      ],
       test_coverage: [
         tool: ExCoveralls
       ],
@@ -34,6 +29,16 @@ defmodule LastCrusader.MixProject do
         main: "readme",
         # logo: "path/to/logo.png",
         extras: ["README.md", "CHANGELOG.md", "CONTRIBUTING.md", "LICENSE"]
+      ]
+    ]
+  end
+
+  def cli do
+    [
+      preferred_envs: [
+        coveralls: :test,
+        "coveralls.html": :test,
+        "coveralls.json": :test
       ]
     ]
   end
