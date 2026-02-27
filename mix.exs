@@ -63,6 +63,8 @@ defmodule LastCrusader.MixProject do
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 3.0.1"},
+      {:ecto_sql, "~> 3.10"},
+      {:ecto_sqlite3, "~> 0.18"},
       # sentry
       {:sentry, "~> 11.0"},
       {:hackney, "~> 1.8"},
