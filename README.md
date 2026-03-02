@@ -12,7 +12,7 @@ Works fine with latest Elixir/OTP
 
 ## Todo
 
-- [ ] [IndieAuth](https://indieauth.com/) endpoint
+- [X] [IndieAuth](https://indieauth.com/) endpoint
 - [X] [Micropub](https://www.w3.org/TR/micropub/) endpoint
   - [ ] [Webmentions](https://indieweb.org/Webmention):
       - [X] send webmentions on new posts

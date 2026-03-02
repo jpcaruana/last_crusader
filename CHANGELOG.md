@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.14.x
+### 0.14.0
+2026/04/02
+- feat: Implement IndieAuth endpoints (closes [#146](https://github.com/jpcaruana/last_crusader/pull/146))
+
 ## 0.13.x
 ### 0.13.0
 2026/02/27
