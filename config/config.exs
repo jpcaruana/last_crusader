@@ -10,7 +10,11 @@ config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 config :last_crusader, env: config_env()
 
 config :sentry,
-  environment_name: :test
+  environment_name: :test,
+  enable_logs: true,
+  telemetry_processor_categories: [:log, :error, :check_in, :transaction]
+
+
 
 # GitLab backend (set :git_backend to LastCrusader.Micropub.GitLab to use)
 # config :last_crusader,
