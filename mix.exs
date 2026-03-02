@@ -65,6 +65,7 @@ defmodule LastCrusader.MixProject do
       {:webmentions, "~> 3.0.1"},
       # sentry
       {:sentry, "~> 12.0"},
+      {:finch, "~> 0.16"},
       {:hackney, "~> 1.8"},
       # code coverage
       {:excoveralls, "~> 0.18.0", only: :test},

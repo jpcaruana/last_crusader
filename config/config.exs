@@ -14,8 +14,6 @@ config :sentry,
   enable_logs: true,
   telemetry_processor_categories: [:log, :error, :check_in, :transaction]
 
-
-
 # GitLab backend (set :git_backend to LastCrusader.Micropub.GitLab to use)
 # config :last_crusader,
 #   gitlab_host: "https://gitlab.com",
@@ -25,7 +23,7 @@ config :sentry,
 
 import_config "#{config_env()}.exs"
 
-if config_env() != :prod do
+if config_env() == :dev do
   config :git_hooks,
     auto_install: false,
     verbose: true,
