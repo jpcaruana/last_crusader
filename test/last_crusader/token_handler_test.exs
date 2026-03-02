@@ -25,6 +25,24 @@ defmodule LastCrusader.TokenHandlerTest do
     })
   end
 
+  defp wait_for_deletion(key, timeout_ms \\ 100) do
+    start_time = System.monotonic_time(:millisecond)
+
+    Stream.repeatedly(fn ->
+      case MemoryTokenStore.read(key) do
+        :not_found -> :deleted
+        _ -> :not_deleted
+      end
+    end)
+    |> Stream.take_while(fn
+      :deleted -> false
+      :not_deleted ->
+        elapsed = System.monotonic_time(:millisecond) - start_time
+        elapsed < timeout_ms
+    end)
+    |> Enum.to_list()
+  end
+
   describe "POST /token" do
     test "valid code and PKCE returns access_token JSON" do
       cache_auth_code("TOKEN_VALID_CODE")
@@ -160,6 +178,8 @@ defmodule LastCrusader.TokenHandlerTest do
       revoke_conn = conn(:post, "/revoke?token=REVOKE_ME")
       revoke_conn = LastCrusader.Router.call(revoke_conn, @opts)
       assert revoke_conn.status == 200
+
+      wait_for_deletion({:access_token, "REVOKE_ME"})
 
       introspect_conn = conn(:post, "/introspect?token=REVOKE_ME")
       introspect_conn = LastCrusader.Router.call(introspect_conn, @opts)
