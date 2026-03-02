@@ -51,10 +51,10 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
   end
 
   @doc """
-    Synchronously deletes a key from the cache, cancelling any pending TTL timer.
+    Asynchronously deletes a key from the cache, cancelling any pending TTL timer.
   """
   @spec delete(cache_key) :: :ok
-  def delete(key), do: GenServer.call(__MODULE__, {:delete, key})
+  def delete(key), do: GenServer.cast(__MODULE__, {:delete, key})
 
   @doc """
     Sychronously reads the cache for the provided key. If no value is found,
@@ -103,15 +103,15 @@ defmodule LastCrusader.Cache.MemoryTokenStore do
     {:reply, :ok, %{state | invalidators: Map.put(invalidators, key, invalidator)}}
   end
 
-  @spec handle_call({:delete, cache_key}, GenServer.from(), t) :: {:reply, :ok, t}
-  def handle_call({:delete, key}, _from, state = %{invalidators: invalidators}) do
+  @spec handle_cast({:delete, cache_key}, t) :: {:noreply, t}
+  def handle_cast({:delete, key}, state = %{invalidators: invalidators}) do
     case Map.get(invalidators, key) do
       nil -> :ok
       timer -> Process.cancel_timer(timer)
     end
 
     :ets.delete(:request_cache, key)
-    {:reply, :ok, %{state | invalidators: Map.delete(invalidators, key)}}
+    {:noreply, %{state | invalidators: Map.delete(invalidators, key)}}
   end
 
   @spec handle_cast(:clear, t) :: {:noreply, t}
