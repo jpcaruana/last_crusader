@@ -3,6 +3,7 @@ defmodule LastCrusader.AuthTest do
 
   use ExUnit.Case, async: false
   use Plug.Test
+  import LastCrusader.TestHelpers
   alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
 
   @opts LastCrusader.Router.init([])
@@ -16,26 +17,6 @@ defmodule LastCrusader.AuthTest do
   # Stable PKCE pair for tests
   @code_verifier "dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"
   @code_challenge :crypto.hash(:sha256, @code_verifier) |> Base.url_encode64(padding: false)
-
-  defp wait_for_deletion(key, timeout_ms \\ 100) do
-    start_time = System.monotonic_time(:millisecond)
-
-    Stream.repeatedly(fn ->
-      case MemoryTokenStore.read(key) do
-        :not_found -> :deleted
-        _ -> :not_deleted
-      end
-    end)
-    |> Stream.take_while(fn
-      :deleted ->
-        false
-
-      :not_deleted ->
-        elapsed = System.monotonic_time(:millisecond) - start_time
-        elapsed < timeout_ms
-    end)
-    |> Enum.to_list()
-  end
 
   describe "GET /auth" do
     test "redirects with code, state, and iss when PKCE params are valid" do

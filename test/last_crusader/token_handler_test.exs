@@ -3,6 +3,7 @@ defmodule LastCrusader.TokenHandlerTest do
 
   use ExUnit.Case, async: false
   use Plug.Test
+  import LastCrusader.TestHelpers
   alias LastCrusader.Cache.MemoryTokenStore, as: MemoryTokenStore
 
   @opts LastCrusader.Router.init([])
@@ -23,26 +24,6 @@ defmodule LastCrusader.TokenHandlerTest do
       scope: @scope,
       code_challenge: @code_challenge
     })
-  end
-
-  defp wait_for_deletion(key, timeout_ms \\ 100) do
-    start_time = System.monotonic_time(:millisecond)
-
-    Stream.repeatedly(fn ->
-      case MemoryTokenStore.read(key) do
-        :not_found -> :deleted
-        _ -> :not_deleted
-      end
-    end)
-    |> Stream.take_while(fn
-      :deleted ->
-        false
-
-      :not_deleted ->
-        elapsed = System.monotonic_time(:millisecond) - start_time
-        elapsed < timeout_ms
-    end)
-    |> Enum.to_list()
   end
 
   describe "POST /token" do
