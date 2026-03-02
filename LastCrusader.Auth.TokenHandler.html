@@ -8,7 +8,7 @@
     <meta name="project" content="Last Crusader v0.13.0">
 
 
-    <title>LastCrusader.Micropub.MicropubHandler — Last Crusader v0.13.0</title>
+    <title>LastCrusader.Auth.TokenHandler — Last Crusader v0.13.0</title>
 
     <link rel="stylesheet" href="dist/html-elixir-YJO4MOOW.css" />
 
@@ -93,19 +93,19 @@ Last Crusader
 <div id="top-content">
   <div class="heading-with-actions top-heading">
     <h1>
-      <span translate="no">LastCrusader.<wbr>Micropub.<wbr>MicropubHandler</span> 
+      <span translate="no">LastCrusader.<wbr>Auth.<wbr>TokenHandler</span> 
       <small class="app-vsn" translate="no">(Last Crusader v0.13.0)</small>
 
     </h1>
 
-<a href="LastCrusader.Micropub.MicropubHandler.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
+<a href="LastCrusader.Auth.TokenHandler.md" title="Copy Markdown (hold Ctrl/Cmd and click it to open as Markdown)" class="copy-markdown icon-action" rel="help">
   <i class="ri-markdown-line" aria-hidden="true"></i>
   <span class="sr-only">Copy Markdown</span>
 </a>
 
 
 
-      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L1" title="View Source" class="icon-action" rel="help">
+      <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/token_handler.ex#L1" title="View Source" class="icon-action" rel="help">
         <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         <span class="sr-only">View Source</span>
       </a>
@@ -114,8 +114,7 @@ Last Crusader
 
 
     <section id="moduledoc">
-<p>The Micropub protocol is used to create, update and delete posts on one's own domain using third-party clients.</p><p>Web apps and native apps (e.g., iPhone, Android) can use Micropub to post and edit articles, short notes, comments,
-likes, photos, events or other kinds of posts on your own website.</p><p>cf full specification: <a href="https://micropub.spec.indieweb.org/">https://micropub.spec.indieweb.org/</a></p><p>see also <a href="LastCrusader.Micropub.PostTypeDiscovery.html"><code class="inline">LastCrusader.Micropub.PostTypeDiscovery</code></a>.</p>
+<p>IndieAuth token, introspection, and revocation endpoints.</p><p>see <a href="https://indieauth.spec.indieweb.org/#token-endpoint">https://indieauth.spec.indieweb.org/#token-endpoint</a></p>
     </section>
 
 </div>
@@ -134,39 +133,31 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#comment/1" data-no-tooltip="" translate="no">comment(conn)</a>
+        <a href="#introspect/1" data-no-tooltip="" translate="no">introspect(conn)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Handles comment posts from HTTP</p></div>
+        <div class="summary-synopsis"><p>POST /introspect — inspect an access token.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#options_comment/1" data-no-tooltip="" translate="no">options_comment(conn)</a>
+        <a href="#issue_token/1" data-no-tooltip="" translate="no">issue_token(conn)</a>
 
       </div>
+
+        <div class="summary-synopsis"><p>POST /token — exchange an auth code for an access token.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#publish/1" data-no-tooltip="" translate="no">publish(conn)</a>
+        <a href="#revoke/1" data-no-tooltip="" translate="no">revoke(conn)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Handles micropublish demands from HTTP</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#query/1" data-no-tooltip="" translate="no">query(conn)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Handles query requests</p></div>
+        <div class="summary-synopsis"><p>POST /revoke — revoke an access token.</p></div>
 
     </div>
 
@@ -184,17 +175,17 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
     </h2>
 
     <div class="functions-list">
-<section class="detail" id="comment/1">
+<section class="detail" id="introspect/1">
 
   <div class="detail-header">
-    <a href="#comment/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#introspect/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">comment(conn)</h1>
+      <h1 class="signature" translate="no">introspect(conn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L100" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/token_handler.ex#L71" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -203,20 +194,21 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 
   <section class="docstring">
 
-<p>Handles comment posts from HTTP</p><p>Parameters:</p><ul><li><code class="inline">author</code> (mandatory): Name of the comment author (just one field, so we allow aliases)</li><li><code class="inline">comment</code> (mandatory): Content of the comment. Can be in markdown format</li><li><code class="inline">original_page</code> (mandatory): URL of the page to comment to</li><li><code class="inline">link</code> (optional): Link to the personal page of the author</li></ul>
+<p>POST /introspect — inspect an access token.</p><p>Parameter:</p><ul><li><code class="inline">token</code> (required): The access token to inspect.</li></ul><p>Returns <code class="inline">{active: true, me, scope, client_id}</code> for a valid token, or
+<code class="inline">{active: false}</code> for an unknown/expired token. Always returns 200.</p>
   </section>
 </section>
-<section class="detail" id="options_comment/1">
+<section class="detail" id="issue_token/1">
 
   <div class="detail-header">
-    <a href="#options_comment/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#issue_token/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">options_comment(conn)</h1>
+      <h1 class="signature" translate="no">issue_token(conn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L122" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/token_handler.ex#L26" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -225,20 +217,21 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 
   <section class="docstring">
 
-
+<p>POST /token — exchange an auth code for an access token.</p><p>Parameters:</p><ul><li><code class="inline">grant_type</code> (required): Must be &quot;authorization_code&quot;.</li><li><code class="inline">code</code> (required): The auth code from the authorization endpoint.</li><li><code class="inline">client_id</code> (required): Must match the client_id used to obtain the code.</li><li><code class="inline">redirect_uri</code> (required): Must match the redirect_uri used to obtain the code.</li><li><code class="inline">code_verifier</code> (required): PKCE code verifier.</li></ul><p>Returns JSON: <code class="inline">{access_token, token_type, scope, me, expires_in}</code>.
+Codes are single-use.</p>
   </section>
 </section>
-<section class="detail" id="publish/1">
+<section class="detail" id="revoke/1">
 
   <div class="detail-header">
-    <a href="#publish/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#revoke/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">publish(conn)</h1>
+      <h1 class="signature" translate="no">revoke(conn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L66" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/token_handler.ex#L96" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -247,29 +240,7 @@ likes, photos, events or other kinds of posts on your own website.</p><p>cf full
 
   <section class="docstring">
 
-<p>Handles micropublish demands from HTTP</p><p>See micropublish specification: <a href="https://micropub.spec.indieweb.org/#create">https://micropub.spec.indieweb.org/#create</a></p>
-  </section>
-</section>
-<section class="detail" id="query/1">
-
-  <div class="detail-header">
-    <a href="#query/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-    </a>
-    <div class="heading-with-actions">
-      <h1 class="signature" translate="no">query(conn)</h1>
-
-
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/micropub/micropub_handler.ex#L26" class="icon-action" rel="help" aria-label="View Source">
-          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-        </a>
-
-    </div>
-  </div>
-
-  <section class="docstring">
-
-<p>Handles query requests</p><p>See micropub query specification: <a href="https://micropub.spec.indieweb.org/#querying">https://micropub.spec.indieweb.org/#querying</a></p><p>Note: we just reply to the <code class="inline">config</code>, <code class="inline">syndicate-to</code> and <code class="inline">category</code> requests</p>
+<p>POST /revoke — revoke an access token.</p><p>Parameter:</p><ul><li><code class="inline">token</code> (required): The access token to revoke.</li></ul><p>Always returns 200 per RFC 7009, even for unknown tokens.</p>
   </section>
 </section>
 

@@ -1,5 +1,7 @@
 404.html
 LastCrusader.Auth.AuthHandler.html
+LastCrusader.Auth.MetadataHandler.html
+LastCrusader.Auth.TokenHandler.html
 LastCrusader.Cache.MemoryTokenStore.html
 LastCrusader.Micropub.Backend.html
 LastCrusader.Micropub.GitHub.html
@@ -23,8 +25,8 @@ dist/lato-latin-700-normal-2XVSBPG4.woff2
 dist/lato-latin-ext-400-normal-N27NCBWW.woff2
 dist/lato-latin-ext-700-normal-Q2L5DVMW.woff2
 dist/remixicon-ZWU5GQ4X.woff2
-dist/search_data-9B655884.js
-dist/sidebar_items-0C7CE1D5.js
+dist/search_data-9B5DC400.js
+dist/sidebar_items-A7FE536E.js
 index.html
 license.html
 readme.html

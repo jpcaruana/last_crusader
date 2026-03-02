@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="dist/html-elixir-YJO4MOOW.css" />
 
-    <script defer src="dist/sidebar_items-0C7CE1D5.js"></script>
+    <script defer src="dist/sidebar_items-A7FE536E.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-YU4BZFVS.js"></script>
 
@@ -167,7 +167,7 @@ Last Crusader
 
       </div>
 
-        <div class="summary-synopsis"><p>  Asynchronous call to cache a value at the provided key. Any key that can
+        <div class="summary-synopsis"><p>  Synchronous call to cache a value at the provided key. Any key that can
   be used with ETS can be used, and will be evaluated using <code class="inline">==</code>.</p></div>
 
     </div>
@@ -189,6 +189,16 @@ Last Crusader
       </div>
 
         <div class="summary-synopsis"><p>  Asynchronous clears all values in the cache.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#delete/1" data-no-tooltip="" translate="no">delete(key)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>  Asynchronously deletes a key from the cache, cancelling any pending TTL timer.</p></div>
 
     </div>
 
@@ -373,7 +383,7 @@ Last Crusader
 
       </div>
 
-<p>  Asynchronous call to cache a value at the provided key. Any key that can
+<p>  Synchronous call to cache a value at the provided key. Any key that can
   be used with ETS can be used, and will be evaluated using <code class="inline">==</code>.</p>
   </section>
 </section>
@@ -427,6 +437,34 @@ Last Crusader
 <p>  Asynchronous clears all values in the cache.</p>
   </section>
 </section>
+<section class="detail" id="delete/1">
+
+  <div class="detail-header">
+    <a href="#delete/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+    </a>
+    <div class="heading-with-actions">
+      <h1 class="signature" translate="no">delete(key)</h1>
+
+
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L57" class="icon-action" rel="help" aria-label="View Source">
+          <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+        </a>
+
+    </div>
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> delete(<a href="#t:cache_key/0">cache_key</a>()) :: :ok</pre>
+
+      </div>
+
+<p>  Asynchronously deletes a key from the cache, cancelling any pending TTL timer.</p>
+  </section>
+</section>
 <section class="detail" id="init/1">
 
   <div class="detail-header">
@@ -437,7 +475,7 @@ Last Crusader
       <h1 class="signature" translate="no">init(ttl_seconds)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L76" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L82" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -494,7 +532,7 @@ Last Crusader
       <h1 class="signature" translate="no">read_or_cache_default(key, default_fn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L61" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/cache/memory_token_store.ex#L67" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 

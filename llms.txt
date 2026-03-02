@@ -10,6 +10,8 @@
 ## Modules
 
 - [LastCrusader.Auth.AuthHandler](LastCrusader.Auth.AuthHandler.md): IndieAuth authorization endpoint
+- [LastCrusader.Auth.MetadataHandler](LastCrusader.Auth.MetadataHandler.md): IndieAuth authorization server metadata endpoint.
+- [LastCrusader.Auth.TokenHandler](LastCrusader.Auth.TokenHandler.md): IndieAuth token, introspection, and revocation endpoints.
 - [LastCrusader.Cache.MemoryTokenStore](LastCrusader.Cache.MemoryTokenStore.md):   Simple ETS-based cache.
 - [LastCrusader.Micropub](LastCrusader.Micropub.md): Handles the _logic_ of micro-publishing.
 - [LastCrusader.Micropub.Backend](LastCrusader.Micropub.Backend.md): Behaviour for git backends used to persist Hugo post files.

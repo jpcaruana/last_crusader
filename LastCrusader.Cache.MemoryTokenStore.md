@@ -29,7 +29,7 @@
 @spec cache(cache_key(), cache_value()) :: :ok
 ```
 
-  Asynchronous call to cache a value at the provided key. Any key that can
+  Synchronous call to cache a value at the provided key. Any key that can
   be used with ETS can be used, and will be evaluated using `==`.
 
 # `child_spec`
@@ -45,6 +45,14 @@ See `Supervisor`.
 ```
 
   Asynchronous clears all values in the cache.
+
+# `delete`
+
+```elixir
+@spec delete(cache_key()) :: :ok
+```
+
+  Asynchronously deletes a key from the cache, cancelling any pending TTL timer.
 
 # `init`
 

@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="dist/html-elixir-YJO4MOOW.css" />
 
-    <script defer src="dist/sidebar_items-0C7CE1D5.js"></script>
+    <script defer src="dist/sidebar_items-A7FE536E.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-YU4BZFVS.js"></script>
 
@@ -114,7 +114,9 @@ Last Crusader
 
 
     <section id="moduledoc">
-<p>IndieAuth authorization endpoint</p><p> An authorization endpoint is an HTTP endpoint that micropub and IndieAuth clients can use to identify a user or obtain an authorization code (which is then later exchanged for an access token) to be able to post to their website.</p><p>see <a href="https://indieweb.org/authorization-endpoint">https://indieweb.org/authorization-endpoint</a></p>
+<p>IndieAuth authorization endpoint</p><p>An authorization endpoint is an HTTP endpoint that micropub and IndieAuth clients
+can use to identify a user or obtain an authorization code (which is then later
+exchanged for an access token) to be able to post to their website.</p><p>Supports PKCE (S256 only) as required by the current IndieAuth spec.</p><p>see <a href="https://indieauth.spec.indieweb.org/#authorization-endpoint">https://indieauth.spec.indieweb.org/#authorization-endpoint</a></p>
     </section>
 
 </div>
@@ -137,7 +139,7 @@ Last Crusader
 
       </div>
 
-        <div class="summary-synopsis"><p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p></div>
+        <div class="summary-synopsis"><p>GET /auth — authorization endpoint.</p></div>
 
     </div>
 
@@ -147,7 +149,7 @@ Last Crusader
 
       </div>
 
-        <div class="summary-synopsis"><p>Auth code verification</p></div>
+        <div class="summary-synopsis"><p>POST /auth — profile-only auth code verification.</p></div>
 
     </div>
 
@@ -175,7 +177,7 @@ Last Crusader
       <h1 class="signature" translate="no">auth_endpoint(conn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L38" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L37" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -184,16 +186,8 @@ Last Crusader
 
   <section class="docstring">
 
-<p>authorization-endpoint. To start the sign-in flow, the user's browser will be redirected to their authorization endpoint, with additional parameters in the query string.</p><h2 id="auth_endpoint/1-parameters" class="section-heading"><a href="#auth_endpoint/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Parameters:</span></h2><ul><li>me:
-Full URI of the user's homepage</li><li>client_id:
-Full URI of the application's/website's home page. Used to identify the application. An authorization endpoint may show the application's icon and title to the user during the auth process.</li><li>redirect_uri:
-Full URI to redirect back to when the login process is finished</li><li>state:
-A random value the app makes up, unique per request. The authorization server just passes it back to the app.
-Optional. Auth endpoints MUST support them, though.</li><li>response_type:
-id (identification only) or code (identification + authorization)
-Optional. Defaults to id.</li><li>scope:
-Not used and omitted in identification mode (response_type=id)
-For authorization, the scope contains a space-separated list of scopes that the web application requests permission for, e.g. &quot;create&quot;. Multiple values are supported, e.g. create delete</li></ul>
+<p>GET /auth — authorization endpoint.</p><p>Starts the IndieAuth sign-in flow. The user's browser is redirected here with
+the following query parameters:</p><ul><li><code class="inline">client_id</code> (required): Full URI of the application's home page.</li><li><code class="inline">redirect_uri</code> (required): Full URI to redirect to when the auth process is done.</li><li><code class="inline">state</code> (optional): Opaque value passed through unchanged.</li><li><code class="inline">me</code> (optional): Hint at the user's profile URL; no longer validated.</li><li><code class="inline">scope</code> (optional): Space-separated list of requested scopes.</li><li><code class="inline">code_challenge</code> (required): PKCE code challenge (Base64URL(SHA256(verifier))).</li><li><code class="inline">code_challenge_method</code> (optional): Must be &quot;S256&quot; if present; defaults to S256.</li></ul><p>On success, redirects to <code class="inline">redirect_uri?code=&lt;code&gt;&amp;state=&lt;state&gt;&amp;iss=&lt;issuer&gt;</code>.</p>
   </section>
 </section>
 <section class="detail" id="code_verification/1">
@@ -206,7 +200,7 @@ For authorization, the scope contains a space-separated list of scopes that the 
       <h1 class="signature" translate="no">code_verification(conn)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L86" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/auth/auth_handler.ex#L97" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -215,14 +209,8 @@ For authorization, the scope contains a space-separated list of scopes that the 
 
   <section class="docstring">
 
-<p>Auth code verification</p><p>For the sign-in flow, the web application will query the authorization endpoint to verify the auth code it received. The client makes a POST request to the authorization server with the following values:</p><pre><code class="makeup elixir" translate="no"><span class="nc">POST</span><span class="w"> </span><span class="n">https</span><span class="ss">://</span><span class="n">auth</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">auth</span><span class="w">
-</span><span class="nc">Content</span><span class="o">-</span><span class="ss">type</span><span class="p">:</span><span class="w"> </span><span class="n">application</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">www</span><span class="o">-</span><span class="n">form</span><span class="o">-</span><span class="n">urlencoded</span><span class="w">
-
-</span><span class="n">code</span><span class="o">=</span><span class="n">xxxxxxxx</span><span class="w">
-</span><span class="o">&amp;</span><span class="n">redirect_uri</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">auth</span><span class="o">/</span><span class="n">callback</span><span class="w">
-</span><span class="o">&amp;</span><span class="n">client_id</span><span class="o">=</span><span class="n">https</span><span class="ss">://</span><span class="n">webapp</span><span class="o">.</span><span class="n">example</span><span class="o">.</span><span class="n">org</span><span class="o">/</span></code></pre><p>After the authorization server verifies that redirect_uri, client_id match the code given, the response will include the &quot;me&quot; value indicating the URL of the user who signed in. The response content-type should be either application/x-www-form-urlencoded or application/json depending on the value of the HTTP Accept header.</p><h2 id="code_verification/1-parameters" class="section-heading"><a href="#code_verification/1-parameters" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a><span class="text">Parameters:</span></h2><ul><li>me:
-Full URI of the user's homepage
-This may be different from the me parameter that the user originally entered, but MUST be on the same domain.</li></ul>
+<p>POST /auth — profile-only auth code verification.</p><p>The client submits the auth code along with a <code class="inline">code_verifier</code> to prove possession
+of the original PKCE secret. On success, returns <code class="inline">{&quot;me&quot;: &quot;&lt;user_url&gt;&quot;}</code>.</p><p>Parameters:</p><ul><li><code class="inline">code</code> (required): The auth code received in the redirect.</li><li><code class="inline">code_verifier</code> (required): The PKCE code verifier (pre-hash plaintext).</li></ul><p>Codes are single-use: a successful verification deletes the code from the cache.</p>
   </section>
 </section>
 
