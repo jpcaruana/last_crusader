@@ -27,7 +27,9 @@ defmodule LastCrusader.AuthTest do
       end
     end)
     |> Stream.take_while(fn
-      :deleted -> false
+      :deleted ->
+        false
+
       :not_deleted ->
         elapsed = System.monotonic_time(:millisecond) - start_time
         elapsed < timeout_ms

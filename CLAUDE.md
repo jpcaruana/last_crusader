@@ -11,7 +11,7 @@ mix test                          # all tests
 mix test path/to/test.exs         # single test file
 mix test path/to/test.exs:42      # single test by line
 mix format                        # format code
-mix check                         # credo + doctor + format + tests
+mix check                         # credo + doctor + format + tests (run by git pre-push hook)
 mix credo                         # lint
 iex -S mix                        # interactive dev server
 MIX_ENV=perso mix release         # personal release
@@ -41,3 +41,7 @@ HTTP client: Tesla, with mock adapter in test/dev environments.
 - Tests use `async: true` by default
 - HTTP mocking via `Tesla.Mock`
 - Git hooks: pre-commit runs `mix format`, pre-push runs `mix check`
+
+## Directions
+
+- NEVER ignore `mix format` or `mix test` results: check it every time before commit and before push. It will break the CI otherwise. These commands are part of `mix check` included in git pre-push hook.
