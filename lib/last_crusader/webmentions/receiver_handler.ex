@@ -12,7 +12,7 @@ defmodule LastCrusader.Webmentions.ReceiverHandler do
     if valid_url?(source) and valid_url?(target) do
       {:ok, id} = Receiver.accept(source, target)
 
-      Task.Supervisor.async_nolink(LastCrusader.TaskSupervisor, fn ->
+      Task.Supervisor.start_child(LastCrusader.TaskSupervisor, fn ->
         Receiver.verify(id, source, target)
       end)
 
