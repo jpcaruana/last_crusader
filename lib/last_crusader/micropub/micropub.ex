@@ -123,14 +123,8 @@ defmodule LastCrusader.Micropub do
     end
   end
 
-  defp extract_syndication_targets(normalized) when is_list(normalized) do
-    case List.keyfind(normalized, "mp-syndicate-to", 0) ||
-           List.keyfind(normalized, "syndicate-to", 0) do
-      {_, targets} when is_list(targets) -> targets
-      {_, target} when is_binary(target) -> [target]
-      nil -> []
-    end
-  end
+  defp extract_syndication_targets(normalized) when is_list(normalized),
+    do: normalized |> Map.new() |> extract_syndication_targets()
 
   defp extract_syndication_targets(params) when is_map(params) do
     targets = Map.get(params, "mp-syndicate-to") || Map.get(params, "syndicate-to") || []
