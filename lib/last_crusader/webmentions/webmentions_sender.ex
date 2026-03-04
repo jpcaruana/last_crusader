@@ -66,15 +66,16 @@ defmodule LastCrusader.Webmentions.Sender do
     Sends webmentions to explicitly specified `syndication_targets` only.
     If `syndication_targets` is empty, no webmentions are sent.
   """
+  def send_webmentions(origin, []) do
+    Logger.info("Sending webmentions from #{inspect(origin)}: no targets, skipping")
+    {:ok, self(), []}
+  end
+
   def send_webmentions(origin, syndication_targets) do
     Logger.info("Sending webmentions from #{inspect(origin)}")
 
     {:ok, webmention_response} =
-      if syndication_targets == [] do
-        {:ok, []}
-      else
-        Webmentions.send_webmentions_for_links(origin, syndication_targets)
-      end
+      Webmentions.send_webmentions_for_links(origin, syndication_targets)
 
     Enum.each(webmention_response, fn x -> Logger.debug("Result: webmention: #{inspect(x)}") end)
 
