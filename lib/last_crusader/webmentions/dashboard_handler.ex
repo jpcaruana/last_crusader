@@ -11,7 +11,7 @@ defmodule LastCrusader.Webmentions.DashboardHandler do
     token = conn.query_params["token"]
     expected = Application.get_env(:last_crusader, :webmention_viewer_token)
 
-    if token == expected do
+    if token != nil and Plug.Crypto.secure_compare(token, expected) do
       records =
         Repo.all(from(r in ReceivedWebmention, order_by: [desc: r.inserted_at]))
 
