@@ -29,3 +29,8 @@ config/perso.exs
 *.log
 
 *.tar.gz
+
+# Ignore local db
+*.db
+*.db-shm
+*.db-wal
