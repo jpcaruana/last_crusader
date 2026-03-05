@@ -19,7 +19,11 @@ defmodule LastCrusader.Webmentions.Sender do
     Only sends webmentions to the explicitly provided `syndication_targets`.
   """
   @spec schedule_webmentions(url(), [url()], pos_integer()) :: {:ok, non_neg_integer()}
-  def schedule_webmentions(origin, syndication_targets \\ [], nb_max_tries \\ 15) do
+  def schedule_webmentions(origin, syndication_targets \\ [], nb_max_tries \\ 15)
+
+  def schedule_webmentions(_origin, [], nb_max_tries), do: {:ok, nb_max_tries}
+
+  def schedule_webmentions(origin, syndication_targets, nb_max_tries) do
     do_schedule_webmentions(origin, syndication_targets, nb_max_tries, 0)
     {:ok, nb_max_tries}
   end
