@@ -5,23 +5,13 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
 
   alias LastCrusader.Webmentions.Sender
 
-  describe "send_webmentions/3" do
-    test "check twitter webmention is OK" do
-      # setup for webmentions is a bit tricky, I hope these variables will help
+  describe "send_webmentions/2" do
+    test "sends webmention only to the specified target" do
       source = "https://some-origin.com"
       webmention_target = "https://brid.gy/publish/twitter"
       webmention_endpoint = "https://brid.gy/publish/webmention"
 
       mock(fn
-        # source page for webmention
-        %{method: :get, url: ^source} ->
-          {:ok,
-           %Tesla.Env{
-             status: 200,
-             body: "<html class=\"h-entry\"><a href=\"#{webmention_target}\"></a>"
-           }}
-
-        # page target for webmention: links to webmention endpoint
         %{method: :get, url: ^webmention_target} ->
           {:ok,
            %Tesla.Env{
@@ -30,7 +20,6 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
              headers: [{"Link", "<#{webmention_endpoint}>; rel=\"webmention\""}]
            }}
 
-        # webmention endpoint
         %{method: :post, url: ^webmention_endpoint} ->
           {:ok,
            %Tesla.Env{
@@ -46,7 +35,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
            }}
       end)
 
-      {:ok, _pid, responses} = Sender.send_webmentions(source)
+      {:ok, _pid, responses} = Sender.send_webmentions(source, [webmention_target])
 
       expected = [
         %Webmentions.Response{
@@ -64,8 +53,7 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       assert responses == expected
     end
 
-    test "check several webmentions are OK" do
-      # setup for webmentions is a bit tricky, I hope these variables will help
+    test "sends webmentions to all specified targets" do
       source = "https://some-origin.com"
 
       webmention_target_1 = "https://target1.com/"
@@ -75,16 +63,6 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       webmention_endpoint_2 = "https://endpoint2.com/"
 
       mock(fn
-        # setup for webmentions is a bit tricky, I hope these variables will help
-        %{method: :get, url: ^source} ->
-          {:ok,
-           %Tesla.Env{
-             status: 200,
-             body:
-               "<html class=\"h-entry\"><a href=\"#{webmention_target_1}\"></a><a href=\"#{webmention_target_2}\"></a>"
-           }}
-
-        # page target for webmention: links to webmention endpoint
         %{method: :get, url: ^webmention_target_1} ->
           {:ok,
            %Tesla.Env{
@@ -101,7 +79,6 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
              headers: [{"Link", "<#{webmention_endpoint_2}>; rel=\"webmention\""}]
            }}
 
-        # webmention endpoint
         %{method: :post, url: ^webmention_endpoint_1} ->
           {:ok,
            %Tesla.Env{
@@ -131,7 +108,8 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
            }}
       end)
 
-      {:ok, _pid, responses} = Sender.send_webmentions(source)
+      {:ok, _pid, responses} =
+        Sender.send_webmentions(source, [webmention_target_1, webmention_target_2])
 
       expected = [
         %Webmentions.Response{
@@ -155,6 +133,50 @@ defmodule LastCrusader.Webmentions.WebmentionsSenderTest do
       ]
 
       assert responses == expected
+    end
+
+    test "sends no webmentions when syndication_targets is empty" do
+      source = "https://some-origin.com"
+
+      mock(fn _ -> flunk("no HTTP calls expected when syndication_targets is empty") end)
+
+      {:ok, _pid, responses} = Sender.send_webmentions(source, [])
+
+      assert responses == []
+    end
+
+    test "sends webmention only to the specified target, ignoring other targets on the page" do
+      source = "https://some-origin.com"
+      twitter_target = "https://brid.gy/publish/twitter"
+      mastodon_target = "https://brid.gy/publish/mastodon"
+      webmention_endpoint = "https://brid.gy/publish/webmention"
+
+      mock(fn
+        %{method: :get, url: ^twitter_target} ->
+          {:ok,
+           %Tesla.Env{
+             status: 200,
+             body: "<html>",
+             headers: [{"Link", "<#{webmention_endpoint}>; rel=\"webmention\""}]
+           }}
+
+        %{method: :post, url: ^webmention_endpoint} ->
+          {:ok,
+           %Tesla.Env{
+             status: 201,
+             body:
+               bridgy_success_response_body(
+                 "https://twitter.com/jpcaruana/status/1409912935766544386"
+               ),
+             headers: [{"Status", "201 Created"}, {"Content-Type", "application/json"}]
+           }}
+      end)
+
+      {:ok, _pid, responses} = Sender.send_webmentions(source, [twitter_target])
+
+      assert length(responses) == 1
+      assert hd(responses).target == twitter_target
+      refute Enum.any?(responses, fn r -> r.target == mastodon_target end)
     end
   end
 
