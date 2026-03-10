@@ -5,6 +5,9 @@ defmodule LastCrusader.Micropub.Backend do
   @callback new_file(filename :: String.t(), content :: String.t()) ::
               {:ok, :content_created} | {:ko, atom(), any()}
 
+  @callback new_file_via_pr(filename :: String.t(), content :: String.t()) ::
+              {:ok, :pr_created} | {:ko, atom(), any()}
+
   @callback update_file(filename :: String.t(), content :: String.t()) ::
               {:ok, :content_updated} | {:ko, atom(), any()}
 
