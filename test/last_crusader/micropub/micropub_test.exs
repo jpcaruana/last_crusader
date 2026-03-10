@@ -27,7 +27,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
 
   describe "Micropub.comment/2" do
     test "success" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
@@ -44,11 +44,11 @@ defmodule LastCrusader.Micropub.MicropubTest do
         This is the comment: Great content!
       """
 
-      assert {{:ok, :content_created}, expected_text} == Micropub.comment(params, now())
+      assert {{:ok, :pr_created}, expected_text} == Micropub.comment(params, now())
     end
 
     test "success (link is not mandatory)" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
@@ -63,11 +63,11 @@ defmodule LastCrusader.Micropub.MicropubTest do
         This is the comment: Great content!
       """
 
-      assert {{:ok, :content_created}, expected_text} == Micropub.comment(params, now())
+      assert {{:ok, :pr_created}, expected_text} == Micropub.comment(params, now())
     end
 
     test "original_page is mandatory" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
@@ -79,7 +79,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
     end
 
     test "author is mandatory" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "original_page" => "https://some.url.fr/notes/2021/07/15/a-post/",
@@ -91,7 +91,7 @@ defmodule LastCrusader.Micropub.MicropubTest do
     end
 
     test "comment is mandatory" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
