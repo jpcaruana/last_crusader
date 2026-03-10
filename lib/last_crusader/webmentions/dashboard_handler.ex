@@ -33,7 +33,7 @@ defmodule LastCrusader.Webmentions.DashboardHandler do
           <td>#{escape(r.source)}</td>
           <td>#{escape(r.target)}</td>
           <td>#{escape(r.status)}</td>
-          <td>#{r.inserted_at}</td>
+          <td>#{escape(to_string(r.inserted_at))}</td>
         </tr>
         """
       end)
