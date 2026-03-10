@@ -5,6 +5,8 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :last_crusader, LastCrusader.Repo, database: "/var/data/last_crusader/webmentions.db"
+
 config :sentry,
   dsn: "https://xxx@o122392.ingest.sentry.io/12345",
   environment_name: :prod,
