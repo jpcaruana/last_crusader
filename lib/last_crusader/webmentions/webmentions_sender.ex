@@ -15,31 +15,36 @@ defmodule LastCrusader.Webmentions.Sender do
   @one_minute 60_000
 
   @doc """
-    Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)
+    Schedules webmentions to be send with 1 minute wait between every try (default is 15 times).
+    Only sends webmentions to the explicitly provided `syndication_targets`.
   """
-  @spec schedule_webmentions(url(), pos_integer()) :: {:ok, non_neg_integer()}
-  def schedule_webmentions(origin, nb_max_tries \\ 15) do
-    do_schedule_webmentions(origin, nb_max_tries, 0)
+  @spec schedule_webmentions(url(), [url()], pos_integer()) :: {:ok, non_neg_integer()}
+  def schedule_webmentions(origin, syndication_targets \\ [], nb_max_tries \\ 15)
+
+  def schedule_webmentions(_origin, [], nb_max_tries), do: {:ok, nb_max_tries}
+
+  def schedule_webmentions(origin, syndication_targets, nb_max_tries) do
+    do_schedule_webmentions(origin, syndication_targets, nb_max_tries, 0)
     {:ok, nb_max_tries}
   end
 
-  defp do_schedule_webmentions(origin, all_tried, all_tried) do
+  defp do_schedule_webmentions(origin, _syndication_targets, all_tried, all_tried) do
     Logger.warning("Sending webmentions from #{inspect(origin)}: aborted (too many tries)")
 
     {:ok, self(), []}
   end
 
-  defp do_schedule_webmentions(origin, nb_max_tries, nb_tried) do
+  defp do_schedule_webmentions(origin, syndication_targets, nb_max_tries, nb_tried) do
     Logger.info(
       "Sending webmentions from #{inspect(origin)}: scheduled. try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
     Task.Supervisor.async_nolink(LastCrusader.TaskSupervisor, fn ->
-      start_task(origin, nb_max_tries, nb_tried)
+      start_task(origin, syndication_targets, nb_max_tries, nb_tried)
     end)
   end
 
-  defp start_task(origin, nb_max_tries, nb_tried) do
+  defp start_task(origin, syndication_targets, nb_max_tries, nb_tried) do
     Logger.info(
       "Started async task for webmentions on #{inspect(origin)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}. Will wait for #{inspect(@one_minute)}ms"
     )
@@ -49,25 +54,32 @@ defmodule LastCrusader.Webmentions.Sender do
     case Tesla.head(origin) do
       {:ok, %Tesla.Env{status: 200}} ->
         Logger.info("Success on #{inspect(origin)}. I will send webmentions.")
-        send_webmentions(origin)
+        send_webmentions(origin, syndication_targets)
 
       {:ok, %Tesla.Env{status: status}} ->
         Logger.info("HEAD on #{inspect(origin)}: HTTP status=#{inspect(status)}")
-        do_schedule_webmentions(origin, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, syndication_targets, nb_max_tries, nb_tried + 1)
 
       other ->
         Logger.info("HEAD on #{inspect(origin)}: #{inspect(other)}")
-        do_schedule_webmentions(origin, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, syndication_targets, nb_max_tries, nb_tried + 1)
     end
   end
 
   @doc """
-    Sends Webmentions to every link
+    Sends webmentions to explicitly specified `syndication_targets` only.
+    If `syndication_targets` is empty, no webmentions are sent.
   """
-  def send_webmentions(origin) do
+  def send_webmentions(origin, []) do
+    Logger.info("Sending webmentions from #{inspect(origin)}: no targets, skipping")
+    {:ok, self(), []}
+  end
+
+  def send_webmentions(origin, syndication_targets) do
     Logger.info("Sending webmentions from #{inspect(origin)}")
 
-    {:ok, webmention_response} = Webmentions.send_webmentions(origin)
+    {:ok, webmention_response} =
+      Webmentions.send_webmentions_for_links(origin, syndication_targets)
 
     Enum.each(webmention_response, fn x -> Logger.debug("Result: webmention: #{inspect(x)}") end)
 

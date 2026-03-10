@@ -33,9 +33,11 @@ defmodule LastCrusader.Micropub do
            |> Hugo.new(DateTime.now!("Europe/Paris"), normalized),
          {:ok, :content_created} <- backend().new_file(filename, filecontent),
          content_url <- generate_published_url(me, path),
+         syndicate_to = extract_syndication_targets(normalized),
          {:ok, _} <-
            Webmentions.Sender.schedule_webmentions(
              content_url,
+             syndicate_to,
              Application.get_env(:last_crusader, :webmention_nb_tries, 15)
            ) do
       {:ok, content_url}
@@ -119,6 +121,14 @@ defmodule LastCrusader.Micropub do
          {:ok, :content_updated} <- backend().update_file(filename, new_frontmatter <> markdown) do
       {:ok, published_page_url}
     end
+  end
+
+  defp extract_syndication_targets(normalized) when is_list(normalized),
+    do: normalized |> Map.new() |> extract_syndication_targets()
+
+  defp extract_syndication_targets(params) when is_map(params) do
+    targets = Map.get(params, "mp-syndicate-to") || Map.get(params, "syndicate-to") || []
+    List.wrap(targets)
   end
 
   defp backend,
