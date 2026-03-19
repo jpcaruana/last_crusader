@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="dist/html-elixir-YJO4MOOW.css" />
 
-    <script defer src="dist/sidebar_items-181C1EED.js"></script>
+    <script defer src="dist/sidebar_items-17181B33.js"></script>
     <script defer src="docs_config.js"></script>
     <script defer src="dist/html-YU4BZFVS.js"></script>
 
@@ -157,21 +157,23 @@ Last Crusader
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#schedule_webmentions/2" data-no-tooltip="" translate="no">schedule_webmentions(origin, nb_max_tries \\ 15)</a>
+        <a href="#schedule_webmentions/3" data-no-tooltip="" translate="no">schedule_webmentions(origin, syndication_targets \\ [], nb_max_tries \\ 15)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p></div>
+        <div class="summary-synopsis"><p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times).
+  Only sends webmentions to the explicitly provided <code class="inline">syndication_targets</code>.</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#send_webmentions/1" data-no-tooltip="" translate="no">send_webmentions(origin)</a>
+        <a href="#send_webmentions/2" data-no-tooltip="" translate="no">send_webmentions(origin, syndication_targets)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>  Sends Webmentions to every link</p></div>
+        <div class="summary-synopsis"><p>  Sends webmentions to explicitly specified <code class="inline">syndication_targets</code> only.
+  If <code class="inline">syndication_targets</code> is empty, no webmentions are sent.</p></div>
 
     </div>
 
@@ -242,7 +244,7 @@ Last Crusader
       <h1 class="signature" translate="no">find_syndication_links(webmention_response, syndication_links \\ [])</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L89" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L117" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -254,19 +256,21 @@ Last Crusader
 <p>  Finds syndication links (from bridy to twitter) in a list of Webmentions responses</p>
   </section>
 </section>
-<section class="detail" id="schedule_webmentions/2">
+<section class="detail" id="schedule_webmentions/3">
 
     <span id="schedule_webmentions/1"></span>
 
+    <span id="schedule_webmentions/2"></span>
+
   <div class="detail-header">
-    <a href="#schedule_webmentions/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#schedule_webmentions/3" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">schedule_webmentions(origin, nb_max_tries \\ 15)</h1>
+      <h1 class="signature" translate="no">schedule_webmentions(origin, syndication_targets \\ [], nb_max_tries \\ 15)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L21" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L22" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -277,24 +281,25 @@ Last Crusader
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> schedule_webmentions(<a href="#t:url/0">url</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> schedule_webmentions(<a href="#t:url/0">url</a>(), [<a href="#t:url/0">url</a>()], <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">non_neg_integer</a>()}</pre>
 
       </div>
 
-<p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)</p>
+<p>  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times).
+  Only sends webmentions to the explicitly provided <code class="inline">syndication_targets</code>.</p>
   </section>
 </section>
-<section class="detail" id="send_webmentions/1">
+<section class="detail" id="send_webmentions/2">
 
   <div class="detail-header">
-    <a href="#send_webmentions/1" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
+    <a href="#send_webmentions/2" class="detail-link" data-no-tooltip="" aria-label="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
     </a>
     <div class="heading-with-actions">
-      <h1 class="signature" translate="no">send_webmentions(origin)</h1>
+      <h1 class="signature" translate="no">send_webmentions(origin, syndication_targets)</h1>
 
 
-        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L67" class="icon-action" rel="help" aria-label="View Source">
+        <a href="https://github.com/jpcaruana/last_crusader/blob/main/lib/last_crusader/webmentions/webmentions_sender.ex#L75" class="icon-action" rel="help" aria-label="View Source">
           <i class="ri-code-s-slash-line" aria-hidden="true"></i>
         </a>
 
@@ -303,7 +308,8 @@ Last Crusader
 
   <section class="docstring">
 
-<p>  Sends Webmentions to every link</p>
+<p>  Sends webmentions to explicitly specified <code class="inline">syndication_targets</code> only.
+  If <code class="inline">syndication_targets</code> is empty, no webmentions are sent.</p>
   </section>
 </section>
 

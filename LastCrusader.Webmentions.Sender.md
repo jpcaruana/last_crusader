@@ -18,14 +18,16 @@ It first checks of the origin exists before sending webmentions. It will retry t
 # `schedule_webmentions`
 
 ```elixir
-@spec schedule_webmentions(url(), pos_integer()) :: {:ok, non_neg_integer()}
+@spec schedule_webmentions(url(), [url()], pos_integer()) :: {:ok, non_neg_integer()}
 ```
 
-  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times)
+  Schedules webmentions to be send with 1 minute wait between every try (default is 15 times).
+  Only sends webmentions to the explicitly provided `syndication_targets`.
 
 # `send_webmentions`
 
-  Sends Webmentions to every link
+  Sends webmentions to explicitly specified `syndication_targets` only.
+  If `syndication_targets` is empty, no webmentions are sent.
 
 ---
 
