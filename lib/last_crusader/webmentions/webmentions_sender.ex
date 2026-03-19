@@ -39,12 +39,14 @@ defmodule LastCrusader.Webmentions.Sender do
       "Sending webmentions from #{inspect(origin)}: scheduled. try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}"
     )
 
-    Task.Supervisor.async_nolink(LastCrusader.TaskSupervisor, fn ->
-      start_task(origin, syndication_targets, nb_max_tries, nb_tried)
+    Enum.each(syndication_targets, fn target ->
+      Task.Supervisor.start_child(LastCrusader.TaskSupervisor, fn ->
+        start_task(origin, target, nb_max_tries, nb_tried)
+      end)
     end)
   end
 
-  defp start_task(origin, syndication_targets, nb_max_tries, nb_tried) do
+  defp start_task(origin, syndication_target, nb_max_tries, nb_tried) do
     Logger.info(
       "Started async task for webmentions on #{inspect(origin)}: try #{inspect(nb_tried)}/#{inspect(nb_max_tries)}. Will wait for #{inspect(@one_minute)}ms"
     )
@@ -54,15 +56,15 @@ defmodule LastCrusader.Webmentions.Sender do
     case Tesla.head(origin) do
       {:ok, %Tesla.Env{status: 200}} ->
         Logger.info("Success on #{inspect(origin)}. I will send webmentions.")
-        send_webmentions(origin, syndication_targets)
+        send_webmentions(origin, [syndication_target])
 
       {:ok, %Tesla.Env{status: status}} ->
         Logger.info("HEAD on #{inspect(origin)}: HTTP status=#{inspect(status)}")
-        do_schedule_webmentions(origin, syndication_targets, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, [syndication_target], nb_max_tries, nb_tried + 1)
 
       other ->
         Logger.info("HEAD on #{inspect(origin)}: #{inspect(other)}")
-        do_schedule_webmentions(origin, syndication_targets, nb_max_tries, nb_tried + 1)
+        do_schedule_webmentions(origin, [syndication_target], nb_max_tries, nb_tried + 1)
     end
   end
 
@@ -93,6 +95,20 @@ defmodule LastCrusader.Webmentions.Sender do
   defp update_content_with_syndication(origin, webmention_responses) do
     find_syndication_links(webmention_responses)
     |> update_content(origin)
+  end
+
+  @spec update_content(list(url()), url()) :: nil
+  defp update_content(syndication_links, origin)
+
+  defp update_content([], origin) do
+    Logger.info("No more syndication links found for from #{inspect(origin)}")
+  end
+
+  defp update_content([{link, type} | tail], origin) do
+    Logger.info("Updating content with #{inspect(type)} syndication link #{inspect(link)}")
+    {:ok, origin} = Micropub.add_keyword_to_post(origin, {type, link})
+    Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
+    update_content(tail, origin)
   end
 
   @doc """
@@ -148,20 +164,5 @@ defmodule LastCrusader.Webmentions.Sender do
         Logger.info("No syndication link found")
         []
     end
-  end
-
-  @spec update_content(list(url()), url()) :: nil
-  defp update_content(syndication_links, origin)
-
-  defp update_content([], origin) do
-    Logger.info("No more syndication links found for from #{inspect(origin)}")
-  end
-
-  defp update_content([{link, type} | tail], origin) do
-    Logger.info("Updating content with #{inspect(type)} syndication link #{inspect(link)}")
-    {:ok, origin} = Micropub.add_keyword_to_post(origin, {type, link})
-    Logger.info("Syndication link found for from #{inspect(origin)}. Content is up to date")
-
-    update_content(tail, origin)
   end
 end
