@@ -1,14 +1,18 @@
 # Changelog
 
 ## 0.14.x
+### 0.14.1
+2026/03/19
+- fix: honour syndicate-to when sending webmentions (see [#333](https://github.com/jpcaruana/last_crusader/pull/333))
+
 ### 0.14.0
-2026/04/02
-- feat: Implement IndieAuth endpoints (closes [#146](https://github.com/jpcaruana/last_crusader/pull/146))
+2026/03/02
+- feat: Implement IndieAuth endpoints (closes [#146](https://github.com/jpcaruana/last_crusader/issues/146))
 
 ## 0.13.x
 ### 0.13.0
 2026/02/27
-- feat: add GitLab as a configurable git backend (closes [#147](https://github.com/jpcaruana/last_crusader/pull/147))
+- feat: add GitLab as a configurable git backend (closes [#147](https://github.com/jpcaruana/last_crusader/issues/147))
 
 ## 0.12.x
 ### 0.12.0
