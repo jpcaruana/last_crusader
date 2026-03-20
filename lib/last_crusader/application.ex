@@ -8,6 +8,7 @@ defmodule LastCrusader.Application do
     # List all child processes to be supervised
     children =
       [
+        LastCrusader.Repo,
         {
           Bandit,
           plug: LastCrusader.Router,
@@ -28,6 +29,8 @@ defmodule LastCrusader.Application do
 
     opts = [strategy: :one_for_one, name: LastCrusader.Supervisor]
     started = Supervisor.start_link(children, opts)
+
+    Ecto.Migrator.run(LastCrusader.Repo, :up, all: true)
 
     {:ok, version} = :application.get_key(:last_crusader, :vsn)
 

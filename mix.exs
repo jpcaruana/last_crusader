@@ -5,7 +5,7 @@ defmodule LastCrusader.MixProject do
     [
       app: :last_crusader,
       version: "0.14.1",
-      elixir: "~> 1.14",
+      elixir: "~> 1.15",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() in [:prod, :perso],
       deps: deps(),
@@ -63,6 +63,8 @@ defmodule LastCrusader.MixProject do
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 3.0.1"},
+      {:ecto_sql, "~> 3.10"},
+      {:ecto_sqlite3, "~> 0.18"},
       # sentry
       {:sentry, "~> 11.0"},
       {:hackney, "~> 1.8"},
@@ -82,7 +84,12 @@ defmodule LastCrusader.MixProject do
   defp aliases do
     [
       pkg: ["cmd ./build_container"],
-      sentry_recompile: ["compile", "deps.compile sentry --force"]
+      sentry_recompile: ["compile", "deps.compile sentry --force"],
+      setup: ["deps.get", "ecto.setup"],
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"]
+      # test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      # test: ["ecto.create", "ecto.migrate", "test"]
     ]
   end
 

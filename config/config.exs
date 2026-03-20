@@ -9,6 +9,12 @@ config :logger, :console,
 config :elixir, :time_zone_database, Tz.TimeZoneDatabase
 config :last_crusader, env: config_env()
 
+config :last_crusader, LastCrusader.Repo,
+  otp_app: :last_crusader,
+  adapter: Ecto.Adapters.SQLite3
+
+config :last_crusader, ecto_repos: [LastCrusader.Repo]
+
 config :sentry,
   environment_name: :test
 
@@ -21,7 +27,7 @@ config :sentry,
 
 import_config "#{config_env()}.exs"
 
-if config_env() != :prod do
+if config_env() == :dev do
   config :git_hooks,
     auto_install: false,
     verbose: true,
