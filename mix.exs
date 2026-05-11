@@ -58,13 +58,14 @@ defmodule LastCrusader.MixProject do
       {:bandit, ">= 0.6.9"},
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.7.0"},
-      {:mint, "~> 1.0"},
+      {:mint, "~> 1.6"},
       {:tz, "~> 0.26.1"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 3.0.1"},
       # sentry
-      {:sentry, "~> 11.0"},
+      {:sentry, "~> 12.0"},
+      {:finch, "~> 0.16"},
       {:hackney, "~> 1.8"},
       # code coverage
       {:excoveralls, "~> 0.18.0", only: :test},
