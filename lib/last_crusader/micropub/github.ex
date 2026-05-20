@@ -6,6 +6,7 @@ defmodule LastCrusader.Micropub.GitHub do
 
   require Logger
 
+  @impl LastCrusader.Micropub.Backend
   @doc """
   shortcut for `new_file/6`
 
@@ -14,6 +15,24 @@ defmodule LastCrusader.Micropub.GitHub do
   @spec new_file(String.t(), String.t()) :: {:ko, atom()} | {:ok, any()}
   def new_file(filename, filecontent) do
     new_file(
+      Application.get_env(:last_crusader, :github_auth),
+      Application.get_env(:last_crusader, :github_user),
+      Application.get_env(:last_crusader, :github_repo),
+      filename,
+      filecontent,
+      Application.get_env(:last_crusader, :github_branch, "master")
+    )
+  end
+
+  @impl LastCrusader.Micropub.Backend
+  @doc """
+  shortcut for `new_file_via_pr/6`
+
+  Uses `Application.get_env/2` for default parameters.
+  """
+  @spec new_file_via_pr(String.t(), String.t()) :: {:ko, atom(), any()} | {:ok, :pr_created}
+  def new_file_via_pr(filename, filecontent) do
+    new_file_via_pr(
       Application.get_env(:last_crusader, :github_auth),
       Application.get_env(:last_crusader, :github_user),
       Application.get_env(:last_crusader, :github_repo),
@@ -47,6 +66,30 @@ defmodule LastCrusader.Micropub.GitHub do
     end
   end
 
+  @doc """
+  Creates a commit with the filecontent to GitHub via a pull request
+  """
+  @spec new_file_via_pr(map(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
+          {:ko, atom(), any()} | {:ok, :pr_created}
+  def new_file_via_pr(auth, user, repo, filename, filecontent, branch \\ "master") do
+    client = build_client(auth)
+    timestamp = :os.system_time(:second)
+    comment_branch = "comment/#{timestamp}"
+
+    with {:ok, base_sha} <- get_branch_sha(client, user, repo, branch),
+         {:ok, _} <- create_branch(client, user, repo, comment_branch, base_sha),
+         {:ok, _} <-
+           commit_file_on_branch(client, user, repo, filename, filecontent, comment_branch),
+         {:ok, _} <- create_pull_request(client, user, repo, comment_branch, branch) do
+      {:ok, :pr_created}
+    else
+      error ->
+        Logger.error("Github: Error while creating PR for #{inspect(filename)}:")
+        {:ko, :github_error, error}
+    end
+  end
+
+  @impl LastCrusader.Micropub.Backend
   @doc """
   shortcut for `update_file/6`
 
@@ -82,6 +125,7 @@ defmodule LastCrusader.Micropub.GitHub do
     end
   end
 
+  @impl LastCrusader.Micropub.Backend
   @doc """
   shortcut for `get_file/5`
 
@@ -145,6 +189,55 @@ defmodule LastCrusader.Micropub.GitHub do
       {:ok, %Tesla.Env{status: 200, body: %{sha: sha}}} -> {:ok, sha}
       {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, body["sha"]}
       _ -> :ko
+    end
+  end
+
+  defp get_branch_sha(client, user, repo, branch) do
+    case Tesla.get(client, "/repos/#{user}/#{repo}/git/refs/heads/#{branch}") do
+      {:ok, %Tesla.Env{status: 200, body: body}} -> {:ok, body["object"]["sha"]}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
+    end
+  end
+
+  defp create_branch(client, user, repo, new_branch, sha) do
+    body = %{
+      "ref" => "refs/heads/#{new_branch}",
+      "sha" => sha
+    }
+
+    case Tesla.post(client, "/repos/#{user}/#{repo}/git/refs", body) do
+      {:ok, %Tesla.Env{status: 201}} -> {:ok, :created}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
+    end
+  end
+
+  defp commit_file_on_branch(client, user, repo, filename, filecontent, branch) do
+    body = %{
+      "branch" => branch,
+      "message" => "new #{filename}\n\nposted with LastCrusader :)",
+      "content" => Base.encode64(filecontent)
+    }
+
+    case commit_new_file(client, user, repo, filename, body) do
+      {:ok, %Tesla.Env{status: status}} when status in [200, 201] -> {:ok, :committed}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
+    end
+  end
+
+  defp create_pull_request(client, user, repo, head_branch, base_branch) do
+    body = %{
+      "title" => "Comment submission",
+      "head" => head_branch,
+      "base" => base_branch
+    }
+
+    case Tesla.post(client, "/repos/#{user}/#{repo}/pulls", body) do
+      {:ok, %Tesla.Env{status: 201}} -> {:ok, :pr_created}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
     end
   end
 
