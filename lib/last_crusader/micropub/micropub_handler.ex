@@ -99,8 +99,8 @@ defmodule LastCrusader.Micropub.MicropubHandler do
   """
   def comment(conn) do
     case Micropub.comment(conn.params, DateTime.now!("Europe/Paris")) do
-      {{:ok, :content_created}, _comment} ->
-        Logger.info("Comment successfully accepted! It will soon be published.")
+      {{:ok, :pr_created}, _comment} ->
+        Logger.info("Comment successfully submitted for review!")
 
         conn
         |> send_resp(202, "Accepted")

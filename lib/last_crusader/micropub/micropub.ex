@@ -97,7 +97,7 @@ defmodule LastCrusader.Micropub do
           content: comment_content
         )
 
-      {backend().new_file(comment_filename, comment_filecontent), comment_filecontent}
+      {backend().new_file_via_pr(comment_filename, comment_filecontent), comment_filecontent}
     end
   end
 

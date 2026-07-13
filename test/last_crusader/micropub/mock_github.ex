@@ -3,6 +3,63 @@ defmodule LastCrusader.Micropub.MockGithub do
 
   import Tesla.Mock
 
+  def mock_ok_create_pr() do
+    # Create a counter to return different responses for sequential calls
+    {:ok, counter} = Agent.start_link(fn -> 0 end)
+
+    # For get_file request (checking if page exists)
+    page_content_doc = %Tesla.Env{
+      status: 200,
+      body: ok_get_sha_body()
+    }
+
+    # For getting branch SHA
+    branch_sha_doc = %Tesla.Env{
+      status: 200,
+      body: %{"object" => %{"sha" => "abc123sha"}}
+    }
+
+    # For creating branch
+    create_branch_doc = %Tesla.Env{
+      status: 201,
+      body: %{"ref" => "refs/heads/comment/1234567890"}
+    }
+
+    # For committing file
+    commit_doc = %Tesla.Env{
+      status: 201,
+      body: ok_create_body()
+    }
+
+    # For creating PR
+    pr_doc = %Tesla.Env{
+      status: 201,
+      body: %{"id" => 1, "html_url" => "https://github.com/user/repo/pull/1"}
+    }
+
+    mock(fn
+      %{method: :get} ->
+        count = Agent.get_and_update(counter, fn c -> {c, c + 1} end)
+
+        case count do
+          0 -> {:ok, page_content_doc}
+          _ -> {:ok, branch_sha_doc}
+        end
+
+      %{method: :post} ->
+        count = Agent.get_and_update(counter, fn c -> {c, c + 1} end)
+
+        case count do
+          1 -> {:ok, create_branch_doc}
+          _ -> {:ok, pr_doc}
+        end
+
+      %{method: :put} ->
+        Agent.get_and_update(counter, fn c -> {c, c + 1} end)
+        {:ok, commit_doc}
+    end)
+  end
+
   def mock_ok_update_doc() do
     filecontent_doc = %Tesla.Env{
       status: 200,
