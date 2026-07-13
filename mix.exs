@@ -59,7 +59,7 @@ defmodule LastCrusader.MixProject do
       {:jason, "~> 1.2"},
       {:tesla, "~> 1.7.0"},
       {:mint, "~> 1.0"},
-      {:tz, "~> 0.26.1"},
+      {:tz, "~> 0.28.2"},
       {:slugger, "~> 0.3"},
       {:remove_emoji, "~> 1.0.0"},
       {:webmentions, "~> 3.0.1"},
