@@ -58,6 +58,105 @@ defmodule LastCrusader.Micropub.GitHubTest do
     end
   end
 
+  describe "GitHub.new_file_via_pr/6" do
+    test "PR creation success" do
+      # Mock responses for: GET branch SHA, POST create branch, PUT commit file, POST create PR
+      branch_sha_doc = %Tesla.Env{
+        status: 200,
+        body: %{"object" => %{"sha" => "abc123sha"}}
+      }
+
+      create_branch_doc = %Tesla.Env{
+        status: 201,
+        body: %{"ref" => "refs/heads/comment/1234567890"}
+      }
+
+      commit_doc = %Tesla.Env{
+        status: 201,
+        body: ok_create_body()
+      }
+
+      pr_doc = %Tesla.Env{
+        status: 201,
+        body: %{"id" => 1, "html_url" => "https://github.com/user/repo/pull/1"}
+      }
+
+      mock(fn
+        %{method: :get} -> {:ok, branch_sha_doc}
+        %{method: :post} -> {:ok, create_branch_doc}
+        %{method: :put} -> {:ok, commit_doc}
+      end)
+
+      assert GitHub.new_file_via_pr(
+               %{access_token: "secret"},
+               "github_user",
+               "github_repo",
+               "test.txt",
+               "this is a text file",
+               "master"
+             ) == {:ok, :pr_created}
+    end
+
+    test "PR creation fails when getting branch SHA fails" do
+      error_doc = %Tesla.Env{
+        status: 404,
+        body: %{"error" => "not found"}
+      }
+
+      mock(fn %{method: :get} -> {:ok, error_doc} end)
+
+      {:ko, :github_error, _} =
+        GitHub.new_file_via_pr(
+          %{access_token: "secret"},
+          "github_user",
+          "github_repo",
+          "test.txt",
+          "this is a text file",
+          "master"
+        )
+    end
+
+    test "PR creation fails when creating branch fails" do
+      branch_sha_doc = %Tesla.Env{
+        status: 200,
+        body: %{"object" => %{"sha" => "abc123sha"}}
+      }
+
+      error_doc = %Tesla.Env{
+        status: 422,
+        body: %{"error" => "branch already exists"}
+      }
+
+      {:ok, counter} = Agent.start_link(fn -> 0 end)
+
+      mock(fn
+        %{method: :get} ->
+          {:ok, branch_sha_doc}
+
+        %{method: :post} ->
+          count = Agent.get_and_update(counter, fn c -> {c, c + 1} end)
+
+          case count do
+            0 -> {:ok, error_doc}
+            _ -> {:ok, error_doc}
+          end
+
+        %{method: :put} ->
+          {:ok, error_doc}
+      end)
+
+      {:ko, :github_error, _} =
+        GitHub.new_file_via_pr(
+          %{access_token: "secret"},
+          "github_user",
+          "github_repo",
+          "test.txt",
+          "this is a text file",
+          "master"
+        )
+    end
+  end
+
   describe "GitHub.update_file/6" do
     test "file update success" do
       sha_doc = %Tesla.Env{
