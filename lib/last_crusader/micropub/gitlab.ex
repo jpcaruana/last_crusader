@@ -19,6 +19,24 @@ defmodule LastCrusader.Micropub.GitLab do
     )
   end
 
+  @impl LastCrusader.Micropub.Backend
+  @doc """
+  shortcut for `new_file_via_pr/6`
+
+  Uses `Application.get_env/2` for default parameters.
+  """
+  @spec new_file_via_pr(String.t(), String.t()) :: {:ko, atom(), any()} | {:ok, :pr_created}
+  def new_file_via_pr(filename, filecontent) do
+    new_file_via_pr(
+      Application.get_env(:last_crusader, :gitlab_host, "https://gitlab.com"),
+      Application.get_env(:last_crusader, :gitlab_token),
+      Application.get_env(:last_crusader, :gitlab_project_id),
+      filename,
+      filecontent,
+      Application.get_env(:last_crusader, :gitlab_branch, "main")
+    )
+  end
+
   @doc """
   Creates a commit with the filecontent to GitLab
   """
@@ -44,6 +62,28 @@ defmodule LastCrusader.Micropub.GitLab do
 
       error ->
         Logger.error("GitLab: Error while creating file #{inspect(filename)}:")
+        {:ko, :gitlab_error, error}
+    end
+  end
+
+  @doc """
+  Creates a commit with the filecontent to GitLab via a merge request
+  """
+  @spec new_file_via_pr(String.t(), String.t(), String.t(), String.t(), String.t(), String.t()) ::
+          {:ko, atom(), any()} | {:ok, :pr_created}
+  def new_file_via_pr(host, token, project_id, filename, filecontent, branch) do
+    client = build_client(host, token)
+    timestamp = :os.system_time(:second)
+    comment_branch = "comment/#{timestamp}"
+
+    with {:ok, _} <- create_branch(client, project_id, comment_branch, branch),
+         {:ok, _} <-
+           commit_file_on_branch(client, project_id, filename, filecontent, comment_branch),
+         {:ok, _} <- create_merge_request(client, project_id, comment_branch, branch) do
+      {:ok, :pr_created}
+    else
+      error ->
+        Logger.error("GitLab: Error while creating MR for #{inspect(filename)}:")
         {:ko, :gitlab_error, error}
     end
   end
@@ -123,6 +163,54 @@ defmodule LastCrusader.Micropub.GitLab do
       error ->
         Logger.error("GitLab: Error while getting file #{inspect(filename)}:")
         {:ko, :gitlab_error, error}
+    end
+  end
+
+  defp create_branch(client, project_id, new_branch, base_branch) do
+    body = %{
+      "branch" => new_branch,
+      "ref" => base_branch
+    }
+
+    case Tesla.post(client, "/api/v4/projects/#{project_id}/repository/branches", body) do
+      {:ok, %Tesla.Env{status: 201}} -> {:ok, :created}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
+    end
+  end
+
+  defp commit_file_on_branch(client, project_id, filename, filecontent, branch) do
+    body = %{
+      "branch" => branch,
+      "commit_message" => "new #{filename}\n\nposted with LastCrusader :)",
+      "content" => Base.encode64(filecontent),
+      "encoding" => "base64"
+    }
+
+    encoded_path = URI.encode(filename, &URI.char_unreserved?/1)
+
+    case Tesla.post(
+           client,
+           "/api/v4/projects/#{project_id}/repository/files/#{encoded_path}",
+           body
+         ) do
+      {:ok, %Tesla.Env{status: 201}} -> {:ok, :committed}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
+    end
+  end
+
+  defp create_merge_request(client, project_id, head_branch, base_branch) do
+    body = %{
+      "title" => "Comment submission",
+      "source_branch" => head_branch,
+      "target_branch" => base_branch
+    }
+
+    case Tesla.post(client, "/api/v4/projects/#{project_id}/merge_requests", body) do
+      {:ok, %Tesla.Env{status: 201}} -> {:ok, :mr_created}
+      {:ok, %Tesla.Env{status: _}} -> :error
+      error -> error
     end
   end
 

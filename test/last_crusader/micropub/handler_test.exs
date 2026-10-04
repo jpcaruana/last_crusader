@@ -130,7 +130,7 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
     end
 
     test "it should accept json requests" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
@@ -150,7 +150,7 @@ defmodule LastCrusader.Micropub.MicropubHandlerTest do
     end
 
     test "it should accept form-urlencoded requests" do
-      LastCrusader.Micropub.MockGithub.mock_ok_update_doc()
+      LastCrusader.Micropub.MockGithub.mock_ok_create_pr()
 
       params = %{
         "author" => "Author of the Comment",
